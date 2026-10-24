@@ -36,8 +36,7 @@
       "@MorpheApp/changelog", {
         "releaseJson": {
           "path": "patches-bundle.json",
-          "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/patches-${version}.mpp",
-          "signatureUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/patches-${version}.mpp.asc"
+          "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/patches-${version}.mpp"
         }
       }
     ],

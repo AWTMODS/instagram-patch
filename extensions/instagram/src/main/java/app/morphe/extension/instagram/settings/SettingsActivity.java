@@ -11,14 +11,31 @@ import static app.morphe.extension.instagram.utils.IgStr.str;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Outline;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.view.WindowInsets;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,20 +94,81 @@ public class SettingsActivity extends Activity {
         }
     }
 
+    public static CharSequence formatStyledTitle(String text) {
+        if (text == null) return "";
+        int lastSpace = text.lastIndexOf(' ');
+        if (lastSpace > 0) {
+            SpannableStringBuilder span = new SpannableStringBuilder(text);
+            span.setSpan(new ForegroundColorSpan(Color.WHITE), 0, lastSpace, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            span.setSpan(new ForegroundColorSpan(Color.parseColor("#4EE49B")), lastSpace + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return span;
+        }
+        return text;
+    }
+
+    private static Drawable createAuroraBackground() {
+        return new Drawable() {
+            private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+            @Override
+            public void draw(Canvas canvas) {
+                int width = canvas.getWidth();
+                int height = canvas.getHeight();
+
+                canvas.drawColor(Color.parseColor("#080B09"));
+
+                float centerX = width * 0.95f;
+                float centerY = height * 0.05f;
+                float radius = Math.max(width, height) * 0.55f;
+
+                int[] colors = new int[]{
+                        Color.parseColor("#384EE49B"),
+                        Color.parseColor("#1834D399"),
+                        Color.parseColor("#08154D32"),
+                        Color.TRANSPARENT
+                };
+                float[] stops = new float[]{0f, 0.35f, 0.65f, 1f};
+
+                paint.setShader(new RadialGradient(
+                        centerX, centerY, radius,
+                        colors, stops,
+                        Shader.TileMode.CLAMP
+                ));
+                canvas.drawRect(0, 0, width, height, paint);
+            }
+
+            @Override
+            public void setAlpha(int alpha) {
+                paint.setAlpha(alpha);
+            }
+
+            @Override
+            public void setColorFilter(ColorFilter colorFilter) {
+                paint.setColorFilter(colorFilter);
+            }
+
+            @Override
+            public int getOpacity() {
+                return PixelFormat.TRANSLUCENT;
+            }
+        };
+    }
+
     @SuppressLint("ResourceType")
     private void createLayout(String displayTitle, boolean isRootSettings) {
         root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
+        root.setBackground(createAuroraBackground());
 
         InstagramPreferenceStyle.applySystemBarStyle(this);
 
         // ---------- Toolbar ----------
         toolbar = new LinearLayout(this);
-        toolbar.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
+        toolbar.setBackgroundColor(Color.TRANSPARENT);
 
         ImageView back = new ImageView(this);
         UI.setThemedIcon(back, UI.DRAWABLE_ARROW_BACK);
+        back.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,10 +177,12 @@ public class SettingsActivity extends Activity {
         });
 
         titleTextView = new TextView(this);
-        titleTextView.setText(displayTitle); // Dynamically bound from intent data
+        titleTextView.setText(formatStyledTitle(displayTitle));
         InstagramPreferenceStyle.applyToolbarLayout(
                 this, toolbar, back, titleTextView, isRootSettings);
-        titleTextView.setTextColor(InstagramPreferenceStyle.primaryTextColor());
+        if (!(titleTextView.getText() instanceof Spanned)) {
+            titleTextView.setTextColor(Color.WHITE);
+        }
 
         toolbar.addView(back);
         toolbar.addView(titleTextView);
@@ -119,9 +199,20 @@ public class SettingsActivity extends Activity {
         content = new LinearLayout(this);
         content.setId(1001);
         content.setOrientation(LinearLayout.VERTICAL);
-        content.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
+        content.setBackgroundColor(Color.TRANSPARENT);
 
-        root.addView(content, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+        LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                1
+        );
+        contentParams.setMargins(
+                InstagramPreferenceStyle.dp(this, 16),
+                InstagramPreferenceStyle.dp(this, 6),
+                InstagramPreferenceStyle.dp(this, 16),
+                InstagramPreferenceStyle.dp(this, 16)
+        );
+        root.addView(content, contentParams);
 
         root.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
             @Override
@@ -132,10 +223,10 @@ public class SettingsActivity extends Activity {
                 v.setPadding(0, topInset, 0, 0);
 
                 content.setPadding(
-                content.getPaddingLeft(),
-                content.getPaddingTop(),
-                content.getPaddingRight(),
-                bottomInset
+                        content.getPaddingLeft(),
+                        content.getPaddingTop(),
+                        content.getPaddingRight(),
+                        bottomInset
                 );
 
                 return insets;
@@ -252,17 +343,38 @@ public class SettingsActivity extends Activity {
                 }
             }
             if (listView != null) {
-                listView.setPadding(0, InstagramPreferenceStyle.dp(context, 10), 0, InstagramPreferenceStyle.dp(context, 10));
-                listView.setClipToPadding(false);
-                listView.setDivider(null);
-                listView.setDividerHeight(0);
+                Context ctx = listView.getContext();
+                GradientDrawable cardBg = new GradientDrawable();
+                cardBg.setShape(GradientDrawable.RECTANGLE);
+                cardBg.setCornerRadius(InstagramPreferenceStyle.dp(ctx, 22));
+                cardBg.setColor(Color.parseColor("#101513"));
+                cardBg.setStroke(InstagramPreferenceStyle.dp(ctx, 1), Color.parseColor("#1B2620"));
+
+                listView.setBackground(cardBg);
+                listView.setClipToOutline(true);
+                listView.setOutlineProvider(new ViewOutlineProvider() {
+                    @Override
+                    public void getOutline(View view, Outline outline) {
+                        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), InstagramPreferenceStyle.dp(ctx, 22));
+                    }
+                });
+
+                ShapeDrawable divider = new ShapeDrawable();
+                divider.setIntrinsicHeight(InstagramPreferenceStyle.dp(ctx, 1));
+                divider.getPaint().setColor(Color.parseColor("#18221D"));
+                listView.setDivider(divider);
+                listView.setDividerHeight(InstagramPreferenceStyle.dp(ctx, 1));
+                listView.setFooterDividersEnabled(false);
+                listView.setHeaderDividersEnabled(false);
+
+                listView.setPadding(0, InstagramPreferenceStyle.dp(ctx, 4), 0, InstagramPreferenceStyle.dp(ctx, 4));
+                listView.setClipToPadding(true);
                 listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
                 listView.setCacheColorHint(Color.TRANSPARENT);
-                listView.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
             }
 
             if (rootView != null) {
-                rootView.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
+                rootView.setBackgroundColor(Color.TRANSPARENT);
             }
         }
     }

@@ -17,6 +17,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -127,8 +130,7 @@ public final class InstagramPreferenceStyle {
     }
 
     public static int pressedBackgroundColor() {
-        int fallback = UI.getThemedColour("igds_color_secondary_background");
-        return ResourceUtils.getColor("igds_elevated_highlight_background", fallback);
+        return Color.parseColor("#1A2B22");
     }
 
     public static int primaryTextColor() {
@@ -170,9 +172,9 @@ public final class InstagramPreferenceStyle {
         PreferenceRow row = new PreferenceRow(context, trailingType);
         row.setOrientation(trailingType == TRAILING_SWITCH ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setMinimumHeight(dp(context, 78));
-        row.setPadding(dp(context, 17), dp(context, 10), dp(context, 17), dp(context, 10));
-        row.setBackgroundColor(backgroundColor());
+        row.setMinimumHeight(dp(context, 66));
+        row.setPadding(dp(context, 4), dp(context, 10), dp(context, 16), dp(context, 10));
+        row.setBackgroundColor(Color.TRANSPARENT);
         row.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -194,8 +196,8 @@ public final class InstagramPreferenceStyle {
 
             TextView title = new TextView(context);
             title.setTag(TAG_TITLE);
-            title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            title.setTextColor(primaryTextColor());
+            title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.5f);
+            title.setTextColor(Color.WHITE);
             title.setIncludeFontPadding(true);
             title.setSingleLine(false);
             LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
@@ -241,8 +243,8 @@ public final class InstagramPreferenceStyle {
 
         TextView title = new TextView(context);
         title.setTag(TAG_TITLE);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-        title.setTextColor(primaryTextColor());
+        title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.5f);
+        title.setTextColor(Color.WHITE);
         title.setIncludeFontPadding(true);
         title.setSingleLine(false);
         textColumn.addView(title, new LinearLayout.LayoutParams(
@@ -272,7 +274,13 @@ public final class InstagramPreferenceStyle {
                     "igds_color_secondary_icon"
             );
             trailing.setScaleType(ImageView.ScaleType.CENTER);
-            row.addView(trailing, new LinearLayout.LayoutParams(dp(context, 22), dp(context, 34)));
+            trailing.setColorFilter(new PorterDuffColorFilter(
+                    Color.parseColor("#70857B"),
+                    PorterDuff.Mode.SRC_IN
+            ));
+            LinearLayout.LayoutParams trailingParams = new LinearLayout.LayoutParams(dp(context, 20), dp(context, 20));
+            trailingParams.gravity = Gravity.CENTER_VERTICAL;
+            row.addView(trailing, trailingParams);
         }
 
         return row;
@@ -286,7 +294,7 @@ public final class InstagramPreferenceStyle {
         TextView summary = view.findViewWithTag(TAG_SUMMARY);
         View trailing = view.findViewWithTag(TAG_TRAILING);
 
-        int titleColor = enabled ? primaryTextColor() : disabledTextColor();
+        int titleColor = enabled ? Color.WHITE : disabledTextColor();
         int summaryColor = enabled ? secondaryTextColor() : disabledTextColor();
 
         if (title != null) {
@@ -311,11 +319,11 @@ public final class InstagramPreferenceStyle {
             trailing.setEnabled(enabled);
             if (trailing instanceof ImageView) {
                 int trailingColor = enabled
-                        ? UI.getThemedColour("igds_color_secondary_icon")
+                        ? Color.parseColor("#70857B")
                         : disabledTextColor();
                 ((ImageView) trailing).setColorFilter(new PorterDuffColorFilter(
                         trailingColor,
-                        PorterDuff.Mode.SRC_ATOP
+                        PorterDuff.Mode.SRC_IN
                 ));
             }
             trailing.invalidate();
@@ -518,6 +526,7 @@ public final class InstagramPreferenceStyle {
         private boolean drawDragHighlight;
         private int dragOverlayColor;
         private boolean switchAccessibilityChecked;
+        private FrameLayout iconContainer;
         private ImageView iconView;
 
 
@@ -538,32 +547,58 @@ public final class InstagramPreferenceStyle {
         }
 
         private void initIconView(Context context) {
+            iconContainer = new FrameLayout(context);
+            int boxSize = dp(context, 42);
+            LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(boxSize, boxSize);
+            containerParams.setMarginStart(dp(context, 16));
+            containerParams.setMarginEnd(dp(context, 14));
+            containerParams.gravity = Gravity.CENTER_VERTICAL;
+            iconContainer.setLayoutParams(containerParams);
+
+            GradientDrawable badgeBg = new GradientDrawable();
+            badgeBg.setShape(GradientDrawable.RECTANGLE);
+            badgeBg.setCornerRadius(dp(context, 12));
+            badgeBg.setColor(Color.parseColor("#121B16"));
+            badgeBg.setStroke(dp(context, 1.2f), Color.parseColor("#1F4B36"));
+            iconContainer.setBackground(badgeBg);
+
             iconView = new ImageView(context);
-
-            int iconSize = dp(context, 24);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
-
-            params.setMarginStart(dp(context, 16));
-            params.setMarginEnd(dp(context, 16));
-            iconView.setLayoutParams(params);
-
+            int iconInnerSize = dp(context, 22);
+            FrameLayout.LayoutParams iconParams = new FrameLayout.LayoutParams(iconInnerSize, iconInnerSize);
+            iconParams.gravity = Gravity.CENTER;
+            iconView.setLayoutParams(iconParams);
             iconView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            addView(iconView, 0);
+
+            iconContainer.addView(iconView);
+            addView(iconContainer, 0);
         }
 
         void setIcon(String iconResName) {
             if (iconResName == null) {
-                if (iconView != null) {
-                    iconView.setImageDrawable(null);
-                    iconView.setVisibility(View.GONE);
+                if (iconContainer != null) {
+                    iconContainer.setVisibility(View.GONE);
                 }
                 return;
             }
-            if (iconView == null) {
+            if (iconContainer == null) {
                 initIconView(getContext());
             }
-            UI.setThemedIcon(iconView, iconResName);
-            iconView.setVisibility(View.VISIBLE);
+            try {
+                Drawable drawable = ResourceUtils.getDrawable(iconResName);
+                if (drawable != null) {
+                    drawable = drawable.mutate();
+                    drawable.setColorFilter(new PorterDuffColorFilter(
+                            Color.parseColor("#4EE49B"),
+                            PorterDuff.Mode.SRC_IN
+                    ));
+                    iconView.setImageDrawable(drawable);
+                } else {
+                    UI.setThemedIcon(iconView, iconResName);
+                }
+            } catch (Exception e) {
+                UI.setThemedIcon(iconView, iconResName);
+            }
+            iconContainer.setVisibility(View.VISIBLE);
         }
 
         void setHighlightView(View highlightView) {

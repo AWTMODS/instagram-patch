@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class DeveloperOptions extends Entity {
 
@@ -81,8 +81,8 @@ public class DeveloperOptions extends Entity {
                 }
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast("Developer options toJSONObject failed");
+            AwtUtils.logger(e);
+            AwtUtils.toast("Developer options toJSONObject failed");
         }
         return mappings;
     }
@@ -115,8 +115,8 @@ public class DeveloperOptions extends Entity {
                 sb.append("Config id: ").append(configId).append("\n\n");
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast("Developer options extraction failed");
+            AwtUtils.logger(e);
+            AwtUtils.toast("Developer options extraction failed");
             sb.append(e.toString() + "\n");
         }
         return sb.toString();

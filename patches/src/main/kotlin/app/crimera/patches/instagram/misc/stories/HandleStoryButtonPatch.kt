@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -117,10 +117,10 @@ val handleStoryButtonPatch =
                         iget-object v3, v3, $reelItemMediaField
                         invoke-static {v0,v2,v3}, $STORY_BUTTON_EXTENSION_CLASS->storyButtonAction($charSequence Landroid/content/Context;Ljava/lang/Object;)Z
                         move-result v0
-                        if-eqz v0, :piko
+                        if-eqz v0, :awt
                         return-void
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(0)),
+                        ExternalLabel("awt", getInstruction(0)),
                     )
                 }
             }

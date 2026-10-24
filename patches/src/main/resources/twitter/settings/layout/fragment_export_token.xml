@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/piko_login_token_export_screen_description"
+            android:text="@string/awt_login_token_export_screen_description"
             android:autoLink="all"
             android:textSize="18sp" />
 
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/piko_login_token_select_account"
+            android:text="@string/awt_login_token_select_account"
             android:textSize="16sp" />
 
         <Spinner
@@ -35,20 +35,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/piko_login_token_export_copy_to_clipboard" />
+            android:text="@string/awt_login_token_export_copy_to_clipboard" />
 
         <Button
             android:id="@+id/save_to_file_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/piko_login_token_export_save_to_file" />
+            android:text="@string/awt_login_token_export_save_to_file" />
 
         <TextView
             android:id="@+id/no_accounts_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/piko_login_token_export_no_accounts_message"
+            android:text="@string/awt_login_token_export_no_accounts_message"
             android:textSize="22sp"
             android:visibility="gone" />
     </LinearLayout>

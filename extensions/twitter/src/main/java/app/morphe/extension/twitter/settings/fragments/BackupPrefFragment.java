@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -42,9 +42,9 @@ public class BackupPrefFragment extends Fragment {
             OutputStream openOutputStream = getActivity().getContentResolver().openOutputStream(uri);
             openOutputStream.write(bytes);
             openOutputStream.close();
-            toast(str("piko_pref_export_success"));
+            toast(str("awt_pref_export_success"));
         } catch (IOException e) {
-            toast(str("piko_pref_export_failed",prefTag));
+            toast(str("awt_pref_export_failed",prefTag));
         }
     }
 
@@ -55,7 +55,7 @@ public class BackupPrefFragment extends Fragment {
             uri = intent.getData();
         }
         if (uri == null) {
-            toast(str("piko_pref_export_no_uri"));
+            toast(str("awt_pref_export_no_uri"));
 
         }
         else if (i2 == -1) {
@@ -66,7 +66,7 @@ public class BackupPrefFragment extends Fragment {
     }
 
     private void toast(String msg){
-        app.morphe.extension.crimera.PikoUtils.toast(msg);
+        app.morphe.extension.crimera.AwtUtils.toast(msg);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class BackupPrefFragment extends Fragment {
 
         if (featureFlag) {
             this.prefData = Utils.getStringPref(Settings.MISC_FEATURE_FLAGS);
-            prefTag = str("piko_title_feature_flags");
+            prefTag = str("awt_title_feature_flags");
             startIntent("feature_flags", 1);
         } else {
             this.prefData = Utils.getAll(true);

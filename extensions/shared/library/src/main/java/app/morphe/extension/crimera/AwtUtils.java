@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -25,7 +25,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.Logger;
 
 @SuppressWarnings("unused")
-public class PikoUtils {
+public class AwtUtils {
     private static final Context ctx = Utils.getContext();
 
     public static Context getContext() {
@@ -85,19 +85,19 @@ public class PikoUtils {
         launchIntent(intent);
     }
 
-    public static boolean pikoWriteFile(String fileName,String data,boolean append){
-        return pikoWriteFile(fileName,"Piko",data,append);
+    public static boolean awtWriteFile(String fileName,String data,boolean append){
+        return awtWriteFile(fileName,"Awt",data,append);
     }
 
-    public static boolean pikoWriteFile(String fileName,String subFolder, String data,boolean append){
+    public static boolean awtWriteFile(String fileName,String subFolder, String data,boolean append){
         File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File pikoDir = new File(downloadsDir, subFolder);
+        File awtDir = new File(downloadsDir, subFolder);
 
-        if (!pikoDir.exists()) {
-            pikoDir.mkdirs();
+        if (!awtDir.exists()) {
+            awtDir.mkdirs();
         }
 
-        File outputFile = new File(pikoDir, fileName);
+        File outputFile = new File(awtDir, fileName);
         return writeFile(outputFile,data.getBytes(),append);
     }
 
@@ -148,7 +148,7 @@ public class PikoUtils {
     }
 
     public static void logger(Object e) {
-        String logName = "piko";
+        String logName = "awt";
         Log.d(logName, e +"\n");
         if (e instanceof Exception) {
             Exception ex = (Exception) e;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -65,9 +65,9 @@ internal fun preserveTimelinePosition(): Pair<String, Int> {
         restoreCode[2].registersUsed != listOf(restoreCode[0].registersUsed[0], restoreCode[1].registersUsed.single())
     ) throw PatchException("Unexpected For You restoration scope")
 
-    val scopeName = "pikoDisableAutoTimelineScroll"
+    val scopeName = "awtDisableAutoTimelineScroll"
     val scope = "${home.type}->$scopeName()Z"
-    val captureName = "pikoCaptureVisibleTimeline"
+    val captureName = "awtCaptureVisibleTimeline"
     if (home.methods.any { it.name == scopeName || it.name == captureName }) {
         throw PatchException("Timeline position helpers already exist")
     }
@@ -322,7 +322,7 @@ private fun preserveTimelineIdentity(
             addInstructions(0, body.trimIndent())
         })
     }
-    helper("pikoRestorePositions", listOf("Ljava/util/List;"), "Z", 4, """
+    helper("awtRestorePositions", listOf("Ljava/util/List;"), "Z", 4, """
         invoke-virtual {p0}, $scope
         move-result v0
         if-eqz v0, :native
@@ -336,19 +336,19 @@ private fun preserveTimelineIdentity(
     """)
     val restoreRegisters = restore.instructions[restoreCallIndex].registersUsed
     if (restoreRegisters.size != 2 || restoreRegisters.any { it !in 0..15 }) throw PatchException("Unexpected restore registers")
-    restore.replaceInstruction(restoreCallIndex, "invoke-virtual {v${restoreRegisters[0]}, v${restoreRegisters[1]}}, $homeType->pikoRestorePositions(Ljava/util/List;)Z")
-    for ((name, extensionMethod) in listOf("pikoKeepPosition" to "keep", "pikoCanSavePosition" to "canSave")) {
+    restore.replaceInstruction(restoreCallIndex, "invoke-virtual {v${restoreRegisters[0]}, v${restoreRegisters[1]}}, $homeType->awtRestorePositions(Ljava/util/List;)Z")
+    for ((name, extensionMethod) in listOf("awtKeepPosition" to "keep", "awtCanSavePosition" to "canSave")) {
         helper(name, emptyList(), "Z", 2, """
             invoke-static {p0}, $extension->$extensionMethod(Ljava/lang/Object;)Z
             move-result v0
             return v0
         """)
     }
-    helper("pikoPreparePositions", listOf("Ljava/util/List;"), "V", 3, """
+    helper("awtPreparePositions", listOf("Ljava/util/List;"), "V", 3, """
         invoke-static {p0, p1}, $extension->prepare(Ljava/lang/Object;Ljava/util/List;)V
         return-void
     """)
-    helper("pikoRetryTimelinePosition", emptyList(), "V", 2, """
+    helper("awtRetryTimelinePosition", emptyList(), "V", 2, """
         invoke-static {p0}, $extension->afterRender(Ljava/lang/Object;)V
         return-void
     """)
@@ -364,7 +364,7 @@ private fun preserveTimelineIdentity(
     ) throw PatchException("Unexpected reset guard register")
     val afterReset = restore.instructions[resetIndex + 1]
     restore.addInstructionsWithLabels(resetIndex, """
-        invoke-virtual/range {p0 .. p0}, $homeType->pikoKeepPosition()Z
+        invoke-virtual/range {p0 .. p0}, $homeType->awtKeepPosition()Z
         move-result v$resetResultRegister
         if-nez v$resetResultRegister, :keep
     """.trimIndent(), ExternalLabel("keep", afterReset))
@@ -375,9 +375,9 @@ private fun preserveTimelineIdentity(
     val positionRegister = save.instructions[saveIndex].registersUsed.last()
     val saveReceiver = save.implementation!!.registerCount - 1
     if (positionRegister !in 0..15 || saveReceiver !in 0..15) throw PatchException("Unexpected position persistence registers")
-    save.addInstructions(saveIndex, "invoke-virtual {v$saveReceiver, v$positionRegister}, $homeType->pikoPreparePositions(Ljava/util/List;)V")
+    save.addInstructions(saveIndex, "invoke-virtual {v$saveReceiver, v$positionRegister}, $homeType->awtPreparePositions(Ljava/util/List;)V")
     save.addInstructionsWithLabels(0, """
-        invoke-virtual/range {p0 .. p0}, $homeType->pikoCanSavePosition()Z
+        invoke-virtual/range {p0 .. p0}, $homeType->awtCanSavePosition()Z
         move-result v0
         if-nez v0, :save
         return-void
@@ -395,7 +395,7 @@ private fun preserveTimelineIdentity(
 context(context: BytecodePatchContext)
 private fun bindTimelineAccess(bindings: Map<String, String>) {
     val bindingClass = "$PATCHES_DESCRIPTOR/TimelinePosition\$Binding;"
-    val prefix = "piko_timeline_"
+    val prefix = "awt_timeline_"
     val constructor = context.mutableClassDefBy(bindingClass).methods.singleOrNull { it.name == "<init>" }
         ?: throw PatchException("Could not uniquely resolve timeline access initialization")
     val placeholders = constructor.instructions.mapNotNull { it.getReference<StringReference>()?.string }

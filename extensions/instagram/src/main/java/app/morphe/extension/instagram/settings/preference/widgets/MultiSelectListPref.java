@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -108,29 +108,29 @@ public class MultiSelectListPref extends MultiSelectListPreference {
         // Migrate legacy action visibility before the preference reads its saved selection.
         if (key == Settings.ACTION_BAR_MAIN_FEED.key) {
             Pref.mainFeedActionBarButtons();
-            entries = ResourceUtils.getStringArray("piko_array_action_bar_main_feed");
-            entriesValues = ResourceUtils.getStringArray("piko_array_action_bar_main_feed_val");
+            entries = ResourceUtils.getStringArray("awt_array_action_bar_main_feed");
+            entriesValues = ResourceUtils.getStringArray("awt_array_action_bar_main_feed_val");
         }
         else if (key == Settings.ACTION_BAR_USER_PROFILE.key) {
             Pref.userProfileActionBarButtons();
-            entries = ResourceUtils.getStringArray("piko_array_action_bar_user_profile");
-            entriesValues = ResourceUtils.getStringArray("piko_array_action_bar_user_profile_val");
+            entries = ResourceUtils.getStringArray("awt_array_action_bar_user_profile");
+            entriesValues = ResourceUtils.getStringArray("awt_array_action_bar_user_profile_val");
         }
         else if (key == Settings.ACTION_BAR_CHAT.key) {
-            entries = ResourceUtils.getStringArray("piko_array_action_bar_chat");
-            entriesValues = ResourceUtils.getStringArray("piko_array_action_bar_chat_val");
+            entries = ResourceUtils.getStringArray("awt_array_action_bar_chat");
+            entriesValues = ResourceUtils.getStringArray("awt_array_action_bar_chat_val");
         }
         else if (key == Settings.ACTION_BAR_INBOX.key) {
-            entries = ResourceUtils.getStringArray("piko_array_action_bar_inbox");
-            entriesValues = ResourceUtils.getStringArray("piko_array_action_bar_inbox_val");
+            entries = ResourceUtils.getStringArray("awt_array_action_bar_inbox");
+            entriesValues = ResourceUtils.getStringArray("awt_array_action_bar_inbox_val");
         }
         else if (key == Settings.FILTER_STORY_BY_TYPE.key) {
-            entries = ResourceUtils.getStringArray("piko_array_reel_type");
-            entriesValues = ResourceUtils.getStringArray("piko_array_reel_type_val");
+            entries = ResourceUtils.getStringArray("awt_array_reel_type");
+            entriesValues = ResourceUtils.getStringArray("awt_array_reel_type_val");
         }
         else if (key == Settings.FILTER_STORY_BY_USER_TYPE.key) {
-            entries = ResourceUtils.getStringArray("piko_array_user_type");
-            entriesValues = ResourceUtils.getStringArray("piko_array_user_type_val");
+            entries = ResourceUtils.getStringArray("awt_array_user_type");
+            entriesValues = ResourceUtils.getStringArray("awt_array_user_type_val");
         }
         setEntries(entries);
         setEntryValues(entriesValues);

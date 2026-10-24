@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -41,7 +41,7 @@ private const val GRAY_0100_FIELD_NAME = "GRAY_0100"
 private const val MATERIAL_YOU_THEME_CLASS =
     "Lapp/morphe/extension/instagram/theme/MaterialYouTheme;"
 private const val COMPOSE_PRISM_COLOR_BRIDGE_NAME = "applyComposePrismColor"
-private const val COMPOSE_PRISM_REFRESH_METHOD_NAME = "pikoRefreshPrismPalette"
+private const val COMPOSE_PRISM_REFRESH_METHOD_NAME = "awtRefreshPrismPalette"
 private const val COMPOSE_SEARCH_ROW_BACKGROUND_RESOLVER =
     "$MATERIAL_YOU_THEME_CLASS->resolveComposeSearchRowBackground(J)J"
 private const val PURE_BLACK_ARGB = 0xff000000L
@@ -97,18 +97,18 @@ internal fun createComposePrismColorBridge(
                 BuilderInstruction21t(
                     Opcode.IF_EQZ,
                     6,
-                    getLabel("piko_compose_prism_write"),
+                    getLabel("awt_compose_prism_write"),
                 ),
             )
             paletteRuntime.holders.forEach { holder ->
                 addInstruction("invoke-static {}, ${holder.refreshMethod}".toInstruction())
             }
-            addLabel("piko_compose_prism_write")
+            addLabel("awt_compose_prism_write")
             addInstruction(
                 BuilderInstruction21t(
                     Opcode.IF_EQZ,
                     5,
-                    getLabel("piko_compose_prism_return"),
+                    getLabel("awt_compose_prism_return"),
                 ),
             )
             addInstruction("int-to-long v0, v5".toInstruction())
@@ -124,7 +124,7 @@ internal fun createComposePrismColorBridge(
                     )
                 }
             }
-            addLabel("piko_compose_prism_return")
+            addLabel("awt_compose_prism_return")
             addInstruction("return-void".toInstruction())
         }.methodImplementation
     return MutableMethod(

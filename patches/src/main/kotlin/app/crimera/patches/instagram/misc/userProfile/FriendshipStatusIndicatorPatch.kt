@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -116,13 +116,13 @@ val friendshipStatusIndicatorPatch =
                         """
                         invoke-virtual/range {p$viewParameter .. p$viewParameter}, $viewType->getTag()Ljava/lang/Object;
                         move-result-object v1
-                        if-eqz v1, :cond_piko
+                        if-eqz v1, :cond_awt
                         check-cast v1, $internalBadgeDefiningClassName
                         iget-object v2, v1, $internalBadgeDefiningClassName->$internalBadgeFieldName:$internalBadgeReturnType
                         move-object/from16 v0, p$profileInfoParameter
                         invoke-static {v0, v2}, ${PATCHES_DESCRIPTOR}/userprofile/FriendshipStatusIndicator;->addFriendshipIndicator(Ljava/lang/Object;Ljava/lang/Object;)V
                         """.trimIndent(),
-                        ExternalLabel("cond_piko", getInstruction(0)),
+                        ExternalLabel("cond_awt", getInstruction(0)),
                     )
 
                     enableSettings("followBackIndicator")

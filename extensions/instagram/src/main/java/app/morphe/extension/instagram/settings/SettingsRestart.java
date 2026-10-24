@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -22,7 +22,7 @@ import app.morphe.extension.instagram.patches.devFlags.FlagsSharedPref;
 import app.morphe.extension.shared.Utils;
 
 public final class SettingsRestart {
-    private static final String TAG = "PikoSettingsRestart";
+    private static final String TAG = "AwtSettingsRestart";
     private static boolean pending;
     private static boolean taskServiceStartRequested;
 
@@ -105,7 +105,7 @@ public final class SettingsRestart {
         boolean settingsFlushed = SharedPref.flush();
         boolean flagsFlushed = FlagsSharedPref.flush();
         if (!settingsFlushed || !flagsFlushed) {
-            throw new IllegalStateException("Failed to flush Piko preferences");
+            throw new IllegalStateException("Failed to flush Awt preferences");
         }
     }
 }

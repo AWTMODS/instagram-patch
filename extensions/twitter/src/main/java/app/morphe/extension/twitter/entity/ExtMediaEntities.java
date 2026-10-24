@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import app.morphe.extension.twitter.entity.Video;
 import app.morphe.extension.twitter.entity.Media;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 // Lcom/twitter/model/core/entity/b0;
 public class ExtMediaEntities extends Debug{
@@ -32,7 +32,7 @@ public class ExtMediaEntities extends Debug{
 
             return width + "x" + height;
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return "";
         }
     }
@@ -74,7 +74,7 @@ public class ExtMediaEntities extends Debug{
                     videoArrayList.add(new Media(type, url, ext, res));
                 }
             } catch (Exception e) {
-                PikoUtils.logger(e);
+                AwtUtils.logger(e);
             }
         });
         // We want highest resolution first.
@@ -99,7 +99,7 @@ public class ExtMediaEntities extends Debug{
                 return imageList;
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return new ArrayList<>();
         }
     }
@@ -110,7 +110,7 @@ public class ExtMediaEntities extends Debug{
         return "ExtMediaEntities [getImageUrl()=" + this.getImageUrl() + ", getHighResImageUrl()="
                 + this.getHighResImageUrl() + ", getMediaList()=" + this.getMediaList() + "]";
         }catch(Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return e.getMessage();
         }
     }

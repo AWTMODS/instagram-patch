@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.ObjectBrowser;
 import app.morphe.extension.crimera.downloader.MediaType;
 
@@ -38,7 +38,7 @@ public class HandleCommentButton {
         try {
             CommentData commentData = new CommentData(commentObject);
 
-            if (Pref.pikoDebug()) {
+            if (Pref.awtDebug()) {
                 list.add(DebugButton.A00);
             }
             if (commentData.hasText() && Pref.commentCopyButton()) {
@@ -48,12 +48,12 @@ public class HandleCommentButton {
                 list.add(SaveMediaButton.A00);
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
-    // return true = Piko button clicked no need to check Instagram's buttons.
-    // return false = Piko button not clicked, check Instagram's buttons.
+    // return true = Awt button clicked no need to check Instagram's buttons.
+    // return false = Awt button not clicked, check Instagram's buttons.
     public static boolean checkOnCommentButtonClick(Object button, List list) {
         try {
             if (list.isEmpty()) return false;
@@ -64,9 +64,9 @@ public class HandleCommentButton {
                 if (commentData.hasText()) {
                     String commentText = (String) commentData.getText();
                     app.morphe.extension.shared.Utils.setClipboard(commentText);
-                    PikoUtils.toast(str("piko_comment_copied_success"));
+                    AwtUtils.toast(str("awt_comment_copied_success"));
                 } else {
-                    PikoUtils.toast(str("piko_comment_copied_failed"));
+                    AwtUtils.toast(str("awt_comment_copied_failed"));
                 }
                 return true;
 
@@ -102,8 +102,8 @@ public class HandleCommentButton {
             }
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast(e.getMessage());
+            AwtUtils.logger(e);
+            AwtUtils.toast(e.getMessage());
             // If exception happens, we need not check Instagram's button.
             return true;
         }

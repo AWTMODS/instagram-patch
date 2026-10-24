@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,7 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import app.morphe.extension.twitter.Pref;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class ResponseLogger {
     private static final boolean LOG_RES;
@@ -45,7 +45,7 @@ public class ResponseLogger {
 
     private static boolean writeFile(String data,boolean append){
         String fileName = "Server-Response-Log.txt";
-        return PikoUtils.pikoWriteFile(fileName,data,append);
+        return AwtUtils.awtWriteFile(fileName,data,append);
     }
 
 }

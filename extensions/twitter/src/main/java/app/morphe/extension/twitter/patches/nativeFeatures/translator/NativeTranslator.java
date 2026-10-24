@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -10,7 +10,7 @@ import static app.morphe.extension.shared.StringRef.str;
 
 import android.content.Context;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.twitter.patches.nativeFeatures.translator.providers.Translate;
 import app.morphe.extension.twitter.patches.nativeFeatures.translator.providers.GTranslate;
 import app.morphe.extension.twitter.patches.nativeFeatures.translator.providers.GTranslateV2;
@@ -28,7 +28,7 @@ public class NativeTranslator {
             Long tweetId = tweet.getTweetId();
             // If text is empty.
             if(text == ""){
-                PikoUtils.logger(str("piko_native_translator_zero_text"));
+                AwtUtils.logger(str("awt_native_translator_zero_text"));
                 return;
             }
 
@@ -37,7 +37,7 @@ public class NativeTranslator {
 
             // If both the tweet language and requested language are same.
             if(tweetLang.toLowerCase() == toLang.toLowerCase()){
-                PikoUtils.logger(str("translate_tweet_same_language",toLang));
+                AwtUtils.logger(str("translate_tweet_same_language",toLang));
                 return;
             }
             int providerCode = Pref.natveTranslatorProvider();
@@ -71,11 +71,11 @@ public class NativeTranslator {
                 @Override
                 public void onError(Exception e) {
                     // Handle translation error
-                    PikoUtils.logger("Translation failed: " + e.getMessage());
+                    AwtUtils.logger("Translation failed: " + e.getMessage());
                     }
                 });
         } catch (Exception ex){
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
     }
 }

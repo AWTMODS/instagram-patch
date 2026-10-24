@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -115,8 +115,8 @@ public class Helper {
             }
 
         } catch (Exception ex) {
-            app.morphe.extension.crimera.PikoUtils.toast(ex.toString());
-            app.morphe.extension.crimera.PikoUtils.logger(ex);
+            app.morphe.extension.crimera.AwtUtils.toast(ex.toString());
+            app.morphe.extension.crimera.AwtUtils.logger(ex);
         }
     }
 

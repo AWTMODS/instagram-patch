@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,7 +16,7 @@ import java.util.Locale;
 import android.os.Build;
 import android.util.Log;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.constants.ExtensionStrings;
 import app.morphe.extension.shared.Utils;
 
@@ -57,17 +57,17 @@ public class CustomCrashHandler implements Thread.UncaughtExceptionHandler {
 
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(new Date());
             String fileName = "crash_report_" + timeStamp + ".txt";
-            String folderName = ExtensionStrings.DEFAULT_PIKO_FOLDER;
+            String folderName = ExtensionStrings.DEFAULT_AWT_FOLDER;
 
-            boolean isCreated = PikoUtils.pikoWriteFile(fileName,folderName,report.toString(),false);
+            boolean isCreated = AwtUtils.awtWriteFile(fileName,folderName,report.toString(),false);
             if(isCreated){
-                PikoUtils.toast("Crashlogs: /Downloads/"+folderName+"/"+fileName);
+                AwtUtils.toast("Crashlogs: /Downloads/"+folderName+"/"+fileName);
             } else{
-                PikoUtils.toast("Failed to create Crashlogs file");
+                AwtUtils.toast("Failed to create Crashlogs file");
             }
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 }

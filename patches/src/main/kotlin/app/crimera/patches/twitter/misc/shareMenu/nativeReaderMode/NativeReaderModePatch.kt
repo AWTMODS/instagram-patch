@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -33,7 +33,7 @@ val nativeReaderModePatch =
         execute {
             val actionName = "ReaderMode"
             val prefFunctionName = "enableNativeReaderMode"
-            val stringId = "piko_title_native_reader_mode"
+            val stringId = "awt_title_native_reader_mode"
             val iconId = "ic_vector_book_stroke_on"
             val statusFunctionName = "nativeReaderMode"
             shareMenuButtonInjection(actionName, prefFunctionName, stringId, iconId, statusFunctionName)

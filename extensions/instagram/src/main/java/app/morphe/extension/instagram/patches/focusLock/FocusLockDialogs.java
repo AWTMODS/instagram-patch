@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,7 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.preference.Preference;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
 import app.morphe.extension.shared.Utils;
 
@@ -39,21 +39,21 @@ public class FocusLockDialogs {
 
     private static void confirmLock(Context context) {
         if (!FocusLock.hasSelection()) {
-            PikoUtils.toast(str("piko_focus_lock_nothing_selected"));
+            AwtUtils.toast(str("awt_focus_lock_nothing_selected"));
             return;
         }
         String message = String.format(
-                str("piko_focus_lock_confirm_lock_desc"),
+                str("awt_focus_lock_confirm_lock_desc"),
                 FocusLockDuration.summary(),
                 FocusLock.COOLING_OFF_MS / (60 * 60 * 1000)
         );
         new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(context))
-                .setTitle(str("piko_focus_lock_confirm_lock"))
+                .setTitle(str("awt_focus_lock_confirm_lock"))
                 .setMessage(message)
-                .setNegativeButton(str("piko_cancel"), null)
-                .setPositiveButton(str("piko_ok"), (d, w) -> {
+                .setNegativeButton(str("awt_cancel"), null)
+                .setPositiveButton(str("awt_ok"), (d, w) -> {
                     if (FocusLock.lock()) {
-                        PikoUtils.toast(str("piko_focus_lock_locked_toast"));
+                        AwtUtils.toast(str("awt_focus_lock_locked_toast"));
                         // Some hooks read preferences once at class-load time, so restart.
                         Utils.restartApp(Utils.getContext());
                     }
@@ -63,14 +63,14 @@ public class FocusLockDialogs {
 
     private static void confirmRequestUnlock(Context context, Preference button) {
         String message = String.format(
-                str("piko_focus_lock_confirm_request_unlock_desc"),
+                str("awt_focus_lock_confirm_request_unlock_desc"),
                 FocusLock.COOLING_OFF_MS / (60 * 60 * 1000)
         );
         new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(context))
-                .setTitle(str("piko_focus_lock_confirm_request_unlock"))
+                .setTitle(str("awt_focus_lock_confirm_request_unlock"))
                 .setMessage(message)
-                .setNegativeButton(str("piko_cancel"), null)
-                .setPositiveButton(str("piko_ok"), (d, w) -> {
+                .setNegativeButton(str("awt_cancel"), null)
+                .setPositiveButton(str("awt_ok"), (d, w) -> {
                     FocusLock.requestUnlock();
                     refresh(button);
                 })
@@ -79,10 +79,10 @@ public class FocusLockDialogs {
 
     private static void confirmUnlock(Context context) {
         new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(context))
-                .setTitle(str("piko_focus_lock_confirm_unlock"))
-                .setMessage(str("piko_focus_lock_confirm_unlock_desc"))
-                .setNegativeButton(str("piko_cancel"), null)
-                .setPositiveButton(str("piko_ok"), (d, w) -> {
+                .setTitle(str("awt_focus_lock_confirm_unlock"))
+                .setMessage(str("awt_focus_lock_confirm_unlock_desc"))
+                .setNegativeButton(str("awt_cancel"), null)
+                .setPositiveButton(str("awt_ok"), (d, w) -> {
                     if (FocusLock.unlock()) {
                         Utils.restartApp(Utils.getContext());
                     }

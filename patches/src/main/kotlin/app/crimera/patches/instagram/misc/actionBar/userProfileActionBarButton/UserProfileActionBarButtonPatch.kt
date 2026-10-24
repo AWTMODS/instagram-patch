@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -350,13 +350,13 @@ val userProfileActionBarButtonPatch =
                 val code =
                     """
                     move-object/from16 v$userObjectRegister, v$actionBarRelatedRegister
-                    if-eqz v$userObjectRegister, :piko
+                    if-eqz v$userObjectRegister, :awt
                     iget-object v$userObjectRegister, v$userObjectRegister, $profileHeaderFieldInActionBarRelatedClass
 
-                    if-eqz v$userObjectRegister, :piko
+                    if-eqz v$userObjectRegister, :awt
                     iget-object v$userObjectRegister, v$userObjectRegister, $userDetailViewModelFieldInProfileHeaderRelatedClass
 
-                    if-eqz v$userObjectRegister, :piko
+                    if-eqz v$userObjectRegister, :awt
                     iget-object v$userObjectRegister, v$userObjectRegister, $userDataFieldInUserDetailClass
                     move-object/from16 v$userSessionCopyRegister, v$userSessionRegister
                     move-object/from16 v$layoutCopyRegister, v$layoutRegister
@@ -367,7 +367,7 @@ val userProfileActionBarButtonPatch =
                 addInstructionsWithLabels(
                     injectionIndex,
                     code,
-                    ExternalLabel("piko", resumeInstruction),
+                    ExternalLabel("awt", resumeInstruction),
                 )
             }
 

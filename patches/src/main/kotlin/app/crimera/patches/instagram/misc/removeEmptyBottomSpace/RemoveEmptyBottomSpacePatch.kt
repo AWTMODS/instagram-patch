@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -58,9 +58,9 @@ val removeEmptyBottomSpacePatch =
                         """
                         invoke-static {}, $PREF_DESCRIPTOR->removeEmptyBottomSpace()Z
                         move-result v$freeRegister
-                        if-nez v$freeRegister, :piko
+                        if-nez v$freeRegister, :awt
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(firstSPutIndexAfterStr)),
+                        ExternalLabel("awt", getInstruction(firstSPutIndexAfterStr)),
                     )
                     enableSettings("removeEmptyBottomSpace")
                 }

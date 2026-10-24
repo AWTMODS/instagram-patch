@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -11,7 +11,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
 
-/** Replaces the platform {@link CheckBox} in piko's own code. */
+/** Replaces the platform {@link CheckBox} in awt's own code. */
 @SuppressWarnings("unused")
 public final class CustomFontCheckBox extends CheckBox {
     public CustomFontCheckBox(Context context) {
@@ -24,6 +24,6 @@ public final class CustomFontCheckBox extends CheckBox {
 
     @Override
     public void setTypeface(Typeface typeface) {
-        super.setTypeface(CustomFont.forPikoView(typeface));
+        super.setTypeface(CustomFont.forAwtView(typeface));
     }
 }

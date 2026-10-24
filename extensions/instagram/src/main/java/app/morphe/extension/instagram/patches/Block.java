@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -38,14 +38,14 @@ public class Block {
             if (SUGGESTED_CONTENT_KEY.contains(key)) condition = true;
         }
 
-        return condition ? Constants.PIKO : key;
+        return condition ? Constants.AWT : key;
     }
 
     public static void deleteAnalyticsCacheFolder() {
         File analyticDirectory = new File(Utils.getContext().getDataDir(), "app_analytics");
         Boolean done = InstaUtils.deleteRecursive(analyticDirectory);
         if (done) {
-            app.morphe.extension.crimera.PikoUtils.toast(str("piko_deleted"));
+            app.morphe.extension.crimera.AwtUtils.toast(str("awt_deleted"));
         }
     }
 }

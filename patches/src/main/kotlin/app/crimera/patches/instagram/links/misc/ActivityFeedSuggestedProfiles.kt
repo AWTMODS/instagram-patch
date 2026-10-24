@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -170,8 +170,8 @@ internal fun hideActivityFeedSuggestions() {
         method.addInstructionsWithLabels(headerIndex, """
             invoke-static/range {v$categoryRegister .. v$categoryRegister}, $SUGGESTIONS->hideActivityFeedSuggestions(Ljava/lang/String;)Z
             move-result v$headerScratch
-            if-nez v$headerScratch, :piko_skip_suggestion_header
-        """.trimIndent(), ExternalLabel("piko_skip_suggestion_header", next))
+            if-nez v$headerScratch, :awt_skip_suggestion_header
+        """.trimIndent(), ExternalLabel("awt_skip_suggestion_header", next))
         // Existing header branches must enter the gate instead of jumping straight to the append.
         val gateLabels = (method.instructions[headerIndex] as BuilderInstruction).location.labels
         headerLocation.labels.clear()
@@ -194,8 +194,8 @@ internal fun hideActivityFeedSuggestions() {
         method.addInstructionsWithLabels(iteratorIndex, """
             invoke-static/range {v$categoryRegister .. v$categoryRegister}, $SUGGESTIONS->hideActivityFeedSuggestions(Ljava/lang/String;)Z
             move-result v$loopScratch
-            if-nez v$loopScratch, :piko_skip_suggestion_rows
-        """.trimIndent(), ExternalLabel("piko_skip_suggestion_rows", skipSection))
+            if-nez v$loopScratch, :awt_skip_suggestion_rows
+        """.trimIndent(), ExternalLabel("awt_skip_suggestion_rows", skipSection))
     }
     edits.sortedByDescending { it.first }.forEach { it.second() }
 }

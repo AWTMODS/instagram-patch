@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -27,7 +27,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.instagram.constants.PostType;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.patches.story.StorySeenRequestScope;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 import app.morphe.extension.instagram.patches.focusLock.FocusLock;
 import app.morphe.extension.instagram.settings.ActivityHook;
@@ -112,7 +112,7 @@ public class Links {
                             || !(scheme.equalsIgnoreCase("http") || scheme.equalsIgnoreCase("https"))) {
                         return false;
                     }
-                    PikoUtils.openUrl(sanitizedUrl,false);
+                    AwtUtils.openUrl(sanitizedUrl,false);
                     return true;
                 }
             }
@@ -170,8 +170,8 @@ public class Links {
             Logger.printException(() -> "intercept URI failed: ", ex);
         }
         // Exception is hanndled at call.
-        if (shouldBlockUri && Pref.pikoDebug()) {
-            Log.d("piko", "blocked uri: " + uri);
+        if (shouldBlockUri && Pref.awtDebug()) {
+            Log.d("awt", "blocked uri: " + uri);
         }
         if(shouldBlockUri) {
             throw new IOException("Block uri");
@@ -220,7 +220,7 @@ public class Links {
 
     public static String customSharingDomainSummary(String customDomain) {
         String domain = normalizeCustomDomain(customDomain);
-        return domain.isEmpty() ? str("piko_custom_sharing_domain_desc") : domain;
+        return domain.isEmpty() ? str("awt_custom_sharing_domain_desc") : domain;
     }
 
     private static String normalizeCustomDomain(String customDomain) {

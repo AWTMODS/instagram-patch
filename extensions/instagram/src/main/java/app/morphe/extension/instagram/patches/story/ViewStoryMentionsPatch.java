@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -18,7 +18,7 @@ import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.entity.MediaData;
 
 import app.morphe.extension.shared.Logger;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 import com.instagram.igds.components.peoplecell.IgdsPeopleCell;
 import com.instagram.common.typedurl.ImageUrl;
@@ -40,7 +40,7 @@ public class ViewStoryMentionsPatch {
 
                         IgdsPeopleCell cell = new IgdsPeopleCell(context);
                         View.OnClickListener openProfile = v ->
-                                PikoUtils.openUrl("instagram://user?username=" + username, true);
+                                AwtUtils.openUrl("instagram://user?username=" + username, true);
 
                         setPrimaryText(cell, fullName, isVerified);
                         setSupportingText(cell, username);
@@ -50,7 +50,7 @@ public class ViewStoryMentionsPatch {
                         peopleCells.add(cell);
                     } catch (Exception ex){
                             Logger.printException(() -> "Failed story mention user extraction", ex);
-                            PikoUtils.logger(ex);
+                            AwtUtils.logger(ex);
                     }
                 });
             }
@@ -58,7 +58,7 @@ public class ViewStoryMentionsPatch {
 
         } catch (Exception ex){
             Logger.printException(() -> "Failed viewMentions", ex);
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
     }
 

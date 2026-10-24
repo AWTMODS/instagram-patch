@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -10,7 +10,7 @@ package app.morphe.extension.instagram.patches.dm;
 import java.util.List;
 import android.content.Context;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.ObjectBrowser;
 
 import app.morphe.extension.instagram.entity.Entity;
@@ -97,14 +97,14 @@ public class MarkChatAsRead {
                 markAsSeenAPICall(userSession, threadId, messageId, senderId);
             });
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
 
     public static List addButton(List buttonList){
         try{
-            if(Pref.pikoDebug()){
+            if(Pref.awtDebug()){
                 buttonList.add(getButton("THREAD_LEVEL_DEBUG"));
             }
             if(Pref.enableMarkChatAsReadOption()){
@@ -112,7 +112,7 @@ public class MarkChatAsRead {
             }
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return buttonList;
     }
@@ -131,7 +131,7 @@ public class MarkChatAsRead {
                 return true;
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return false;
     }

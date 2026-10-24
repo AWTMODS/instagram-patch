@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -9,7 +9,7 @@ package app.morphe.extension.instagram.patches.dm;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.entity.DirectItem;
 import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.utils.Pref;
@@ -53,9 +53,9 @@ public class EphemeralMediaPatch {
     }
 
     private static SharedPreferences localReadPreferences() {
-        Context context = PikoUtils.getContext();
+        Context context = AwtUtils.getContext();
         // Suppressing the receipt preserves the image, but refresh resets the server's seen count.
-        return context == null ? null : context.getSharedPreferences("piko_ephemeral_media_viewed", Context.MODE_PRIVATE);
+        return context == null ? null : context.getSharedPreferences("awt_ephemeral_media_viewed", Context.MODE_PRIVATE);
     }
 
     public static String makeEphemeralMediaPermanent(Long expireAt, String viewMode) {

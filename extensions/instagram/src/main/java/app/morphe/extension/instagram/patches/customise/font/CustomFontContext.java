@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * A themed context whose inflater applies the custom font, for the platform dialogs piko shows:
- * their text views are inflated by the framework rather than created in piko's code.
+ * A themed context whose inflater applies the custom font, for the platform dialogs awt shows:
+ * their text views are inflated by the framework rather than created in awt's code.
  */
 public final class CustomFontContext extends ContextThemeWrapper {
     private LayoutInflater inflater;
@@ -66,7 +66,7 @@ public final class CustomFontContext extends ContextThemeWrapper {
             if (view instanceof TextView) {
                 TextView textView = (TextView) view;
                 Typeface current = textView.getTypeface();
-                Typeface replacement = CustomFont.forPikoView(current);
+                Typeface replacement = CustomFont.forAwtView(current);
                 if (replacement != current) {
                     textView.setTypeface(replacement);
                 }

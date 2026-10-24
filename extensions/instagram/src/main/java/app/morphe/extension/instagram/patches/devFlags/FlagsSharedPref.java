@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.sharedPreference.BaseSharedPref;
 import app.morphe.extension.crimera.settings.StringSetting;
 
@@ -52,7 +52,7 @@ public class FlagsSharedPref extends BaseSharedPref {
                 // only treat it as a bool override if it actually looks like one.
                 if (!flagState.equals(FlagState.ENABLE.toString()) && !flagState.equals(FlagState.DISABLE.toString())) continue;
                 Boolean value = flagState.equals(FlagState.ENABLE.toString()) ? true:false;
-                // PikoUtils.logger(key+" : "+Boolean.valueOf(value));
+                // AwtUtils.logger(key+" : "+Boolean.valueOf(value));
                 if (!key.contains(",")) outFlags.put(key, value);
             }
             // A grouped choice takes precedence over older individual overrides, including Default.

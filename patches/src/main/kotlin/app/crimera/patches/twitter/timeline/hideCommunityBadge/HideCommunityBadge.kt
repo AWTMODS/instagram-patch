@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -49,10 +49,10 @@ val hideCommunityBadge =
                 index,
                 """
                 sget-boolean v0, $PREF_DESCRIPTOR;->HIDE_COMM_BADGE:Z
-                if-eqz v0, :piko
+                if-eqz v0, :awt
                     sget-object v$reg, $ref->NON_MEMBER:$ref  
                 """.trimIndent(),
-                ExternalLabel("piko", iputObj),
+                ExternalLabel("awt", iputObj),
             )
             enableSettings("hideCommBadge")
         }

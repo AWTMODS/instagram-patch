@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -56,9 +56,9 @@ public class AddReelButton {
     private static void addDownloadButton(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
         String icon = UI.DRAWABLE_DOWNLOAD_ICON;
         ReelButton reelButton = new DownloadButton(context, mediaObject, currentMediaIndex);
-        String DOWNLOAD_BUTTON_TEXT = str("piko_download_options");
+        String DOWNLOAD_BUTTON_TEXT = str("awt_download_options");
         if(Pref.enableDirectDownload()){
-            DOWNLOAD_BUTTON_TEXT = str("piko_category_download_media");
+            DOWNLOAD_BUTTON_TEXT = str("awt_category_download_media");
         }
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon,reelButton,DOWNLOAD_BUTTON_TEXT);
@@ -69,7 +69,7 @@ public class AddReelButton {
     private static void addInfoButton(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
         String icon = UI.DRAWABLE_BLUB_ICON;
         ReelButton reelButton = new InfoButton(context, mediaObject, currentMediaIndex);
-        String buttonText = str("piko_more_options");
+        String buttonText = str("awt_more_options");
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon,reelButton,buttonText);
 
@@ -79,7 +79,7 @@ public class AddReelButton {
     private static void addDebugButton(Context context, Object helperObject, Object mediaObject, int currentMediaIndex) {
         String icon = UI.DRAWABLE_DEBUG_ICON;
         ReelButton reelButton = new DebugButton(context, mediaObject);
-        String buttonText = str("piko_debug");
+        String buttonText = str("awt_debug");
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon, reelButton, buttonText);
 
@@ -89,7 +89,7 @@ public class AddReelButton {
     private static void addExternalDownloadButton(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
         String icon = UI.DRAWABLE_DOWNLOAD_ICON;
         ReelButton reelButton = new ExternalDownloadButton(context, mediaObject, currentMediaIndex);
-        String buttonText = str("piko_download_with_external_downloader");
+        String buttonText = str("awt_download_with_external_downloader");
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon,reelButton,buttonText);
 
@@ -98,7 +98,7 @@ public class AddReelButton {
 
     // Called from hook — passes the real current carousel index.
     public static void includeCustomReelOverflowButtons(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
-        if(Pref.pikoDebug()){
+        if(Pref.awtDebug()){
             AddReelButton.addDebugButton(context, helperObject, mediaObject, currentMediaIndex);
         }
         if(Pref.enableDownload()){

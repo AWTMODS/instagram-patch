@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -52,38 +52,38 @@ public final class FocusLockTargets {
         List<Target> targets = new ArrayList<>();
 
         add(targets, SettingsStatus.hideNavigationButtons,
-                REELS_TAB_KEY, "piko_focus_lock_reels_tab", "piko_focus_lock_reels_tab_desc");
+                REELS_TAB_KEY, "awt_focus_lock_reels_tab", "awt_focus_lock_reels_tab_desc");
         add(targets, SettingsStatus.disableReelsScrolling,
-                Settings.DISABLE_REELS_SCROLLING, "piko_disable_reels_scrolling", null);
+                Settings.DISABLE_REELS_SCROLLING, "awt_disable_reels_scrolling", null);
         add(targets, SettingsStatus.hideReelsFollowButton,
-                Settings.HIDE_REELS_FOLLOW_BUTTON, "piko_hide_reels_follow_button", null);
+                Settings.HIDE_REELS_FOLLOW_BUTTON, "awt_hide_reels_follow_button", null);
         add(targets, SettingsStatus.disableExplore,
-                Settings.DISABLE_EXPLORE, "piko_disable_explore", null);
+                Settings.DISABLE_EXPLORE, "awt_disable_explore", null);
         add(targets, SettingsStatus.disableStories,
-                Settings.DISABLE_STORIES, "piko_disable_stories", null);
+                Settings.DISABLE_STORIES, "awt_disable_stories", null);
         add(targets, SettingsStatus.hideStoriesTray,
-                Settings.HIDE_STORIES_TRAY, "piko_hide_stories_tray", null);
+                Settings.HIDE_STORIES_TRAY, "awt_hide_stories_tray", null);
         add(targets, SettingsStatus.disableHighlights,
-                Settings.DISABLE_HIGHLIGHTS, "piko_disable_highlights", null);
+                Settings.DISABLE_HIGHLIGHTS, "awt_disable_highlights", null);
         add(targets, SettingsStatus.hideNotesTray,
-                Settings.HIDE_NOTES_TRAY, "piko_hide_notes_tray", null);
+                Settings.HIDE_NOTES_TRAY, "awt_hide_notes_tray", null);
         add(targets, SettingsStatus.disableComments,
-                Settings.DISABLE_COMMENTS, "piko_disable_comments", null);
+                Settings.DISABLE_COMMENTS, "awt_disable_comments", null);
         add(targets, SettingsStatus.limitFollowingFeed,
-                Settings.LIMIT_FOLLOWING_FEED, "piko_limit_following_feed", null);
+                Settings.LIMIT_FOLLOWING_FEED, "awt_limit_following_feed", null);
         add(targets, SettingsStatus.disableSwipeToCreate,
-                Settings.DISABLE_SWIPE_TO_CREATE, "piko_disable_swipe_to_create", null);
+                Settings.DISABLE_SWIPE_TO_CREATE, "awt_disable_swipe_to_create", null);
         add(targets, SettingsStatus.hideGroupCreationOnSharesheet,
                 Settings.HIDE_GROUP_CREATION_BUTTON_ON_SHARESHEET,
-                "piko_hide_group_creation_button_on_sharesheet", null);
+                "awt_hide_group_creation_button_on_sharesheet", null);
         add(targets, SettingsStatus.disableDoubleTapLike,
-                Settings.DISABLE_DOUBLE_TAP_LIKE_POST, "piko_disable_double_tap_like_post", null);
+                Settings.DISABLE_DOUBLE_TAP_LIKE_POST, "awt_disable_double_tap_like_post", null);
         add(targets, SettingsStatus.disableDoubleTapLike,
-                Settings.DISABLE_DOUBLE_TAP_LIKE_REEL, "piko_disable_double_tap_like_reel", null);
+                Settings.DISABLE_DOUBLE_TAP_LIKE_REEL, "awt_disable_double_tap_like_reel", null);
         add(targets, SettingsStatus.disableDoubleTapLike,
-                Settings.DISABLE_DOUBLE_TAP_LIKE_COMMENT, "piko_disable_double_tap_like_comment", null);
+                Settings.DISABLE_DOUBLE_TAP_LIKE_COMMENT, "awt_disable_double_tap_like_comment", null);
         add(targets, SettingsStatus.disableDoubleTapLike,
-                Settings.DISABLE_DOUBLE_TAP_LIKE_MESSAGE, "piko_disable_double_tap_like_message", null);
+                Settings.DISABLE_DOUBLE_TAP_LIKE_MESSAGE, "awt_disable_double_tap_like_message", null);
 
         return targets;
     }

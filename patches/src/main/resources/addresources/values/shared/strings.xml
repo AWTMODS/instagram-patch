@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="piko_name" translatable="false">Awt</string>
-    <string name="piko_title_settings">Awt settings</string>
-    <string name="piko_title_piko_patches">Awt Patches</string>
+    <string name="awt_name" translatable="false">Awt</string>
+    <string name="awt_title_settings">Awt settings</string>
+    <string name="awt_title_awt_patches">Awt Patches</string>
 </resources>

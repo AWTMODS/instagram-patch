@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -22,9 +22,9 @@ import app.morphe.extension.shared.Logger;
  * Store for captured Instants: InstantsDownloadHook writes their CDN links here, and the
  * "Saved Instants" screen reads them back for viewing and download.
  */
-public class PikoInstantsDb extends SQLiteOpenHelper {
+public class AwtInstantsDb extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "piko_instants_vault.db";
+    private static final String DB_NAME = "awt_instants_vault.db";
     private static final int DB_VERSION = 3;
     private static final String TABLE = "saved_instants";
 
@@ -37,16 +37,16 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
     private static final String COL_USERID = "userid";
     private static final String COL_EXPIRES_AT = "expires_at";
 
-    private static volatile PikoInstantsDb sInstance;
+    private static volatile AwtInstantsDb sInstance;
 
-    public static synchronized PikoInstantsDb getInstance(Context context) {
+    public static synchronized AwtInstantsDb getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new PikoInstantsDb(context.getApplicationContext());
+            sInstance = new AwtInstantsDb(context.getApplicationContext());
         }
         return sInstance;
     }
 
-    private PikoInstantsDb(Context context) {
+    private AwtInstantsDb(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -73,7 +73,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
             try {
                 db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN " + COL_USERID + " TEXT");
             } catch (Throwable t) {
-                Logger.printException(() -> "PikoInstantsDb.onUpgrade v2 failed", t);
+                Logger.printException(() -> "AwtInstantsDb.onUpgrade v2 failed", t);
             }
         }
         // v2 -> v3: remember when the CDN link dies so dead rows can be dropped on open.
@@ -82,7 +82,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
                 db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN " + COL_EXPIRES_AT
                         + " INTEGER DEFAULT 0");
             } catch (Throwable t) {
-                Logger.printException(() -> "PikoInstantsDb.onUpgrade v3 failed", t);
+                Logger.printException(() -> "AwtInstantsDb.onUpgrade v3 failed", t);
             }
         }
     }
@@ -106,7 +106,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
             getWritableDatabase().insertWithOnConflict(
                 TABLE, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
         } catch (Throwable t) {
-            Logger.printException(() -> "PikoInstantsDb.insertOrIgnore failed", t);
+            Logger.printException(() -> "AwtInstantsDb.insertOrIgnore failed", t);
         }
     }
 
@@ -140,7 +140,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
                 });
             }
         } catch (Throwable t) {
-            Logger.printException(() -> "PikoInstantsDb.getAll failed", t);
+            Logger.printException(() -> "AwtInstantsDb.getAll failed", t);
         }
         return out;
     }
@@ -153,7 +153,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
                     COL_EXPIRES_AT + " > 0 AND " + COL_EXPIRES_AT + " <= ?",
                     new String[]{String.valueOf(System.currentTimeMillis())});
         } catch (Throwable t) {
-            Logger.printException(() -> "PikoInstantsDb.purgeExpired failed", t);
+            Logger.printException(() -> "AwtInstantsDb.purgeExpired failed", t);
             return 0;
         }
     }
@@ -162,7 +162,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
         try {
             getWritableDatabase().delete(TABLE, COL_ID + "=?", new String[]{mediaId});
         } catch (Throwable t) {
-            Logger.printException(() -> "PikoInstantsDb.delete failed", t);
+            Logger.printException(() -> "AwtInstantsDb.delete failed", t);
         }
     }
 
@@ -170,7 +170,7 @@ public class PikoInstantsDb extends SQLiteOpenHelper {
         try {
             getWritableDatabase().delete(TABLE, null, null);
         } catch (Throwable t) {
-            Logger.printException(() -> "PikoInstantsDb.clearAll failed", t);
+            Logger.printException(() -> "AwtInstantsDb.clearAll failed", t);
         }
     }
 }

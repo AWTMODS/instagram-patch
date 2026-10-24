@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -58,12 +58,12 @@ val shareMenuButtonOnClickHook =
                         """
                         invoke-static {v$buttonPressedRegister}, ${EXTENSION_CLASS_NAME}isButtonPressed(Ljava/lang/Object;)Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :piko
+                        if-eqz v$freeRegister, :awt
                         move-object/from16 v$freeRegister, p$tweetObjectParameter
                         invoke-static {v$contextRegister,v$buttonPressedRegister,v$freeRegister}, ${EXTENSION_CLASS_NAME}buttonPressAction(Landroid/content/Context;Ljava/lang/Object;Ljava/lang/Object;)V
                         return-void
                         """.trimIndent(),
-                        ExternalLabel("piko", nextInstruction),
+                        ExternalLabel("awt", nextInstruction),
                     )
                 }
             }

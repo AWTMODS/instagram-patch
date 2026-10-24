@@ -1,12 +1,12 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
 
 package app.morphe.extension.instagram.utils;
 
-/** Helpers for the CDN urls piko stores and re-opens later. */
+/** Helpers for the CDN urls awt stores and re-opens later. */
 public final class MediaUrls {
 
     private MediaUrls() {

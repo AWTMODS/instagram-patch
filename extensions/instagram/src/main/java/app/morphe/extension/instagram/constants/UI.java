@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import java.util.ArrayList;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.instagram.entity.InstagramDialogBox;
 import app.morphe.extension.instagram.settings.preference.fragments.FragmentHook;
@@ -43,7 +43,7 @@ public class UI {
     public static final String DRAWABLE_BLUB_ICON = "instagram_bulb_outline_24";
     public static final String DRAWABLE_GEAR_ICON = "instagram_settings_pano_filled_24";
     public static final String DRAWABLE_ADS_ICON = "instagram_shield_outline_24";
-    public static final String DRAWABLE_GHOST_ICON = "piko_ghost_icon";
+    public static final String DRAWABLE_GHOST_ICON = "awt_ghost_icon";
     public static final String DRAWABLE_STACK_ICON = "fb_ic_changed_beliefs_outline_24";
     public static final String DRAWABLE_HISTORY_ICON = "instagram_history_outline_24";
     public static final String DRAWABLE_STORY_ICON = "instagram_story_outline_24";
@@ -178,7 +178,7 @@ public class UI {
         return null;
     }
 
-    public static void pikoSettingsGear(ViewGroup viewGroup) {
+    public static void awtSettingsGear(ViewGroup viewGroup) {
         try {
             if (viewGroup == null) {
                 return;
@@ -190,13 +190,13 @@ public class UI {
             }
 
             Context context = viewGroup.getContext();
-            boolean isFirstTime = Pref.firstTimePiko();
+            boolean isFirstTime = Pref.firstTimeAwt();
             if(isFirstTime) {
-                TooltipHelper.showPersistentTooltip(context, imageView, str("piko_tap_here"));
-                Pref.setFirstTimePiko(false);
+                TooltipHelper.showPersistentTooltip(context, imageView, str("awt_tap_here"));
+                Pref.setFirstTimeAwt(false);
             }
         } catch (Exception e) {
-            Logger.printException(() -> "Failed pikoSettingsGear: ", e);
+            Logger.printException(() -> "Failed awtSettingsGear: ", e);
         }
     }
 
@@ -204,7 +204,7 @@ public class UI {
         InstagramDialogBox dialog = new InstagramDialogBox(context);
 
         ArrayList<String> options = new ArrayList<>();
-        options.add(str("piko_ok"));
+        options.add(str("awt_ok"));
         CharSequence[] items = options.toArray(new CharSequence[0]);
 
         dialog.addDialogMenuItems(items, new DialogInterface.OnClickListener() {
@@ -214,7 +214,7 @@ public class UI {
                     // Doing like this because options are dynamic.
                     String selectedOption = options.get(which);
 
-                    if (selectedOption.equals(str("piko_ok"))) {
+                    if (selectedOption.equals(str("awt_ok"))) {
                         Utils.restartApp(context);
 
                     }
@@ -226,7 +226,7 @@ public class UI {
         });
 
 
-        dialog.setTitle(str("piko_restart_app"));
+        dialog.setTitle(str("awt_restart_app"));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
@@ -238,7 +238,7 @@ public class UI {
         InstagramDialogBox dialog = new InstagramDialogBox(context);
 
         ArrayList<String> options = new ArrayList<>();
-        options.add(str("piko_goto_piko_settings"));
+        options.add(str("awt_goto_awt_settings"));
         CharSequence[] items = options.toArray(new CharSequence[0]);
 
         dialog.addDialogMenuItems(items, new DialogInterface.OnClickListener() {
@@ -248,8 +248,8 @@ public class UI {
                     // Doing like this because options are dynamic.
                     String selectedOption = options.get(which);
 
-                    if (selectedOption.equals(str("piko_goto_piko_settings"))) {
-                        PikoUtils.openUrl("instagram://profile",true);
+                    if (selectedOption.equals(str("awt_goto_awt_settings"))) {
+                        AwtUtils.openUrl("instagram://profile",true);
                     }
 
                 } catch (Exception e) {
@@ -259,8 +259,8 @@ public class UI {
             }
         });
 
-        dialog.setTitle(str("piko_welcome_title"));
-        dialog.setMessage(str("piko_welcome_message"));
+        dialog.setTitle(str("awt_welcome_title"));
+        dialog.setMessage(str("awt_welcome_message"));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
@@ -268,12 +268,12 @@ public class UI {
         dlg.show();
     }
 
-    public static void pikoSettingsButton(ViewGroup viewGroup, int bottomMargin) throws Exception {
-        boolean isFirstTime = Pref.firstTimePiko();
+    public static void awtSettingsButton(ViewGroup viewGroup, int bottomMargin) throws Exception {
+        boolean isFirstTime = Pref.firstTimeAwt();
 
         Context context = viewGroup.getContext();
         InstagramButton button = new InstagramButton(context);
-        button.setText(str("piko_title_settings"));
+        button.setText(str("awt_title_settings"));
         button.setStyle(InstagramButtonStyleEnum.SECONDARY);
         button.setOnClickListener(FragmentHook::startSettings);
 
@@ -283,7 +283,7 @@ public class UI {
         viewGroup.addView(button.getIgdsButton());
         if(isFirstTime){
             button.startPulseAnimation();
-            Pref.setFirstTimePiko(false);
+            Pref.setFirstTimeAwt(false);
         }
     }
 }

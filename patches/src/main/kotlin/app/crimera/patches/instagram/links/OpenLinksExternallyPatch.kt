@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -60,10 +60,10 @@ val openLinksExternallyPatch =
                         """
                         invoke-static/range { v$urlRegister .. v$urlRegister }, ${Constants.LINKS_DESCRIPTOR}->openExternally(Ljava/lang/String;)Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :piko
+                        if-eqz v$freeRegister, :awt
                         return v$freeRegister
                     """,
-                        ExternalLabel("piko", instructions[urlResultObjIndex + 1]),
+                        ExternalLabel("awt", instructions[urlResultObjIndex + 1]),
                     )
 
                     enableSettings("openLinksExternally")

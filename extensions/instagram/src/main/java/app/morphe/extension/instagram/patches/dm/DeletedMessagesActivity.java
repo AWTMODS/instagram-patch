@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -41,7 +41,7 @@ import java.util.Locale;
 import app.morphe.extension.instagram.constants.UI;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
-import app.morphe.extension.instagram.db.PikoMessageDb;
+import app.morphe.extension.instagram.db.AwtMessageDb;
 import app.morphe.extension.instagram.patches.download.DownloadUtils;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.ui.Dim;
@@ -89,7 +89,7 @@ public class DeletedMessagesActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER);
-        messages = PikoMessageDb.getInstance(this).getDeletedMessages();
+        messages = AwtMessageDb.getInstance(this).getDeletedMessages();
         Locale locale = getResources().getConfiguration().getLocales().get(0);
         String skeleton = DateFormat.is24HourFormat(this) ? "yMMMdHm" : "yMMMdhm";
         timestampFormatter = new SimpleDateFormat(
@@ -109,7 +109,7 @@ public class DeletedMessagesActivity extends Activity {
         backAction = back;
 
         toolbarTitle = new TextView(this);
-        toolbarTitle.setText(str("piko_all_deleted_messages"));
+        toolbarTitle.setText(str("awt_all_deleted_messages"));
         toolbarTitle.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         InstagramPreferenceStyle.applyToolbarLayout(
                 this, toolbar, back, toolbarTitle, false);
@@ -118,7 +118,7 @@ public class DeletedMessagesActivity extends Activity {
         selectAll.setOrientation(LinearLayout.VERTICAL);
         selectAll.setGravity(Gravity.CENTER);
         selectAll.setVisibility(View.GONE);
-        selectAll.setContentDescription(str("piko_all"));
+        selectAll.setContentDescription(str("awt_all"));
 
         selectAllCheck = new CheckBox(this);
         selectAllCheck.setClickable(false);
@@ -131,7 +131,7 @@ public class DeletedMessagesActivity extends Activity {
         selectAll.addView(selectAllCheck, new LinearLayout.LayoutParams(Dim.dp28, Dim.dp28));
 
         selectAllLabel = new TextView(this);
-        selectAllLabel.setText(str("piko_all"));
+        selectAllLabel.setText(str("awt_all"));
         selectAllLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         selectAllLabel.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         selectAllLabel.setIncludeFontPadding(false);
@@ -141,7 +141,7 @@ public class DeletedMessagesActivity extends Activity {
         selectAllAction = selectAll;
 
         TextView cancelSelection = new TextView(this);
-        cancelSelection.setText(str("piko_cancel"));
+        cancelSelection.setText(str("awt_cancel"));
         cancelSelection.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         cancelSelection.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         cancelSelection.setGravity(Gravity.CENTER);
@@ -160,7 +160,7 @@ public class DeletedMessagesActivity extends Activity {
 
         FrameLayout content = new FrameLayout(this);
         TextView empty = new TextView(this);
-        empty.setText(str("piko_no_deleted_messages"));
+        empty.setText(str("awt_no_deleted_messages"));
         empty.setGravity(Gravity.CENTER);
         empty.setPadding(Dim.dp8 * 2, Dim.dp8 * 4, Dim.dp8 * 2, Dim.dp8 * 4);
         empty.setTextColor(InstagramPreferenceStyle.secondaryTextColor());
@@ -186,7 +186,7 @@ public class DeletedMessagesActivity extends Activity {
             if (body != null && body.startsWith("http")) {
                 showMediaOptions(messageId, body, type);
             } else if (type != null && !"text".equals(type)) {
-                android.widget.Toast.makeText(this, str("piko_media_not_available"),
+                android.widget.Toast.makeText(this, str("awt_media_not_available"),
                         android.widget.Toast.LENGTH_SHORT).show();
             }
         });
@@ -209,7 +209,7 @@ public class DeletedMessagesActivity extends Activity {
                 LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
 
         deleteAction = new Button(this);
-        deleteAction.setText(str("piko_delete"));
+        deleteAction.setText(str("awt_delete"));
         deleteAction.setAllCaps(false);
         deleteAction.setTextColor(0xffed4956);
         deleteAction.setBackgroundTintList(ColorStateList.valueOf(
@@ -274,8 +274,8 @@ public class DeletedMessagesActivity extends Activity {
             selectionToolbarVisible = selecting;
         }
         toolbarTitle.setText(selecting
-                ? String.format(Locale.getDefault(), str("piko_selected_count"), checkedCount)
-                : str("piko_all_deleted_messages"));
+                ? String.format(Locale.getDefault(), str("awt_selected_count"), checkedCount)
+                : str("awt_all_deleted_messages"));
         backAction.setVisibility(selecting ? View.GONE : View.VISIBLE);
         selectAllAction.setVisibility(selecting ? View.VISIBLE : View.GONE);
         selectAllCheck.setChecked(areAllSelected(
@@ -321,11 +321,11 @@ public class DeletedMessagesActivity extends Activity {
         if (selectedIds.isEmpty()) return;
 
         String prompt = String.format(Locale.getDefault(),
-                str("piko_delete_selected_confirm"), selectedIds.size());
+                str("awt_delete_selected_confirm"), selectedIds.size());
         new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(this))
                 .setMessage(prompt)
-                .setPositiveButton(str("piko_delete"), (dialog, which) -> {
-                    PikoMessageDb db = PikoMessageDb.getInstance(this);
+                .setPositiveButton(str("awt_delete"), (dialog, which) -> {
+                    AwtMessageDb db = AwtMessageDb.getInstance(this);
                     db.deleteSaved(selectedIds);
                     selectionMode = false;
                     messageList.clearChoices();
@@ -334,7 +334,7 @@ public class DeletedMessagesActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     updateSelectionUi();
                 })
-                .setNegativeButton(str("piko_cancel"), null)
+                .setNegativeButton(str("awt_cancel"), null)
                 .show();
     }
 
@@ -380,24 +380,24 @@ public class DeletedMessagesActivity extends Activity {
                     || url.contains("instagram.com/p/") || url.contains("instagram.com/tv/");
 
             final CharSequence[] options = new CharSequence[] {
-                str("piko_download_current_media"),
-                isShare ? str("piko_open_share_in_instagram")
-                        : isAudio ? str("piko_open_voice_with_player")
-                        : isVideo ? str("piko_open_video_externally")
-                        : str("piko_open_image_externally"),
-                str("piko_copy_media_link"),
+                str("awt_download_current_media"),
+                isShare ? str("awt_open_share_in_instagram")
+                        : isAudio ? str("awt_open_voice_with_player")
+                        : isVideo ? str("awt_open_video_externally")
+                        : str("awt_open_image_externally"),
+                str("awt_copy_media_link"),
             };
 
             new android.app.AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(this))
-                .setTitle(str("piko_download_options"))
+                .setTitle(str("awt_download_options"))
                 .setItems(options, (d, which) -> {
                     try {
                         if (which == 0) {
-                            String fileName = "piko_" + messageId + guessExtension(url, type);
+                            String fileName = "awt_" + messageId + guessExtension(url, type);
                             DownloadUtils.downloadMediaUrl(this, url, Constants.DEFAULT_DM_FOLDER, fileName);
                         } else if (which == 2) {
                             Utils.setClipboard(url);
-                            Utils.showToastShort(str("piko_copied_media_link"));
+                            Utils.showToastShort(str("awt_copied_media_link"));
                         } else {
                             android.net.Uri uri = android.net.Uri.parse(url);
                             // The caller only checks url.startsWith("http"), which still lets a
@@ -432,30 +432,30 @@ public class DeletedMessagesActivity extends Activity {
                             }
                         }
                     } catch (Exception e) {
-                        android.util.Log.e("piko", "showMediaOptions action: " + e);
+                        android.util.Log.e("awt", "showMediaOptions action: " + e);
                     }
                 })
                 .show();
         } catch (Exception e) {
-            android.util.Log.e("piko", "showMediaOptions: " + e);
+            android.util.Log.e("awt", "showMediaOptions: " + e);
         }
     }
 
     private static String mediaLabel(String type) {
-        if (type == null) return "[" + str("piko_media_unknown") + "]";
+        if (type == null) return "[" + str("awt_media_unknown") + "]";
         String label;
         switch (type) {
             case "media":
-            case "image":          label = str("piko_media_photo"); break;
-            case "video":          label = str("piko_media_video"); break;
+            case "image":          label = str("awt_media_photo"); break;
+            case "video":          label = str("awt_media_video"); break;
             case "voice_media":
-            case "audio":          label = str("piko_media_voice"); break;
-            case "animated_media": label = str("piko_media_gif"); break;
-            case "reel_share":     label = str("piko_media_reel"); break;
-            case "story_share":    label = str("piko_media_story"); break;
-            case "media_share":    label = str("piko_media_post"); break;
+            case "audio":          label = str("awt_media_voice"); break;
+            case "animated_media": label = str("awt_media_gif"); break;
+            case "reel_share":     label = str("awt_media_reel"); break;
+            case "story_share":    label = str("awt_media_story"); break;
+            case "media_share":    label = str("awt_media_post"); break;
             case "clip":
-            case "xma_clip":       label = str("piko_media_reel"); break;
+            case "xma_clip":       label = str("awt_media_reel"); break;
             default:               return "[" + type + "]";
         }
         return "[" + label + "]";
@@ -547,16 +547,16 @@ public class DeletedMessagesActivity extends Activity {
             } else if (senderId != null && !senderId.isEmpty()) {
                 who = "@" + senderId;
             } else {
-                who = str("piko_unknown");
+                who = str("awt_unknown");
             }
             senderView.setText(who);
             boolean isMediaUrl = content != null && content.startsWith("http");
             if (isMediaUrl) {
                 contentView.setText(mediaLabel(type) + "  ·  "
-                        + str(isExpiredMediaUrl(content) ? "piko_media_expired" : "piko_tap_to_view"));
+                        + str(isExpiredMediaUrl(content) ? "awt_media_expired" : "awt_tap_to_view"));
             } else {
                 contentView.setText(content != null && !content.isEmpty() ? content
-                        : (type != null ? "[" + type + "]" : str("piko_media_deleted_generic")));
+                        : (type != null ? "[" + type + "]" : str("awt_media_deleted_generic")));
             }
             metaView.setText(timestampFormatter.format(new Date(timestamp)));
             boolean checked = messageList.isItemChecked(position);

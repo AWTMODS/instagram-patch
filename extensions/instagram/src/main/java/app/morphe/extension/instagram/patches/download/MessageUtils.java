@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -23,7 +23,7 @@ import app.morphe.extension.crimera.downloader.MediaType;
 public class MessageUtils {
     private static boolean DEBUG;
     static {
-        DEBUG = Pref.pikoDebug();
+        DEBUG = Pref.awtDebug();
     }
 
     public static boolean messageDownloadCheck(Context context, Object messageInfoObject){
@@ -53,7 +53,7 @@ public class MessageUtils {
             }
 
         } catch (Exception e) {
-            app.morphe.extension.crimera.PikoUtils.logger(e);
+            app.morphe.extension.crimera.AwtUtils.logger(e);
         }
         return false;
     }

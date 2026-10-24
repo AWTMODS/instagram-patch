@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -42,13 +42,13 @@ public class DeepLink {
             String mainPath = secondSegment.toLowerCase();
             String lastSegment = deeplink.getLastPathSegment();
 
-            boolean isPiko = mainPath.equals("piko") || mainPath.equals("pikosettings");
+            boolean isAwt = mainPath.equals("awt") || mainPath.equals("awtsettings");
 
             String key = null;
             if (segmentSize == 2 && "settings".equals(lastSegment)){
                 Utils.startXSettings();
                 return true;
-            } else if (segmentSize == 2 && isPiko) {
+            } else if (segmentSize == 2 && isAwt) {
                 ActivityHook.startSettingsActivity();
                 return true;
             } else if (mainPath.equals("addflags")) {
@@ -66,7 +66,7 @@ public class DeepLink {
                 String tweetId = deeplinkSegments.get(2);
                 ActivityHook.startReaderMode(tweetId);
                 return true;
-            } else if (isPiko) {
+            } else if (isAwt) {
                 if ("premium".equals(lastSegment)){
                     key = Settings.PREMIUM_SECTION;
                 } else if ("download".equals(lastSegment)) {
@@ -96,7 +96,7 @@ public class DeepLink {
                 return true;
             }
         } catch (Exception e) {
-            app.morphe.extension.crimera.PikoUtils.logger(e);
+            app.morphe.extension.crimera.AwtUtils.logger(e);
         }
 
         return false;

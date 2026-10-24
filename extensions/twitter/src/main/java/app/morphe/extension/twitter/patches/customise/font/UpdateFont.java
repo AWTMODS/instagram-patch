@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -9,7 +9,7 @@ package app.morphe.extension.twitter.patches.customise.font;
 import static app.morphe.extension.shared.StringRef.str;
 
 import android.os.Build;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Spannable;
@@ -51,7 +51,7 @@ public class UpdateFont {
     public static void loadFont(String fontName,boolean isEmojiFont){
         File fontFile = new File(context.getFilesDir(), fontName);
         if (!fontFile.exists()) {
-            PikoUtils.logger("Font not found: " + fontFile.getAbsolutePath());
+            AwtUtils.logger("Font not found: " + fontFile.getAbsolutePath());
         }else{
 
             Typeface typeface = Typeface.createFromFile(fontFile);
@@ -60,7 +60,7 @@ public class UpdateFont {
             }else{
                 textTypeface = typeface;
             }
-            PikoUtils.logger("Font loaded: " + fontFile.getAbsolutePath());
+            AwtUtils.logger("Font loaded: " + fontFile.getAbsolutePath());
         }
     }
 
@@ -69,12 +69,12 @@ public class UpdateFont {
         File fontFile = new File(context.getFilesDir(), filename);
         if (fontFile.exists()) {
             if (fontFile.delete()) {
-                PikoUtils.toast(str("piko_pref_delete_font_success"));
+                AwtUtils.toast(str("awt_pref_delete_font_success"));
             } else {
-                PikoUtils.toast(str("piko_pref_delete_font_fail"));
+                AwtUtils.toast(str("awt_pref_delete_font_fail"));
             }
         } else {
-            PikoUtils.toast(str("piko_pref_delete_font_warn"));
+            AwtUtils.toast(str("awt_pref_delete_font_warn"));
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -62,7 +62,7 @@ val downloadMediaPatch =
 
         execute {
 
-            addOverflowMenuButtonAttributes("PIKO_DOWNLOAD", "downloadOverflowButton")
+            addOverflowMenuButtonAttributes("AWT_DOWNLOAD", "downloadOverflowButton")
 
             // DM media downloader.
             GetDirectThreadMediaSaverModuleNameFingerprint.apply {
@@ -89,10 +89,10 @@ val downloadMediaPatch =
                         move-object/from16 v1, p2
                         invoke-static {v0, v1}, $DOWNLOAD_DESCRIPTOR/MessageUtils;->messageDownloadCheck(Landroid/content/Context;Ljava/lang/Object;)Z
                         move-result v1
-                        if-nez v1, :piko
+                        if-nez v1, :awt
                         return-void
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(0)),
+                        ExternalLabel("awt", getInstruction(0)),
                     )
                 }
             }

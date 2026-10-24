@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -30,7 +30,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 public final class MaterialYouTheme {
-    private static final String PIKO_SETTINGS_ACTIVITY_PACKAGE =
+    private static final String AWT_SETTINGS_ACTIVITY_PACKAGE =
             "app.morphe.extension.instagram.settings.";
     private static boolean initializationFailureLogged;
     private static boolean lifecycleCallbacksRegistered;
@@ -40,7 +40,7 @@ public final class MaterialYouTheme {
     private static int themeTransitionDepth;
     private static Activity themeTransitionActivity;
     private static boolean themeTransitionOverlayChanged;
-    private static boolean themeTransitionPikoRecreate;
+    private static boolean themeTransitionAwtRecreate;
     private static int lastComposePrismOverrideArgb = Integer.MIN_VALUE;
     private static int lastComposeSearchRowOverrideArgb = Integer.MIN_VALUE;
 
@@ -305,11 +305,11 @@ public final class MaterialYouTheme {
 
     private static boolean resolveInstagramDark(Activity activity) {
         boolean activityDark = isActivityDark(activity);
-        boolean pikoSettingsActivity = activity == null
-                || activity.getClass().getName().startsWith(PIKO_SETTINGS_ACTIVITY_PACKAGE);
+        boolean awtSettingsActivity = activity == null
+                || activity.getClass().getName().startsWith(AWT_SETTINGS_ACTIVITY_PACKAGE);
         observedInstagramDark = MaterialYouState.updateObservedInstagramDark(
                 observedInstagramDark,
-                pikoSettingsActivity,
+                awtSettingsActivity,
                 activityDark
         );
         return MaterialYouState.resolveInstagramDark(
@@ -408,7 +408,7 @@ public final class MaterialYouTheme {
         );
         boolean overlayChanged = previousEffectiveMode != requestedEffectiveMode
                 || previousInstagramDark != requestedInstagramDark;
-        boolean pikoRecreate = MaterialYouState.shouldPikoRecreate(
+        boolean awtRecreate = MaterialYouState.shouldAwtRecreate(
                 previousEffectiveMode,
                 requestedEffectiveMode,
                 nativeAction != null,
@@ -453,7 +453,7 @@ public final class MaterialYouTheme {
         runThemeTransition(
                 activity,
                 nativeAction,
-                pikoRecreate,
+                awtRecreate,
                 overlayChanged
         );
         observedInstagramDark =
@@ -516,17 +516,17 @@ public final class MaterialYouTheme {
     private static void runThemeTransition(
             Activity activity,
             Runnable nativeAction,
-            boolean pikoRecreate,
+            boolean awtRecreate,
             boolean overlayChanged
     ) {
         boolean rootTransition = themeTransitionDepth == 0;
         if (rootTransition) {
             themeTransitionActivity = activity;
             themeTransitionOverlayChanged = false;
-            themeTransitionPikoRecreate = false;
+            themeTransitionAwtRecreate = false;
         }
         themeTransitionOverlayChanged |= overlayChanged;
-        themeTransitionPikoRecreate |= pikoRecreate;
+        themeTransitionAwtRecreate |= awtRecreate;
         themeTransitionDepth++;
         try {
             if (nativeAction != null) {
@@ -538,14 +538,14 @@ public final class MaterialYouTheme {
                 Activity refreshActivity = themeTransitionActivity;
                 themeTransitionActivity = null;
                 boolean changedOverlay = themeTransitionOverlayChanged;
-                boolean recreateWithPiko = themeTransitionPikoRecreate;
+                boolean recreateWithAwt = themeTransitionAwtRecreate;
                 themeTransitionOverlayChanged = false;
-                themeTransitionPikoRecreate = false;
+                themeTransitionAwtRecreate = false;
                 if (refreshActivity != null && changedOverlay) {
                     ACTIVITY_GENERATIONS.advance();
                     ACTIVITY_GENERATIONS.recordCreated(refreshActivity);
                 }
-                if (refreshActivity != null && recreateWithPiko) {
+                if (refreshActivity != null && recreateWithAwt) {
                     refreshActivity.recreate();
                 }
             }

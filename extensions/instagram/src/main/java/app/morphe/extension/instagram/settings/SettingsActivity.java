@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -72,16 +72,16 @@ public class SettingsActivity extends Activity {
 
         // Extract both variables safely from the incoming intent bundle
         if (getIntent() != null && getIntent().getExtras() != null) {
-            displayTitle = str(getIntent().getStringExtra(Constants.PIKO_FRAGMENT_TITLE));
-            fragmentName = getIntent().getStringExtra(Constants.PIKO_FRAGMENT_NAME);
+            displayTitle = str(getIntent().getStringExtra(Constants.AWT_FRAGMENT_TITLE));
+            fragmentName = getIntent().getStringExtra(Constants.AWT_FRAGMENT_NAME);
         }
 
         // Fallback to default localized string if no custom title was provided in the intent
         if (displayTitle == null || displayTitle.isEmpty()) {
-            displayTitle = str("piko_title_settings");
+            displayTitle = str("awt_title_settings");
         }
 
-        boolean isRootSettings = fragmentName == null || Constants.PIKO_FRAGMENT_SETTINGS.equals(fragmentName);
+        boolean isRootSettings = fragmentName == null || Constants.AWT_FRAGMENT_SETTINGS.equals(fragmentName);
         createLayout(displayTitle, isRootSettings);
 
         if (bundle == null) {
@@ -259,7 +259,7 @@ public class SettingsActivity extends Activity {
         public void onResume() {
             super.onResume();
             refreshPreferenceSummary(
-                    "piko_download_set_path",
+                    "awt_download_set_path",
                     StorageUtils::getCustomPathForDisplay
             );
             Preference preference = findPreference(Settings.AMOLED_THEME.key);
@@ -284,46 +284,46 @@ public class SettingsActivity extends Activity {
             Helper helper = new Helper(context);
             ScreenBuilder screenBuilder = new ScreenBuilder(context, screen, helper);
 
-            String fragment_name = Constants.PIKO_FRAGMENT_SETTINGS;
+            String fragment_name = Constants.AWT_FRAGMENT_SETTINGS;
             if (getArguments() != null) {
-                fragment_name = getArguments().getString(Constants.PIKO_FRAGMENT_NAME, Constants.PIKO_FRAGMENT_SETTINGS);
+                fragment_name = getArguments().getString(Constants.AWT_FRAGMENT_NAME, Constants.AWT_FRAGMENT_SETTINGS);
             }
-            if(fragment_name.equals(Constants.PIKO_FRAGMENT_SETTINGS)) {
+            if(fragment_name.equals(Constants.AWT_FRAGMENT_SETTINGS)) {
                 screenBuilder.buildSettingsPage();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_ADS)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_ADS)) {
                 screenBuilder.buildAdsSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_GHOST)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_GHOST)) {
                 screenBuilder.ghostSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_STORY)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_STORY)) {
                 screenBuilder.storySection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_LINKS)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_LINKS)) {
                 screenBuilder.linksSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_DISTRACTION_FREE)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DISTRACTION_FREE)) {
                 screenBuilder.distractionFreeSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_FOCUS_LOCK)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_FOCUS_LOCK)) {
                 screenBuilder.buildFocusLockSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_MISC)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_MISC)) {
                 screenBuilder.buildMiscSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_DOWNLOAD_MEDIA)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DOWNLOAD_MEDIA)) {
                 screenBuilder.buildDownloadSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_NAV_BTNS)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_NAV_BTNS)) {
                 screenBuilder.buildNavigationSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_DEV_OPTIONS)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DEV_OPTIONS)) {
                 screenBuilder.buildDeveloperSection();
-            } else if(fragment_name.equals(Constants.PIKO_FRAGMENT_ABOUT)) {
+            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_ABOUT)) {
                 screenBuilder.aboutSection(SettingsStatus.FLAGS);
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_ACTION_BAR)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_ACTION_BAR)) {
                 screenBuilder.buildActionBarSection();
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_DM)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_DM)) {
                 screenBuilder.dmSection();
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_FILTER_CONTENT)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_FILTER_CONTENT)) {
                 screenBuilder.filterContentSection();
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_REC_FLAGS)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_REC_FLAGS)) {
                 preferenceManager.setSharedPreferencesName(Constants.REC_FLAGS);
                 screenBuilder.buildRecommendedFlagsSection();
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_INSTANTS)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_INSTANTS)) {
                 screenBuilder.buildInstantsSection();
-            } else if (fragment_name.equals(Constants.PIKO_FRAGMENT_FONT)) {
+            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_FONT)) {
                 screenBuilder.buildFontSection();
             }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -77,7 +77,7 @@ public class ScreenBuilder {
         if (SettingsStatus.disableAds) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_ads"),
+                            str("awt_disable_ads"),
                             "",
                             Settings.DISABLE_ADS
                     )
@@ -86,8 +86,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideSuggestedContent) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_hide_suggested_content"),
-                            str("piko_hide_suggested_content_desc"),
+                            str("awt_hide_suggested_content"),
+                            str("awt_hide_suggested_content_desc"),
                             Settings.HIDE_SUGGESTED_CONTENT
                     )
             );
@@ -101,41 +101,41 @@ public class ScreenBuilder {
         // this listener has run - FontStorage.useSystemFont() has to read the new value straight
         // away, from load() on the next start up.
         SwitchPref useSystemFont = new SwitchPref(context);
-        useSystemFont.setTitle(str("piko_use_system_font"));
-        useSystemFont.setSummary(str("piko_use_system_font_desc"));
+        useSystemFont.setTitle(str("awt_use_system_font"));
+        useSystemFont.setSummary(str("awt_use_system_font_desc"));
         useSystemFont.setKey(Settings.USE_SYSTEM_FONT.key);
         useSystemFont.setPersistent(false);
         useSystemFont.setChecked(FontStorage.useSystemFont());
         useSystemFont.setOnPreferenceChangeListener((preference, newValue) -> {
             FontStorage.setUseSystemFont(Boolean.TRUE.equals(newValue));
-            Utils.showToastShort(str("piko_restart_app"));
+            Utils.showToastShort(str("awt_restart_app"));
             return true;
         });
         addPreference(useSystemFont);
 
         addPreference(helper.buttonPreference(
-                str("piko_pref_add_font"),
-                str("piko_pref_add_font_desc"),
-                "piko_pref_add_font"
+                str("awt_pref_add_font"),
+                str("awt_pref_add_font_desc"),
+                "awt_pref_add_font"
         ));
 
         addPreference(helper.buttonPreference(
-                str("piko_pref_delete_font"),
+                str("awt_pref_delete_font"),
                 "",
-                "piko_pref_delete_font"
+                "awt_pref_delete_font"
         ));
     }
 
     public void buildDeveloperSection() {
         if (!(SettingsStatus.developerOptionsSection())) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_dev_options"));
+        // PreferenceCategory category= addCategory(str("awt_category_dev_options"));
         if (SettingsStatus.recommendedFlags) {
             addPreference(
                     helper.buttonPreference(
-                            str("piko_category_rec_flags"),
-                            str("piko_category_rec_flags_desc"),
-                            Constants.PIKO_FRAGMENT_REC_FLAGS
+                            str("awt_category_rec_flags"),
+                            str("awt_category_rec_flags_desc"),
+                            Constants.AWT_FRAGMENT_REC_FLAGS
                     )
             );
         }
@@ -143,8 +143,8 @@ public class ScreenBuilder {
         if (SettingsStatus.unlockEmployeeOptions) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_enable_emp_options"),
-                            str("piko_enable_emp_options_desc"),
+                            str("awt_enable_emp_options"),
+                            str("awt_enable_emp_options_desc"),
                             Settings.ENABLE_EMP_OPTIONS
                     )
             );
@@ -152,8 +152,8 @@ public class ScreenBuilder {
         if (SettingsStatus.allowUserNetworkCertificate) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_allow_user_network_certificate"),
-                            str("piko_allow_user_network_certificate_desc"),
+                            str("awt_allow_user_network_certificate"),
+                            str("awt_allow_user_network_certificate_desc"),
                             Settings.ALLOW_USER_NETWORK_CERTIFICATE
                     )
             );
@@ -161,61 +161,61 @@ public class ScreenBuilder {
         if (SettingsStatus.enableDeveloperOptions) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_enable_dev_options"),
-                            str("piko_enable_dev_options_desc"),
+                            str("awt_enable_dev_options"),
+                            str("awt_enable_dev_options_desc"),
                             Settings.DEVELOPER_OPTIONS
                     )
             );
             addPreference(
                     helper.switchPreference(
-                            str("piko_directly_open_metaconfig"),
-                            str("piko_directly_open_metaconfig_desc"),
+                            str("awt_directly_open_metaconfig"),
+                            str("awt_directly_open_metaconfig_desc"),
                             Settings.DIRECTLY_OPEN_METACONFIG
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_export_dev_overrides"),
+                            str("awt_export_dev_overrides"),
                             "",
-                            "piko_export_dev_overrides"
+                            "awt_export_dev_overrides"
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_import_dev_overrides"),
+                            str("awt_import_dev_overrides"),
                             "",
-                            "piko_import_dev_overrides"
+                            "awt_import_dev_overrides"
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_import_id_mapping"),
+                            str("awt_import_id_mapping"),
                             "",
-                            "piko_import_id_mapping"
+                            "awt_import_id_mapping"
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_download_id_mapping"),
+                            str("awt_download_id_mapping"),
                             "",
-                            "piko_download_id_mapping"
+                            "awt_download_id_mapping"
                     )
             );
 
-            if(Pref.pikoDebug()) {
+            if(Pref.awtDebug()) {
                 addPreference(
                         helper.buttonPreference(
-                                str("piko_export_experiment_list"),
+                                str("awt_export_experiment_list"),
                                 "",
-                                "piko_export_experiment_list"
+                                "awt_export_experiment_list"
                         )
                 );
 
                 addPreference(
                         helper.buttonPreference(
-                                str("piko_export_experiment_mappings"),
+                                str("awt_export_experiment_mappings"),
                                 "",
-                                "piko_export_experiment_mappings"
+                                "awt_export_experiment_mappings"
                         )
                 );
             }
@@ -228,8 +228,8 @@ public class ScreenBuilder {
         if (SettingsStatus.unlimitedReplaysOnEphemeralMedia) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_unlimited_replays"),
-                            str("piko_unlimited_replays_desc"),
+                            str("awt_unlimited_replays"),
+                            str("awt_unlimited_replays_desc"),
                             Settings.UNLIMITED_REPLAYS
                     )
             );
@@ -238,8 +238,8 @@ public class ScreenBuilder {
         if (SettingsStatus.markChatAsRead) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_enable_mark_chat_as_read"),
-                            str("piko_enable_mark_chat_as_read_desc"),
+                            str("awt_enable_mark_chat_as_read"),
+                            str("awt_enable_mark_chat_as_read_desc"),
                             Settings.ENABLE_MARK_CHAT_AS_READ
                     )
             );
@@ -248,15 +248,15 @@ public class ScreenBuilder {
         if (SettingsStatus.inboxLock) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_inbox_lock"),
-                            str("piko_inbox_lock_desc"),
+                            str("awt_inbox_lock"),
+                            str("awt_inbox_lock_desc"),
                             Settings.INBOX_LOCK
                     )
             );
             addPreference(
                     helper.switchPreference(
-                            str("piko_inbox_lock_notifications"),
-                            str("piko_inbox_lock_notifications_desc"),
+                            str("awt_inbox_lock_notifications"),
+                            str("awt_inbox_lock_notifications_desc"),
                             Settings.INBOX_LOCK_NOTIFICATIONS
                     )
             );
@@ -265,14 +265,14 @@ public class ScreenBuilder {
         if (SettingsStatus.saveDeletedMessages) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_save_deleted_messages"),
-                            str("piko_save_deleted_messages_desc"),
+                            str("awt_save_deleted_messages"),
+                            str("awt_save_deleted_messages_desc"),
                             Settings.SAVE_DELETED_MESSAGES
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_view_deleted_messages"),
+                            str("awt_view_deleted_messages"),
                             "",
                             "view_deleted_messages"
                     )
@@ -283,11 +283,11 @@ public class ScreenBuilder {
     public void ghostSection() {
         if (!(SettingsStatus.ghostSection())) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_ghost"));
+        // PreferenceCategory category= addCategory(str("awt_category_ghost"));
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_turn_on_all_ghost_modes"),
+                        str("awt_turn_on_all_ghost_modes"),
                         "",
                         Settings.TURN_ON_ALL_GHOST_MODES
                 )
@@ -296,7 +296,7 @@ public class ScreenBuilder {
         if (SettingsStatus.viewStoriesAnonymously) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_view_stories_anonymously"),
+                            str("awt_view_stories_anonymously"),
                             "",
                             Settings.VIEW_STORIES_ANONYMOUSLY
                     )
@@ -305,7 +305,7 @@ public class ScreenBuilder {
         if (SettingsStatus.viewLiveAnonymously) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_view_live_anonymously"),
+                            str("awt_view_live_anonymously"),
                             "",
                             Settings.VIEW_LIVE_ANONYMOUSLY
                     )
@@ -314,7 +314,7 @@ public class ScreenBuilder {
         if (SettingsStatus.disableTypingStatus) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_typing_status"),
+                            str("awt_disable_typing_status"),
                             "",
                             Settings.DISABLE_TYPING_STATUS
                     )
@@ -323,7 +323,7 @@ public class ScreenBuilder {
         if (SettingsStatus.disableScreenshotDetection) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_screenshot_detection"),
+                            str("awt_disable_screenshot_detection"),
                             "",
                             Settings.DISABLE_SCREENSHOT_DETECTION
                     )
@@ -332,8 +332,8 @@ public class ScreenBuilder {
         if (SettingsStatus.viewDmAnonymously) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_view_dm_anonymously"),
-                            str("piko_view_dm_anonymously_desc"),
+                            str("awt_view_dm_anonymously"),
+                            str("awt_view_dm_anonymously_desc"),
                             Settings.VIEW_DM_ANONYMOUSLY
                     )
             );
@@ -344,12 +344,12 @@ public class ScreenBuilder {
     public void linksSection() {
         if (!(SettingsStatus.linksSection())) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_links"));
+        // PreferenceCategory category= addCategory(str("awt_category_links"));
         if (SettingsStatus.openLinksExternally) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_open_links_externally"),
-                            str("piko_open_links_externally_desc"),
+                            str("awt_open_links_externally"),
+                            str("awt_open_links_externally_desc"),
                             Settings.OPEN_LINKS_EXTERNALLY
                     )
             );
@@ -357,7 +357,7 @@ public class ScreenBuilder {
         if (SettingsStatus.sanitizeShareLinks) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_sanitize_share_links"),
+                            str("awt_sanitize_share_links"),
                             "",
                             Settings.SANITIZE_SHARE_LINKS
                     )
@@ -366,7 +366,7 @@ public class ScreenBuilder {
         if (SettingsStatus.customSharingDomain) {
             addPreference(
                     helper.editTextPreference(
-                            str("piko_custom_sharing_domain"),
+                            str("awt_custom_sharing_domain"),
                             Links.customSharingDomainSummary(Pref.customSharingDomain()),
                             Settings.CUSTOM_SHARING_DOMAIN
                     )
@@ -377,71 +377,71 @@ public class ScreenBuilder {
     public void distractionFreeSection() {
         if (!(SettingsStatus.distractionFreeSection())) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_distraction_free"));
+        // PreferenceCategory category= addCategory(str("awt_category_distraction_free"));
 
         if (SettingsStatus.focusLock) {
             addPreference(
                     helper.buttonPreference(
-                            str("piko_focus_lock"),
+                            str("awt_focus_lock"),
                             FocusLock.statusSummary(),
-                            Constants.PIKO_FRAGMENT_FOCUS_LOCK
+                            Constants.AWT_FRAGMENT_FOCUS_LOCK
                     )
             );
         }
 
         if (SettingsStatus.disableStories) {
             addLockableSwitch(
-                    str("piko_disable_stories"),
+                    str("awt_disable_stories"),
                     "",
                     Settings.DISABLE_STORIES
             );
         }
         if (SettingsStatus.hideStoriesTray) {
             addLockableSwitch(
-                    str("piko_hide_stories_tray"),
-                    str("piko_hide_stories_tray_desc"),
+                    str("awt_hide_stories_tray"),
+                    str("awt_hide_stories_tray_desc"),
                     Settings.HIDE_STORIES_TRAY
             );
         }
         if (SettingsStatus.disableHighlights) {
             addLockableSwitch(
-                    str("piko_disable_highlights"),
+                    str("awt_disable_highlights"),
                     "",
                     Settings.DISABLE_HIGHLIGHTS
             );
         }
         if (SettingsStatus.hideNotesTray) {
             addLockableSwitch(
-                    str("piko_hide_notes_tray"),
-                    str("piko_hide_notes_tray_desc"),
+                    str("awt_hide_notes_tray"),
+                    str("awt_hide_notes_tray_desc"),
                     Settings.HIDE_NOTES_TRAY
             );
         }
         if (SettingsStatus.disableExplore) {
             addLockableSwitch(
-                    str("piko_disable_explore"),
+                    str("awt_disable_explore"),
                     "",
                     Settings.DISABLE_EXPLORE
             );
         }
         if (SettingsStatus.disableComments) {
             addLockableSwitch(
-                    str("piko_disable_comments"),
+                    str("awt_disable_comments"),
                     "",
                     Settings.DISABLE_COMMENTS
             );
         }
         if (SettingsStatus.limitFollowingFeed) {
             addLockableSwitch(
-                    str("piko_limit_following_feed"),
-                    str("piko_limit_following_feed_desc"),
+                    str("awt_limit_following_feed"),
+                    str("awt_limit_following_feed_desc"),
                     Settings.LIMIT_FOLLOWING_FEED
             );
         }
         if (SettingsStatus.disableDiscoverPeople) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_discover_people"),
+                            str("awt_disable_discover_people"),
                             "",
                             Settings.DISABLE_DISCOVER_PEOPLE
                     )
@@ -449,36 +449,36 @@ public class ScreenBuilder {
         }
         if (SettingsStatus.disableReelsScrolling) {
             addLockableSwitch(
-                    str("piko_disable_reels_scrolling"),
-                    str("piko_disable_reels_scrolling_desc"),
+                    str("awt_disable_reels_scrolling"),
+                    str("awt_disable_reels_scrolling_desc"),
                     Settings.DISABLE_REELS_SCROLLING
             );
         }
         if (SettingsStatus.disableSwipeToCreate) {
             addLockableSwitch(
-                    str("piko_disable_swipe_to_create"),
-                    str("piko_disable_swipe_to_create_desc"),
+                    str("awt_disable_swipe_to_create"),
+                    str("awt_disable_swipe_to_create_desc"),
                     Settings.DISABLE_SWIPE_TO_CREATE
             );
         }
         if (SettingsStatus.hideGroupCreationOnSharesheet) {
             addLockableSwitch(
-                    str("piko_hide_group_creation_button_on_sharesheet"),
+                    str("awt_hide_group_creation_button_on_sharesheet"),
                     "",
                     Settings.HIDE_GROUP_CREATION_BUTTON_ON_SHARESHEET
             );
         }
         if (SettingsStatus.hideReelsFollowButton) {
             addLockableSwitch(
-                    str("piko_hide_reels_follow_button"),
-                    str("piko_hide_reels_follow_button_desc"),
+                    str("awt_hide_reels_follow_button"),
+                    str("awt_hide_reels_follow_button_desc"),
                     Settings.HIDE_REELS_FOLLOW_BUTTON
             );
         }
         if (SettingsStatus.hideShareButton) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_hide_share_button"),
+                            str("awt_hide_share_button"),
                             "",
                             Settings.HIDE_SHARE_BUTTON
                     )
@@ -487,7 +487,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideSaveButtons) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_hide_save_buttons"),
+                            str("awt_hide_save_buttons"),
                             "",
                             Settings.HIDE_SAVE_BUTTONS
                     )
@@ -496,7 +496,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideReshareButton) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_hide_reshare_button"),
+                            str("awt_hide_reshare_button"),
                             "",
                             Settings.HIDE_RESHARE_BUTTON
                     )
@@ -505,7 +505,7 @@ public class ScreenBuilder {
         if (SettingsStatus.disableVideoAutoplay) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_video_autoplay"),
+                            str("awt_disable_video_autoplay"),
                             "",
                             Settings.DISABLE_VIDEO_AUTOPLAY
                     )
@@ -513,25 +513,25 @@ public class ScreenBuilder {
         }
         if (SettingsStatus.disableDoubleTapLike) {
             addLockableSwitch(
-                    str("piko_disable_double_tap_like_post"),
+                    str("awt_disable_double_tap_like_post"),
                     "",
                     Settings.DISABLE_DOUBLE_TAP_LIKE_POST
             );
 
             addLockableSwitch(
-                    str("piko_disable_double_tap_like_reel"),
+                    str("awt_disable_double_tap_like_reel"),
                     "",
                     Settings.DISABLE_DOUBLE_TAP_LIKE_REEL
             );
 
             addLockableSwitch(
-                    str("piko_disable_double_tap_like_comment"),
+                    str("awt_disable_double_tap_like_comment"),
                     "",
                     Settings.DISABLE_DOUBLE_TAP_LIKE_COMMENT
             );
 
             addLockableSwitch(
-                    str("piko_disable_double_tap_like_message"),
+                    str("awt_disable_double_tap_like_message"),
                     "",
                     Settings.DISABLE_DOUBLE_TAP_LIKE_MESSAGE
             );
@@ -546,7 +546,7 @@ public class ScreenBuilder {
                         summary,
                         setting,
                         FocusLock.isForced(setting),
-                        str("piko_focus_lock_enforced")
+                        str("awt_focus_lock_enforced")
                 )
         );
     }
@@ -567,16 +567,16 @@ public class ScreenBuilder {
                 helper.buttonPreference(
                         FocusLock.buttonTitle(),
                         FocusLock.statusSummary(),
-                        "piko_focus_lock_action"
+                        "awt_focus_lock_action"
                 )
         );
 
         FocusLockDurationPreference duration = new FocusLockDurationPreference(context);
-        duration.setTitle(str("piko_focus_lock_duration"));
+        duration.setTitle(str("awt_focus_lock_duration"));
         duration.setEnabled(!locked);
         addPreference(duration);
 
-        PreferenceCategory targets = addCategory(str("piko_focus_lock_targets"));
+        PreferenceCategory targets = addCategory(str("awt_focus_lock_targets"));
         for (FocusLockTargets.Target target : FocusLockTargets.available()) {
             Preference pref = helper.switchPreference(
                     str(target.titleKey),
@@ -593,11 +593,11 @@ public class ScreenBuilder {
     public void buildMiscSection() {
         if (!(SettingsStatus.miscSection())) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_misc"));
+        // PreferenceCategory category= addCategory(str("awt_category_misc"));
         if (MaterialYouTheme.isAmoledAvailable()) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_amoled_title"),
+                            str("awt_amoled_title"),
                             "",
                             Settings.AMOLED_THEME
                     )
@@ -606,7 +606,7 @@ public class ScreenBuilder {
         if (MaterialYouTheme.isMaterialYouAvailable()) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_material_you_title"),
+                            str("awt_material_you_title"),
                             "",
                             Settings.MATERIAL_YOU_THEME
                     )
@@ -615,17 +615,17 @@ public class ScreenBuilder {
         if (SettingsStatus.fontSection()) {
             addPreference(
                     helper.buttonPreference(
-                            str("piko_category_font"),
+                            str("awt_category_font"),
                             "",
-                            Constants.PIKO_FRAGMENT_FONT
+                            Constants.AWT_FRAGMENT_FONT
                     )
             );
         }
         if (SettingsStatus.unlockPlusBenefits) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_unlock_plus_benefits"),
-                            str("piko_unlock_plus_benefits_desc"),
+                            str("awt_unlock_plus_benefits"),
+                            str("awt_unlock_plus_benefits_desc"),
                             Settings.UNLOCK_PLUS_BENEFITS
                     )
             );
@@ -633,8 +633,8 @@ public class ScreenBuilder {
         if (SettingsStatus.changeLikeAnimation) {
             addPreference(
                     helper.listPreference(
-                            str("piko_change_like_animation"),
-                            str("piko_change_like_animation_desc"),
+                            str("awt_change_like_animation"),
+                            str("awt_change_like_animation_desc"),
                             Settings.CHANGE_LIKE_ANIMATION
                     )
             );
@@ -642,24 +642,24 @@ public class ScreenBuilder {
         if (SettingsStatus.disableAnalytics) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_analytics"),
-                            str("piko_disable_analytics_desc"),
+                            str("awt_disable_analytics"),
+                            str("awt_disable_analytics_desc"),
                             Settings.DISABLE_ANALYTICS
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_delete_analytics_cache"),
+                            str("awt_delete_analytics_cache"),
                             "",
-                            "piko_delete_analytics_cache"
+                            "awt_delete_analytics_cache"
                     )
             );
         }
         if (SettingsStatus.moreOptionsOnPost) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_enable_more_options_on_post"),
-                            str("piko_enable_more_options_on_post_desc"),
+                            str("awt_enable_more_options_on_post"),
+                            str("awt_enable_more_options_on_post_desc"),
                             Settings.ENABLE_MORE_OPTIONS_ON_POST
                     )
             );
@@ -667,16 +667,16 @@ public class ScreenBuilder {
         if (SettingsStatus.followBackIndicator) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_follow_back_indicator"),
-                            str("piko_follow_back_indicator_desc"),
+                            str("awt_follow_back_indicator"),
+                            str("awt_follow_back_indicator_desc"),
                             Settings.FOLLOW_BACK_INDICATOR
                     )
             );
 
             addPreference(
                     helper.switchPreference(
-                            str("piko_fbi_color_indicator"),
-                            str("piko_fbi_color_indicator_desc"),
+                            str("awt_fbi_color_indicator"),
+                            str("awt_fbi_color_indicator_desc"),
                             Settings.FOLLOW_BACK_COLOR_INDICATOR
                     )
             );
@@ -684,8 +684,8 @@ public class ScreenBuilder {
         if (SettingsStatus.followListNonFollowerBadge) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_follow_list_non_follower_badge"),
-                            str("piko_follow_list_non_follower_badge_desc"),
+                            str("awt_follow_list_non_follower_badge"),
+                            str("awt_follow_list_non_follower_badge_desc"),
                             Settings.FOLLOW_LIST_NON_FOLLOWER_BADGE
                     )
             );
@@ -693,8 +693,8 @@ public class ScreenBuilder {
         if (SettingsStatus.improveImageViewing) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_improve_image_viewing"),
-                            str("piko_improve_image_viewing_desc"),
+                            str("awt_improve_image_viewing"),
+                            str("awt_improve_image_viewing_desc"),
                             Settings.IMPROVE_IMAGE_VIEWING
                     )
             );
@@ -702,8 +702,8 @@ public class ScreenBuilder {
         if (SettingsStatus.copyCommentButton) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_copy_comment"),
-                            str("piko_copy_comment_desc"),
+                            str("awt_copy_comment"),
+                            str("awt_copy_comment_desc"),
                             Settings.COMMENT_COPY_BUTTON
                     )
             );
@@ -711,7 +711,7 @@ public class ScreenBuilder {
         if (SettingsStatus.removeEmptyBottomSpace) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_remove_empty_bottom_space"),
+                            str("awt_remove_empty_bottom_space"),
                             "",
                             Settings.REMOVE_EMPTY_BOTTOM_SPACE
                     )
@@ -723,16 +723,16 @@ public class ScreenBuilder {
         if (SettingsStatus.instantsDownload) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_instants_download"),
-                            str("piko_instants_download_desc"),
+                            str("awt_instants_download"),
+                            str("awt_instants_download_desc"),
                             Settings.INSTANTS_DOWNLOAD
                     )
             );
             addPreference(
                     helper.buttonPreference(
-                            str("piko_view_saved_instants"),
+                            str("awt_view_saved_instants"),
                             "",
-                            "piko_view_saved_instants"
+                            "awt_view_saved_instants"
                     )
             );
         }
@@ -741,11 +741,11 @@ public class ScreenBuilder {
     public void buildDownloadSection() {
         if (!SettingsStatus.downloadSection()) return;
 
-        // PreferenceCategory category= addCategory(str("piko_category_download_media"));
+        // PreferenceCategory category= addCategory(str("awt_category_download_media"));
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_enable_download"),
+                        str("awt_enable_download"),
                         "",
                         Settings.ENABLE_DOWNLOAD
                 )
@@ -754,8 +754,8 @@ public class ScreenBuilder {
         if (SettingsStatus.feedDownloadButton) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_feed_download_button"),
-                            str("piko_feed_download_button_desc"),
+                            str("awt_feed_download_button"),
+                            str("awt_feed_download_button_desc"),
                             Settings.FEED_DOWNLOAD_BUTTON
                     )
             );
@@ -763,8 +763,8 @@ public class ScreenBuilder {
         if (SettingsStatus.saveMediaCommentButton) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_save_media_comment"),
-                            str("piko_save_media_comment_desc"),
+                            str("awt_save_media_comment"),
+                            str("awt_save_media_comment_desc"),
                             Settings.COMMENT_SAVE_MEDIA_BUTTON
                     )
             );
@@ -772,31 +772,31 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_enable_direct_download"),
-                        str("piko_enable_direct_download_desc"),
+                        str("awt_enable_direct_download"),
+                        str("awt_enable_direct_download_desc"),
                         Settings.ENABLE_DIRECT_DOWNLOAD
                 )
         );
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_download_username_folder"),
-                        str("piko_download_username_folder_desc"),
+                        str("awt_download_username_folder"),
+                        str("awt_download_username_folder_desc"),
                         Settings.DOWNLOAD_USERNAME_FOLDER
                 )
         );
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_embed_download_metadata"),
-                        str("piko_embed_download_metadata_desc"),
+                        str("awt_embed_download_metadata"),
+                        str("awt_embed_download_metadata_desc"),
                         Settings.EMBED_DOWNLOAD_METADATA
                 )
         );
 
         addPreference(
                 helper.downloadFileNameTemplatePreference(
-                        str("piko_download_file_name_template"),
+                        str("awt_download_file_name_template"),
                         Pref.downloadFileNameTemplate(),
                         Settings.DOWNLOAD_FILE_NAME_TEMPLATE
                 )
@@ -804,16 +804,16 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.buttonPreference(
-                        str("piko_download_set_path"),
+                        str("awt_download_set_path"),
                         StorageUtils.getCustomPathForDisplay(),
-                        "piko_download_set_path"
+                        "awt_download_set_path"
                 )
         );
 
         if(SettingsStatus.downloadWithExternalDownloader) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_download_with_external_downloader"),
+                            str("awt_download_with_external_downloader"),
                             "",
                             Settings.DOWNLOAD_WITH_EXTERNAL_DOWNLOADER
                     )
@@ -821,7 +821,7 @@ public class ScreenBuilder {
 
             addPreference(
                     helper.editTextPreference(
-                            str("piko_external_downloader_package_name"),
+                            str("awt_external_downloader_package_name"),
                             Pref.externalDownloaderPackageName(),
                             Settings.EXTERNAL_DOWNLOADER_PACKAGE_NAME
                     )
@@ -833,7 +833,7 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.multiSelectListPref(
-                        str("piko_action_bar_main_feed"),
+                        str("awt_action_bar_main_feed"),
                         "",
                         Settings.ACTION_BAR_MAIN_FEED
                 )
@@ -841,7 +841,7 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.multiSelectListPref(
-                        str("piko_action_bar_user_profile"),
+                        str("awt_action_bar_user_profile"),
                         "",
                         Settings.ACTION_BAR_USER_PROFILE
                 )
@@ -849,7 +849,7 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.multiSelectListPref(
-                        str("piko_action_bar_inbox"),
+                        str("awt_action_bar_inbox"),
                         "",
                         Settings.ACTION_BAR_INBOX
                 )
@@ -857,8 +857,8 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.multiSelectListPref(
-                        str("piko_action_bar_chat"),
-                        str("piko_action_bar_chat_desc"),
+                        str("awt_action_bar_chat"),
+                        str("awt_action_bar_chat_desc"),
                         Settings.ACTION_BAR_CHAT
                 )
         );
@@ -868,12 +868,12 @@ public class ScreenBuilder {
         if(!SettingsStatus.filterContentSection()) return;
 
         if(SettingsStatus.storyFilters) {
-            PreferenceCategory category = addCategory(str("piko_filter_story"));
+            PreferenceCategory category = addCategory(str("awt_filter_story"));
 
             addPreference(
                     category,
                     helper.multiSelectListPref(
-                            str("piko_filter_story_types_to_hide"),
+                            str("awt_filter_story_types_to_hide"),
                             "",
                             Settings.FILTER_STORY_BY_TYPE
                     )
@@ -882,7 +882,7 @@ public class ScreenBuilder {
             addPreference(
                     category,
                     helper.multiSelectListPref(
-                            str("piko_filter_story_user_types_to_hide"),
+                            str("awt_filter_story_user_types_to_hide"),
                             "",
                             Settings.FILTER_STORY_BY_USER_TYPE
                     )
@@ -891,8 +891,8 @@ public class ScreenBuilder {
             addPreference(
                     category,
                     helper.editTextNumPreference(
-                            str("piko_filter_story_minimum_item_count"),
-                            str("piko_filter_story_minimum_item_count_desc"),
+                            str("awt_filter_story_minimum_item_count"),
+                            str("awt_filter_story_minimum_item_count_desc"),
                             Settings.FILTER_STORY_MIN_STORY_ITEMS
                     )
             );
@@ -900,8 +900,8 @@ public class ScreenBuilder {
             addPreference(
                     category,
                     helper.editTextNumPreference(
-                            str("piko_filter_story_maximum_item_count"),
-                            str("piko_filter_story_maximum_item_count_desc"),
+                            str("awt_filter_story_maximum_item_count"),
+                            str("awt_filter_story_maximum_item_count_desc"),
                             Settings.FILTER_STORY_MAX_STORY_ITEMS
                     )
             );
@@ -913,15 +913,15 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.navigationBarPreference(
-                        str("piko_navigation_tabs_title"),
-                        str("piko_navigation_tabs_summary")
+                        str("awt_navigation_tabs_title"),
+                        str("awt_navigation_tabs_summary")
                 )
         );
 
         addPreference(
                 helper.navigationStartupPreference(
-                        str("piko_navigation_startup_tab"),
-                        str("piko_navigation_startup_tab_summary")
+                        str("awt_navigation_startup_tab"),
+                        str("awt_navigation_startup_tab_summary")
                 )
         );
     }
@@ -935,13 +935,13 @@ public class ScreenBuilder {
             String skeleton = DateFormat.is24HourFormat(context) ? "yMMMEdHm" : "yMMMEdhm";
             String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
             String formattedDate = new SimpleDateFormat(pattern, locale).format(new Date(lastModified));
-            lastModifiedAtString = String.format(str("piko_rec_flags_last_modified_at"), formattedDate);
+            lastModifiedAtString = String.format(str("awt_rec_flags_last_modified_at"), formattedDate);
         }
         addPreference(
             helper.buttonPreference(
-                    str("piko_rec_flags_refresh_file"),
+                    str("awt_rec_flags_refresh_file"),
                     lastModifiedAtString,
-                    "piko_rec_flags_refresh_file"
+                    "awt_rec_flags_refresh_file"
             )
         );
         List<Flag> recFlags = RecommendedFlags.getFlags();
@@ -972,8 +972,8 @@ public class ScreenBuilder {
 
     public void aboutSection(TreeMap<String, Boolean> flags) {
 
-        String appVersionText = String.format(str("piko_app_version"), Utils.getAppVersionName());
-        String patchVersionText = String.format(str("piko_patch_version"), Utils.getPatchesReleaseVersion());
+        String appVersionText = String.format(str("awt_app_version"), Utils.getAppVersionName());
+        String patchVersionText = String.format(str("awt_patch_version"), Utils.getPatchesReleaseVersion());
 
         addPreference(
                 helper.buttonPreference(
@@ -993,39 +993,39 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.buttonPreference(
-                        str("piko_export_pref"),
+                        str("awt_export_pref"),
                         "",
-                        "piko_export_pref"
+                        "awt_export_pref"
                 )
         );
 
         addPreference(
                 helper.buttonPreference(
-                        str("piko_import_pref"),
+                        str("awt_import_pref"),
                         "",
-                        "piko_import_pref"
+                        "awt_import_pref"
                 )
         );
 
         addPreference(
                 helper.buttonPreference(
-                        str("piko_reset_pref"),
+                        str("awt_reset_pref"),
                         "",
-                        "piko_reset_pref"
+                        "awt_reset_pref"
                 )
         );
 
         addPreference(
                 helper.switchPreference(
-                        str("piko_debug"),
-                        str("piko_debug_desc"),
-                        Settings.PIKO_DEBUG
+                        str("awt_debug"),
+                        str("awt_debug_desc"),
+                        Settings.AWT_DEBUG
                 )
         );
 
-        PreferenceCategory category = addCategory(str("piko_patch_info_title"));
-        String enabledStr = str("piko_patch_enabled");
-        String disabledStr = str("piko_patch_disabled");
+        PreferenceCategory category = addCategory(str("awt_patch_info_title"));
+        String enabledStr = str("awt_patch_enabled");
+        String disabledStr = str("awt_patch_disabled");
 
         for (Map.Entry<String, Boolean> entry : flags.entrySet()) {
             String resName = entry.getKey();
@@ -1049,7 +1049,7 @@ public class ScreenBuilder {
         if (SettingsStatus.viewStoryMentions) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_view_story_mentions"),
+                            str("awt_view_story_mentions"),
                             "",
                             Settings.VIEW_STORY_MENTIONS
                     )
@@ -1058,8 +1058,8 @@ public class ScreenBuilder {
         if (SettingsStatus.disableStoryFlipping) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_disable_story_flipping"),
-                            str("piko_disable_story_flipping_desc"),
+                            str("awt_disable_story_flipping"),
+                            str("awt_disable_story_flipping_desc"),
                             Settings.DISABLE_STORY_FLIPPING
                     )
             );
@@ -1067,8 +1067,8 @@ public class ScreenBuilder {
         if (SettingsStatus.loopStory) {
             addPreference(
                     helper.switchPreference(
-                            str("piko_loop_story"),
-                            str("piko_loop_story_desc"),
+                            str("awt_loop_story"),
+                            str("awt_loop_story_desc"),
                             Settings.LOOP_STORY
                     )
             );
@@ -1076,8 +1076,8 @@ public class ScreenBuilder {
         if (SettingsStatus.customiseStoryTimestamp) {
             addPreference(
                     helper.listPreference(
-                            str("piko_customise_story_timestamp"),
-                            str("piko_customise_story_timestamp_desc"),
+                            str("awt_customise_story_timestamp"),
+                            str("awt_customise_story_timestamp_desc"),
                             Settings.CUSTOMISE_STORY_TIMESTAMP
                     )
             );
@@ -1085,8 +1085,8 @@ public class ScreenBuilder {
         if (SettingsStatus.customiseStoryRingSize) {
             addPreference(
                     helper.editTextNumPreference(
-                            str("piko_customise_story_ring_size"),
-                            str("piko_customise_story_ring_size_desc"),
+                            str("awt_customise_story_ring_size"),
+                            str("awt_customise_story_ring_size_desc"),
                             Settings.CUSTOMISE_STORY_RING_SIZE
                     )
             );
@@ -1097,9 +1097,9 @@ public class ScreenBuilder {
         if (SettingsStatus.adsSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_ads"),
+                            str("awt_category_ads"),
                             "",
-                            Constants.PIKO_FRAGMENT_ADS
+                            Constants.AWT_FRAGMENT_ADS
                     )
             );
         }
@@ -1107,9 +1107,9 @@ public class ScreenBuilder {
         if (SettingsStatus.filterContentSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_filter_content"),
+                            str("awt_category_filter_content"),
                             "",
-                            Constants.PIKO_FRAGMENT_FILTER_CONTENT
+                            Constants.AWT_FRAGMENT_FILTER_CONTENT
                     )
             );
         }
@@ -1117,9 +1117,9 @@ public class ScreenBuilder {
         if (SettingsStatus.ghostSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_ghost"),
+                            str("awt_category_ghost"),
                             "",
-                            Constants.PIKO_FRAGMENT_GHOST
+                            Constants.AWT_FRAGMENT_GHOST
                     )
             );
         }
@@ -1127,9 +1127,9 @@ public class ScreenBuilder {
         if (SettingsStatus.dmSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_dm"),
+                            str("awt_category_dm"),
                             "",
-                            Constants.PIKO_FRAGMENT_DM
+                            Constants.AWT_FRAGMENT_DM
                     )
             );
         }
@@ -1137,9 +1137,9 @@ public class ScreenBuilder {
         if (SettingsStatus.storySection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_story"),
+                            str("awt_category_story"),
                             "",
-                            Constants.PIKO_FRAGMENT_STORY
+                            Constants.AWT_FRAGMENT_STORY
                     )
             );
         }
@@ -1147,9 +1147,9 @@ public class ScreenBuilder {
         if (SettingsStatus.linksSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_links"),
+                            str("awt_category_links"),
                             "",
-                            Constants.PIKO_FRAGMENT_LINKS
+                            Constants.AWT_FRAGMENT_LINKS
                     )
             );
         }
@@ -1157,9 +1157,9 @@ public class ScreenBuilder {
         if (SettingsStatus.distractionFreeSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_distraction_free"),
+                            str("awt_category_distraction_free"),
                             "",
-                            Constants.PIKO_FRAGMENT_DISTRACTION_FREE
+                            Constants.AWT_FRAGMENT_DISTRACTION_FREE
                     )
             );
         }
@@ -1167,9 +1167,9 @@ public class ScreenBuilder {
         if (SettingsStatus.miscSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_misc"),
+                            str("awt_category_misc"),
                             "",
-                            Constants.PIKO_FRAGMENT_MISC
+                            Constants.AWT_FRAGMENT_MISC
                     )
             );
         }
@@ -1177,9 +1177,9 @@ public class ScreenBuilder {
         if (SettingsStatus.downloadSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_downloads"),
+                            str("awt_category_downloads"),
                             "",
-                            Constants.PIKO_FRAGMENT_DOWNLOAD_MEDIA
+                            Constants.AWT_FRAGMENT_DOWNLOAD_MEDIA
                     )
             );
         }
@@ -1187,27 +1187,27 @@ public class ScreenBuilder {
         if (SettingsStatus.instantsDownload){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_instants_title"),
+                            str("awt_instants_title"),
                             "",
-                            Constants.PIKO_FRAGMENT_INSTANTS
+                            Constants.AWT_FRAGMENT_INSTANTS
                     )
             );
         }
 
         addPreference(
                 helper.categoryPreference(
-                        str("piko_category_action_bar"),
+                        str("awt_category_action_bar"),
                         "",
-                        Constants.PIKO_FRAGMENT_ACTION_BAR
+                        Constants.AWT_FRAGMENT_ACTION_BAR
                 )
         );
 
         if (SettingsStatus.hideNavigationButtons){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_navigation_tabs"),
+                            str("awt_category_navigation_tabs"),
                             "",
-                            Constants.PIKO_FRAGMENT_NAV_BTNS
+                            Constants.AWT_FRAGMENT_NAV_BTNS
                     )
             );
         }
@@ -1215,18 +1215,18 @@ public class ScreenBuilder {
         if (SettingsStatus.developerOptionsSection()){
             addPreference(
                     helper.categoryPreference(
-                            str("piko_category_dev_options"),
+                            str("awt_category_dev_options"),
                             "",
-                            Constants.PIKO_FRAGMENT_DEV_OPTIONS
+                            Constants.AWT_FRAGMENT_DEV_OPTIONS
                     )
             );
         }
 
         addPreference(
                 helper.categoryPreference(
-                        str("piko_category_about"),
+                        str("awt_category_about"),
                         "",
-                        Constants.PIKO_FRAGMENT_ABOUT
+                        Constants.AWT_FRAGMENT_ABOUT
                 )
         );
 

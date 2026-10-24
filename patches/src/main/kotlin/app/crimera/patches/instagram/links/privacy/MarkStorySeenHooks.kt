@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -319,7 +319,7 @@ internal fun addStoryAggregateBridge(
                 !AccessFlags.STATIC.isSet(it.accessFlags)
         }
     ) throw PatchException("Typed story aggregation method is not public")
-    val name = "pikoAddStorySeen"
+    val name = "awtAddStorySeen"
     if (owner.methods.any { it.name == name }) throw PatchException("Duplicate story aggregation bridge")
     val bridge = MutableMethod(ImmutableMethod(
         owner.type, name,
@@ -713,17 +713,17 @@ internal fun addStoryProgressBridgeHook(
         check-cast p0, $controllerClass
         iget-object p1, p0, $sessionField
         iget-object p2, p0, $itemField
-        if-eqz p2, :piko_story_progress_unavailable
+        if-eqz p2, :awt_story_progress_unavailable
         iget-object p3, p0, $reelField
-        if-eqz p3, :piko_story_progress_unavailable
+        if-eqz p3, :awt_story_progress_unavailable
         iget-object p4, p3, $reelModelField
-        if-eqz p4, :piko_story_progress_unavailable
+        if-eqz p4, :awt_story_progress_unavailable
         iget-object p4, p4, $reelTypeField
         iget-object p0, p0, $rootViewField
-        if-eqz p0, :piko_story_progress_unavailable
+        if-eqz p0, :awt_story_progress_unavailable
         invoke-static {p1, p2, p3, p4, p0}, $STORY_SEEN_BUTTON_DESCRIPTOR->captureCurrentStoryFromProgress(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
         return-void
-        :piko_story_progress_unavailable
+        :awt_story_progress_unavailable
         invoke-static {}, $STORY_SEEN_BUTTON_DESCRIPTOR->invalidateCurrentStory()V
         return-void
         """.trimIndent(),
@@ -804,18 +804,18 @@ internal fun addStoryHeaderBridgeHook(
         """
         check-cast p2, ${reelModelField.definingClass}
         check-cast p3, $holderClass
-        if-eqz p1, :piko_story_header_unavailable
-        if-eqz p2, :piko_story_header_unavailable
-        if-eqz p3, :piko_story_header_unavailable
+        if-eqz p1, :awt_story_header_unavailable
+        if-eqz p2, :awt_story_header_unavailable
+        if-eqz p3, :awt_story_header_unavailable
         iget-object p4, p3, $rootViewField
-        if-eqz p4, :piko_story_header_unavailable
+        if-eqz p4, :awt_story_header_unavailable
         iget-object p5, p2, $reelModelField
-        if-eqz p5, :piko_story_header_unavailable
+        if-eqz p5, :awt_story_header_unavailable
         iget-object p5, p5, $reelTypeField
         move-object p3, p5
         invoke-static/range {p0 .. p4}, $STORY_SEEN_BUTTON_DESCRIPTOR->captureCurrentStoryFromHeader(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
         return-void
-        :piko_story_header_unavailable
+        :awt_story_header_unavailable
         invoke-static {}, $STORY_SEEN_BUTTON_DESCRIPTOR->invalidateCurrentStory()V
         return-void
         """.trimIndent(),

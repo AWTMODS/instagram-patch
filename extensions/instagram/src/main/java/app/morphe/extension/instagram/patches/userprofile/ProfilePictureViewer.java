@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -56,7 +56,7 @@ public class ProfilePictureViewer {
             String username = userData.getUsername();
 
             if (imageUrl == null || imageUrl.isEmpty()) {
-                Utils.showToastShort(str("piko_fail_no_file"));
+                Utils.showToastShort(str("awt_fail_no_file"));
                 return;
             }
 
@@ -86,11 +86,11 @@ public class ProfilePictureViewer {
 
             panel.addView(buildCloseRow(context, dialog, closeIconColor));
             panel.addView(buildImageArea(context, imageUrl, placeholderColor));
-            panel.addView(buildActionButton(context, str("piko_open_image_externally"), () -> {
+            panel.addView(buildActionButton(context, str("awt_open_image_externally"), () -> {
                 dialog.dismiss();
                 ActivityHook.handleUrlIntent(false, imageUrl);
             }));
-            panel.addView(buildActionButton(context, str("piko_download_profile_picture"), () -> {
+            panel.addView(buildActionButton(context, str("awt_download_profile_picture"), () -> {
                 try {
                     String filename = username + "_dp.jpg";
                     String subFolder = DownloadUtils.getSubfolderName(username);
@@ -175,7 +175,7 @@ public class ProfilePictureViewer {
                 imageView.setImageBitmap(bitmap);
                 imageView.setVisibility(View.VISIBLE);
             } else {
-                Utils.showToastShort(str("piko_download_failed_media"));
+                Utils.showToastShort(str("awt_download_failed_media"));
             }
         });
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -17,7 +17,7 @@ import app.morphe.extension.twitter.patches.links.ExternalDownloader;
 import app.morphe.extension.twitter.Pref;
 import app.morphe.extension.twitter.entity.Tweet;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.ObjectBrowser;
 
 public class ButtonPressHandler {
@@ -60,7 +60,7 @@ public class ButtonPressHandler {
 
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
     }

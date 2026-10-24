@@ -7,18 +7,18 @@ It exports the session token for the currently logged-in account.
 This is useful in the following cases:
 
 - If you already have a device logged in and want to log in on another device
-- If you want to reinstall Piko
+- If you want to reinstall Awt
 - If you want to log into a cloned APK
 - If you have another rooted device and can log in normally
 
 Tokens and other necessary data will be exported in JSON format.  
-You can import it from the login screen or piko settings.
+You can import it from the login screen or awt settings.
 
 **This patch does NOT fix the login attestation problem. To get a token, you must first log in to your account using any login method.**
 
 ## How to export tokens
 
-Piko settings > Backup and restore > Export login token
+Awt settings > Backup and restore > Export login token
 
 ## How to import tokens
 
@@ -39,10 +39,10 @@ There are three workarounds to import tokens.
 <summary>Method A: Using deep link</summary>
 
 You can open the import menu by clicking the deep link.  
-First, set the Piko Twitter app to open x.com links. (App Info > Open by default)  
+First, set the Awt Twitter app to open x.com links. (App Info > Open by default)  
 Then click the deep link below.
 
-[**\<\<\<CLICK HERE\>\>\>**](https://x.com/i/piko/pref)
+[**\<\<\<CLICK HERE\>\>\>**](https://x.com/i/awt/pref)
 
 </details>
 
@@ -50,7 +50,7 @@ Then click the deep link below.
 
 <summary>Method B: Using shortcut</summary>
 
-1. Long press the app icon and select "Piko settings".
+1. Long press the app icon and select "Awt settings".
 <img width="360" src="https://github.com/user-attachments/assets/04862e6f-268d-4e78-a043-38f6ddae7965" />
 
 2. Select "Backup and restore".
@@ -87,7 +87,7 @@ Tap the text "Login through token json".
 
 ### • Add second account
 
-If you want to import a second or subsequent account, you can import it simply from Piko settings > Backup and restore > Import login token
+If you want to import a second or subsequent account, you can import it simply from Awt settings > Backup and restore > Import login token
 
 ## WARNING
 
@@ -145,9 +145,9 @@ This means that login sessions can be restored after reinstallation using the da
 When exporting, this patch uses the AccountManager API to get account data which X stored.  
 When importing, this patch adds an account data to the AccountManager in the same way that X adds an account at login.
 
-### The structure of piko's token JSON files
+### The structure of awt's token JSON files
 
-This is a format specific to piko for saving various data within AccountManager as a single text file.
+This is a format specific to awt for saving various data within AccountManager as a single text file.
 
 ```json
 {
@@ -177,11 +177,11 @@ This is a format specific to piko for saving various data within AccountManager 
 Not all keys in "userdata" necessarily exist.  
 However, some keys are required. If any required keys are missing when importing an account, the X app will remove that account immediately after it is imported.
 
-### Get token from rooted device without piko
+### Get token from rooted device without awt
 
-If you are using the official X app (not piko) on a rooted device, you can extract your tokens without installing piko using the following method.
+If you are using the official X app (not awt) on a rooted device, you can extract your tokens without installing awt using the following method.
 
-Note that if you don't mind installing piko, you don't need to use this method. Just install piko over the official app using an Xposed module (e.g. Core Patch) to allow app updates across different signatures.
+Note that if you don't mind installing awt, you don't need to use this method. Just install awt over the official app using an Xposed module (e.g. Core Patch) to allow app updates across different signatures.
 
 1. Use any file manager app that supports root access
 2. Get `/data/system_ce/0/accounts_ce.db`

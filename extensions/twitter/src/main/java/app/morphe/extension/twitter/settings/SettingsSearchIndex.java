@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -130,8 +130,8 @@ final class SettingsSearchIndex implements PreferenceBuildTarget {
     private void collectPatchInfoResults(SectionContext section) {
         for (SearchResult result : patchInfoResults(
                 section,
-                str("piko_debug"),
-                Settings.PIKO_DEBUG.key,
+                str("awt_debug"),
+                Settings.AWT_DEBUG.key,
                 str(Settings.SUPPORTED_LINKS),
                 Settings.SUPPORTED_LINKS
         )) {
@@ -185,7 +185,7 @@ final class SettingsSearchIndex implements PreferenceBuildTarget {
     }
 
     private void collectUndoPostSettingsResults(SectionContext section) {
-        String undoPostSettingsTitle = str("piko_pref_undo_posts_btn");
+        String undoPostSettingsTitle = str("awt_pref_undo_posts_btn");
         String sectionTitle = section.sectionTitle;
         String keywords = joinSearchText(
                 section.sectionTitle,

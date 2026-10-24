@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -9,7 +9,7 @@ package app.morphe.extension.twitter.entity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class Debug {
     protected final Object obj;
@@ -127,8 +127,8 @@ public class Debug {
                 .append("\n" + line + "\n" + line);
         
         String fileName = className+".txt";
-        PikoUtils.pikoWriteFile(fileName,sb.toString(),false);
-        PikoUtils.toast("DONE: "+className);
+        AwtUtils.awtWriteFile(fileName,sb.toString(),false);
+        AwtUtils.toast("DONE: "+className);
 
     }
 }

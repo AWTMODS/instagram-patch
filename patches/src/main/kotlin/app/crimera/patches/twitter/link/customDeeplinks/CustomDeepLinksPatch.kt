@@ -119,7 +119,7 @@ val customDeepLinksPatch =
             document("res/values/arrays.xml").use { document ->
                 val array =
                     document.createElement("string-array").apply {
-                        setAttribute("name", "piko_custom_deeplink_hosts")
+                        setAttribute("name", "awt_custom_deeplink_hosts")
                         for (customHost in hostLinks!!) {
                             document
                                 .createElement("item")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -35,7 +35,7 @@ public class ProfileMoreOption {
     private static boolean DEBUG;
 
     static {
-        DEBUG = Pref.pikoDebug();
+        DEBUG = Pref.awtDebug();
     }
 
     public static void moreOptionsDailogueBox(Context context, UserData userData) {
@@ -43,13 +43,13 @@ public class ProfileMoreOption {
             InstagramDialogBox dialog = new InstagramDialogBox(context);
 
             ArrayList<String> options = new ArrayList<>();
-            options.add(str("piko_view_profile_picture"));
-            options.add(str("piko_copy_username"));
-            options.add(str("piko_copy_full_name"));
-            options.add(str("piko_copy_user_id"));
-            options.add(str("piko_copy_bio"));
-            options.add(str("piko_copy_links_from_bio"));
-            if (DEBUG) options.add(str("piko_debug"));
+            options.add(str("awt_view_profile_picture"));
+            options.add(str("awt_copy_username"));
+            options.add(str("awt_copy_full_name"));
+            options.add(str("awt_copy_user_id"));
+            options.add(str("awt_copy_bio"));
+            options.add(str("awt_copy_links_from_bio"));
+            if (DEBUG) options.add(str("awt_debug"));
 
             CharSequence[] items = options.toArray(new CharSequence[0]);
 
@@ -62,37 +62,37 @@ public class ProfileMoreOption {
                         boolean toCopy = false;
                         String text = null;
 
-                        if (selectedOption.equals(str("piko_copy_username"))) {
+                        if (selectedOption.equals(str("awt_copy_username"))) {
                             text = userData.getUsername();
                             toCopy = true;
 
-                        } else if (selectedOption.equals(str("piko_copy_full_name"))) {
+                        } else if (selectedOption.equals(str("awt_copy_full_name"))) {
                             text = userData.getFullName();
                             toCopy = true;
 
-                        } else if (selectedOption.equals(str("piko_copy_user_id"))) {
+                        } else if (selectedOption.equals(str("awt_copy_user_id"))) {
                             text = userData.getUserId();
                             toCopy = true;
 
-                        } else if (selectedOption.equals(str("piko_copy_bio"))) {
+                        } else if (selectedOption.equals(str("awt_copy_bio"))) {
                             text = userData.getBio();
                             toCopy = true;
 
-                        } else if (selectedOption.equals(str("piko_copy_links_from_bio"))) {
+                        } else if (selectedOption.equals(str("awt_copy_links_from_bio"))) {
                             // Links live in the bio as plain text; the profile object
                             // carries no separate list of them.
                             String links = linksFrom(userData.getBio());
                             if (links == null) {
-                                Utils.showToastShort(str("piko_no_links_in_bio"));
+                                Utils.showToastShort(str("awt_no_links_in_bio"));
                             } else {
                                 text = links;
                                 toCopy = true;
                             }
 
-                        } else if (selectedOption.equals(str("piko_view_profile_picture"))) {
+                        } else if (selectedOption.equals(str("awt_view_profile_picture"))) {
                             ProfilePictureViewer.show(context, userData);
 
-                        } else if (selectedOption.equals(str("piko_debug"))) {
+                        } else if (selectedOption.equals(str("awt_debug"))) {
                             // Using userData as it will be easier to debug known functions.
                             ObjectBrowser.browseObject(context, userData);
 
@@ -100,7 +100,7 @@ public class ProfileMoreOption {
 
                         if (toCopy && text != null && text.length() > 0) {
                             Utils.setClipboard(text);
-                            Utils.showToastShort(str("piko_copied"));
+                            Utils.showToastShort(str("awt_copied"));
                         }
                     } catch (Exception e) {
                         Logger.printException(() -> "Error at moreOptionsDailogueBox onclick", e);
@@ -108,8 +108,8 @@ public class ProfileMoreOption {
                     }
                 }
             });
-            dialog.setTitle(str("piko_more_profile_options"));
-            dialog.setNegativeButton(str("piko_close"), (d, which) -> d.dismiss());
+            dialog.setTitle(str("awt_more_profile_options"));
+            dialog.setNegativeButton(str("awt_close"), (d, which) -> d.dismiss());
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
 
@@ -149,7 +149,7 @@ public class ProfileMoreOption {
 
             Context context = viewGroup.getContext();
             InstagramButton button = new InstagramButton(context);
-            button.setText(str("piko_more_profile_options"));
+            button.setText(str("awt_more_profile_options"));
             button.setStyle(InstagramButtonStyleEnum.SECONDARY);
             button.setOnClickListener(() ->
                     moreOptionsDailogueBox(context, userData)

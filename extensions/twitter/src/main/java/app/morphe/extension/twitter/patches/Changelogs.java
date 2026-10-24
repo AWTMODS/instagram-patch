@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 
 import java.net.HttpURLConnection;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.requests.Requester;
@@ -30,8 +30,8 @@ import app.morphe.extension.twitter.Pref;
 
 public class Changelogs {
     private static final String CHANGELOG_URL = "https://raw.githubusercontent.com";
-    private static final String CHANGELOG_ROUTE_MAIN = "/crimera/piko/refs/heads/main/CHANGELOG.md";
-    private static final String CHANGELOG_ROUTE_DEV = "/crimera/piko/refs/heads/dev/CHANGELOG.md";
+    private static final String CHANGELOG_ROUTE_MAIN = "/crimera/awt/refs/heads/main/CHANGELOG.md";
+    private static final String CHANGELOG_ROUTE_DEV = "/crimera/awt/refs/heads/dev/CHANGELOG.md";
     private static final String patchVersion = Utils.getPatchesReleaseVersion();
     private static String latestChangelogVersion = Pref.getLatestChangelogVersion();
 
@@ -79,7 +79,7 @@ public class Changelogs {
         textView.setPadding(40, 40, 40, 40);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(str("piko_changelogs_title"))
+                .setTitle(str("awt_changelogs_title"))
                 .setView(textView)
                 .setPositiveButton(str("ok"), (dialogInterface, i) -> dialogInterface.dismiss())
                 .create();
@@ -120,7 +120,7 @@ public class Changelogs {
                     showChangelogDialog(context);
                 });
             } catch (Exception ex) {
-                PikoUtils.logger(ex);
+                AwtUtils.logger(ex);
             }
         });
     }

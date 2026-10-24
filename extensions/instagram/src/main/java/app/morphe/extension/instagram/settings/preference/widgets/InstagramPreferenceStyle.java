@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -45,10 +45,10 @@ import app.morphe.extension.shared.ResourceUtils;
 
 public final class InstagramPreferenceStyle {
     static final long NAVIGATION_DRAG_DURATION_MS = 120L;
-    private static final String TAG_TITLE = "piko_instagram_pref_title";
-    private static final String TAG_SUMMARY = "piko_instagram_pref_summary";
-    private static final String TAG_SWITCH = "piko_instagram_pref_switch";
-    private static final String TAG_TRAILING = "piko_instagram_pref_trailing";
+    private static final String TAG_TITLE = "awt_instagram_pref_title";
+    private static final String TAG_SUMMARY = "awt_instagram_pref_summary";
+    private static final String TAG_SWITCH = "awt_instagram_pref_switch";
+    private static final String TAG_TRAILING = "awt_instagram_pref_trailing";
     private static final String IGDS_SWITCH_CLASS_NAME =
             "com.instagram.igds.components.switchbutton.IgdsSwitch";
 

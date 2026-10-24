@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -21,7 +21,7 @@ import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
 
 final class StorySeenButtonView {
-    private static final String BUTTON_TAG = "piko_mark_story_seen_button";
+    private static final String BUTTON_TAG = "awt_mark_story_seen_button";
     private static final String[] ACTION_ID_NAMES = {
             "toolbar_like_container", "toolbar_reshare_button", "toolbar_menu_button"
     };
@@ -116,12 +116,12 @@ final class StorySeenButtonView {
     private static Presentation presentationFor(StorySeenBridge.SeenState seenState) {
         switch (seenState) {
             case MARKED:
-                return new Presentation(false, 0.50f, "piko_story_seen_sent");
+                return new Presentation(false, 0.50f, "awt_story_seen_sent");
             case PENDING:
-                return new Presentation(false, 1.0f, "piko_story_seen_pending");
+                return new Presentation(false, 1.0f, "awt_story_seen_pending");
             case UNMARKED:
             default:
-                return new Presentation(true, 1.0f, "piko_mark_story_seen");
+                return new Presentation(true, 1.0f, "awt_mark_story_seen");
         }
     }
 

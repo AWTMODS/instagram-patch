@@ -5,5 +5,5 @@
             <solid android:color="#FFF5F5F5" />
         </shape>
     </background>
-    <foreground android:drawable="@drawable/piko_settings_shortcut_foreground" />
+    <foreground android:drawable="@drawable/awt_settings_shortcut_foreground" />
 </adaptive-icon>

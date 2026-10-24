@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -223,7 +223,7 @@ internal fun MutableMethod.hookPaintTypefaceCalls() {
 
 internal val FONT_EXTENSION_PACKAGE = CUSTOM_FONT_DESCRIPTOR.removeSuffix("CustomFont;")
 
-/** A platform class, the piko subclass that replaces it, and the constructors that subclass has. */
+/** A platform class, the awt subclass that replaces it, and the constructors that subclass has. */
 internal typealias Replacements = Map<String, Pair<String, Set<List<String>>>>
 
 /** Platform spans that set their font inside the framework while drawing. */
@@ -244,8 +244,8 @@ internal val PLATFORM_TYPEFACE_SPANS: Replacements =
                 )),
     )
 
-/** The platform text widgets piko's own code creates. */
-internal val PIKO_TEXT_WIDGETS: Replacements =
+/** The platform text widgets awt's own code creates. */
+internal val AWT_TEXT_WIDGETS: Replacements =
     listOf("TextView", "Button", "CheckBox", "EditText").associate {
         "Landroid/widget/$it;" to
             ("${FONT_EXTENSION_PACKAGE}CustomFont$it;" to
@@ -261,7 +261,7 @@ internal fun Instruction.createsOneOf(replacements: Replacements) =
         getReference<TypeReference>()?.type in replacements
 
 /**
- * Creates piko's subclass wherever the method creates one of the [replacements], unless a
+ * Creates awt's subclass wherever the method creates one of the [replacements], unless a
  * constructor call there is one the subclass lacks.
  */
 internal fun MutableMethod.replaceCreations(replacements: Replacements) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -30,8 +30,8 @@ public class PeopleCellDialogBox {
     public static void showPeopleDialog(@NonNull Context context,
                                        @Nullable ArrayList<IgdsPeopleCell> peopleCells) {
         InstagramDialogBox builder = new InstagramDialogBox(context);
-        builder.setTitle(str("piko_vsm_title"));
-        builder.setNegativeButton(str("piko_close"), (dialog, which) -> dialog.dismiss());
+        builder.setTitle(str("awt_vsm_title"));
+        builder.setNegativeButton(str("awt_close"), (dialog, which) -> dialog.dismiss());
         builder.setCancelable(true);
         builder.setCanceledOnTouchOutside(true);
 
@@ -46,7 +46,7 @@ public class PeopleCellDialogBox {
             }
             builder.addDialogMenuItems(names, (dialog, which) -> peopleCells.get(which).performClick());
         } else {
-            builder.setMessage(str("piko_vsm_no_mentions"));
+            builder.setMessage(str("awt_vsm_no_mentions"));
         }
 
         Dialog dialog = builder.getDialog();

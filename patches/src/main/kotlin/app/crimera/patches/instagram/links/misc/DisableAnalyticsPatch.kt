@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -94,10 +94,10 @@ val disableAnalyticsPatch =
                         iget-object v0, v0, $appIdField
                         invoke-static {v0}, $LINKS_DESCRIPTOR->shouldBlockOnboardingScreen(Ljava/lang/String;)Z
                         move-result v0
-                        if-eqz v0, :piko_continue
+                        if-eqz v0, :awt_continue
                         return-void
                         """.trimIndent(),
-                        ExternalLabel("piko_continue", getInstruction(0)),
+                        ExternalLabel("awt_continue", getInstruction(0)),
                     )
                 }
             }
@@ -135,9 +135,9 @@ val disableAnalyticsPatch =
                     """
                     $PREF_CALL_DESCRIPTOR->disableAnalytics()Z
                     move-result v$freeRegister
-                    if-nez v$freeRegister, :piko_skip_dispatch
+                    if-nez v$freeRegister, :awt_skip_dispatch
                     """.trimIndent(),
-                    ExternalLabel("piko_skip_dispatch", nextInstruction),
+                    ExternalLabel("awt_skip_dispatch", nextInstruction),
                 )
             }
         }

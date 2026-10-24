@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -8,7 +8,7 @@ package app.morphe.extension.instagram.entity;
 
 import java.util.Map;
 import java.util.HashMap;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class UserFriendshipStatus extends Entity {
     private final Object obj;
@@ -24,7 +24,7 @@ public class UserFriendshipStatus extends Entity {
             return (Map) super.getMethod(helperClass, "methodname",
                     new Class[]{Class.forName("friendshipstatusclass")}, this.obj);
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return new HashMap();
     }

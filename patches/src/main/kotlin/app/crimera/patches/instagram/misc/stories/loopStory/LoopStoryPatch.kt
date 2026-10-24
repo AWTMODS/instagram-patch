@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -134,28 +134,28 @@ val loopStoryPatch =
                         """
                         ${PREF_CALL_DESCRIPTOR}->loopStory()Z
                         move-result v0
-                        if-eqz v0, :piko
+                        if-eqz v0, :awt
                         check-cast v$reelItemRegister, $reelItemType
                         iget-object v0, p0, $playerField
-                        if-eqz v0, :piko_photo
+                        if-eqz v0, :awt_photo
                         instance-of v1, v0, ${player.type}
-                        if-eqz v1, :piko
+                        if-eqz v1, :awt
                         check-cast v0, ${player.type}
                         iget-object v1, v0, $currentItem
                         invoke-virtual {v$reelItemRegister, v1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
                         move-result v1
-                        if-eqz v1, :piko_photo
+                        if-eqz v1, :awt_photo
                         const/4 v1, 0x0
                         invoke-static {v0, v1}, $absoluteSeek
                         const-string v1, "resume"
                         const/4 v2, 0x0
                         invoke-interface {v0, v1, v2}, $resume
-                        :piko_photo
+                        :awt_photo
                         const/4 v3, 0x1
-                        goto :piko_loop
+                        goto :awt_loop
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(0)),
-                        ExternalLabel("piko_loop", getInstruction(photoRestartIndex)),
+                        ExternalLabel("awt", getInstruction(0)),
+                        ExternalLabel("awt_loop", getInstruction(photoRestartIndex)),
                     )
                     return@apply
                 }
@@ -194,14 +194,14 @@ val loopStoryPatch =
                     """
                     ${PREF_CALL_DESCRIPTOR}->loopStory()Z
                     move-result v0
-                    if-eqz v0, :piko
+                    if-eqz v0, :awt
                     check-cast v$reelItemRegister, $reelItemType
                     const/4 v$playingRegister, 0x1
                     const/4 v$positionRegister, 0x0
-                    goto :piko_loop
+                    goto :awt_loop
                     """.trimIndent(),
-                    ExternalLabel("piko", getInstruction(0)),
-                    ExternalLabel("piko_loop", getInstruction(restartIndex)),
+                    ExternalLabel("awt", getInstruction(0)),
+                    ExternalLabel("awt_loop", getInstruction(restartIndex)),
                 )
             }
             enableSettings("loopStory")

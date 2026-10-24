@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -24,7 +24,7 @@ import app.morphe.extension.twitter.entity.Video;
 
 import java.util.List;
 import java.util.ArrayList;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class TimelineEntry {
     public static final boolean hideAds;
@@ -190,7 +190,7 @@ public class TimelineEntry {
             }
 
         } catch (Exception ex) {
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
 
         return videoEntities;

@@ -19,17 +19,17 @@ import java.util.*;
  * If saved numbers will not be used with a preference fragment,
  * then store the primitive numbers using the {@link #preferences} itself.
  */
-public class PikoSharedPrefCategory {
+public class AwtSharedPrefCategory {
     @NonNull
     public final String name;
     @NonNull
     public final SharedPreferences preferences;
 
-    public PikoSharedPrefCategory(@NonNull String name) {
+    public AwtSharedPrefCategory(@NonNull String name) {
         this(Objects.requireNonNull(Utils.getContext()), name);
     }
 
-    public PikoSharedPrefCategory(@NonNull Context context, @NonNull String name) {
+    public AwtSharedPrefCategory(@NonNull Context context, @NonNull String name) {
         this.name = Objects.requireNonNull(name);
         preferences = Objects.requireNonNull(context).getSharedPreferences(name, Context.MODE_PRIVATE);
     }

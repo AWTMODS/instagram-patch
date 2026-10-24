@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.constants.Constants;
 
 public class BackupPrefActivity extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class BackupPrefActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = PikoUtils.getContext();
+        context = AwtUtils.getContext();
 
         Bundle args = getIntent().getExtras();
 
@@ -44,12 +44,12 @@ public class BackupPrefActivity extends AppCompatActivity {
 
         if (args != null) {
 
-            if (args.containsKey("piko_export_dev_overrides")) {
+            if (args.containsKey("awt_export_dev_overrides")) {
                 filename = "mc_overrides";
                 ext = ".json";
                 sourceFile = new File(context.getFilesDir() + "/mobileconfig", filename + ext);
-            } else if (args.containsKey("piko_export_pref")) {
-                filename = Constants.PIKO_SETTINGS;
+            } else if (args.containsKey("awt_export_pref")) {
+                filename = Constants.AWT_SETTINGS;
                 ext = ".xml";
                 sourceFile =  new File(context.getApplicationInfo().dataDir + "/shared_prefs",filename + ext);
             }
@@ -59,11 +59,11 @@ public class BackupPrefActivity extends AppCompatActivity {
             if (sourceFile.exists()) {
                 startIntent(filename, ext);
             } else {
-                toast(str("piko_fail_no_file"));
+                toast(str("awt_fail_no_file"));
                 finish();
             }
         } else{
-            toast(str("piko_import_fail"));
+            toast(str("awt_import_fail"));
             finish();
         }
 
@@ -98,11 +98,11 @@ public class BackupPrefActivity extends AppCompatActivity {
             in.close();
             out.close();
 
-            toast(str("piko_export_success"));
+            toast(str("awt_export_success"));
 
         } catch (IOException e) {
 
-            toast(str("piko_export_fail"));
+            toast(str("awt_export_fail"));
 
             app.morphe.extension.shared.Logger.printException(() -> "export failure", e);
         }
@@ -120,7 +120,7 @@ public class BackupPrefActivity extends AppCompatActivity {
         }
 
         if (uri == null) {
-            toast(str("piko_fail_no_path"));
+            toast(str("awt_fail_no_path"));
         } else if (res == RESULT_OK) {
             copyFile(uri);
         }
@@ -130,6 +130,6 @@ public class BackupPrefActivity extends AppCompatActivity {
 
 
     private void toast(String msg) {
-        PikoUtils.toast(msg);
+        AwtUtils.toast(msg);
     }
 }

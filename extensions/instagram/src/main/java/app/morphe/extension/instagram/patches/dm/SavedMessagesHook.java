@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,8 +16,8 @@ import java.lang.reflect.Modifier;
 
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
-import app.morphe.extension.crimera.PikoUtils;
-import app.morphe.extension.instagram.db.PikoMessageDb;
+import app.morphe.extension.crimera.AwtUtils;
+import app.morphe.extension.instagram.db.AwtMessageDb;
 import app.morphe.extension.instagram.entity.DirectItem;
 import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.utils.Pref;
@@ -26,26 +26,26 @@ import app.morphe.extension.instagram.utils.Pref;
 @SuppressWarnings("unused")
 public class SavedMessagesHook {
 
-    static final String NOTIFICATION_CHANNEL_ID = "piko_deleted_messages";
+    static final String NOTIFICATION_CHANNEL_ID = "awt_deleted_messages";
 
     private static volatile String sMyUserId;
     private static android.os.HandlerThread sWorkerThread;
     private static android.os.Handler sWorker;
 
-    private static void piko(String message) {
-        android.util.Log.e("piko", message);
+    private static void awt(String message) {
+        android.util.Log.e("awt", message);
     }
 
-    /** Opens the all-chat history from Piko settings. */
+    /** Opens the all-chat history from Awt settings. */
     public static void openDeletedMessages(Context context) {
         try {
-            if (context == null) context = PikoUtils.getContext();
+            if (context == null) context = AwtUtils.getContext();
             if (context == null) return;
             Intent intent = new Intent(context, DeletedMessagesActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception e) {
-            piko("SavedMessagesHook.openDeletedMessages: " + e);
+            awt("SavedMessagesHook.openDeletedMessages: " + e);
         }
     }
 
@@ -60,7 +60,7 @@ public class SavedMessagesHook {
         }
         getWorker().post(() -> {
             try {
-                PikoMessageDb db = PikoMessageDb.getInstance(PikoUtils.getContext());
+                AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
                 for (Object user : copy) {
                     if (user == null) continue;
                     try {
@@ -81,9 +81,9 @@ public class SavedMessagesHook {
     private static String myUserId() {
         if (sMyUserId == null) {
             try {
-                Context context = PikoUtils.getContext();
+                Context context = AwtUtils.getContext();
                 if (context != null) {
-                    String value = context.getSharedPreferences("piko_dm", Context.MODE_PRIVATE)
+                    String value = context.getSharedPreferences("awt_dm", Context.MODE_PRIVATE)
                             .getString("my_user_id", null);
                     if (value != null && !value.isEmpty()) sMyUserId = value;
                 }
@@ -97,9 +97,9 @@ public class SavedMessagesHook {
         if (id == null || id.isEmpty() || id.equals(sMyUserId)) return;
         sMyUserId = id;
         try {
-            Context context = PikoUtils.getContext();
+            Context context = AwtUtils.getContext();
             if (context != null) {
-                context.getSharedPreferences("piko_dm", Context.MODE_PRIVATE)
+                context.getSharedPreferences("awt_dm", Context.MODE_PRIVATE)
                         .edit().putString("my_user_id", id).apply();
             }
         } catch (Exception ignored) {
@@ -126,7 +126,7 @@ public class SavedMessagesHook {
 
     private static synchronized android.os.Handler getWorker() {
         if (sWorker == null) {
-            sWorkerThread = new android.os.HandlerThread("piko-dm-hook");
+            sWorkerThread = new android.os.HandlerThread("awt-dm-hook");
             sWorkerThread.start();
             sWorker = new android.os.Handler(sWorkerThread.getLooper());
         }
@@ -193,7 +193,7 @@ public class SavedMessagesHook {
             if (isBlank(threadId) && !isBlank(threadIdHint)) threadId = threadIdHint;
             if (threadId == null) threadId = "";
 
-            PikoMessageDb db = PikoMessageDb.getInstance(PikoUtils.getContext());
+            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
             String senderUsername = db.getUsername(senderId);
             if (senderUsername == null) {
                 senderUsername = db.getThreadUsername(threadId, senderId);
@@ -231,7 +231,7 @@ public class SavedMessagesHook {
             db.upsertMessage(serverId, clientContext, threadId, senderId,
                     senderUsername, content, type, timestamp);
         } catch (Exception e) {
-            piko("SavedMessagesHook.processReceivedItem: " + e);
+            awt("SavedMessagesHook.processReceivedItem: " + e);
         }
     }
 
@@ -240,7 +240,7 @@ public class SavedMessagesHook {
         if (!isBlank(restoredContent)) directItem.setText(restoredContent);
     }
 
-    private static void markDeletedAndNotify(PikoMessageDb db, String messageId) {
+    private static void markDeletedAndNotify(AwtMessageDb db, String messageId) {
         if (!db.markDeleted(messageId)) return;
 
         String type = db.getMessageType(messageId);
@@ -253,7 +253,7 @@ public class SavedMessagesHook {
 
     private static void notifyDeletion(String sender, String content, String type) {
         try {
-            Context context = PikoUtils.getContext();
+            Context context = AwtUtils.getContext();
             if (context == null) return;
 
             android.app.NotificationManager manager =
@@ -263,16 +263,16 @@ public class SavedMessagesHook {
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 android.app.NotificationChannel channel = new android.app.NotificationChannel(
-                        NOTIFICATION_CHANNEL_ID, str("piko_deleted_messages_channel"),
+                        NOTIFICATION_CHANNEL_ID, str("awt_deleted_messages_channel"),
                         android.app.NotificationManager.IMPORTANCE_DEFAULT);
-                channel.setDescription(str("piko_deleted_messages_channel_desc"));
+                channel.setDescription(str("awt_deleted_messages_channel_desc"));
                 manager.createNotificationChannel(channel);
             }
 
-            String who = !isBlank(sender) ? sender : str("piko_someone");
+            String who = !isBlank(sender) ? sender : str("awt_someone");
             String body = !isBlank(content)
                     ? content
-                    : !isBlank(type) ? "[" + type + "]" : str("piko_media_deleted_generic");
+                    : !isBlank(type) ? "[" + type + "]" : str("awt_media_deleted_generic");
 
             Intent intent = new Intent(context, DeletedMessagesActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -290,7 +290,7 @@ public class SavedMessagesHook {
             android.app.Notification notification = builder
                     .setSmallIcon(icon != 0 ? icon : android.R.drawable.ic_dialog_info)
                     .setCategory(android.app.Notification.CATEGORY_MESSAGE)
-                    .setContentTitle(String.format(str("piko_deleted_a_message"), who))
+                    .setContentTitle(String.format(str("awt_deleted_a_message"), who))
                     .setContentText(body)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
@@ -299,30 +299,30 @@ public class SavedMessagesHook {
             manager.notify((int) (System.currentTimeMillis() & Integer.MAX_VALUE),
                     InboxLock.hideNotification(notification));
         } catch (Exception e) {
-            piko("SavedMessagesHook.notifyDeletion: " + e);
+            awt("SavedMessagesHook.notifyDeletion: " + e);
         }
     }
 
     private static String describeMediaType(String type) {
-        if (type == null) return str("piko_media_deleted_generic");
+        if (type == null) return str("awt_media_deleted_generic");
         String label;
         switch (type) {
             case "media":
-            case "image":           label = str("piko_media_photo"); break;
-            case "raven_media":     label = str("piko_media_disappearing_photo"); break;
-            case "video":           label = str("piko_media_video"); break;
+            case "image":           label = str("awt_media_photo"); break;
+            case "raven_media":     label = str("awt_media_disappearing_photo"); break;
+            case "video":           label = str("awt_media_video"); break;
             case "voice_media":
-            case "audio":           label = str("piko_media_voice"); break;
-            case "animated_media":  label = str("piko_media_gif"); break;
-            case "reel_share":      label = str("piko_media_reel"); break;
-            case "story_share":     label = str("piko_media_story"); break;
-            case "media_share":     label = str("piko_media_post"); break;
-            case "like":            label = str("piko_media_like"); break;
-            case "link":            label = str("piko_media_link"); break;
-            case "action_log":      label = str("piko_media_activity"); break;
+            case "audio":           label = str("awt_media_voice"); break;
+            case "animated_media":  label = str("awt_media_gif"); break;
+            case "reel_share":      label = str("awt_media_reel"); break;
+            case "story_share":     label = str("awt_media_story"); break;
+            case "media_share":     label = str("awt_media_post"); break;
+            case "like":            label = str("awt_media_like"); break;
+            case "link":            label = str("awt_media_link"); break;
+            case "action_log":      label = str("awt_media_activity"); break;
             default:                 label = type; break;
         }
-        return String.format(str("piko_media_deleted"), label);
+        return String.format(str("awt_media_deleted"), label);
     }
 
     public static void onMessageHiddenFromDb(String serverId, String clientContext) {
@@ -334,13 +334,13 @@ public class SavedMessagesHook {
     private static void processMessageHiddenFromDb(String serverId, String clientContext) {
         try {
             if (!Pref.saveDeletedMessages()) return;
-            PikoMessageDb db = PikoMessageDb.getInstance(PikoUtils.getContext());
+            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
             String messageId = db.resolveAndMergeMessageId(serverId, clientContext);
             if (messageId == null) return;
             if (!shouldCaptureStored(db.getSenderId(messageId), myUserId())) return;
             markDeletedAndNotify(db, messageId);
         } catch (Exception e) {
-            piko("SavedMessagesHook.processMessageHiddenFromDb: " + e);
+            awt("SavedMessagesHook.processMessageHiddenFromDb: " + e);
         }
     }
 }

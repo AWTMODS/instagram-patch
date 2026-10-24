@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -20,7 +20,7 @@ public class SharedPref extends BaseSharedPref {
     private static final SharedPref INSTANCE = new SharedPref();
 
     public SharedPref() {
-        super(ExtensionStrings.PIKO_SETTINGS);
+        super(ExtensionStrings.AWT_SETTINGS);
     }
 
     // Static Wrapper Delegates

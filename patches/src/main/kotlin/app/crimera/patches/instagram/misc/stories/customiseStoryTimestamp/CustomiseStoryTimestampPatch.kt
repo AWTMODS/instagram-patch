@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -48,10 +48,10 @@ val customiseStoryTimestampPatch =
                     """
                     invoke-static/range {v$postedTimestampRegister .. v${postedTimestampRegister + 1}}, ${PATCHES_DESCRIPTOR}/story/StoryTimestamp;->customiseStoryTimestamp(J)Ljava/lang/String;
                     move-result-object v$dummyRegister
-                    if-eqz v$dummyRegister, :piko
+                    if-eqz v$dummyRegister, :awt
                     return-object v$dummyRegister
                     """.trimIndent(),
-                    ExternalLabel("piko", longToDoubleInstruction),
+                    ExternalLabel("awt", longToDoubleInstruction),
                 )
 
                 enableSettings("customiseStoryTimestamp")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -44,7 +44,7 @@ internal fun buildThemeOverlayTable(
     require(packageName.isNotBlank())
     require(values.day.keys == values.night.keys)
 
-    val workRoot = Files.createTempDirectory("piko-theme-overlay").toFile()
+    val workRoot = Files.createTempDirectory("awt-theme-overlay").toFile()
     try {
         sourceManifest
             .copyTo(workRoot.resolve("AndroidManifest.xml"), overwrite = true)

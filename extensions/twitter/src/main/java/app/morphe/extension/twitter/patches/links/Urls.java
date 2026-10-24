@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -10,7 +10,7 @@ import com.twitter.model.json.core.JsonUrlEntity;
 
 import app.morphe.extension.twitter.Pref;
 import app.morphe.extension.twitter.settings.SettingsStatus;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import com.x.models.ContextualPost;
 import java.net.URL;
 import java.util.regex.Matcher;
@@ -31,7 +31,7 @@ public class Urls {
                 entity.e = entity.c;
             }
         } catch (Exception ex) {
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
         return entity;
     }
@@ -53,7 +53,7 @@ public class Urls {
                 return new URL(url.getProtocol(), customDomainName, url.getPort(), url.getFile()).toString();
             }
         } catch (Exception ex) {
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
             return urlString;
         }
         return urlString;
@@ -69,7 +69,7 @@ public class Urls {
                 }
             }
         }catch (Exception ex) {
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
         return changeDomain(link);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -440,7 +440,7 @@ public final class StorySeenButton {
         button.setEnabled(false);
         StorySeenRequestScope.Listener listener = resultListener(
                 () -> Utils.runOnMainThread(
-                        () -> Utils.showToastShort(str("piko_story_seen_sent"))),
+                        () -> Utils.showToastShort(str("awt_story_seen_sent"))),
                 () -> BINDING_UPDATES.fail(bindingState.storyKey)
         );
         if (StorySeenBridge.markSeen(

@@ -25,7 +25,7 @@ import app.morphe.extension.twitter.patches.nativeFeatures.downloader.NativeDown
 @SuppressWarnings("unused")
 public class InlineDownloadButton {
 
-    private static final String WRAPPER_TAG = "piko_download_wrapper";
+    private static final String WRAPPER_TAG = "awt_download_wrapper";
     private static final Map<Class<?>, Map<String, Field>> FIELD_CACHE = new ConcurrentHashMap<>();
 
     // Placeholders rewritten at patch time.

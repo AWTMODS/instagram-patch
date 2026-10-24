@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -11,7 +11,7 @@ import static app.morphe.extension.shared.StringRef.str;
 import android.content.Context;
 
 import app.morphe.extension.twitter.settings.ActivityHook;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -103,7 +103,7 @@ public class ReaderModeUtils {
             ActivityHook.startReaderMode(tweetId);
             return;
         } catch (Exception ex) {
-            PikoUtils.logger(ex);
+            AwtUtils.logger(ex);
         }
     }
 
@@ -173,26 +173,26 @@ public class ReaderModeUtils {
             }
         }
         if (deleted) {
-            PikoUtils.toast(str("piko_native_reader_mode_cache_delete_success"));
+            AwtUtils.toast(str("awt_native_reader_mode_cache_delete_success"));
         } else {
-            PikoUtils.toast(str("piko_native_reader_mode_cache_delete_failed"));
+            AwtUtils.toast(str("awt_native_reader_mode_cache_delete_failed"));
         }
     }
 
     private static boolean writeCacheFile(String tweetId, String data) {
         try {
-            return PikoUtils.writeFile(cacheFileDir(tweetId), data.getBytes(), false);
+            return AwtUtils.writeFile(cacheFileDir(tweetId), data.getBytes(), false);
         } catch (Exception e) {
-            PikoUtils.logger(e.toString());
+            AwtUtils.logger(e.toString());
         }
         return false;
     }
 
     private static String readCacheFile(String tweetId) throws Exception {
         try {
-            return PikoUtils.readFile(cacheFileDir(tweetId));
+            return AwtUtils.readFile(cacheFileDir(tweetId));
         } catch (Exception e) {
-            PikoUtils.logger(e.toString());
+            AwtUtils.logger(e.toString());
         }
         return null;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -46,7 +46,7 @@ private val importExportLoginTokenResourcePatch = resourcePatch {
             val newElement =
                 it.createElement("com.twitter.ui.components.text.legacy.TypefacesTextView").apply {
                     setAttribute("android:id", "@+id/import_token_text")
-                    setAttribute("android:text", "@string/piko_login_token_import_token_button_text")
+                    setAttribute("android:text", "@string/awt_login_token_import_token_button_text")
                     setAttribute("android:gravity", "center_vertical")
                     setAttribute("android:layout_width", "match_parent")
                     setAttribute("android:layout_height", "wrap_content")
@@ -71,7 +71,7 @@ val importExportLoginTokenPatch =
         name = "Import/Export login token",
         description =
             "Adds an feature to export and import the token of accounts. " +
-                "This is useful when logging in on your second device or when re-installing piko.",
+                "This is useful when logging in on your second device or when re-installing awt.",
     ) {
         compatibleWith(COMPATIBILITY_X)
 

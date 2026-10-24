@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -100,18 +100,18 @@ val disableAdsPatch =
                     """
                     ${Constants.PREF_CALL_DESCRIPTOR}->disableAds()Z
                     move-result v0
-                    if-eqz v0, :piko_original
-                    if-eqz p1, :piko_original
+                    if-eqz v0, :awt_original
+                    if-eqz p1, :awt_original
                     invoke-virtual/range {p1 .. p1}, $getMedia
                     move-result-object v0
-                    if-eqz v0, :piko_original
+                    if-eqz v0, :awt_original
                     invoke-virtual {v0}, $isAd
                     move-result v0
-                    if-eqz v0, :piko_original
+                    if-eqz v0, :awt_original
                     const/4 v0, 0x0
                     return v0
                     """.trimIndent(),
-                    ExternalLabel("piko_original", code[1]),
+                    ExternalLabel("awt_original", code[1]),
                 )
             }
 

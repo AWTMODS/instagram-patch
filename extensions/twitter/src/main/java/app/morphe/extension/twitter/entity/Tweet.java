@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -11,7 +11,7 @@ import app.morphe.extension.twitter.entity.TweetInfo;
 import app.morphe.extension.twitter.entity.Debug;
 
 import java.util.*;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 // All comments based of 11.14.beta-0
 // Lcom/twitter/model/core/entity/e;
@@ -118,7 +118,7 @@ public class Tweet extends Debug {
             text = text.replaceAll("https?://t\\.co/\\S+", "");
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             text = e.getMessage();
         }
         return text;
@@ -134,7 +134,7 @@ public class Tweet extends Debug {
                     + this.getTweetLang() + ", getLongText()=" + this.getLongText() + ", getShortText()=" + this.getShortText() + "]";
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return e.getMessage();
         }
 

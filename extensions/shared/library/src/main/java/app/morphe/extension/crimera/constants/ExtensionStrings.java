@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -8,9 +8,9 @@ package app.morphe.extension.crimera.constants;
 
 
 public class ExtensionStrings {
-    public static final String PIKO_SETTINGS = "piko_settings";
+    public static final String AWT_SETTINGS = "awt_settings";
 
-    public static String DEFAULT_PIKO_FOLDER = "Piko";
+    public static String DEFAULT_AWT_FOLDER = "Awt";
 
     public static String DOWNLOAD_ONGOING = "Downloading: ";
     public static String DOWNLOAD_COMPLETED = "Downloaded: ";
@@ -21,8 +21,8 @@ public class ExtensionStrings {
     public static String DOWNLOAD_GRANT_PERMISSION = "Choose a download folder to continue";
     public static String DOWNLOAD_GRANT_PERMISSION_FAILED = "Could not open folder picker";
 
-    public static void setDefaultPikoFolder(String defaultPikoFolder) {
-        DEFAULT_PIKO_FOLDER = defaultPikoFolder;
+    public static void setDefaultAwtFolder(String defaultAwtFolder) {
+        DEFAULT_AWT_FOLDER = defaultAwtFolder;
     }
 
     public static void setDownloadOngoing(String downloadOngoing) {

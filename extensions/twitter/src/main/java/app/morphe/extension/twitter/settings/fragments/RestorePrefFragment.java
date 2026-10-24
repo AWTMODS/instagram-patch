@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -53,16 +53,16 @@ public class RestorePrefFragment extends Fragment {
         String prefTag = str("notification_settings_preferences_category");
         if(featureFlag){
             sts = Utils.setStringPref(Settings.MISC_FEATURE_FLAGS.key,jsonString);
-            prefTag = str("piko_title_feature_flags");
+            prefTag = str("awt_title_feature_flags");
         }else{
             sts = Utils.setAll(jsonString);
 
         }
         if(sts){
-            toast(str("piko_pref_import_success"));
+            toast(str("awt_pref_import_success"));
         }
         else{
-            toast(str("piko_pref_import_failed",prefTag));
+            toast(str("awt_pref_import_failed",prefTag));
         }
 
         Utils.showRestartAppDialog(context);
@@ -80,14 +80,14 @@ public class RestorePrefFragment extends Fragment {
                 receiveFileForRestore(uri,getActivity());
             }
             else {
-                toast(str("piko_pref_import_no_uri"));
+                toast(str("awt_pref_import_no_uri"));
             }
         }
         getFragmentManager().popBackStack();
     }
 
     private static void toast(String msg){
-        app.morphe.extension.crimera.PikoUtils.toast(msg);
+        app.morphe.extension.crimera.AwtUtils.toast(msg);
     }
 
     @Override

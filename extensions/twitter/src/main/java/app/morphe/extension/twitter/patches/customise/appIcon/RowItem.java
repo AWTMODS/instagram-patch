@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -43,7 +43,7 @@ public class RowItem {
 
     public static RowItem exclusiveIcon(String labelKey, String iconId, String iconNum) {
         RowItem r = icon(labelKey,iconId,iconNum);
-        r.iconLabel+=" "+str("piko_app_icon_piko_exclusive");
+        r.iconLabel+=" "+str("awt_app_icon_awt_exclusive");
         return r;
     }
 }

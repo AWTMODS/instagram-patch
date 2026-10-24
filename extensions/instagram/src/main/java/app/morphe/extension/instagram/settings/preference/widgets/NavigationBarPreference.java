@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -30,7 +30,7 @@ public class NavigationBarPreference extends Preference {
         AlertDialog dialog = new AlertDialog.Builder(dialogContext)
                 .setTitle(getTitle())
                 .setAdapter(adapter, null)
-                .setNeutralButton(str("piko_reset"), null)
+                .setNeutralButton(str("awt_reset"), null)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, null)
                 .create();

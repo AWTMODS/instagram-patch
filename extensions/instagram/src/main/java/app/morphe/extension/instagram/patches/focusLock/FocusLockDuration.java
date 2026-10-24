@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -28,7 +28,7 @@ public final class FocusLockDuration {
 
     private static int[] steps() {
         try {
-            CharSequence[] values = ResourceUtils.getStringArray("piko_array_focus_lock_duration_val");
+            CharSequence[] values = ResourceUtils.getStringArray("awt_array_focus_lock_duration_val");
             if (values != null && values.length > 0) {
                 int[] steps = new int[values.length];
                 for (int i = 0; i < values.length; i++) {
@@ -78,7 +78,7 @@ public final class FocusLockDuration {
 
     public static String labelForStep(int step) {
         try {
-            CharSequence[] labels = ResourceUtils.getStringArray("piko_array_focus_lock_duration");
+            CharSequence[] labels = ResourceUtils.getStringArray("awt_array_focus_lock_duration");
             if (labels != null && step >= 0 && step < labels.length) return labels[step].toString();
         } catch (Exception ignored) {
             // Fall through to the raw minutes.

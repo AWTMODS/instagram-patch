@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -35,12 +35,12 @@ public class ActivityHook {
     @SuppressLint("StaticFieldLeak")
     public static Toolbar toolbar;
     private static final String AUTHORIZE_ACTIVITY_CLASS = "com.twitter.android.AuthorizeAppActivity";
-    private static final String EXTRA_PIKO = "piko";
-    private static final String EXTRA_PIKO_SETTINGS = EXTRA_PIKO + "_settings";
-    public static final String EXTRA_SETTINGS_SEARCH_TARGET_KEY = EXTRA_PIKO + "_settings_search_target_key";
-    public static final String EXTRA_SETTINGS_SEARCH_TARGET_TITLE = EXTRA_PIKO + "_settings_search_target_title";
-    public static final String EXTRA_SETTINGS_SEARCH_TARGET_SUMMARY = EXTRA_PIKO + "_settings_search_target_summary";
-    private static final String PIKO_PREF_KEY = "pref_mod";
+    private static final String EXTRA_AWT = "awt";
+    private static final String EXTRA_AWT_SETTINGS = EXTRA_AWT + "_settings";
+    public static final String EXTRA_SETTINGS_SEARCH_TARGET_KEY = EXTRA_AWT + "_settings_search_target_key";
+    public static final String EXTRA_SETTINGS_SEARCH_TARGET_TITLE = EXTRA_AWT + "_settings_search_target_title";
+    public static final String EXTRA_SETTINGS_SEARCH_TARGET_SUMMARY = EXTRA_AWT + "_settings_search_target_summary";
+    private static final String AWT_PREF_KEY = "pref_mod";
 
     public static Context getPreferenceContext(Context context) {
         String theme = app.morphe.extension.twitter.Utils.getTheme();
@@ -52,7 +52,7 @@ public class ActivityHook {
 
     public static boolean create(Activity act) {
         Intent intent = act.getIntent();
-        if (!(intent.getBooleanExtra(EXTRA_PIKO, false))) return false;
+        if (!(intent.getBooleanExtra(EXTRA_AWT, false))) return false;
 
         Bundle bundle = intent.getExtras();
         Window window = act.getWindow();
@@ -80,7 +80,7 @@ public class ActivityHook {
         boolean addToBackStack = false;
         String activity_name = bundle != null ? bundle.getString(Settings.ACT_NAME) : null;
 
-        if (EXTRA_PIKO_SETTINGS.equals(activity_name)) {
+        if (EXTRA_AWT_SETTINGS.equals(activity_name)) {
             fragment = new SettingsFragment();
         } else if (Settings.FEATURE_FLAGS.equals(activity_name)) {
             fragment = new FeatureFlagsFragment();
@@ -111,7 +111,7 @@ public class ActivityHook {
         toolbar.setNavigationOnClickListener(view -> act.onBackPressed());
 
         int fragmentContainerId = ResourceUtils.getIdentifier(ResourceType.ID, "fragment_container");
-        if (EXTRA_PIKO_SETTINGS.equals(activity_name)) {
+        if (EXTRA_AWT_SETTINGS.equals(activity_name)) {
             SettingsSearchUIController.install(act, toolbar, fragmentContainerId);
         }
 
@@ -125,17 +125,17 @@ public class ActivityHook {
 
     private static String getTitle(String activity_name){
         if (activity_name == null) {
-            return ResourceUtils.getString("piko_title_settings");
+            return ResourceUtils.getString("awt_title_settings");
         }
         String sectionTitle = ScreenBuilder.getSectionTitleResourceName(activity_name);
         if (sectionTitle != null) {
             return ResourceUtils.getString(sectionTitle);
         }
         String toolbarText = switch (activity_name) {
-            case Settings.READER_MODE_KEY -> "piko_title_native_reader_mode";
-            case Settings.CHANGE_APP_ICON -> "piko_pref_customisation_change_app_icon";
-            case Settings.EXPORT_LOGIN_TOKEN -> "piko_pref_export_login_token";
-            default -> "piko_title_settings";
+            case Settings.READER_MODE_KEY -> "awt_title_native_reader_mode";
+            case Settings.CHANGE_APP_ICON -> "awt_pref_customisation_change_app_icon";
+            case Settings.EXPORT_LOGIN_TOKEN -> "awt_pref_export_login_token";
+            default -> "awt_title_settings";
         };
         return ResourceUtils.getString(toolbarText);
     }
@@ -144,7 +144,7 @@ public class ActivityHook {
         Context context = Utils.getContext();
         String packageName = context.getPackageName();
         bundle.putString(Settings.ACT_NAME, activity_name);
-        bundle.putBoolean(EXTRA_PIKO, true);
+        bundle.putBoolean(EXTRA_AWT, true);
         Intent intent = new Intent();
         intent.setClassName(packageName, AUTHORIZE_ACTIVITY_CLASS);
         intent.setPackage(packageName);
@@ -156,7 +156,7 @@ public class ActivityHook {
     public static void startActivity(String activity_name) {
         Bundle bundle = new Bundle();
         bundle.putString(Settings.ACT_NAME, activity_name);
-        bundle.putBoolean(EXTRA_PIKO, true);
+        bundle.putBoolean(EXTRA_AWT, true);
         startActivity(activity_name, bundle);
     }
 
@@ -167,12 +167,12 @@ public class ActivityHook {
     }
 
     public static void startSettingsActivity() {
-        startActivity(EXTRA_PIKO_SETTINGS);
+        startActivity(EXTRA_AWT_SETTINGS);
     }
 
     @SuppressWarnings("unused")
     public static boolean startSettingsActivity(String key) {
-        if (PIKO_PREF_KEY.equals(key)) {
+        if (AWT_PREF_KEY.equals(key)) {
             try {
                 startSettingsActivity();
                 return true;

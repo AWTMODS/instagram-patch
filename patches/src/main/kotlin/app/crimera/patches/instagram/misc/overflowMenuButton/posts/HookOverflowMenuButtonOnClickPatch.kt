@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -50,7 +50,7 @@ val hookOverflowMenuButtonOnClickPatch =
                         move-object/from16 v1, p1
                         invoke-static {v1}, $FEED_OVERFLOW_MENU_BUTTON_CLASS->isCustomButtonPressed($MEDIA_OPTIONS_CLASS)Z
                         move-result v0
-                        if-eqz v0, :piko
+                        if-eqz v0, :awt
                         
                         move-object/from16 v0, p0
                         iget-object v5, v0, $appActivityField
@@ -64,7 +64,7 @@ val hookOverflowMenuButtonOnClickPatch =
                         return-void
                         
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(0)),
+                        ExternalLabel("awt", getInstruction(0)),
                     )
                 }
             }

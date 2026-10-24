@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -9,7 +9,7 @@ package app.morphe.extension.instagram.patches.instants;
 import android.content.Context;
 
 import app.morphe.extension.crimera.sharedPreference.SharedPref;
-import app.morphe.extension.instagram.db.PikoInstantsDb;
+import app.morphe.extension.instagram.db.AwtInstantsDb;
 import app.morphe.extension.instagram.entity.MediaData;
 import app.morphe.extension.instagram.settings.Settings;
 import app.morphe.extension.shared.Logger;
@@ -52,7 +52,7 @@ public class InstantsDownloadHook {
 
             Context ctx = Utils.getContext();
             if (ctx == null) return;
-            PikoInstantsDb db = PikoInstantsDb.getInstance(ctx);
+            AwtInstantsDb db = AwtInstantsDb.getInstance(ctx);
             if (db.has(id)) return;
 
             boolean isVideo = safeBool(() -> md.isVideo());

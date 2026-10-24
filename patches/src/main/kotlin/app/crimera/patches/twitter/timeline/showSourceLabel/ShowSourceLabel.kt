@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -60,7 +60,7 @@ val showSourceLabel =
                     igetWideIndex,
                     """
                     sget-boolean v$dummyReg1, $PREF_DESCRIPTOR;->SHOW_SRC_LBL:Z
-                    if-eqz v$dummyReg1, :piko
+                    if-eqz v$dummyReg1, :awt
                     invoke-virtual {v$idReg}, $idRef->getId()J
                     move-result-wide v$dummyReg1
                     
@@ -68,7 +68,7 @@ val showSourceLabel =
                     invoke-static {v$dummyReg1, v$dummyReg2}, $apiMethod->getTweetSource(J)Ljava/lang/String;
                     move-result-object v$const4Reg
                     """.trimIndent(),
-                    ExternalLabel("piko", igetWide),
+                    ExternalLabel("awt", igetWide),
                 )
 
                 enableSettings("showSourceLabel")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -113,10 +113,10 @@ final class MaterialYouState {
 
     static Boolean updateObservedInstagramDark(
             Boolean observedInstagramDark,
-            boolean pikoSettingsActivity,
+            boolean awtSettingsActivity,
             boolean activityDark
     ) {
-        if (pikoSettingsActivity) {
+        if (awtSettingsActivity) {
             return observedInstagramDark;
         }
         return activityDark;
@@ -208,7 +208,7 @@ final class MaterialYouState {
         return cachedNightMask;
     }
 
-    static boolean shouldPikoRecreate(
+    static boolean shouldAwtRecreate(
             ThemeMode previousMode,
             ThemeMode requestedMode,
             boolean hasNativeAction,

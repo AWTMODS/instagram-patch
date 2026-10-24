@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -11,7 +11,7 @@ import android.view.View;
 
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import static app.morphe.extension.shared.StringRef.str;
 
 import app.morphe.extension.twitter.entity.Debug;
@@ -56,7 +56,7 @@ public class MoreProfileInfo {
                 Context context = (Context) headerComponentEntity.getField(headerComponentContextFieldName());
 
                 int count = twitterUserEntity.getFastFollowersCount();
-                String text = str("piko_fast_follower");
+                String text = str("awt_fast_follower");
                 setTweetStatView(context, rootView, "fast_follower_stat", text, count);
 
                 count = twitterUserEntity.getStatusCount();
@@ -76,7 +76,7 @@ public class MoreProfileInfo {
                 setTweetStatView(context, rootView, "likes_stat", text, count);
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
     }
@@ -87,12 +87,12 @@ public class MoreProfileInfo {
                 TwitterUser twitterUserEntity = new TwitterUser(TwitterUserObject);
                 long userId = twitterUserEntity.getId();
 
-                String userIdstr = str("piko_pref_account_id", String.valueOf(userId));
+                String userIdstr = str("awt_pref_account_id", String.valueOf(userId));
                 return userName + "\n" + userIdstr;
             }
             return userName;
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return userName;
         }
     }

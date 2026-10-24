@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -34,7 +34,7 @@ import app.morphe.extension.instagram.patches.userprofile.ProfileMoreOption;
 import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.constants.Constants;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceType;
@@ -132,7 +132,7 @@ public class ActionBarPatch {
                             updateGhostModeIcons(ghostModeToggle);
                         }
 
-                        String toastStr = ghostModeToggle ? str("piko_ghost_modes_on") : str("piko_ghost_modes_default");
+                        String toastStr = ghostModeToggle ? str("awt_ghost_modes_on") : str("awt_ghost_modes_default");
                         Utils.showToastShort(toastStr);
                     } catch (Exception ex) {
                         Logger.printException(() -> "ghost icon click failed: ", ex);
@@ -156,7 +156,7 @@ public class ActionBarPatch {
             }
 
             if(pref.contains(Constants.AB_SETTINGS_ICON)) {
-                UI.pikoSettingsGear(viewGroup);
+                UI.awtSettingsGear(viewGroup);
             }
 
             HomeActionBarLayout.observe(
@@ -166,7 +166,7 @@ public class ActionBarPatch {
 
         } catch (Exception e) {
             Logger.printException(() -> "mainFeedActionBarButton failure", e);
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
@@ -195,7 +195,7 @@ public class ActionBarPatch {
             Boolean isSelfProfile = userData.getUserId().equals(userSession.getUserId());
 
             if(pref.contains(Constants.AB_SETTINGS_ICON) && isSelfProfile) {
-                UI.pikoSettingsGear(viewGroup);
+                UI.awtSettingsGear(viewGroup);
             }
 
             if(pref.contains(Constants.AB_GHOST_MODE_ICON) && isSelfProfile) {
@@ -209,7 +209,7 @@ public class ActionBarPatch {
 
         } catch (Exception e) {
             Logger.printException(() -> "userProfileActionBarButton: ", e);
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
@@ -222,7 +222,7 @@ public class ActionBarPatch {
             Set<String> pref = Pref.chatActionBarButtons();
 
             if(pref.contains(Constants.AB_SETTINGS_ICON)) {
-                UI.pikoSettingsGear(viewGroup);
+                UI.awtSettingsGear(viewGroup);
             }
 
             if(pref.contains(Constants.AB_GHOST_MODE_ICON)) {
@@ -243,7 +243,7 @@ public class ActionBarPatch {
             Set<String> pref = Pref.inboxActionBarButtons();
 
             if(pref.contains(Constants.AB_SETTINGS_ICON)) {
-                UI.pikoSettingsGear(viewGroup);
+                UI.awtSettingsGear(viewGroup);
             }
 
             if(pref.contains(Constants.AB_GHOST_MODE_ICON)) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
 import android.app.Fragment;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 
 public class FontPickerFragment extends Fragment {
@@ -52,7 +52,7 @@ public class FontPickerFragment extends Fragment {
                 return true;
             }
         }catch (Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return false;
     }
@@ -75,7 +75,7 @@ public class FontPickerFragment extends Fragment {
             return true;
         }
         catch (Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return false;
     }
@@ -88,13 +88,13 @@ public class FontPickerFragment extends Fragment {
                 Uri uri = intent.getData();
                 if (hasValidFontHeader(uri)) {
                     if(copyFont(uri)){
-                        toast(str("piko_pref_add_font_success"));
+                        toast(str("awt_pref_add_font_success"));
                         app.morphe.extension.twitter.Utils.showRestartAppDialog(getActivity());
                     }else{
-                        toast(str("piko_pref_add_font_fail"));
+                        toast(str("awt_pref_add_font_fail"));
                     }
                 } else {
-                    toast(str("piko_pref_add_font_desc"));
+                    toast(str("awt_pref_add_font_desc"));
                 }
             }
         }
@@ -102,7 +102,7 @@ public class FontPickerFragment extends Fragment {
     }
 
     private static void toast(String msg){
-        PikoUtils.toast(msg);
+        AwtUtils.toast(msg);
     }
 
     @Override

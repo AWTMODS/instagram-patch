@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -51,11 +51,11 @@ val hookFlagsPatch =
                                 invoke-static/range {p$configSpecifierRegister .. p${configSpecifierRegister + 1}}, $HOOK_FLAGS_DESCRIPTOR->handleBoolFlags(J)Ljava/lang/Boolean;
                                 move-result-object v0 
                                 # 1. Check if the result is NULL
-                                if-eqz v0, :piko
+                                if-eqz v0, :awt
                                 invoke-virtual {v0}, Ljava/lang/Boolean;->booleanValue()Z
                                 move-result v1
                                 return v1
-                                :piko
+                                :awt
                                 nop
                                 """.trimIndent(),
                             )
@@ -78,11 +78,11 @@ val hookFlagsPatch =
                                 invoke-static/range {p$configSpecifierRegister .. p${configSpecifierRegister + 1}}, $HOOK_FLAGS_DESCRIPTOR->handleLongFlags(J)Ljava/lang/Long;
                                 move-result-object v0
                                 # 1. Check if the result is NULL
-                                if-eqz v0, :piko
+                                if-eqz v0, :awt
                                 invoke-virtual {v0}, Ljava/lang/Long;->longValue()J
                                 move-result-wide v1
                                 return-wide v1
-                                :piko
+                                :awt
                                 nop
                                 """.trimIndent(),
                             )

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -14,20 +14,20 @@ import app.morphe.extension.twitter.Utils;
 import app.morphe.extension.twitter.settings.Settings;
 import app.morphe.extension.twitter.settings.ActivityHook;
 
-public class PikoSettingsButton extends AppCompatButton implements View.OnClickListener {
+public class AwtSettingsButton extends AppCompatButton implements View.OnClickListener {
 
     // Constructors
-    public PikoSettingsButton(Context context) {
+    public AwtSettingsButton(Context context) {
         super(context);
         init();
     }
 
-    public PikoSettingsButton(Context context, AttributeSet attrs) {
+    public AwtSettingsButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public PikoSettingsButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AwtSettingsButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -46,7 +46,7 @@ public class PikoSettingsButton extends AppCompatButton implements View.OnClickL
         try {
             ActivityHook.startSettingsActivity();
         } catch (Exception e) {
-            app.morphe.extension.crimera.PikoUtils.logger(e);
+            app.morphe.extension.crimera.AwtUtils.logger(e);
         }
 
     }

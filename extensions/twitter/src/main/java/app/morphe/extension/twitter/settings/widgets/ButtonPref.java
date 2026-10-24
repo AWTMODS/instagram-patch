@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 import static app.morphe.extension.shared.StringRef.str;
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 import app.morphe.extension.twitter.patches.Changelogs;
 import app.morphe.extension.twitter.patches.DatabasePatch;
@@ -123,7 +123,7 @@ public class ButtonPref extends Preference {
                     } else if (key.equals(Settings.PREMIUM_UNDO_POSTS.key)) {
                         Utils.startUndoPostActivity();
                     }  else if (key.equals(Settings.PREMIUM_NAVBAR.key)) {
-                        PikoUtils.openUrl("https://www.x.com/settings/custom_navigation",true);
+                        AwtUtils.openUrl("https://www.x.com/settings/custom_navigation",true);
                     } else if (key.equals(Settings.RESET_PREF)) {
                         Utils.deleteSharedPrefAB(context, false);
                     } else if (key.equals(Settings.RESET_FLAGS)) {
@@ -138,12 +138,12 @@ public class ButtonPref extends Preference {
                         new ImportLoginTokenDialogFragment().show(((Activity) context).getFragmentManager(), null);
                     } else if (key.equals(Settings.EXPORT_LOGIN_TOKEN)) {
                         fragment = new ExportLoginTokenFragment();
-                    } else if ( (key.equals(Settings.APP_VERSION)) || (key.equals(Settings.PIKO_PATCHES)) ) {
+                    } else if ( (key.equals(Settings.APP_VERSION)) || (key.equals(Settings.AWT_PATCHES)) ) {
                         String summary = preference.getSummary().toString();
                         app.morphe.extension.shared.Utils.setClipboard(summary);
-                        PikoUtils.toast(str("copied_to_clipboard")+": "+ summary);
+                        AwtUtils.toast(str("copied_to_clipboard")+": "+ summary);
                     } else if (key.equals(Settings.SUPPORTED_LINKS)){
-                        PikoUtils.openDefaultLinks();
+                        AwtUtils.openDefaultLinks();
                     } else if (key.equals(Settings.CHANGELOGS_TITLE)){
                         Changelogs.showChangelogDialog(context);
                     } else {
@@ -155,8 +155,8 @@ public class ButtonPref extends Preference {
                         ActivityHook.startFragment((Activity) context, key,fragment, true);
                     }
                 } catch (Exception e) {
-                    PikoUtils.logger(e);
-                    PikoUtils.toast(e.toString());
+                    AwtUtils.logger(e);
+                    AwtUtils.toast(e.toString());
                 }
 
                 return true;

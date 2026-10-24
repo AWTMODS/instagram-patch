@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -19,7 +19,7 @@ public class WelcomeMessage {
 
     public static void openWelcomeMessage(Context context) {
         try {
-            if(Pref.firstTimePiko()) {
+            if(Pref.firstTimeAwt()) {
                 UI.welcomeDialogBox(context);
             }
         } catch (Exception ex) {

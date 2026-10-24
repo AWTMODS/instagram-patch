@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
 import app.morphe.extension.twitter.Pref;
@@ -65,14 +65,14 @@ public class ShareImageHandler {
 
     private static Uri generateImage(Activity activity, Tweet tweet) {
         try {
-            PikoUtils.toast(str("piko_share_image_capturing"));
+            AwtUtils.toast(str("awt_share_image_capturing"));
 
             Long tweetId = tweet.getTweetId();
 
             View rootView = activity.getWindow().getDecorView().getRootView();
             View tweetView = searchViewTree(rootView, tweetId, 0);
             if (tweetView == null) {
-                PikoUtils.toast(str("piko_share_image_view_not_found"));
+                AwtUtils.toast(str("awt_share_image_view_not_found"));
                 return null;
             }
             CaptureTarget target = resolveCaptureTarget(activity, rootView, tweetView);
@@ -80,12 +80,12 @@ public class ShareImageHandler {
             if (target == null) target = new CaptureTarget(tweetView, null);
 
             if (ViewUtils.DEBUG) {
-                PikoUtils.logger(String.format("Capture: Tweet %d | Density %.1f",
+                AwtUtils.logger(String.format("Capture: Tweet %d | Density %.1f",
                         tweetId, activity.getResources().getDisplayMetrics().density));
-                PikoUtils.logger("Target: " + target.view.getClass().getSimpleName() + " " + target.view.getWidth() + "x" + target.view.getHeight());
+                AwtUtils.logger("Target: " + target.view.getClass().getSimpleName() + " " + target.view.getWidth() + "x" + target.view.getHeight());
 
                 if (target.clipRect != null) {
-                    PikoUtils.logger("Clip: " + target.clipRect.toShortString());
+                    AwtUtils.logger("Clip: " + target.clipRect.toShortString());
                 }
             }
 
@@ -107,7 +107,7 @@ public class ShareImageHandler {
             }
 
             if (bitmap == null) {
-                PikoUtils.toast(str("piko_share_image_capture_failed"));
+                AwtUtils.toast(str("awt_share_image_capture_failed"));
                 return null;
             }
 
@@ -125,7 +125,7 @@ public class ShareImageHandler {
             // Overwrite existing
             try {
                 String selection = MediaStore.MediaColumns.DISPLAY_NAME + " = ? AND " + MediaStore.MediaColumns.RELATIVE_PATH + " LIKE ?";
-                resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection, new String[]{displayName, "Pictures/Piko/%"});
+                resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection, new String[]{displayName, "Pictures/Awt/%"});
             } catch (Exception ignored) {}
 
             ContentValues values = new ContentValues();
@@ -133,7 +133,7 @@ public class ShareImageHandler {
             values.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Piko");
+                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Awt");
                 values.put(MediaStore.MediaColumns.IS_PENDING, 1);
             }
 
@@ -155,8 +155,8 @@ public class ShareImageHandler {
             return uri;
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast(str("piko_share_image_error", e.getMessage()));
+            AwtUtils.logger(e);
+            AwtUtils.toast(str("awt_share_image_error", e.getMessage()));
             return  null;
         }
 
@@ -168,7 +168,7 @@ public class ShareImageHandler {
             Tweet tweet = new Tweet(tweetObj);
 
             if (!(context instanceof Activity)) {
-                PikoUtils.toast(str("piko_share_image_invalid_context"));
+                AwtUtils.toast(str("awt_share_image_invalid_context"));
                 return;
             }
 
@@ -190,8 +190,8 @@ public class ShareImageHandler {
             }
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast(str("piko_share_image_error", e.getMessage()));
+            AwtUtils.logger(e);
+            AwtUtils.toast(str("awt_share_image_error", e.getMessage()));
         }
     }
 
@@ -206,7 +206,7 @@ public class ShareImageHandler {
                 intent.setClipData(ClipData.newRawUri("image", uri));
             }
 
-            Intent chooser = Intent.createChooser(intent, str("piko_share_image_title"));
+            Intent chooser = Intent.createChooser(intent, str("awt_share_image_title"));
 
             // Grant URI permission to all resolved activities
             PackageManager pm = activity.getPackageManager();
@@ -217,14 +217,14 @@ public class ShareImageHandler {
 
             activity.startActivity(chooser);
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
     private static void shareImageToInstaStory(Activity activity, Uri imageUri) {
         String packageName = "com.instagram.android";
 
-        if(PikoUtils.isAppInstalledAndEnabled(packageName)) {
+        if(AwtUtils.isAppInstalledAndEnabled(packageName)) {
             Intent intent = new Intent("com.instagram.share.ADD_TO_STORY");
             intent.setPackage(packageName);
 
@@ -239,7 +239,7 @@ public class ShareImageHandler {
 
             activity.startActivity(intent);
         } else{
-            str("piko_share_image_app_error", "Instagram");
+            str("awt_share_image_app_error", "Instagram");
         }
     }
 
@@ -252,10 +252,10 @@ public class ShareImageHandler {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 selection += " AND " + MediaStore.MediaColumns.RELATIVE_PATH + " LIKE ?";
-                args = new String[]{String.valueOf(cutoff), "Pictures/Piko/%"};
+                args = new String[]{String.valueOf(cutoff), "Pictures/Awt/%"};
             } else {
                 selection += " AND " + MediaStore.MediaColumns.DATA + " LIKE ?";
-                args = new String[]{String.valueOf(cutoff), "%/Pictures/Piko/%"};
+                args = new String[]{String.valueOf(cutoff), "%/Pictures/Awt/%"};
             }
             context.getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection, args);
         } catch (Exception ignored) {}
@@ -312,7 +312,7 @@ public class ShareImageHandler {
             int crop = getRelativeBottom(anchor, target) - dp(activity, 1);
             if (crop > 0 && crop < h) {
                 if (ViewUtils.DEBUG) {
-                    PikoUtils.logger("Cropped at #" + name);
+                    AwtUtils.logger("Cropped at #" + name);
                 }
                 return crop;
             }
@@ -329,7 +329,7 @@ public class ShareImageHandler {
             if (v.getHeight() <= dp(activity, 4) && v.getBottom() >= bot - dp(activity, 1)) {
                 bot = v.getTop();
                 if (ViewUtils.DEBUG) {
-                    PikoUtils.logger("Removed slop: " + v.getClass().getSimpleName());
+                    AwtUtils.logger("Removed slop: " + v.getClass().getSimpleName());
                 }
             } else break;
         }
@@ -550,7 +550,7 @@ public class ShareImageHandler {
             serializer.endDocument();
             saveXmlFile(activity, baseName + ".xml", writer.toString());
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
@@ -594,7 +594,7 @@ public class ShareImageHandler {
     }
 
     /**
-     * Writes {@code content} to Documents/Piko/{displayName}, mirroring the
+     * Writes {@code content} to Documents/Awt/{displayName}, mirroring the
      * MediaStore approach used for saving the screenshot itself.
      */
     private static void saveXmlFile(Context context, String displayName, String content) {
@@ -605,12 +605,12 @@ public class ShareImageHandler {
                 ContentResolver resolver = context.getContentResolver();
 
                 String selection = MediaStore.MediaColumns.DISPLAY_NAME + " = ? AND " + MediaStore.MediaColumns.RELATIVE_PATH + " LIKE ?";
-                resolver.delete(MediaStore.Files.getContentUri("external"), selection, new String[]{displayName, "Documents/Piko/%"});
+                resolver.delete(MediaStore.Files.getContentUri("external"), selection, new String[]{displayName, "Documents/Awt/%"});
 
                 ContentValues values = new ContentValues();
                 values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
                 values.put(MediaStore.MediaColumns.MIME_TYPE, "text/xml");
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Piko");
+                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Awt");
 
                 Uri uri = resolver.insert(MediaStore.Files.getContentUri("external"), values);
                 if (uri == null) return;
@@ -619,7 +619,7 @@ public class ShareImageHandler {
                     if (os != null) os.write(bytes);
                 }
             } else {
-                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Piko");
+                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Awt");
                 if (!dir.exists() && !dir.mkdirs()) return;
 
                 File file = new File(dir, displayName);
@@ -628,7 +628,7 @@ public class ShareImageHandler {
                 }
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
@@ -647,7 +647,7 @@ public class ShareImageHandler {
                 v.getClass().getSimpleName(), v.getWidth(), v.getHeight(), v.getLeft(), v.getTop(),
                 idName.isEmpty() ? "" : " #" + idName));
 
-        PikoUtils.logger(sb.toString());
+        AwtUtils.logger(sb.toString());
 
         if (v instanceof ViewGroup group) {
             for (int i = 0; i < group.getChildCount(); i++) {

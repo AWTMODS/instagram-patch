@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -27,7 +27,7 @@ val nativeShareImagePatch =
         execute {
             val actionName = "ShareImage"
             val prefFunctionName = "enableShareImage"
-            val stringId = "piko_share_image_title"
+            val stringId = "awt_share_image_title"
             val iconId = "ic_vector_share"
             val statusFunctionName = "shareImage"
 

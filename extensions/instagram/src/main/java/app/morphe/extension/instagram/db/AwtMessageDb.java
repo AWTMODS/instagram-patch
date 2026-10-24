@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -15,9 +15,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PikoMessageDb extends SQLiteOpenHelper {
+public class AwtMessageDb extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "piko_dm_vault.db";
+    private static final String DB_NAME = "awt_dm_vault.db";
     static final int DB_VERSION = 4;
     private static final String TABLE = "saved_messages";
     // sender_id → username directory. MQTT-delivered items carry only a numeric sender_id;
@@ -25,7 +25,7 @@ public class PikoMessageDb extends SQLiteOpenHelper {
     // persist it here so later MQTT-only items can show the real handle.
     private static final String DIR_TABLE = "user_directory";
 
-    private static volatile PikoMessageDb instance;
+    private static volatile AwtMessageDb instance;
 
     static String normalizeIdentity(String value) {
         if (value == null) return null;
@@ -59,18 +59,18 @@ public class PikoMessageDb extends SQLiteOpenHelper {
         return statements.toArray(new String[0]);
     }
 
-    public static PikoMessageDb getInstance(Context context) {
+    public static AwtMessageDb getInstance(Context context) {
         if (instance == null) {
-            synchronized (PikoMessageDb.class) {
+            synchronized (AwtMessageDb.class) {
                 if (instance == null) {
-                    instance = new PikoMessageDb(context.getApplicationContext());
+                    instance = new AwtMessageDb(context.getApplicationContext());
                 }
             }
         }
         return instance;
     }
 
-    private PikoMessageDb(Context context) {
+    private AwtMessageDb(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

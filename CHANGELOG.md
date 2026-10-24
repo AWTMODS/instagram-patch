@@ -29,7 +29,7 @@
 * **Custom font:** Fix crash on Android 8 by restricting the functionality to Android 9+ ([477f634](https://github.com/AWTMODS/instagram-patch/commit/477f6345a062bc3605dd343d290734074483a61c))
 * **Custom font:** Fix crash on Android 8 by restricting the functionality to Android 9+ ([000539b](https://github.com/AWTMODS/instagram-patch/commit/000539b8b67d97b83efdf4eab2d311e9b492f167))
 * **Custom sharing domain:** Now works on "Copy Link" ([8f71415](https://github.com/AWTMODS/instagram-patch/commit/8f71415e2c7cb5cf351bbcf11d2942d5f0771995))
-* **Dynamic color:** Reflect piko's original changes ([0c91cad](https://github.com/AWTMODS/instagram-patch/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
+* **Dynamic color:** Reflect awt's original changes ([0c91cad](https://github.com/AWTMODS/instagram-patch/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
 * **Enable Reader Mode:** Specify the compatible version, show a warning instead of throwing an exception when failed ([b1c52e7](https://github.com/AWTMODS/instagram-patch/commit/b1c52e73daabe3222e925ba5d6b866af31a35045))
 * **entity:** swap username and display name method mappings in TweetEntityPatch ([b946ebf](https://github.com/AWTMODS/instagram-patch/commit/b946ebff8b59081ad3c53eb9ed108c3695dfe5fa))
 * fallback instruction address ([95f69e3](https://github.com/AWTMODS/instagram-patch/commit/95f69e3fef4774072bb82b2717d9ba44ed8e0487))
@@ -105,12 +105,12 @@
 * **Instagram:** Fix navigation buttons not hiding after selecting them ([9bbad36](https://github.com/AWTMODS/instagram-patch/commit/9bbad36ef0783abf04d986e764a8b6a964b4372f))
 * **Instagram:** Fix null userdata from mediadata ([ef8fb7e](https://github.com/AWTMODS/instagram-patch/commit/ef8fb7ee09bf744183bb87302e8d36215a873023))
 * **Instagram:** Fix opening links ([ba9b4c4](https://github.com/AWTMODS/instagram-patch/commit/ba9b4c43af6e4a42ce0654d11aa26a3d28496247))
-* **Instagram:** fix padding issue in Piko settings button ([4855f38](https://github.com/AWTMODS/instagram-patch/commit/4855f38410ed6999e3d501cb0301efee4490a148))
+* **Instagram:** fix padding issue in Awt settings button ([4855f38](https://github.com/AWTMODS/instagram-patch/commit/4855f38410ed6999e3d501cb0301efee4490a148))
 * **Instagram:** Fix persistent downloading notification after completion ([905828d](https://github.com/AWTMODS/instagram-patch/commit/905828dd465b9b0aa0afc489bbf624acd8a3faa4))
-* **Instagram:** Fix piko settings action bar ([1712146](https://github.com/AWTMODS/instagram-patch/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
-* **Instagram:** Fix Piko settings color issues ([f1f278a](https://github.com/AWTMODS/instagram-patch/commit/f1f278a87665be59218dcc54af983b411802fe0f))
-* **Instagram:** fix Piko settings issues ([d3369f2](https://github.com/AWTMODS/instagram-patch/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
-* **Instagram:** fix piko settings nav bar clipping ([0b94452](https://github.com/AWTMODS/instagram-patch/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
+* **Instagram:** Fix awt settings action bar ([1712146](https://github.com/AWTMODS/instagram-patch/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
+* **Instagram:** Fix Awt settings color issues ([f1f278a](https://github.com/AWTMODS/instagram-patch/commit/f1f278a87665be59218dcc54af983b411802fe0f))
+* **Instagram:** fix Awt settings issues ([d3369f2](https://github.com/AWTMODS/instagram-patch/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
+* **Instagram:** fix awt settings nav bar clipping ([0b94452](https://github.com/AWTMODS/instagram-patch/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
 * **Instagram:** Fix reels current media logic ([40836e8](https://github.com/AWTMODS/instagram-patch/commit/40836e83e10b1f023e7ec4c1dca4f1407ba6d638))
 * **Instagram:** Fix register issue while hooking reel overflow menu ([83786a8](https://github.com/AWTMODS/instagram-patch/commit/83786a8d379b7ae05bfaa73ab07c94172ba9d9d3))
 * **Instagram:** Fix spilt username folder issue ([b2931c0](https://github.com/AWTMODS/instagram-patch/commit/b2931c0ac5ed6a84efa830cd91ee2bb975848da6))
@@ -129,8 +129,8 @@
 * **Instagram:** keep one navigation button visible ([dd5dce8](https://github.com/AWTMODS/instagram-patch/commit/dd5dce8f8974df4e47ff3eb32057ca8ca0cd9c25))
 * **Instagram:** Keep settings switch animations consistent after shortcut launch ([#1883](https://github.com/AWTMODS/instagram-patch/issues/1883)) ([6ffb046](https://github.com/AWTMODS/instagram-patch/commit/6ffb046f68cf0d82c36d9c9837d695d259838331))
 * **Instagram:** make EditMediaInfoGetCurrentMediaIdFingerprint resilient for v447 ([a0d92cb](https://github.com/AWTMODS/instagram-patch/commit/a0d92cb3a723c9d3aa0220d28e85719844d559ab))
-* **Instagram:** match piko settings background to amoled patch ([#1543](https://github.com/AWTMODS/instagram-patch/issues/1543)) ([56003dc](https://github.com/AWTMODS/instagram-patch/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
-* **Instagram:** Match piko settings highlight to theme ([#1548](https://github.com/AWTMODS/instagram-patch/issues/1548)) ([c428e7e](https://github.com/AWTMODS/instagram-patch/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
+* **Instagram:** match awt settings background to amoled patch ([#1543](https://github.com/AWTMODS/instagram-patch/issues/1543)) ([56003dc](https://github.com/AWTMODS/instagram-patch/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
+* **Instagram:** Match awt settings highlight to theme ([#1548](https://github.com/AWTMODS/instagram-patch/issues/1548)) ([c428e7e](https://github.com/AWTMODS/instagram-patch/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
 * **Instagram:** Match story mention dialog to Instagram theme ([#1554](https://github.com/AWTMODS/instagram-patch/issues/1554)) ([08563ca](https://github.com/AWTMODS/instagram-patch/commit/08563ca54d486585e5fc4bc7c432d6f5f19e6d28))
 * **Instagram:** Move the story seen button to the bottom action row ([0d7fba0](https://github.com/AWTMODS/instagram-patch/commit/0d7fba0feeb17c430af4292176be47036593bda3))
 * **Instagram:** Native comment buttons not working ([ea145d7](https://github.com/AWTMODS/instagram-patch/commit/ea145d7759d3b7bf8af78cbab064fe76c6760cd5))
@@ -151,7 +151,7 @@
 * **Instagram:** Prevent notification registration crash ([#1678](https://github.com/AWTMODS/instagram-patch/issues/1678)) ([4f67a78](https://github.com/AWTMODS/instagram-patch/commit/4f67a78430871afa0eff393d9127f78fd11a85e0))
 * **Instagram:** Recover settings after crash ([#1822](https://github.com/AWTMODS/instagram-patch/issues/1822)) ([8391a5b](https://github.com/AWTMODS/instagram-patch/commit/8391a5b6817289307eb2fef96837c2055eebea99))
 * **Instagram:** Refine Focus Lock highlight and slider spacing ([#1982](https://github.com/AWTMODS/instagram-patch/issues/1982)) ([c5b8ca5](https://github.com/AWTMODS/instagram-patch/commit/c5b8ca5855b04706d86b20de89752780c36a7aa6))
-* **instagram:** Refine piko settings title styling ([#1534](https://github.com/AWTMODS/instagram-patch/issues/1534)) ([ce69be6](https://github.com/AWTMODS/instagram-patch/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
+* **instagram:** Refine awt settings title styling ([#1534](https://github.com/AWTMODS/instagram-patch/issues/1534)) ([ce69be6](https://github.com/AWTMODS/instagram-patch/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
 * **Instagram:** Refresh localized download folder path ([#1537](https://github.com/AWTMODS/instagram-patch/issues/1537)) ([72ce666](https://github.com/AWTMODS/instagram-patch/commit/72ce66602c601a2e1b600367bd04430419dadc59))
 * **Instagram:** Refresh profile friendship status and hide unknown states ([2418d65](https://github.com/AWTMODS/instagram-patch/commit/2418d657c7cfb1db752980c2cc10b74bd3af4641))
 * **Instagram:** Remove blocking blok fixing your activity page issue ([6d4ce78](https://github.com/AWTMODS/instagram-patch/commit/6d4ce78ae0d279bf4570a968258962a3ab47e714))
@@ -205,7 +205,7 @@
 * **Twitter - Customize Navigation Bar items:** May not work on 11.95.0-alpha.0+ ([d4c5f4e](https://github.com/AWTMODS/instagram-patch/commit/d4c5f4e29f633fbdbad9310ce3a45a2600a8814a))
 * **Twitter - Customize Navigation Bar items:** Sometimes the order of navigation buttons is reset ([4790d6c](https://github.com/AWTMODS/instagram-patch/commit/4790d6c2f2611463a9b8a54081bf4defcddb4bb2))
 * **Twitter - Dynamic Color:** update border and icon tint colors ([fcd1aa3](https://github.com/AWTMODS/instagram-patch/commit/fcd1aa33fecb0eaaa76b0168d78a56c074874e36))
-* **Twitter - Import/Export login token:** Add import menu to piko settings as a workaround for redesigned login screen ([dad823c](https://github.com/AWTMODS/instagram-patch/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
+* **Twitter - Import/Export login token:** Add import menu to awt settings as a workaround for redesigned login screen ([dad823c](https://github.com/AWTMODS/instagram-patch/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
 * **Twitter - Log server response:** Escape single qoutes ([cedbfaf](https://github.com/AWTMODS/instagram-patch/commit/cedbfaf77913afb81b0363207a9839ea1624fa63))
 * **Twitter - Native Downloader:** Add missing downloadAll method and fix null checks ([ba9d036](https://github.com/AWTMODS/instagram-patch/commit/ba9d036e7e01a2455e291504ec4984c9b94cda94))
 * **Twitter - Native Downloader:** Clean stale temp file before download and auto-retry legacy resolution if orig fails ([a9d9bd1](https://github.com/AWTMODS/instagram-patch/commit/a9d9bd15f9895d723a3bb9eea1ea2d56cd6aa3e4))
@@ -423,7 +423,7 @@
 * **Instagram:** Added ability to download audio from some posts and reel ([8d503d3](https://github.com/AWTMODS/instagram-patch/commit/8d503d3ecffd66949779acb5cc24480e75f06f91))
 * **Instagram:** Added ability to download mappings ([ee843af](https://github.com/AWTMODS/instagram-patch/commit/ee843af511c656e3a6ce4fa86102459ff80392e0))
 * **Instagram:** Added ability to download video variants ([2baeea8](https://github.com/AWTMODS/instagram-patch/commit/2baeea81698d843408c140f29e6d69ce86e2d748))
-* **Instagram:** Added ability to remove Piko preference ([3e29d69](https://github.com/AWTMODS/instagram-patch/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
+* **Instagram:** Added ability to remove Awt preference ([3e29d69](https://github.com/AWTMODS/instagram-patch/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
 * **Instagram:** Added ability to turn on all ghost modes ([6a1c497](https://github.com/AWTMODS/instagram-patch/commit/6a1c497d8e9ff761fd9e0e7ea93034b9465d549b))
 * **Instagram:** Added alert if the mapping file is missing ([dc9b4c2](https://github.com/AWTMODS/instagram-patch/commit/dc9b4c2ce682974c3b8fa2df3ef4ed5f01737ba5))
 * **Instagram:** Added custom exception handler and crash logs ([b119727](https://github.com/AWTMODS/instagram-patch/commit/b1197279845cad3f1d98f318ed86c144f764194d))
@@ -460,7 +460,7 @@
 * **Instagram:** Move profile more options button to action bar ([068ba4f](https://github.com/AWTMODS/instagram-patch/commit/068ba4f5e32073ab52c983910b7a776d3d6bfd0c))
 * **Instagram:** Move settings launcher to main feed action bar ([3ed88ed](https://github.com/AWTMODS/instagram-patch/commit/3ed88ede87285c20532dc174b3cf4e4774dedc18))
 * **Instagram:** New patch to block onboarding permission prompts ([9b6e569](https://github.com/AWTMODS/instagram-patch/commit/9b6e56956ecb6df916afc1743a6cbb3b8e463b33))
-* **Instagram:** Refine Piko settings UI ([#1310](https://github.com/AWTMODS/instagram-patch/issues/1310)) ([dd76ee4](https://github.com/AWTMODS/instagram-patch/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
+* **Instagram:** Refine Awt settings UI ([#1310](https://github.com/AWTMODS/instagram-patch/issues/1310)) ([dd76ee4](https://github.com/AWTMODS/instagram-patch/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
 * **Instagram:** Restore classic search recents (up to 25) ([#1741](https://github.com/AWTMODS/instagram-patch/issues/1741)) ([bb98bcb](https://github.com/AWTMODS/instagram-patch/commit/bb98bcb219ca0a30ee672db4361dc70abbfe06df))
 * **Instagram:** Save and view received Instants ([#1538](https://github.com/AWTMODS/instagram-patch/issues/1538)) ([40e1327](https://github.com/AWTMODS/instagram-patch/commit/40e1327b265565e19074bf699091dcde77f581dc))
 * **Instagram:** save deleted messages ([#1531](https://github.com/AWTMODS/instagram-patch/issues/1531)) ([6c120d6](https://github.com/AWTMODS/instagram-patch/commit/6c120d603cb830c0ccc8c4a99acc9eab089f70bd))
@@ -526,9 +526,9 @@
 * **twitter:** Add download patch ([b9612bf](https://github.com/AWTMODS/instagram-patch/commit/b9612bfc69656681f3b84d0c8837e5d3dad9bc0d))
 * **Twitter:** Add Dynamic color switch toggle ([#1582](https://github.com/AWTMODS/instagram-patch/issues/1582)) ([c3de8d8](https://github.com/AWTMODS/instagram-patch/commit/c3de8d8df101203139ff3171bf8f600ef3eef028))
 * **twitter:** Add google ads patch ([152b118](https://github.com/AWTMODS/instagram-patch/commit/152b118737f84ebc155377ca58c7131486bad8a9))
-* **Twitter:** Add piko settings to the app icon long-press shortcut ([#1412](https://github.com/AWTMODS/instagram-patch/issues/1412)) ([2eb970b](https://github.com/AWTMODS/instagram-patch/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
+* **Twitter:** Add awt settings to the app icon long-press shortcut ([#1412](https://github.com/AWTMODS/instagram-patch/issues/1412)) ([2eb970b](https://github.com/AWTMODS/instagram-patch/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
 * **twitter:** Add remove view count patch ([e31f222](https://github.com/AWTMODS/instagram-patch/commit/e31f22278e6a5704037f3e3ed1583c25025abed8))
-* **Twitter:** Add Search Piko settings ([#1516](https://github.com/AWTMODS/instagram-patch/issues/1516)) ([fed4f51](https://github.com/AWTMODS/instagram-patch/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
+* **Twitter:** Add Search Awt settings ([#1516](https://github.com/AWTMODS/instagram-patch/issues/1516)) ([fed4f51](https://github.com/AWTMODS/instagram-patch/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
 * **twitter:** Add selectable text patch ([ee3bcf1](https://github.com/AWTMODS/instagram-patch/commit/ee3bcf17900dfe549a07426182a2149bcf16f87a))
 * **Twitter:** Add settings for `Hide FAB` patch ([d5dde7c](https://github.com/AWTMODS/instagram-patch/commit/d5dde7cb2e843bb0c8b90b7d1d5989bcf91e712b))
 * **Twitter:** Add Settings for `Hide Live Threads` and `Hide Banner` patch ([ca474d4](https://github.com/AWTMODS/instagram-patch/commit/ca474d4e7a1baa5f9cfcfd03a0640a4867089131))
@@ -632,7 +632,7 @@
 * **Instagram:** Add support for 447.0.0.55.81 ([3e15b92](https://github.com/AWTMODS/instagram-patch/commit/3e15b928c85449e21b3e6a34a2ac419d272885bb))
 * **Instagram:** Bump support for `430.0.0.53.80` ([60a0c1a](https://github.com/AWTMODS/instagram-patch/commit/60a0c1a80b38397f95b82d1eb51c053feabb27fa))
 * **Instagram:** Bump support for `435.0.0.37.76` ([d53a75a](https://github.com/AWTMODS/instagram-patch/commit/d53a75a22ab99e2dbeb647bbe428face2037b16b))
-* **Twitter:** Add `11.99.0-release.1` to supported versions list (Requires Piko-Shim) ([#1367](https://github.com/AWTMODS/instagram-patch/issues/1367)) ([ee10064](https://github.com/AWTMODS/instagram-patch/commit/ee100646a0e8bea517252c76d19c325d43c88301))
+* **Twitter:** Add `11.99.0-release.1` to supported versions list (Requires Awt-Shim) ([#1367](https://github.com/AWTMODS/instagram-patch/issues/1367)) ([ee10064](https://github.com/AWTMODS/instagram-patch/commit/ee100646a0e8bea517252c76d19c325d43c88301))
 * **Twitter:** Add support for `12.11.0-release.0` ([cdca6a8](https://github.com/AWTMODS/instagram-patch/commit/cdca6a84f94366aa91c1c2fcb533056413a95d61))
 * **Twitter:** Added support for 11.93.xx ([dd7352c](https://github.com/AWTMODS/instagram-patch/commit/dd7352cd9485a7af6d32a62b09410d65fd4567d2))
 * **Twitter:** Bump support for `11.95.1-release.0` ([1e12f66](https://github.com/AWTMODS/instagram-patch/commit/1e12f66bb86462bddff28f15620ab5cc7e767c97))
@@ -662,7 +662,7 @@
 * **Instagram:** Add random like animations and previews ([#1980](https://github.com/AWTMODS/instagram-patch/issues/1980)) ([f544987](https://github.com/AWTMODS/instagram-patch/commit/f54498748f8ddf9051b443c396ce46235cd047e0))
 * **Instagram:** Always apply link and build expiration fixes ([476cf62](https://github.com/AWTMODS/instagram-patch/commit/476cf6220c4b59b85b812829e77f9135f3c73cdb))
 * **Instagram:** Clarify settings row highlight behavior ([#1989](https://github.com/AWTMODS/instagram-patch/issues/1989)) ([40e1086](https://github.com/AWTMODS/instagram-patch/commit/40e108645d273402c0964e6b83b9f32ae9127cf5))
-* **Instagram:** Confirm before piko settings reset ([#1710](https://github.com/AWTMODS/instagram-patch/issues/1710)) ([5852c71](https://github.com/AWTMODS/instagram-patch/commit/5852c715d2663c75d1dcd06d3de312b4dc6cf9af))
+* **Instagram:** Confirm before awt settings reset ([#1710](https://github.com/AWTMODS/instagram-patch/issues/1710)) ([5852c71](https://github.com/AWTMODS/instagram-patch/commit/5852c715d2663c75d1dcd06d3de312b4dc6cf9af))
 * **Instagram:** fix N+1 query when opening Deleted Messages ([#1965](https://github.com/AWTMODS/instagram-patch/issues/1965)) ([bdc8d10](https://github.com/AWTMODS/instagram-patch/commit/bdc8d10fb11c3809fd9a87aed2ab1269c2ce40ca))
 * **Instagram:** Hide comment buttons and counts ([2cbd8b2](https://github.com/AWTMODS/instagram-patch/commit/2cbd8b268b8ba21c5321b58be861c1402b46e6d8))
 * **Instagram:** Hide suggested profiles ([#1917](https://github.com/AWTMODS/instagram-patch/issues/1917)) ([c6ea8c4](https://github.com/AWTMODS/instagram-patch/commit/c6ea8c4013cb22fa52f661acb7a83d88b6e54a18))
@@ -1046,7 +1046,7 @@
 
 ### 🔧 Improvements
 
-* **Instagram:** Improve piko settings ([#1684](https://github.com/crimera/piko/issues/1684)) ([17662c3](https://github.com/crimera/piko/commit/17662c3d311a093b4f35545db5ba73d4c8547a6d))
+* **Instagram:** Improve awt settings ([#1684](https://github.com/crimera/piko/issues/1684)) ([17662c3](https://github.com/crimera/piko/commit/17662c3d311a093b4f35545db5ba73d4c8547a6d))
 * **Instagram:** refresh recommended flags after download ([#1685](https://github.com/crimera/piko/issues/1685)) ([85057c0](https://github.com/crimera/piko/commit/85057c09a76f2efbd481f0ffb6454c40d067cfb7))
 * **Instagram:** Turn off `Disable analytics` by default ([#1674](https://github.com/crimera/piko/issues/1674)) ([753a70b](https://github.com/crimera/piko/commit/753a70be81449c27f0a8e056f7f0e938a11e964e))
 * **Twitter:** improve more profile info ([#1687](https://github.com/crimera/piko/issues/1687)) ([46cb754](https://github.com/crimera/piko/commit/46cb754e48b66606f19804b610cd085d54f5d173))
@@ -1100,7 +1100,7 @@
 
 ### 🔧 Improvements
 
-* **Instagram:** Improve piko settings ([#1684](https://github.com/crimera/piko/issues/1684)) ([17662c3](https://github.com/crimera/piko/commit/17662c3d311a093b4f35545db5ba73d4c8547a6d))
+* **Instagram:** Improve awt settings ([#1684](https://github.com/crimera/piko/issues/1684)) ([17662c3](https://github.com/crimera/piko/commit/17662c3d311a093b4f35545db5ba73d4c8547a6d))
 * **Instagram:** refresh recommended flags after download ([#1685](https://github.com/crimera/piko/issues/1685)) ([85057c0](https://github.com/crimera/piko/commit/85057c09a76f2efbd481f0ffb6454c40d067cfb7))
 * **Twitter:** improve more profile info ([#1687](https://github.com/crimera/piko/issues/1687)) ([46cb754](https://github.com/crimera/piko/commit/46cb754e48b66606f19804b610cd085d54f5d173))
 
@@ -1187,12 +1187,12 @@
 * **Instagram:** Fix app crash on comment media download([#1568](https://github.com/crimera/piko/issues/1568)) ([b3b01f7](https://github.com/crimera/piko/commit/b3b01f7f5a9f8f01b66a32299cec06a3748e23b3))
 * **Instagram:** Fix chat action bar function name ([1401808](https://github.com/crimera/piko/commit/140180878895841fc8437dc21a39ab7941f79540))
 * **Instagram:** Fix opening links ([ba9b4c4](https://github.com/crimera/piko/commit/ba9b4c43af6e4a42ce0654d11aa26a3d28496247))
-* **Instagram:** Fix Piko settings color issues ([f1f278a](https://github.com/crimera/piko/commit/f1f278a87665be59218dcc54af983b411802fe0f))
-* **Instagram:** match piko settings background to amoled patch ([#1543](https://github.com/crimera/piko/issues/1543)) ([56003dc](https://github.com/crimera/piko/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
-* **Instagram:** Match piko settings highlight to theme ([#1548](https://github.com/crimera/piko/issues/1548)) ([c428e7e](https://github.com/crimera/piko/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
+* **Instagram:** Fix Awt settings color issues ([f1f278a](https://github.com/crimera/piko/commit/f1f278a87665be59218dcc54af983b411802fe0f))
+* **Instagram:** match awt settings background to amoled patch ([#1543](https://github.com/crimera/piko/issues/1543)) ([56003dc](https://github.com/crimera/piko/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
+* **Instagram:** Match awt settings highlight to theme ([#1548](https://github.com/crimera/piko/issues/1548)) ([c428e7e](https://github.com/crimera/piko/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
 * **Instagram:** Match story mention dialog to Instagram theme ([#1554](https://github.com/crimera/piko/issues/1554)) ([08563ca](https://github.com/crimera/piko/commit/08563ca54d486585e5fc4bc7c432d6f5f19e6d28))
 * **instagram:** preserve settings fragment on recreation ([#1546](https://github.com/crimera/piko/issues/1546)) ([f57ddcc](https://github.com/crimera/piko/commit/f57ddcc555dd487f57d959e5adc625f0f15ed80c))
-* **instagram:** Refine piko settings title styling ([#1534](https://github.com/crimera/piko/issues/1534)) ([ce69be6](https://github.com/crimera/piko/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
+* **instagram:** Refine awt settings title styling ([#1534](https://github.com/crimera/piko/issues/1534)) ([ce69be6](https://github.com/crimera/piko/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
 * **Instagram:** Refresh localized download folder path ([#1537](https://github.com/crimera/piko/issues/1537)) ([72ce666](https://github.com/crimera/piko/commit/72ce66602c601a2e1b600367bd04430419dadc59))
 * **Instagram:** Restore and sync ghost action bar icons ([#1545](https://github.com/crimera/piko/issues/1545)) ([1240faf](https://github.com/crimera/piko/commit/1240faf55fa68867e9517bbd017e1cd1978cfa72))
 * **instagram:** restore native off switch colors ([#1533](https://github.com/crimera/piko/issues/1533)) ([71b0b00](https://github.com/crimera/piko/commit/71b0b007096756e1c801c14a1e8c21e2f7cada4a))
@@ -1212,13 +1212,13 @@
 
 * **Instagram:** Added `Filter stories` patch ([c62d02a](https://github.com/crimera/piko/commit/c62d02adf1f0160f8bc72c4eb4e521e06b89c0be))
 * **Instagram:** Added `Mark chat as read manually` patch ([1d267c8](https://github.com/crimera/piko/commit/1d267c8f67d1f7153e50a0166d327056e1643603))
-* **Instagram:** Added ability to remove Piko preference ([3e29d69](https://github.com/crimera/piko/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
+* **Instagram:** Added ability to remove Awt preference ([3e29d69](https://github.com/crimera/piko/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
 * **instagram:** Disable swipe to create ([#1539](https://github.com/crimera/piko/issues/1539)) ([eaea2e9](https://github.com/crimera/piko/commit/eaea2e9db2db929409247c4a8b0ec865f13e087b))
 * **Instagram:** Include debug option on thread long press ([c9df942](https://github.com/crimera/piko/commit/c9df9426377f62225c8ee63e0872563f99fd7d50))
 * **instagram:** Material You theme ([#1509](https://github.com/crimera/piko/issues/1509)) ([9d97f59](https://github.com/crimera/piko/commit/9d97f590cd17e79c66a39deeedcb12a2f9f510f8))
 * **Twitter - Native Downloader:** Add long-press to download all inline button ([f3d11e6](https://github.com/crimera/piko/commit/f3d11e653fd90176cdb2edc21d375447f63a4c39))
-* **Twitter:** Add piko settings to the app icon long-press shortcut ([#1412](https://github.com/crimera/piko/issues/1412)) ([2eb970b](https://github.com/crimera/piko/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
-* **Twitter:** Add Search Piko settings ([#1516](https://github.com/crimera/piko/issues/1516)) ([fed4f51](https://github.com/crimera/piko/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
+* **Twitter:** Add awt settings to the app icon long-press shortcut ([#1412](https://github.com/crimera/piko/issues/1412)) ([2eb970b](https://github.com/crimera/piko/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
+* **Twitter:** Add Search Awt settings ([#1516](https://github.com/crimera/piko/issues/1516)) ([fed4f51](https://github.com/crimera/piko/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
 * **Twitter:** Added `Custom share menu` patch ([23f0a32](https://github.com/crimera/piko/commit/23f0a3237b57eea75443062ade78fc3be093fb33))
 * **Twitter:** Added `External downloader` patch ([0e9a9f7](https://github.com/crimera/piko/commit/0e9a9f743364d1132d18d289a21e7e86c929f998))
 * **Twitter:** Added `More information on profile` patch ([1167728](https://github.com/crimera/piko/commit/116772873059fe2b66b0708524a89cd90acac6e1))
@@ -1233,7 +1233,7 @@
 * **Instagram:** Added inbox action bar customization ([7f0a219](https://github.com/crimera/piko/commit/7f0a219676976a8832744d889fe563129ea479bb))
 * **Instagram:** Added more flags to improve the user experience ([#1443](https://github.com/crimera/piko/issues/1443)) ([d4835d2](https://github.com/crimera/piko/commit/d4835d26a358136777c6beccf299ab2268ecf709))
 * **Instagram:** Added more story filters ([bab0fc6](https://github.com/crimera/piko/commit/bab0fc653d2ec9642ee608a0d57cd76380af944b))
-* **Instagram:** Adjust DM section position on piko settings ([4646c7d](https://github.com/crimera/piko/commit/4646c7d24823f31ab530d2b2b85bfe74bae41db3))
+* **Instagram:** Adjust DM section position on awt settings ([4646c7d](https://github.com/crimera/piko/commit/4646c7d24823f31ab530d2b2b85bfe74bae41db3))
 * **Instagram:** Enhance story mention dialog box ([8d77056](https://github.com/crimera/piko/commit/8d7705684809cfa279ca0b517cecfc0911bcc54a))
 * **Instagram:** Handle edge cases of comment button interaction ([fe847cb](https://github.com/crimera/piko/commit/fe847cbce8bc1fac1b324af9ac494b6d17a3ca19))
 * **Instagram:** Improve action bar icon selection options ([a3b2b73](https://github.com/crimera/piko/commit/a3b2b7338659a978adba480595f9e96fc2b0d21f))
@@ -1251,7 +1251,7 @@
 
 ### 🐛 Bug Fixes
 
-* **Instagram:** Match piko settings highlight to theme ([#1548](https://github.com/crimera/piko/issues/1548)) ([c428e7e](https://github.com/crimera/piko/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
+* **Instagram:** Match awt settings highlight to theme ([#1548](https://github.com/crimera/piko/issues/1548)) ([c428e7e](https://github.com/crimera/piko/commit/c428e7ea762cf2ec94e5e9a9f17ea207a976176f))
 * **Instagram:** Match story mention dialog to Instagram theme ([#1554](https://github.com/crimera/piko/issues/1554)) ([08563ca](https://github.com/crimera/piko/commit/08563ca54d486585e5fc4bc7c432d6f5f19e6d28))
 * **Instagram:** Restore and sync ghost action bar icons ([#1545](https://github.com/crimera/piko/issues/1545)) ([1240faf](https://github.com/crimera/piko/commit/1240faf55fa68867e9517bbd017e1cd1978cfa72))
 * **Twitter - Native Downloader:** Add missing downloadAll method and fix null checks ([ba9d036](https://github.com/crimera/piko/commit/ba9d036e7e01a2455e291504ec4984c9b94cda94))
@@ -1269,9 +1269,9 @@
 
 ### 🐛 Bug Fixes
 
-* **Instagram:** match piko settings background to amoled patch ([#1543](https://github.com/crimera/piko/issues/1543)) ([56003dc](https://github.com/crimera/piko/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
+* **Instagram:** match awt settings background to amoled patch ([#1543](https://github.com/crimera/piko/issues/1543)) ([56003dc](https://github.com/crimera/piko/commit/56003dc4b68e6969e208570c45b583bcf709ceb3))
 * **instagram:** preserve settings fragment on recreation ([#1546](https://github.com/crimera/piko/issues/1546)) ([f57ddcc](https://github.com/crimera/piko/commit/f57ddcc555dd487f57d959e5adc625f0f15ed80c))
-* **instagram:** Refine piko settings title styling ([#1534](https://github.com/crimera/piko/issues/1534)) ([ce69be6](https://github.com/crimera/piko/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
+* **instagram:** Refine awt settings title styling ([#1534](https://github.com/crimera/piko/issues/1534)) ([ce69be6](https://github.com/crimera/piko/commit/ce69be69e8aea7aee04bdf00db5a413bbb849b2f))
 * **Instagram:** Refresh localized download folder path ([#1537](https://github.com/crimera/piko/issues/1537)) ([72ce666](https://github.com/crimera/piko/commit/72ce66602c601a2e1b600367bd04430419dadc59))
 * **instagram:** restore native off switch colors ([#1533](https://github.com/crimera/piko/issues/1533)) ([71b0b00](https://github.com/crimera/piko/commit/71b0b007096756e1c801c14a1e8c21e2f7cada4a))
 * **Twitter:** Fix high resolution image url ([5d07767](https://github.com/crimera/piko/commit/5d07767458b387c85448801851ab4d2de01caf12))
@@ -1281,20 +1281,20 @@
 ### ✨ New Features
 
 * **instagram:** Disable swipe to create ([#1539](https://github.com/crimera/piko/issues/1539)) ([eaea2e9](https://github.com/crimera/piko/commit/eaea2e9db2db929409247c4a8b0ec865f13e087b))
-* **Twitter:** Add Search Piko settings ([#1516](https://github.com/crimera/piko/issues/1516)) ([fed4f51](https://github.com/crimera/piko/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
+* **Twitter:** Add Search Awt settings ([#1516](https://github.com/crimera/piko/issues/1516)) ([fed4f51](https://github.com/crimera/piko/commit/fed4f51e3b88b4f7349af8c13a3ea61ecebb4c7c))
 * **Twitter:** Added new download dialog box ([9fca347](https://github.com/crimera/piko/commit/9fca347fc14da4d95c8c8a1a74fc691f1481077a))
 
 ## [3.8.0-dev.4](https://github.com/crimera/piko/compare/v3.8.0-dev.3...v3.8.0-dev.4) (2026-07-12)
 
 ### 🐛 Bug Fixes
 
-* **Instagram:** Fix Piko settings color issues ([f1f278a](https://github.com/crimera/piko/commit/f1f278a87665be59218dcc54af983b411802fe0f))
+* **Instagram:** Fix Awt settings color issues ([f1f278a](https://github.com/crimera/piko/commit/f1f278a87665be59218dcc54af983b411802fe0f))
 
 ### ✨ New Features
 
 * **Instagram:** Added `Filter stories` patch ([c62d02a](https://github.com/crimera/piko/commit/c62d02adf1f0160f8bc72c4eb4e521e06b89c0be))
 * **Instagram:** Added `Mark chat as read manually` patch ([1d267c8](https://github.com/crimera/piko/commit/1d267c8f67d1f7153e50a0166d327056e1643603))
-* **Instagram:** Added ability to remove Piko preference ([3e29d69](https://github.com/crimera/piko/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
+* **Instagram:** Added ability to remove Awt preference ([3e29d69](https://github.com/crimera/piko/commit/3e29d69e0af53df4c0814bbd5e057ced196633c6))
 * **Instagram:** Include debug option on thread long press ([c9df942](https://github.com/crimera/piko/commit/c9df9426377f62225c8ee63e0872563f99fd7d50))
 
 ### 🚀 Updated App Support
@@ -1304,7 +1304,7 @@
 ### 🔧 Improvements
 
 * **Instagram:** Added more story filters ([bab0fc6](https://github.com/crimera/piko/commit/bab0fc653d2ec9642ee608a0d57cd76380af944b))
-* **Instagram:** Adjust DM section position on piko settings ([4646c7d](https://github.com/crimera/piko/commit/4646c7d24823f31ab530d2b2b85bfe74bae41db3))
+* **Instagram:** Adjust DM section position on awt settings ([4646c7d](https://github.com/crimera/piko/commit/4646c7d24823f31ab530d2b2b85bfe74bae41db3))
 * **Instagram:** Move DM long press button check to java ([b2e4e71](https://github.com/crimera/piko/commit/b2e4e71e1e64fdeb06e0130271e8366d2fc4d200))
 * **Instagram:** Remove unused preference ([232b4d6](https://github.com/crimera/piko/commit/232b4d6584750510088e4fe4e216534b8ce1ed86))
 * **Instagram:** Update download path handling and permissions ([#1500](https://github.com/crimera/piko/issues/1500)) ([76cdcb3](https://github.com/crimera/piko/commit/76cdcb3cfd62fa19cd79cdead1a3a2dd082585b2))
@@ -1321,7 +1321,7 @@
 
 ### ✨ New Features
 
-* **Twitter:** Add piko settings to the app icon long-press shortcut ([#1412](https://github.com/crimera/piko/issues/1412)) ([2eb970b](https://github.com/crimera/piko/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
+* **Twitter:** Add awt settings to the app icon long-press shortcut ([#1412](https://github.com/crimera/piko/issues/1412)) ([2eb970b](https://github.com/crimera/piko/commit/2eb970bfc7160256438fa854e5be0a0513c86877))
 * **Twitter:** Added `More information on profile` patch ([1167728](https://github.com/crimera/piko/commit/116772873059fe2b66b0708524a89cd90acac6e1))
 
 ### 🔧 Improvements
@@ -1388,14 +1388,14 @@
 ### 🔧 Improvements
 
 * **Instagram:** added flags to improve the experience and more stable ([#1348](https://github.com/crimera/piko/issues/1348)) ([a585d21](https://github.com/crimera/piko/commit/a585d21cdc811030c55a8c00c5053d33543a2916))
-* **Instagram:** Added icons to Piko settings ([4f4a070](https://github.com/crimera/piko/commit/4f4a07064fdaed0f29c0d3a8aef193783c48a411))
+* **Instagram:** Added icons to Awt settings ([4f4a070](https://github.com/crimera/piko/commit/4f4a07064fdaed0f29c0d3a8aef193783c48a411))
 * **Instagram:** Added missing dependencies ([8cced1e](https://github.com/crimera/piko/commit/8cced1e3f04ac880d44149a5f71aae97696a4017))
 * **Instagram:** Added patch info section on about ([a0394e8](https://github.com/crimera/piko/commit/a0394e863c6348bff7d7e3e84aef30cf554d122f))
 * **Instagram:** Improve discover user blocking ([6c99846](https://github.com/crimera/piko/commit/6c99846d0f5cd4231f915185e0e526b1f9b1b678))
 * **Instagram:** Improve flags to block `location consent` blok ([a4cf9b7](https://github.com/crimera/piko/commit/a4cf9b7aa1fc0466a645324a77b3e17fe0aadf2c))
 * **Instagram:** Improve hook flags logic ([9a1f1cd](https://github.com/crimera/piko/commit/9a1f1cd177f008a8872742354e48daa27d828709))
 * **Instagram:** invert ghost mode icons ([0af81ad](https://github.com/crimera/piko/commit/0af81ada0f252762e1cd774cec3a4fa71eaae54b))
-* **Instagram:** Make Piko settings multi page ([cb5ef6a](https://github.com/crimera/piko/commit/cb5ef6a1710316a33c0c35db27c037154d8f6372))
+* **Instagram:** Make Awt settings multi page ([cb5ef6a](https://github.com/crimera/piko/commit/cb5ef6a1710316a33c0c35db27c037154d8f6372))
 * **Instagram:** Move debug export experiment list into Developer option section ([2567ed5](https://github.com/crimera/piko/commit/2567ed5060f86236f3b883d5930083b15bc31cc0))
 * **Instagram:** Remove debug code ([7646088](https://github.com/crimera/piko/commit/764608824d033f8ab23cc35c19d25872c233d466))
 * **Instagram:** Remove user action bar support temporarily ([8173c82](https://github.com/crimera/piko/commit/8173c82a9af0d935a7838922dab7eab67a0a576f))
@@ -1508,9 +1508,9 @@
 ### 🔧 Improvements
 
 * **Instagram:** added flags to improve the experience and more stable ([#1348](https://github.com/crimera/piko/issues/1348)) ([a585d21](https://github.com/crimera/piko/commit/a585d21cdc811030c55a8c00c5053d33543a2916))
-* **Instagram:** Added icons to Piko settings ([4f4a070](https://github.com/crimera/piko/commit/4f4a07064fdaed0f29c0d3a8aef193783c48a411))
+* **Instagram:** Added icons to Awt settings ([4f4a070](https://github.com/crimera/piko/commit/4f4a07064fdaed0f29c0d3a8aef193783c48a411))
 * **Instagram:** Added patch info section on about ([a0394e8](https://github.com/crimera/piko/commit/a0394e863c6348bff7d7e3e84aef30cf554d122f))
-* **Instagram:** Make Piko settings multi page ([cb5ef6a](https://github.com/crimera/piko/commit/cb5ef6a1710316a33c0c35db27c037154d8f6372))
+* **Instagram:** Make Awt settings multi page ([cb5ef6a](https://github.com/crimera/piko/commit/cb5ef6a1710316a33c0c35db27c037154d8f6372))
 * **Twitter:** Update Tweet user id extraction fingerprint ([2f573d2](https://github.com/crimera/piko/commit/2f573d2025e44728d95332b6e1bb0fea40a06aa4))
 
 ## [3.6.0](https://github.com/crimera/piko/compare/v3.5.0...v3.6.0) (2026-06-18)
@@ -1526,7 +1526,7 @@
 
 ### 🚀 Updated App Support
 
-* **Twitter:** Add `11.99.0-release.1` to supported versions list (Requires Piko-Shim) ([#1367](https://github.com/crimera/piko/issues/1367)) ([ee10064](https://github.com/crimera/piko/commit/ee100646a0e8bea517252c76d19c325d43c88301))
+* **Twitter:** Add `11.99.0-release.1` to supported versions list (Requires Awt-Shim) ([#1367](https://github.com/crimera/piko/issues/1367)) ([ee10064](https://github.com/crimera/piko/commit/ee100646a0e8bea517252c76d19c325d43c88301))
 
 ### 🔧 Improvements
 
@@ -1589,7 +1589,7 @@
 * **Instagram:** Added image variants download option ([5aca4b4](https://github.com/crimera/piko/commit/5aca4b44efe461bebaea397316649f6c5897f076))
 * **Instagram:** Move profile more options button to action bar ([068ba4f](https://github.com/crimera/piko/commit/068ba4f5e32073ab52c983910b7a776d3d6bfd0c))
 * **Instagram:** Move settings launcher to main feed action bar ([3ed88ed](https://github.com/crimera/piko/commit/3ed88ede87285c20532dc174b3cf4e4774dedc18))
-* **Instagram:** Refine Piko settings UI ([#1310](https://github.com/crimera/piko/issues/1310)) ([dd76ee4](https://github.com/crimera/piko/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
+* **Instagram:** Refine Awt settings UI ([#1310](https://github.com/crimera/piko/issues/1310)) ([dd76ee4](https://github.com/crimera/piko/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
 * **Translations-Instagram:** Added Spanish translation ([#1288](https://github.com/crimera/piko/issues/1288)) ([023eef8](https://github.com/crimera/piko/commit/023eef8339afa9069173381da280052e72e59f73))
 * **Twitter:** Add compatibility check patch to handle exceptions ([d46c253](https://github.com/crimera/piko/commit/d46c25343c6dc73a60379e8283c8a067c2075799))
 
@@ -1615,7 +1615,7 @@
 * **Instagram:** Improve `Hide reshare button` patch fingerprint ([d22764b](https://github.com/crimera/piko/commit/d22764b6ae59c507298dbd0fb683be0ffac3fe88))
 * **Instagram:** Improve profile info entity extractor ([1eae27e](https://github.com/crimera/piko/commit/1eae27e77dad179b88f1279ca6599b9d576dce33))
 * **Instagram:** Improve View story mentions logic ([3a38492](https://github.com/crimera/piko/commit/3a3849259bea1d247f6cbfdb5be072ffe92ec9ac))
-* **Instagram:** Make piko settings on action bar optional ([3b45655](https://github.com/crimera/piko/commit/3b456555e59c76b98f974f7e58a5c31a97658774))
+* **Instagram:** Make awt settings on action bar optional ([3b45655](https://github.com/crimera/piko/commit/3b456555e59c76b98f974f7e58a5c31a97658774))
 * **Instagram:** Moved ghost mode toggle to DM action bar ([1d0c9b5](https://github.com/crimera/piko/commit/1d0c9b5fe4e96369ef80b4575f72fce7b14ad0c6))
 * **Instagram:** Override flags that trigger new overflow menu ([1b645bb](https://github.com/crimera/piko/commit/1b645bb13da653895a60a3c73079960d4d4db7ec))
 * **Instagram:** Potential fix for location blok due to analytics ([87c6195](https://github.com/crimera/piko/commit/87c61958b0c103a81b9a4f95bf18c1979c0a37a7))
@@ -1630,7 +1630,7 @@
 * **Twitter:** Added `Priority tab` to hide notification tabs list ([c83f603](https://github.com/crimera/piko/commit/c83f603da2e14b9f864900f2d95a86cd985dc730))
 * **Twitter:** Added version check for various patches ([6db66b5](https://github.com/crimera/piko/commit/6db66b523b4623762fb5c645343e5b7493024101))
 * **Twitter:** Improve share menu enum logic for newer versions ([0cd809e](https://github.com/crimera/piko/commit/0cd809e979ccdca8c4ddcd195dc9831ac2c1a983))
-* **Twitter:** Make Force Pip option independent of undo option in piko settings ([074489f](https://github.com/crimera/piko/commit/074489f2d27a7a1e3d120b9f956d4e96a4169ee4))
+* **Twitter:** Make Force Pip option independent of undo option in awt settings ([074489f](https://github.com/crimera/piko/commit/074489f2d27a7a1e3d120b9f956d4e96a4169ee4))
 * **Twitter:** Make unofficial instance links optional for deeplinks ([6dea26b](https://github.com/crimera/piko/commit/6dea26b5435e68068d71adc5d727eefda8273a91))
 * **Twitter:** replace dynamic string composition with explicit string resources ([#845](https://github.com/crimera/piko/issues/845)) ([49a7c01](https://github.com/crimera/piko/commit/49a7c018c389135fa8a8e3368514b4e339450522))
 * **Twitter:** Update `Customize profile tabs` fingerprint ([da9333e](https://github.com/crimera/piko/commit/da9333e2bf2dfaacbe21ee48a6d5c498869c7218))
@@ -1665,7 +1665,7 @@
 
 * **Instagram:** Add `Clone` patch ([#1295](https://github.com/crimera/piko/issues/1295)) ([a6b1fe1](https://github.com/crimera/piko/commit/a6b1fe11f817b94c7c6e6d70b56df9394335d5f8))
 * **Instagram:** Added `External downloader` patch ([5d00775](https://github.com/crimera/piko/commit/5d007751b6ed834c1bc65ef478fa47187b8c7cdd))
-* **Instagram:** Refine Piko settings UI ([#1310](https://github.com/crimera/piko/issues/1310)) ([dd76ee4](https://github.com/crimera/piko/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
+* **Instagram:** Refine Awt settings UI ([#1310](https://github.com/crimera/piko/issues/1310)) ([dd76ee4](https://github.com/crimera/piko/commit/dd76ee4f1a31c8c7810f3247e92ee31894e72f6a))
 * **Translations-Instagram:** Added Spanish translation ([#1288](https://github.com/crimera/piko/issues/1288)) ([023eef8](https://github.com/crimera/piko/commit/023eef8339afa9069173381da280052e72e59f73))
 * **Twitter:** Add compatibility check patch to handle exceptions ([d46c253](https://github.com/crimera/piko/commit/d46c25343c6dc73a60379e8283c8a067c2075799))
 
@@ -1740,7 +1740,7 @@
 
 * **Instagram:** Added download story options to self stories ([9382ee0](https://github.com/crimera/piko/commit/9382ee050fe39457ec58b6efa4a9103f2cf0a946))
 * **Instagram:** Added option to switch profile action between action bar and as button ([bf4f4d5](https://github.com/crimera/piko/commit/bf4f4d5498da66ead398b79bb970702325213482))
-* **Instagram:** Make piko settings on action bar optional ([3b45655](https://github.com/crimera/piko/commit/3b456555e59c76b98f974f7e58a5c31a97658774))
+* **Instagram:** Make awt settings on action bar optional ([3b45655](https://github.com/crimera/piko/commit/3b456555e59c76b98f974f7e58a5c31a97658774))
 * **Instagram:** Moved ghost mode toggle to DM action bar ([1d0c9b5](https://github.com/crimera/piko/commit/1d0c9b5fe4e96369ef80b4575f72fce7b14ad0c6))
 * **Instagram:** Potential fix for location blok due to analytics ([87c6195](https://github.com/crimera/piko/commit/87c61958b0c103a81b9a4f95bf18c1979c0a37a7))
 * **Twitter:** Added `Priority tab` to hide notification tabs list ([c83f603](https://github.com/crimera/piko/commit/c83f603da2e14b9f864900f2d95a86cd985dc730))
@@ -1844,7 +1844,7 @@
 * **Instagram:** keep one navigation button visible ([dd5dce8](https://github.com/crimera/piko/commit/dd5dce8f8974df4e47ff3eb32057ca8ca0cd9c25))
 * **Instagram:** Override flags to fix certain issues ([07c6313](https://github.com/crimera/piko/commit/07c63138482048709618c172bfd8a7a3843d30f2))
 * **Instagram:** Potential fix for A16-A17 ([b3352b4](https://github.com/crimera/piko/commit/b3352b481c0af9c59f587bceb0e1b6f50472437f))
-* **Twitter - Import/Export login token:** Add import menu to piko settings as a workaround for redesigned login screen ([dad823c](https://github.com/crimera/piko/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
+* **Twitter - Import/Export login token:** Add import menu to awt settings as a workaround for redesigned login screen ([dad823c](https://github.com/crimera/piko/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
 
 
 ### Features
@@ -1976,7 +1976,7 @@
 * fallback instruction address ([95f69e3](https://github.com/crimera/piko/commit/95f69e3fef4774072bb82b2717d9ba44ed8e0487))
 * **Instagram:** download all carousel media ([2f93f78](https://github.com/crimera/piko/commit/2f93f786eb25b6186b0a2657b6eb75b52a405f33))
 * **Instagram:** keep one navigation button visible ([dd5dce8](https://github.com/crimera/piko/commit/dd5dce8f8974df4e47ff3eb32057ca8ca0cd9c25))
-* **Twitter - Import/Export login token:** Add import menu to piko settings as a workaround for redesigned login screen ([dad823c](https://github.com/crimera/piko/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
+* **Twitter - Import/Export login token:** Add import menu to awt settings as a workaround for redesigned login screen ([dad823c](https://github.com/crimera/piko/commit/dad823c3d4a7fa88d5e98cc8b24146fcfb5c5758))
 
 
 ### Features
@@ -2010,10 +2010,10 @@
 * **Instagram:** Fix fingerprints broken on 423 ([3859ba4](https://github.com/crimera/piko/commit/3859ba4da669dfb0dbfd23ab66fa3c9354f84199))
 * **Instagram:** Fix Friendship status fingerprints broken on 423 ([0f42aaf](https://github.com/crimera/piko/commit/0f42aaf4e6d818db4a40b83ace1bbe6ca126abf9))
 * **Instagram:** Fix friendship status method fingerprint ([276048e](https://github.com/crimera/piko/commit/276048e0e6ffc31d531096748b1243d1c7500aca))
-* **Instagram:** fix padding issue in Piko settings button ([4855f38](https://github.com/crimera/piko/commit/4855f38410ed6999e3d501cb0301efee4490a148))
-* **Instagram:** Fix piko settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
-* **Instagram:** fix Piko settings issues ([d3369f2](https://github.com/crimera/piko/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
-* **Instagram:** fix piko settings nav bar clipping ([0b94452](https://github.com/crimera/piko/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
+* **Instagram:** fix padding issue in Awt settings button ([4855f38](https://github.com/crimera/piko/commit/4855f38410ed6999e3d501cb0301efee4490a148))
+* **Instagram:** Fix awt settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
+* **Instagram:** fix Awt settings issues ([d3369f2](https://github.com/crimera/piko/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
+* **Instagram:** fix awt settings nav bar clipping ([0b94452](https://github.com/crimera/piko/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
 * **Instagram:** Fix story button method fingerprint ([ba7b16d](https://github.com/crimera/piko/commit/ba7b16d599eabb43400f6cb5a8162a8f056c29b6))
 * **Instagram:** Fixed sanitize post and reels urls ([61257fb](https://github.com/crimera/piko/commit/61257fbd601e69b3c507b5da22b687439890c873))
 * **Instagram:** Follow indicator handling ([ad3ed3f](https://github.com/crimera/piko/commit/ad3ed3fd0576c17cf409a69c2703ed0484c0fac0))
@@ -2071,9 +2071,9 @@
 ### Bug Fixes
 
 * **Instagram:** fix `Improve image viewing` patch ([5655756](https://github.com/crimera/piko/commit/5655756526bbad2588db7fefcb0641d1470aa251))
-* **Instagram:** fix padding issue in Piko settings button ([4855f38](https://github.com/crimera/piko/commit/4855f38410ed6999e3d501cb0301efee4490a148))
-* **Instagram:** fix Piko settings issues ([d3369f2](https://github.com/crimera/piko/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
-* **Instagram:** fix piko settings nav bar clipping ([0b94452](https://github.com/crimera/piko/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
+* **Instagram:** fix padding issue in Awt settings button ([4855f38](https://github.com/crimera/piko/commit/4855f38410ed6999e3d501cb0301efee4490a148))
+* **Instagram:** fix Awt settings issues ([d3369f2](https://github.com/crimera/piko/commit/d3369f2aa594737bbf73ef86bb8b3001e17c4327))
+* **Instagram:** fix awt settings nav bar clipping ([0b94452](https://github.com/crimera/piko/commit/0b94452310b8d3630142d8b9b3715b4bbea012d9))
 
 
 ### Features
@@ -2116,7 +2116,7 @@
 * **Instagram:** Fix fingerprints broken on 423 ([3859ba4](https://github.com/crimera/piko/commit/3859ba4da669dfb0dbfd23ab66fa3c9354f84199))
 * **Instagram:** Fix Friendship status fingerprints broken on 423 ([0f42aaf](https://github.com/crimera/piko/commit/0f42aaf4e6d818db4a40b83ace1bbe6ca126abf9))
 * **Instagram:** Fix friendship status method fingerprint ([276048e](https://github.com/crimera/piko/commit/276048e0e6ffc31d531096748b1243d1c7500aca))
-* **Instagram:** Fix piko settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
+* **Instagram:** Fix awt settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
 * **Instagram:** Fix story button method fingerprint ([ba7b16d](https://github.com/crimera/piko/commit/ba7b16d599eabb43400f6cb5a8162a8f056c29b6))
 * **Instagram:** Fixed sanitize post and reels urls ([61257fb](https://github.com/crimera/piko/commit/61257fbd601e69b3c507b5da22b687439890c873))
 * **Instagram:** Follow indicator handling ([ad3ed3f](https://github.com/crimera/piko/commit/ad3ed3fd0576c17cf409a69c2703ed0484c0fac0))
@@ -2185,7 +2185,7 @@
 * **Instagram:** Fix fingerprints broken on 423 ([3859ba4](https://github.com/crimera/piko/commit/3859ba4da669dfb0dbfd23ab66fa3c9354f84199))
 * **Instagram:** Fix Friendship status fingerprints broken on 423 ([0f42aaf](https://github.com/crimera/piko/commit/0f42aaf4e6d818db4a40b83ace1bbe6ca126abf9))
 * **Instagram:** Fix friendship status method fingerprint ([276048e](https://github.com/crimera/piko/commit/276048e0e6ffc31d531096748b1243d1c7500aca))
-* **Instagram:** Fix piko settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
+* **Instagram:** Fix awt settings action bar ([1712146](https://github.com/crimera/piko/commit/17121469f71b0c71953f70b2cf6dc09ab920b78a))
 * **Instagram:** Fix story button method fingerprint ([ba7b16d](https://github.com/crimera/piko/commit/ba7b16d599eabb43400f6cb5a8162a8f056c29b6))
 * **Instagram:** Follow indicator handling ([ad3ed3f](https://github.com/crimera/piko/commit/ad3ed3fd0576c17cf409a69c2703ed0484c0fac0))
 
@@ -2392,7 +2392,7 @@
 
 * **Custom font:** Fix crash on Android 8 by restricting the functionality to Android 9+ ([477f634](https://github.com/crimera/piko/commit/477f6345a062bc3605dd343d290734074483a61c))
 * **Custom font:** Fix crash on Android 8 by restricting the functionality to Android 9+ ([000539b](https://github.com/crimera/piko/commit/000539b8b67d97b83efdf4eab2d311e9b492f167))
-* **Dynamic color:** Reflect piko's original changes ([0c91cad](https://github.com/crimera/piko/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
+* **Dynamic color:** Reflect awt's original changes ([0c91cad](https://github.com/crimera/piko/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
 * **entity:** swap username and display name method mappings in TweetEntityPatch ([b946ebf](https://github.com/crimera/piko/commit/b946ebff8b59081ad3c53eb9ed108c3695dfe5fa))
 * some patch has compatibleWith and dependsOn in execute block ([dd25a6c](https://github.com/crimera/piko/commit/dd25a6cd43354b8d6f4cb60d7798c539b06a6e50))
 * **Twitter:** `Disunify xchat system` patch ([ad767b1](https://github.com/crimera/piko/commit/ad767b10afcc01c83450988816a60cf32d8fc195))
@@ -2502,7 +2502,7 @@
 * **Dynamic color:** Do not get elements repeatedly in XML operation ([3417fe1](https://github.com/crimera/piko/commit/3417fe15d2d558b042a44a06e9c21a1523d12540))
 * **Twitter:** Correct ja strings replacement in BBT patch ([ee200a5](https://github.com/crimera/piko/commit/ee200a5c5ae14e1a935903b5de9e7ecf7f03e0f9))
 * **Twitter:** fix `Remove promoted trends` ([0e1d4ed](https://github.com/crimera/piko/commit/0e1d4ed2ac090451172f2bed985310061b987428))
-* **Twitter:** handle piko resources programmatically ([3cc0f07](https://github.com/crimera/piko/commit/3cc0f0715c6ad62c14d6cd13e91f0965886e1534))
+* **Twitter:** handle awt resources programmatically ([3cc0f07](https://github.com/crimera/piko/commit/3cc0f0715c6ad62c14d6cd13e91f0965886e1534))
 * **Twitter:** potential fix for resource compilation failing in manager ([fa0dfac](https://github.com/crimera/piko/commit/fa0dfac2b959ba9a958bb458cc4572f28ff94902))
 * **Twitter:** refactor `Bring back twitter` patch ([f24cb72](https://github.com/crimera/piko/commit/f24cb72309f648493b209fffb1e7d19bd5c705f6))
 * **Twitter:** refactor fingerprint for tweet short text ([062aeb3](https://github.com/crimera/piko/commit/062aeb3b4902185a041b73689bad56e8636b951b))
@@ -2736,7 +2736,7 @@
 
 ### Bug Fixes
 
-* **Dynamic color:** Reflect piko's original changes ([0c91cad](https://github.com/crimera/piko/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
+* **Dynamic color:** Reflect awt's original changes ([0c91cad](https://github.com/crimera/piko/commit/0c91cad6d4112a02735edc5776a136e9f7c88271))
 * **Twitter:** fix `Enable force HD videos` patch ([23f2859](https://github.com/crimera/piko/commit/23f285974c8c12a117b81c794a64e94e6f33e531))
 * **Twitter:** Update `extensions` hook ([bf20765](https://github.com/crimera/piko/commit/bf2076592f49c11337acedf0d90e8a9d2d8d4ba4))
 
@@ -2784,7 +2784,7 @@
 
 * **Twitter:** Correct ja strings replacement in BBT patch ([ee200a5](https://github.com/crimera/piko/commit/ee200a5c5ae14e1a935903b5de9e7ecf7f03e0f9))
 * **Twitter:** fix `Remove promoted trends` ([0e1d4ed](https://github.com/crimera/piko/commit/0e1d4ed2ac090451172f2bed985310061b987428))
-* **Twitter:** handle piko resources programmatically ([3cc0f07](https://github.com/crimera/piko/commit/3cc0f0715c6ad62c14d6cd13e91f0965886e1534))
+* **Twitter:** handle awt resources programmatically ([3cc0f07](https://github.com/crimera/piko/commit/3cc0f0715c6ad62c14d6cd13e91f0965886e1534))
 * **Twitter:** refactor `Bring back twitter` patch ([f24cb72](https://github.com/crimera/piko/commit/f24cb72309f648493b209fffb1e7d19bd5c705f6))
 * **Twitter:** remove old comments ([1655283](https://github.com/crimera/piko/commit/165528374dadeab472a5f7d28bc60be12a09bbe0))
 

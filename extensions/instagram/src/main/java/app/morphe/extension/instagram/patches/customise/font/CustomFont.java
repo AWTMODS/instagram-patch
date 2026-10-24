@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -243,10 +243,10 @@ public class CustomFont {
     }
 
     /**
-     * The font for a view piko built itself. Those are never app content, so unlike
+     * The font for a view awt built itself. Those are never app content, so unlike
      * {@link #assign(Typeface)} this asks no questions about the caller.
      */
-    static Typeface forPikoView(Typeface typeface) {
+    static Typeface forAwtView(Typeface typeface) {
         if (!active) {
             return typeface;
         }

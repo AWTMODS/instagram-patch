@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -50,7 +50,7 @@ val instantsDownloadPatch =
                 enableSettings("instantsDownload")
             }.onFailure { error ->
                 println(
-                    "[piko] Save Instants: DISABLED for this build — could not resolve the " +
+                    "[awt] Save Instants: DISABLED for this build — could not resolve the " +
                         "quicksnap item: ${error.message}",
                 )
             }

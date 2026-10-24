@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -107,7 +107,7 @@ public class Helper {
 
     public Preference categoryPreference(String title, String summary, String setting) {
         ButtonPref preference = buttonPreference(title, summary, setting);
-        // Among rows with a chevron (>), only top-level Piko categories get a pressed highlight.
+        // Among rows with a chevron (>), only top-level Awt categories get a pressed highlight.
         // Other chevron rows keep the chevron without a pressed highlight.
         preference.setPressedHighlightEnabled(true);
         return preference;

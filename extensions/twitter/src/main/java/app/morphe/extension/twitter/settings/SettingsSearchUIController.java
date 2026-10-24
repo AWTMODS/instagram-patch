@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -96,7 +96,7 @@ public final class SettingsSearchUIController {
                 || settingsSearchToolbar == null) {
             return;
         }
-        settingsSearchToolbar.setTitle(str("piko_title_settings"));
+        settingsSearchToolbar.setTitle(str("awt_title_settings"));
         settingsSearchToolbar.setNavigationOnClickListener(view -> {
             Activity owner = settingsSearchStateOwner.current();
             if (owner != null) {
@@ -282,7 +282,7 @@ public final class SettingsSearchUIController {
         label.setSingleLine(true);
         label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         label.setTextColor(SettingsSearchColors.current(context).searchHintColor);
-        label.setText(str("piko_settings_search_hint"));
+        label.setText(str("awt_settings_search_hint"));
         label.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -332,7 +332,7 @@ public final class SettingsSearchUIController {
         }
 
         if (settingsSearchEmptyTitle != null && showNoResults) {
-            settingsSearchEmptyTitle.setText(str("piko_settings_search_no_results",query));
+            settingsSearchEmptyTitle.setText(str("awt_settings_search_no_results",query));
         }
     }
 
@@ -396,7 +396,7 @@ public final class SettingsSearchUIController {
             settingsSearchEntryBar.setVisibility(View.VISIBLE);
         }
         if (searchToolbar != null) {
-            searchToolbar.setTitle(str("piko_title_settings"));
+            searchToolbar.setTitle(str("awt_title_settings"));
             searchToolbar.setNavigationOnClickListener(view -> activity.onBackPressed());
         }
         setContentState("", true, false);
@@ -449,7 +449,7 @@ public final class SettingsSearchUIController {
                             return proxy == (args == null ? null : args[0]);
                         }
                         if ("toString".equals(methodName) && parameterCount == 0) {
-                            return "PikoSettingsSearchBackCallback";
+                            return "AwtSettingsSearchBackCallback";
                         }
                         if ("onBackInvoked".equals(methodName)
                                 && settingsSearchStateOwner.current() == activity) {
@@ -509,7 +509,7 @@ public final class SettingsSearchUIController {
         toolbarSearchInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         toolbarSearchInput.setTextColor(SettingsSearchColors.current(activity).searchTextColor);
         toolbarSearchInput.setHintTextColor(SettingsSearchColors.current(activity).searchHintColor);
-        toolbarSearchInput.setHint(str("piko_settings_search_hint"));
+        toolbarSearchInput.setHint(str("awt_settings_search_hint"));
         toolbarSearchInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         toolbarSearchInput.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         toolbarSearchInput.setBackgroundColor(Color.TRANSPARENT);
@@ -537,7 +537,7 @@ public final class SettingsSearchUIController {
         );
         toolbarSearchClear.setColorFilter(TWITTER_BLUE);
         toolbarSearchClear.setScaleType(ImageView.ScaleType.CENTER);
-        toolbarSearchClear.setContentDescription(str("piko_settings_search_clear"));
+        toolbarSearchClear.setContentDescription(str("awt_settings_search_clear"));
         toolbarSearchClear.setClickable(true);
         toolbarSearchClear.setFocusable(true);
         toolbarSearchClear.setVisibility(View.GONE);

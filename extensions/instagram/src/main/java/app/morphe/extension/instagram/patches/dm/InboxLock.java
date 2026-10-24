@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -44,7 +44,7 @@ import java.util.WeakHashMap;
 import app.morphe.extension.instagram.constants.UI;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
 import app.morphe.extension.instagram.utils.Pref;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
@@ -58,7 +58,7 @@ public final class InboxLock {
     // A chat opened from a notification skips the inbox, so its own screen needs the same cover.
     private static final String THREAD_ID = "thread_view_root";
     private static final String THREAD_CONTAINER_ID = "thread_fragment_container";
-    private static final String COVER_TAG = "piko_inbox_lock_cover";
+    private static final String COVER_TAG = "awt_inbox_lock_cover";
     private static final String MESSAGE_CHANNEL = "ig_direct";
 
     private static boolean initialized;
@@ -229,7 +229,7 @@ public final class InboxLock {
         column.addView(lock, new LinearLayout.LayoutParams(Dim.dp48 * 2, Dim.dp48 * 2));
 
         TextView unlock = new TextView(activity);
-        unlock.setText(str("piko_inbox_lock_unlock"));
+        unlock.setText(str("awt_inbox_lock_unlock"));
         unlock.setTextColor(UI.getThemedColour("igds_color_primary_text"));
         unlock.setTextSize(16);
         unlock.setGravity(Gravity.CENTER);
@@ -281,14 +281,14 @@ public final class InboxLock {
         KeyguardManager keyguard = (KeyguardManager) activity.getSystemService(Activity.KEYGUARD_SERVICE);
         // Without a screen lock there is nothing to check against, and locking would only trap the user.
         if (Build.VERSION.SDK_INT < 29 || keyguard == null || !keyguard.isDeviceSecure()) {
-            PikoUtils.toast(str("piko_inbox_lock_no_lock"));
+            AwtUtils.toast(str("awt_inbox_lock_no_lock"));
             unlock();
             if (afterUnlock != null) afterUnlock.run();
             return;
         }
 
         BiometricPrompt.Builder builder = new BiometricPrompt.Builder(activity)
-                .setTitle(str("piko_inbox_lock_prompt"));
+                .setTitle(str("awt_inbox_lock_prompt"));
         if (Build.VERSION.SDK_INT >= 30) {
             builder.setAllowedAuthenticators(
                     BiometricManager.Authenticators.BIOMETRIC_STRONG
@@ -338,8 +338,8 @@ public final class InboxLock {
                     .setColor(original.color)
                     .setContentTitle(context.getApplicationInfo().loadLabel(context.getPackageManager()))
                     .setContentText(SavedMessagesHook.NOTIFICATION_CHANNEL_ID.equals(channel)
-                            ? String.format(str("piko_deleted_a_message"), str("piko_someone"))
-                            : str("piko_inbox_lock_notification"))
+                            ? String.format(str("awt_deleted_a_message"), str("awt_someone"))
+                            : str("awt_inbox_lock_notification"))
                     .setContentIntent(original.contentIntent)
                     .setDeleteIntent(original.deleteIntent)
                     .setWhen(original.when)

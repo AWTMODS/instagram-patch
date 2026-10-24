@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static app.morphe.extension.shared.StringRef.str;
 import app.morphe.extension.shared.Utils;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.crimera.ObjectBrowser;
 
 import app.morphe.extension.twitter.patches.nativeFeatures.downloader.NativeDownloader;
@@ -50,38 +50,38 @@ public class BottomSheetBuilder {
             actions.add(new BottomSheetAction<>("ic_vector_compose_dm", str(itemKey), t -> shareToDM(context, t)));
         }
 
-        itemKey = "piko_share_image_instagram_stories";
+        itemKey = "awt_share_image_instagram_stories";
         if(!itemsToHide.contains(itemKey)) {
             actions.add(new BottomSheetAction<>("ic_vector_logo_instagram", str(itemKey), t -> ShareImageHandler.shareAsImage(context, tweetObject, 1)));
         }
 
-        itemKey = "piko_pref_external_downloader_text";
+        itemKey = "awt_pref_external_downloader_text";
         if(Pref.enableExternalDownloader() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_incoming",str(itemKey),t -> ExternalDownloader.sendToExternalDownloader(tweetObject)));
         }
 
-        itemKey = "piko_title_native_downloader";
+        itemKey = "awt_title_native_downloader";
         if(Pref.enableNativeDownloader() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_incoming",str(itemKey),t -> NativeDownloader.downloader(context, tweetObject)));
         }
 
-        itemKey = "piko_title_native_translator";
+        itemKey = "awt_title_native_translator";
         if(Pref.enableNativeTranslator() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_sparkle",str(itemKey),t -> NativeTranslator.translate(context, tweetObject)));
         }
 
-        itemKey = "piko_title_native_reader_mode";
+        itemKey = "awt_title_native_reader_mode";
         if(Pref.enableNativeReaderMode() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_book_stroke_on",str(itemKey),t -> ReaderModeUtils.launchReaderMode(context, tweetObject)));
         }
 
-        itemKey = "piko_share_image_title";
+        itemKey = "awt_share_image_title";
         if(Pref.enableShareImage() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_share",str(itemKey),t -> ShareImageHandler.shareAsImage(context, tweetObject,0)));
         }
 
-        itemKey = "piko_debug";
-        if(Pref.pikoDebug() && !itemsToHide.contains(itemKey)){
+        itemKey = "awt_debug";
+        if(Pref.awtDebug() && !itemsToHide.contains(itemKey)){
             actions.add(new BottomSheetAction<>("ic_vector_flask_stroke",str(itemKey),t -> ObjectBrowser.browseObject(context, tweet)));
         }
 
@@ -108,7 +108,7 @@ public class BottomSheetBuilder {
                     null   // onDismiss
             );
         } catch (java.lang.Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
@@ -128,7 +128,7 @@ public class BottomSheetBuilder {
             Utils.showToastShort(link);
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             Utils.showToastShort(e.getMessage());
         }
     }
@@ -143,7 +143,7 @@ public class BottomSheetBuilder {
             ctx.startActivity(Intent.createChooser(intent,str("room_settings_system_share_via")));
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
     }
@@ -162,7 +162,7 @@ public class BottomSheetBuilder {
             ctx.startActivity(intent);
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
     }

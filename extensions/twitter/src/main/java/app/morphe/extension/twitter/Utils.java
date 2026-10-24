@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -41,14 +41,14 @@ import app.morphe.extension.crimera.settings.BooleanSetting;
 import app.morphe.extension.crimera.settings.StringSetting;
 import app.morphe.extension.twitter.settings.Settings;
 import app.morphe.extension.shared.ResourceUtils;
-import app.morphe.extension.shared.settings.preference.PikoSharedPrefCategory;
+import app.morphe.extension.shared.settings.preference.AwtSharedPrefCategory;
 
 @SuppressWarnings("unused")
 public class Utils {
     @SuppressLint("StaticFieldLeak")
     private static final Context ctx = app.morphe.extension.shared.Utils.getContext();
-    private static final PikoSharedPrefCategory sp = new PikoSharedPrefCategory(Settings.SHARED_PREF_NAME);
-    private static final PikoSharedPrefCategory defsp = new PikoSharedPrefCategory(ctx.getPackageName() + "_preferences");
+    private static final AwtSharedPrefCategory sp = new AwtSharedPrefCategory(Settings.SHARED_PREF_NAME);
+    private static final AwtSharedPrefCategory defsp = new AwtSharedPrefCategory(ctx.getPackageName() + "_preferences");
     private static final Pattern INVALID_FILENAME_CHARACTER = Pattern.compile("[\\\\/:*?\"<>|\\p{Cntrl}]");
     private static final Pattern TRAILING_DOT_OR_SPACE = Pattern.compile("[. ]+$");
 
@@ -97,7 +97,7 @@ public class Utils {
             }
 
         } catch (Exception e) {
-            app.morphe.extension.crimera.PikoUtils.logger(e.toString());
+            app.morphe.extension.crimera.AwtUtils.logger(e.toString());
         }
         return false;
     }
@@ -150,11 +150,11 @@ public class Utils {
         LinearLayout ln = new LinearLayout(context);
         ln.setOrientation(LinearLayout.VERTICAL);
 
-        String content = flag ? "piko_title_feature_flags" : "notification_settings_preferences_category";
+        String content = flag ? "awt_title_feature_flags" : "notification_settings_preferences_category";
 
-        dialog.setTitle(str("piko_dialog_delete_title"));
+        dialog.setTitle(str("awt_dialog_delete_title"));
 
-        dialog.setMessage(str("piko_dialog_delete_message", str(content)));
+        dialog.setMessage(str("awt_dialog_delete_message", str(content)));
         dialog.setPositiveButton(str("ok"), (dialogInterface, i) -> {
             boolean success = false;
             if (flag) {
@@ -264,7 +264,7 @@ public class Utils {
                     }
                 }
             } catch (Exception e) {
-                app.morphe.extension.crimera.PikoUtils.logger(e);
+                app.morphe.extension.crimera.AwtUtils.logger(e);
             }
 
             if (success) {
@@ -362,7 +362,7 @@ public class Utils {
     }
 
     private static void toast(String msg){
-        app.morphe.extension.crimera.PikoUtils.toast(msg);
+        app.morphe.extension.crimera.AwtUtils.toast(msg);
     }
 
 }

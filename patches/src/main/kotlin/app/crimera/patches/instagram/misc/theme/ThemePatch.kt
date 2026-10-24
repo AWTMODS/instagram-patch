@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -19,7 +19,7 @@ val themePatch =
     resourcePatch(
         name = "Theme",
         description =
-            "Adds Material You and AMOLED controls to Piko settings " +
+            "Adds Material You and AMOLED controls to Awt settings " +
                 "on Android 12 and later. On Android 8–11, it applies a fixed " +
                 "Material You-style theme or an optional AMOLED theme.",
         default = true,
@@ -33,7 +33,7 @@ val themePatch =
             description =
                 "Use a fixed pure-black AMOLED theme instead of the fixed Material " +
                     "You-style theme on Android 8–11. On Android 12 and later, use " +
-                    "the AMOLED control in Piko settings.",
+                    "the AMOLED control in Awt settings.",
         )
 
         var bytecodePatchContext: BytecodePatchContext? = null

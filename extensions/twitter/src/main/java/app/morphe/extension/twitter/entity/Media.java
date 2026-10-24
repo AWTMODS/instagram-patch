@@ -1,12 +1,12 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
 
 package app.morphe.extension.twitter.entity;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class Media {
     // 0-img, 1-video
@@ -28,7 +28,7 @@ public class Media {
         try {
             return "Media [type=" + this.type + ", url=" + this.url + ", ext=" + this.ext + "]";
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return e.getMessage();
         }
     }

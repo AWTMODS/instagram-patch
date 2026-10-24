@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -45,7 +45,7 @@ import app.morphe.extension.shared.ResourceUtils;
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.twitter.Pref;
 import app.morphe.extension.twitter.entity.Media;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 import static app.morphe.extension.shared.StringRef.str;
 
@@ -122,7 +122,7 @@ public class DownloadDialog {
 
         if (items == null || items.isEmpty()) {
             TextView empty = new TextView(context);
-            empty.setText(str("piko_pref_native_downloader_no_media"));
+            empty.setText(str("awt_pref_native_downloader_no_media"));
             empty.setTextColor(primaryTextColor(context));
             empty.setGravity(Gravity.CENTER);
             empty.setPadding(0, Dim.dp16, 0, Dim.dp16);
@@ -216,7 +216,7 @@ public class DownloadDialog {
 
     private static void showVariantsDialog(Context context, DownloadItem item) {
         if (!item.hasVariants()) return;
-        String titleTag = str("piko_video_variants");
+        String titleTag = str("awt_video_variants");
 
         buildDialog(context, titleTag, item.variants);
     }
@@ -282,7 +282,7 @@ public class DownloadDialog {
 
         boolean hasMultipleItems = items != null && items.size() > 1;
 
-        Button closeButton = CustomDialog.createButton(context, dialog, str("piko_cancel"), null, !hasMultipleItems, true);
+        Button closeButton = CustomDialog.createButton(context, dialog, str("awt_cancel"), null, !hasMultipleItems, true);
         if (accentColor != null && !hasMultipleItems) {
             ShapeDrawable shape = new ShapeDrawable(new RoundRectShape(Dim.roundedCorners(20), null, null));
             shape.getPaint().setColor(accentColor);
@@ -300,7 +300,7 @@ public class DownloadDialog {
         row.addView(closeButton);
 
         if (hasMultipleItems) {
-            Button downloadAllButton = CustomDialog.createButton(context, dialog, str("piko_pref_native_downloader_download_all"), () -> downloadAll(items), true, true);
+            Button downloadAllButton = CustomDialog.createButton(context, dialog, str("awt_pref_native_downloader_download_all"), () -> downloadAll(items), true, true);
             if (accentColor != null) {
                 ShapeDrawable shape = new ShapeDrawable(new RoundRectShape(Dim.roundedCorners(20), null, null));
                 shape.getPaint().setColor(accentColor);
@@ -329,7 +329,7 @@ public class DownloadDialog {
     }
 
     private static void downloadFile(DownloadItem item) {
-        PikoUtils.toast(str("download_started"));
+        AwtUtils.toast(str("download_started"));
         Media media = item.media;
         String fileName = item.fileName;
         app.morphe.extension.twitter.Utils.downloadFile(media.url, fileName, media.ext);
@@ -340,7 +340,7 @@ public class DownloadDialog {
         String url = item.media.url;
 
         Utils.setClipboard(url);
-        PikoUtils.toast(str("link_copied_to_clipboard"));
+        AwtUtils.toast(str("link_copied_to_clipboard"));
     }
 
     // ---------------------------------------------------------------------------------------

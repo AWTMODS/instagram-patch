@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -70,31 +70,31 @@ public class RestorePrefActivity extends AppCompatActivity {
         Bundle args = getIntent().getExtras();
 
         if (args != null) {
-            if (args.containsKey("piko_import_dev_overrides")) {
+            if (args.containsKey("awt_import_dev_overrides")) {
                 destinationFile =new File(context.getFilesDir()+ "/mobileconfig","mc_overrides.json");
-            } else if (args.containsKey("piko_import_id_mapping")) {
+            } else if (args.containsKey("awt_import_id_mapping")) {
                 destinationFile = new File(context.getFilesDir()+ "/mobileconfig","id_name_mapping.json");
-            } else if (args.containsKey("piko_import_pref")) {
+            } else if (args.containsKey("awt_import_pref")) {
                 // Importing an older settings file would drop an active Focus Lock.
                 if (FocusLock.isActive()) {
-                    toast(str("piko_focus_lock_blocked_action"));
+                    toast(str("awt_focus_lock_blocked_action"));
                     finish();
                     return;
                 }
-                destinationFile =  new File(context.getApplicationInfo().dataDir + "/shared_prefs",Constants.PIKO_SETTINGS+".xml");
-            } else if (args.containsKey("piko_pref_add_font")) {
+                destinationFile =  new File(context.getApplicationInfo().dataDir + "/shared_prefs",Constants.AWT_SETTINGS+".xml");
+            } else if (args.containsKey("awt_pref_add_font")) {
                 // FontStorage decides where the font goes, and validates it first.
                 isFontImport = true;
             }
             if (destinationFile != null || isFontImport) {
                 // An imported file can turn Inbox lock off, so it has to be confirmed first while the lock is up.
-                if (args.containsKey("piko_import_pref")) {
+                if (args.containsKey("awt_import_pref")) {
                     InboxLock.confirmIfLocked(this, this::requestFileForRestore, this::finish);
                 } else {
                     requestFileForRestore();
                 }
             } else {
-                toast(str("piko_export_fail"));
+                toast(str("awt_export_fail"));
                 finish();
             }
         }
@@ -123,16 +123,16 @@ public class RestorePrefActivity extends AppCompatActivity {
             mainHandler.post(() -> {
                 switch (result) {
                     case ADDED:
-                        toast(str("piko_pref_add_font_success"));
+                        toast(str("awt_pref_add_font_success"));
                         break;
                     case NOT_A_FONT:
-                        toast(str("piko_pref_add_font_invalid"));
+                        toast(str("awt_pref_add_font_invalid"));
                         break;
                     case TOO_LARGE:
-                        toast(str("piko_pref_add_font_too_large"));
+                        toast(str("awt_pref_add_font_too_large"));
                         break;
                     default:
-                        toast(str("piko_pref_add_font_fail"));
+                        toast(str("awt_pref_add_font_fail"));
                         break;
                 }
                 finish();
@@ -160,19 +160,19 @@ public class RestorePrefActivity extends AppCompatActivity {
             // Don't touch the current file unless the whole picked file is what we restore.
             if (!isValidRestoreFile(tempFile)) {
                 tempFile.delete();
-                toast(str("piko_import_fail"));
+                toast(str("awt_import_fail"));
                 return;
             }
             if (!tempFile.renameTo(destinationFile)) {
                 throw new IOException("Could not replace " + destinationFile);
             }
 
-            toast(str("piko_import_success"));
+            toast(str("awt_import_success"));
             Utils.restartApp(ctx);
 
         } catch (Exception e) {
             tempFile.delete();
-            toast(str("piko_import_fail"));
+            toast(str("awt_import_fail"));
             Logger.printException(() -> "import failure", e);
         }
     }
@@ -276,7 +276,7 @@ public class RestorePrefActivity extends AppCompatActivity {
             Uri uri = intent.getData();
 
             if (uri == null) {
-                toast(str("piko_fail_no_path"));
+                toast(str("awt_fail_no_path"));
             } else if (isFontImport) {
                 // Finishes itself once the font is imported off the main thread.
                 receiveFont(this, uri);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -203,29 +203,29 @@ public final class TimelinePosition {
 
         Binding(ClassLoader loader) throws ReflectiveOperationException {
             // Placeholders are replaced with verified native descriptors at patch time.
-            forYouType = Integer.parseInt("piko_timeline_forYouType");
-            type = field(loader, "piko_timeline_type");
-            view = field(loader, "piko_timeline_view");
-            list = field(loader, "piko_timeline_list");
-            recycler = field(loader, "piko_timeline_recycler");
-            provider = field(loader, "piko_timeline_provider");
-            id = field(loader, "piko_timeline_id");
-            offset = field(loader, "piko_timeline_offset");
-            metadata = field(loader, "piko_timeline_metadata");
-            entry = field(loader, "piko_timeline_entry");
-            group = field(loader, "piko_timeline_group");
-            metadataRow = field(loader, "piko_timeline_metadataRow");
-            metadataType = field(loader, "piko_timeline_metadataType");
-            itemRow = field(loader, "piko_timeline_itemRow");
-            sort = field(loader, "piko_timeline_sort");
-            adapter = method(loader, "piko_timeline_adapter");
-            count = method(loader, "piko_timeline_count");
-            item = method(loader, "piko_timeline_item", int.class);
-            itemEntry = method(loader, "piko_timeline_itemEntry");
-            itemGroup = method(loader, "piko_timeline_itemGroup");
-            itemInfo = method(loader, "piko_timeline_itemInfo");
-            lookup = method(loader, "piko_timeline_lookup", long.class);
-            scroll = method(loader, "piko_timeline_scroll", int.class, int.class, boolean.class);
+            forYouType = Integer.parseInt("awt_timeline_forYouType");
+            type = field(loader, "awt_timeline_type");
+            view = field(loader, "awt_timeline_view");
+            list = field(loader, "awt_timeline_list");
+            recycler = field(loader, "awt_timeline_recycler");
+            provider = field(loader, "awt_timeline_provider");
+            id = field(loader, "awt_timeline_id");
+            offset = field(loader, "awt_timeline_offset");
+            metadata = field(loader, "awt_timeline_metadata");
+            entry = field(loader, "awt_timeline_entry");
+            group = field(loader, "awt_timeline_group");
+            metadataRow = field(loader, "awt_timeline_metadataRow");
+            metadataType = field(loader, "awt_timeline_metadataType");
+            itemRow = field(loader, "awt_timeline_itemRow");
+            sort = field(loader, "awt_timeline_sort");
+            adapter = method(loader, "awt_timeline_adapter");
+            count = method(loader, "awt_timeline_count");
+            item = method(loader, "awt_timeline_item", int.class);
+            itemEntry = method(loader, "awt_timeline_itemEntry");
+            itemGroup = method(loader, "awt_timeline_itemGroup");
+            itemInfo = method(loader, "awt_timeline_itemInfo");
+            lookup = method(loader, "awt_timeline_lookup", long.class);
+            scroll = method(loader, "awt_timeline_scroll", int.class, int.class, boolean.class);
             constructor = metadata.getType().getConstructor(String.class, String.class, long.class, long.class, int.class);
         }
 

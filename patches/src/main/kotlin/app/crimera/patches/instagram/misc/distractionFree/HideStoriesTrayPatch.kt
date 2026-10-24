@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -49,10 +49,10 @@ val hideStoriesTrayPatch =
                         """
                         $PREF_CALL_DESCRIPTOR->hideStoriesTray()Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :piko
+                        if-eqz v$freeRegister, :awt
                         const v$storiesTrayViewGroupRegistry, 0x0
                         """.trimIndent(),
-                        ExternalLabel("piko", getInstruction(targetIndex + 1)),
+                        ExternalLabel("awt", getInstruction(targetIndex + 1)),
                     )
 
                     enableSettings("hideStoriesTray")

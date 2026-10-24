@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -37,10 +37,10 @@ val disableVideoAutoplayPatch =
                     """
                     $PREF_CALL_DESCRIPTOR->disableVideoAutoplay()Z
                     move-result v0
-                    if-eqz v0, :piko
+                    if-eqz v0, :awt
                     return v0
                     """.trimIndent(),
-                    ExternalLabel("piko", getInstruction(0)),
+                    ExternalLabel("awt", getInstruction(0)),
                 )
                 enableSettings("disableVideoAutoplay")
             }

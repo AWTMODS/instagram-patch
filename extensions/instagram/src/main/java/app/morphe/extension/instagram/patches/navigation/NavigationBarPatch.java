@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -48,13 +48,13 @@ public final class NavigationBarPatch {
     }
 
     public enum Tab {
-        HOME("home", "piko_navigation_tab_home", "tab_home_drawable", "fragment_feed", "FEED"),
-        REELS("reels", "piko_navigation_tab_reels", "tab_clips_drawable", "fragment_clips", "CLIPS"),
-        MESSAGES("messages", "piko_navigation_tab_messages", "tab_prism_direct_drawable", "fragment_direct_tab", "DIRECT"),
-        SEARCH("search", "piko_navigation_tab_search", "tab_search_drawable", "fragment_search", "SEARCH"),
-        PROFILE("profile", "piko_navigation_tab_profile", "tab_profile_drawable", "fragment_profile", "PROFILE"),
-        NOTIFICATIONS("notifications", "piko_navigation_tab_notifications", "tab_activity_heart_drawable", "fragment_news", "NEWS"),
-        CREATE("create", "piko_navigation_tab_create", "tab_camera_drawable", "fragment_share", "SHARE", "CREATION");
+        HOME("home", "awt_navigation_tab_home", "tab_home_drawable", "fragment_feed", "FEED"),
+        REELS("reels", "awt_navigation_tab_reels", "tab_clips_drawable", "fragment_clips", "CLIPS"),
+        MESSAGES("messages", "awt_navigation_tab_messages", "tab_prism_direct_drawable", "fragment_direct_tab", "DIRECT"),
+        SEARCH("search", "awt_navigation_tab_search", "tab_search_drawable", "fragment_search", "SEARCH"),
+        PROFILE("profile", "awt_navigation_tab_profile", "tab_profile_drawable", "fragment_profile", "PROFILE"),
+        NOTIFICATIONS("notifications", "awt_navigation_tab_notifications", "tab_activity_heart_drawable", "fragment_news", "NEWS"),
+        CREATE("create", "awt_navigation_tab_create", "tab_camera_drawable", "fragment_share", "SHARE", "CREATION");
 
         private final String key;
         private final String labelName;

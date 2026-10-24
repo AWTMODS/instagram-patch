@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -62,7 +62,7 @@ public class FocusLock {
      * Whether the running lock was written before this layout existed.
      *
      * Such a lock is still honoured, through the keys it was written with. Releasing it on update
-     * would turn updating piko into a way out of a lock, which is the one thing the feature is
+     * would turn updating awt into a way out of a lock, which is the one thing the feature is
      * supposed to prevent. It is read rather than rewritten, so nothing is persisted behind the
      * user's back; the next lock they set is written in the current layout.
      */
@@ -159,22 +159,22 @@ public class FocusLock {
     /** Summary shown under the lock/unlock button. */
     public static String statusSummary() {
         if (!isActive()) {
-            return str("piko_focus_lock_status_unlocked");
+            return str("awt_focus_lock_status_unlocked");
         }
         String until = formatDate(lockedUntil());
         if (canUnlockNow()) {
-            return str("piko_focus_lock_status_unlock_ready");
+            return str("awt_focus_lock_status_unlock_ready");
         }
         if (isUnlockPending()) {
-            return String.format(str("piko_focus_lock_status_unlock_pending"), formatDate(unlockAvailableAt()), until);
+            return String.format(str("awt_focus_lock_status_unlock_pending"), formatDate(unlockAvailableAt()), until);
         }
-        return String.format(str("piko_focus_lock_status_locked"), until);
+        return String.format(str("awt_focus_lock_status_locked"), until);
     }
 
     public static String buttonTitle() {
-        if (!isActive()) return str("piko_focus_lock_button_lock");
-        if (canUnlockNow()) return str("piko_focus_lock_button_unlock");
-        if (isUnlockPending()) return str("piko_focus_lock_button_cancel_unlock");
-        return str("piko_focus_lock_button_request_unlock");
+        if (!isActive()) return str("awt_focus_lock_button_lock");
+        if (canUnlockNow()) return str("awt_focus_lock_button_unlock");
+        if (isUnlockPending()) return str("awt_focus_lock_button_cancel_unlock");
+        return str("awt_focus_lock_button_request_unlock");
     }
 }

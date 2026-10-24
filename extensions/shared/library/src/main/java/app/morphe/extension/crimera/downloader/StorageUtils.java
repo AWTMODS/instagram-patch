@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -21,7 +21,7 @@ import android.os.storage.StorageVolume;
 
 import app.morphe.extension.crimera.sharedPreference.SharedPref;
 import app.morphe.extension.crimera.constants.ExtensionStrings;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class StorageUtils {
     private static final String KEY_BASE_PATH = "custom_download_path";
@@ -122,7 +122,7 @@ public class StorageUtils {
 
     private static String resolveStorageLabel(String storageId) {
         try {
-            Context context = PikoUtils.getContext();
+            Context context = AwtUtils.getContext();
             if (context == null) {
                 return null;
             }
@@ -160,7 +160,7 @@ public class StorageUtils {
     }
 
     public static Uri getDownloadTreeUri() {
-        Context context = PikoUtils.getContext();
+        Context context = AwtUtils.getContext();
         if (context == null) {
             return null;
         }
@@ -182,13 +182,13 @@ public class StorageUtils {
 
     public static void allowStorageAccess() {
         try {
-            Context context = PikoUtils.getContext();
+            Context context = AwtUtils.getContext();
             Intent intent = new Intent(context, FolderPickerActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-            PikoUtils.toast(ExtensionStrings.DOWNLOAD_GRANT_PERMISSION);
+            AwtUtils.toast(ExtensionStrings.DOWNLOAD_GRANT_PERMISSION);
         } catch (Exception e) {
-            PikoUtils.toast(ExtensionStrings.DOWNLOAD_GRANT_PERMISSION_FAILED);
+            AwtUtils.toast(ExtensionStrings.DOWNLOAD_GRANT_PERMISSION_FAILED);
         }
     }
 }

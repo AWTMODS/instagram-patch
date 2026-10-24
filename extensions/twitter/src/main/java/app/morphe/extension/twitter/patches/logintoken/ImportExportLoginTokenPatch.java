@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -76,7 +76,7 @@ public class ImportExportLoginTokenPatch {
             String token = accountJson.optString("token");
             String secret = accountJson.optString("secret");
             if (userName.isEmpty() || token.isEmpty() || secret.isEmpty()) {
-                Utils.showToastLong(str("piko_login_token_import_failed_missing_info"));
+                Utils.showToastLong(str("awt_login_token_import_failed_missing_info"));
                 return;
             }
 
@@ -92,7 +92,7 @@ public class ImportExportLoginTokenPatch {
             AccountManager accountManager = AccountManager.get(context);
             boolean succeeded = accountManager.addAccountExplicitly(account, null, newUserData);
             if (!succeeded) {
-                Utils.showToastLong(str("piko_login_token_import_failed_already_exist"));
+                Utils.showToastLong(str("awt_login_token_import_failed_already_exist"));
                 return;
             }
 
@@ -104,8 +104,8 @@ public class ImportExportLoginTokenPatch {
             // Since the app begins some process immediately after an account is added,
             // we do not use Utils.restartApp() which calls System.exit(0) for safety.
             new AlertDialog.Builder(context)
-                    .setTitle(str("piko_pref_import_success"))
-                    .setMessage(str("piko_login_token_import_success_reopen_required"))
+                    .setTitle(str("awt_pref_import_success"))
+                    .setMessage(str("awt_login_token_import_success_reopen_required"))
                     .setPositiveButton(android.R.string.ok, null)
                     .setCancelable(false)
                     .show();
@@ -122,10 +122,10 @@ public class ImportExportLoginTokenPatch {
     @SuppressWarnings({"deprecation", "unused"})
     public static void initImportButton(View view) {
         try {
-            TextView pikoTextView = view.findViewById(
+            TextView awtTextView = view.findViewById(
                     ResourceUtils.getIdentifier(ResourceType.ID, "import_token_text"));
-            pikoTextView.setTextColor(ResourceUtils.getColor("twitter_blue"));
-            pikoTextView.setOnClickListener(v -> {
+            awtTextView.setTextColor(ResourceUtils.getColor("twitter_blue"));
+            awtTextView.setOnClickListener(v -> {
                 if (v.getContext() instanceof Activity activity) {
                     new ImportLoginTokenDialogFragment().show(activity.getFragmentManager(), null);
                 } else {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -37,7 +37,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import app.morphe.extension.crimera.constants.ExtensionStrings;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.Utils;
 
 public class MediaDownloader {
@@ -146,7 +146,7 @@ public class MediaDownloader {
                         copyDownload(input, output, length, builder, notificationId);
                     }
                 } else {
-                    cacheFile = File.createTempFile("piko-download-", ".mp4", context.getCacheDir());
+                    cacheFile = File.createTempFile("awt-download-", ".mp4", context.getCacheDir());
                     try (InputStream input = new BufferedInputStream(conn.getInputStream());
                          OutputStream output = new BufferedOutputStream(new FileOutputStream(cacheFile))) {
                         copyDownload(input, output, length, builder, notificationId);
@@ -155,7 +155,7 @@ public class MediaDownloader {
                     try {
                         writeMetadata(cacheFile, outputDocumentUri, request.metadata);
                     } catch (Exception | LinkageError remuxException) {
-                        PikoUtils.logger(remuxException);
+                        AwtUtils.logger(remuxException);
                         copyRawFile(cacheFile, outputDocumentUri);
                     }
                 }
@@ -180,7 +180,7 @@ public class MediaDownloader {
                 notificationManager.notify(finalNotificationId, builder.build());
 
                 try {
-                    PikoUtils.toast(downloadCompletedString);
+                    AwtUtils.toast(downloadCompletedString);
                 } catch (Exception ignored) {}
             });
         } catch (Exception e) {
@@ -191,10 +191,10 @@ public class MediaDownloader {
             }
             showToast(ExtensionStrings.DOWNLOAD_ERROR + e.getMessage());
             notificationManager.cancel(notificationId);
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         } finally {
             if (cacheFile != null && cacheFile.exists() && !cacheFile.delete()) {
-                PikoUtils.logger(new IOException("Could not delete download cache file"));
+                AwtUtils.logger(new IOException("Could not delete download cache file"));
             }
             isDownloading = false;
             processNext();
@@ -266,7 +266,7 @@ public class MediaDownloader {
     }
 
     private void showToast(String msg) {
-        mainHandler.post(() -> PikoUtils.toast(msg));
+        mainHandler.post(() -> AwtUtils.toast(msg));
     }
 
     private Uri getTargetDirectoryUri(DownloadRequest request) throws Exception {
@@ -352,7 +352,7 @@ public class MediaDownloader {
                 }
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
         return null;

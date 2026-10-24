@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -88,7 +88,7 @@ val makeEphemeralPermanentPatch =
                     addInstructionsWithLabels(
                         lastIfEqIndex,
                         """
-                        if-ne v$registerA, v$registerB, :piko
+                        if-ne v$registerA, v$registerB, :awt
                         
                         iget-object v0, v$ephemeralMediaClassRegister, $ephemeralMediaClassName->$expireAtFieldName:Ljava/lang/Long;
                         iget-object v1, v$ephemeralMediaClassRegister, $ephemeralMediaClassName->$viewModeFieldName:Ljava/lang/String;
@@ -99,7 +99,7 @@ val makeEphemeralPermanentPatch =
                         iput-object v1, v$ephemeralMediaClassRegister, $ephemeralMediaClassName->$viewModeFieldName:Ljava/lang/String;
                         return-object v$ephemeralMediaClassRegister
                         """.trimIndent(),
-                        ExternalLabel("piko", midIfEqInstruction),
+                        ExternalLabel("awt", midIfEqInstruction),
                     )
                 }
             }
@@ -182,11 +182,11 @@ private fun suppressEphemeralMediaReceipts() {
         """
         invoke-static {p0, p1}, $EXTENSION->wasEphemeralMediaViewed(Ljava/lang/Object;Ljava/lang/Object;)Z
         move-result v$unreadRegister
-        if-eqz v$unreadRegister, :piko_native_unread
+        if-eqz v$unreadRegister, :awt_native_unread
         const/4 v$unreadRegister, 0x0
         return v$unreadRegister
         """.trimIndent(),
-        ExternalLabel("piko_native_unread", unseen.getInstruction(0)),
+        ExternalLabel("awt_native_unread", unseen.getInstruction(0)),
     )
     val register = producer.getFreeRegisterProvider(
         index = index,
@@ -198,9 +198,9 @@ private fun suppressEphemeralMediaReceipts() {
         """
         invoke-static {v$sessionRegister, v$itemRegister}, $EXTENSION->shouldSuppressEphemeralMediaReceipt(${USER_SESSION}Ljava/lang/Object;)Z
         move-result v$register
-        if-eqz v$register, :piko_send_receipt
+        if-eqz v$register, :awt_send_receipt
         return-void
         """.trimIndent(),
-        ExternalLabel("piko_send_receipt", firstField),
+        ExternalLabel("awt_send_receipt", firstField),
     )
 }

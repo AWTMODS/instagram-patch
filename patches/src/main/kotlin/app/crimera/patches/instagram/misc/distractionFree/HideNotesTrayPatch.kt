@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -55,11 +55,11 @@ val hideNotesTrayPatch =
                         """
                         ${PREF_CALL_DESCRIPTOR}->hideNotesTray()Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :piko
+                        if-eqz v$freeRegister, :awt
                         const/16 v$freeRegister, 0x8
                         invoke-virtual {v$notesTrayRegister, v$freeRegister}, Landroid/view/View;->setVisibility(I)V
                         """.trimIndent(),
-                        ExternalLabel("piko", iPutObjectInstruction),
+                        ExternalLabel("awt", iPutObjectInstruction),
                     )
 
                     enableSettings("hideNotesTray")

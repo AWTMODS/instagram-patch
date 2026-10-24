@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="https://socialify.git.ci/crimera/piko/image?forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Auto" alt="piko" width="640" height="320" />
+<img src="https://socialify.git.ci/crimera/awt/image?forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Auto" alt="awt" width="640" height="320" />
 
 <h1>
     Morphe patches focused on Twitter/X & Instagram<br>
     <a href="https://t.me/pikopatches">
         <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/>
     </a>
-    <a href="https://crowdin.com/project/piko">
+    <a href="https://crowdin.com/project/awt">
         <img src="https://img.shields.io/badge/Crowdin-1B263B?style=for-the-badge&logo=crowdin&logoColor=white" alt="Crowdin"/>
     </a>
 </h1>
@@ -16,13 +16,13 @@
 
 ## 🕹️ Usage
 
-Starting with patches v3.0.0, Piko patches use [Morphe](https://morphe.software).
+Starting with patches v3.0.0, Awt patches use [Morphe](https://morphe.software).
 
 ### Morphe Manager
 
-Tap the link to add Piko as a patch source in Morphe Manager:
+Tap the link to add Awt as a patch source in Morphe Manager:
 
-[**➕ Add Piko to Morphe**](https://morphe.software/add-source?github=crimera/piko)
+[**➕ Add Awt to Morphe**](https://morphe.software/add-source?github=crimera/awt)
 
 Then patch Twitter/X or Instagram:
 1. Tap X or Instagram app icon in Morphe
@@ -32,12 +32,12 @@ Then patch Twitter/X or Instagram:
 ### Morphe CLI
 
 ```sh
-java -jar cli.jar patch --patches piko.mpp input.apkm
+java -jar cli.jar patch --patches awt.mpp input.apkm
 ```
 
 ### X-Shim
 
-Starting `12.5.0-release.0` **you need not** apply X-Shim along with Piko patches. X login and XChat will work fine without X-Shim patches.
+Starting `12.5.0-release.0` **you need not** apply X-Shim along with Awt patches. X login and XChat will work fine without X-Shim patches.
 
 <details>
 
@@ -51,7 +51,7 @@ To patch with Twitter/X version 11.88 to 12.4, you must include patches from ano
 
 ⚠️Important steps⚠️
 * Enable `expert mode` in Morphe Manager.
-* You must select all patches from the X Shim bundle and recommended/preferred patches from Piko. **DO NOT INCLUDE** patches from any other bundles.
+* You must select all patches from the X Shim bundle and recommended/preferred patches from Awt. **DO NOT INCLUDE** patches from any other bundles.
 * Select "Proceed anyway" at the prompt warning of using multiple bundles.
 
 ⚠️Additional Context⚠️
@@ -60,7 +60,7 @@ To patch with Twitter/X version 11.88 to 12.4, you must include patches from ano
 * XChat decryption and XChat video calls work. 
 * The X Shim patch only adds a compatibility shim layer and pairip is not removed.
 
-> For an up-to-date patching guide, [follow this Reddit guide](https://www.reddit.com/r/MorpheApp/comments/1r4xt24/x_twitter_can_now_be_patched_with_piko_patches/).
+> For an up-to-date patching guide, [follow this Reddit guide](https://www.reddit.com/r/MorpheApp/comments/1r4xt24/x_twitter_can_now_be_patched_with_awt_patches/).
 
 </del>
 
@@ -134,7 +134,7 @@ To patch with Twitter/X version 11.88 to 12.4, you must include patches from ano
 | [Hide promote button](#hide-promote-button) | Hides promote button under self posts |  |
 | [Hide recommendation items](#hide-recommendation-items) | Adds options to hide recommendation items such as "Who to follow" and "Today's news" in timeline, search, and replies. |  |
 | [Hook feature flag](#hook-feature-flag) |  |  |
-| [Import/Export login token](#import-export-login-token) | Adds an feature to export and import the token of accounts. This is useful when logging in on your second device or when re-installing piko. |  |
+| [Import/Export login token](#import-export-login-token) | Adds an feature to export and import the token of accounts. This is useful when logging in on your second device or when re-installing awt. |  |
 | [Legacy share links](#legacy-share-links) | Brings back username on post share links. Works post 11.4x.xx |  |
 | [Log server response](#log-server-response) | Log json responses received from server |  |
 | [More information on profile](#more-information-on-profile) | Adds more details on the profile page |  |
@@ -224,7 +224,7 @@ To patch with Twitter/X version 11.88 to 12.4, you must include patches from ano
 | [Save Instants](#save-instants) | Captures view-once Instants as you view them so you can re-view and download them later. |  |
 | [Save deleted messages](#save-deleted-messages) | Captures incoming DMs locally as they arrive from the server and marks them when the sender deletes them. |  |
 | [Save media comment](#save-media-comment) | Adds a button to save media comments on posts and reels. |  |
-| [Theme](#theme) | Adds Material You and AMOLED controls to Piko settings on Android 12 and later. On Android 8–11, it applies a fixed Material You-style theme or an optional AMOLED theme. | • Pure-black AMOLED theme for Android 8–11 |
+| [Theme](#theme) | Adds Material You and AMOLED controls to Awt settings on Android 12 and later. On Android 8–11, it applies a fixed Material You-style theme or an optional AMOLED theme. | • Pure-black AMOLED theme for Android 8–11 |
 | [Unlock Plus benefits](#unlock-plus-benefits) | Unlocks 'Plus' subscription benefits that are checked locally. USE IT AT YOUR OWN RISK |  |
 | [Unlock developer options](#unlock-developer-options) | Unlocks developer option by long pressing home icon |  |
 | [Unlock employee options](#unlock-employee-options) | Unlocks all options using by employee for debugging |  |
@@ -239,12 +239,12 @@ To patch with Twitter/X version 11.88 to 12.4, you must include patches from ano
 
 ## 🛠️ Building
 
-To build Piko Patches, follow the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation).
+To build Awt Patches, follow the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation).
 
 ## ✨ Stargazers over time
 
 <p align="center">
-    <img src="https://starchart.cc/crimera/piko.svg?variant=light" alt="piko" width="640" height="320" />
+    <img src="https://starchart.cc/crimera/awt.svg?variant=light" alt="awt" width="640" height="320" />
 </p>
 
 ## License

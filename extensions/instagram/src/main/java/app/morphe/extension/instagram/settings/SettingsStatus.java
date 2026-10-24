@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -262,73 +262,73 @@ public class SettingsStatus {
 
 
         public static void loadStatusMap(){
-        FLAGS.put(str("piko_disable_ads"),SettingsStatus.disableAds);
-        FLAGS.put(str("piko_hide_suggested_content"),SettingsStatus.hideSuggestedContent);
+        FLAGS.put(str("awt_disable_ads"),SettingsStatus.disableAds);
+        FLAGS.put(str("awt_hide_suggested_content"),SettingsStatus.hideSuggestedContent);
 
-        FLAGS.put(str("piko_category_hide_navigation_buttons"),SettingsStatus.hideNavigationButtons);
+        FLAGS.put(str("awt_category_hide_navigation_buttons"),SettingsStatus.hideNavigationButtons);
 
-        FLAGS.put(str("piko_category_downloads"),SettingsStatus.downloadMedia);
-        FLAGS.put(str("piko_feed_download_button"),SettingsStatus.feedDownloadButton);
-        FLAGS.put(str("piko_download_voice_media"),SettingsStatus.downloadVoiceMessage);
-        FLAGS.put(str("piko_download_with_external_downloader"),SettingsStatus.downloadWithExternalDownloader);
-        FLAGS.put(str("piko_more_profile_options"),SettingsStatus.moreOptionsOnProfile);
-        FLAGS.put(str("piko_enable_more_options_on_post"),SettingsStatus.moreOptionsOnPost);
-        FLAGS.put(str("piko_disable_video_autoplay"),SettingsStatus.disableVideoAutoplay);
-        FLAGS.put(str("piko_remove_empty_bottom_space"),SettingsStatus.removeEmptyBottomSpace);
-        FLAGS.put(str("piko_save_media_comment"),SettingsStatus.saveMediaCommentButton);
-        FLAGS.put(str("piko_copy_comment"),SettingsStatus.copyCommentButton);
-        FLAGS.put(str("piko_hide_reshare_button"),SettingsStatus.hideReshareButton);
-        FLAGS.put(str("piko_hide_save_buttons"), SettingsStatus.hideSaveButtons);
-        FLAGS.put(str("piko_hide_share_button"), SettingsStatus.hideShareButton);
-        FLAGS.put(str("piko_improve_image_viewing"),SettingsStatus.improveImageViewing);
-        FLAGS.put(str("piko_unlimited_replays"),SettingsStatus.unlimitedReplaysOnEphemeralMedia);
+        FLAGS.put(str("awt_category_downloads"),SettingsStatus.downloadMedia);
+        FLAGS.put(str("awt_feed_download_button"),SettingsStatus.feedDownloadButton);
+        FLAGS.put(str("awt_download_voice_media"),SettingsStatus.downloadVoiceMessage);
+        FLAGS.put(str("awt_download_with_external_downloader"),SettingsStatus.downloadWithExternalDownloader);
+        FLAGS.put(str("awt_more_profile_options"),SettingsStatus.moreOptionsOnProfile);
+        FLAGS.put(str("awt_enable_more_options_on_post"),SettingsStatus.moreOptionsOnPost);
+        FLAGS.put(str("awt_disable_video_autoplay"),SettingsStatus.disableVideoAutoplay);
+        FLAGS.put(str("awt_remove_empty_bottom_space"),SettingsStatus.removeEmptyBottomSpace);
+        FLAGS.put(str("awt_save_media_comment"),SettingsStatus.saveMediaCommentButton);
+        FLAGS.put(str("awt_copy_comment"),SettingsStatus.copyCommentButton);
+        FLAGS.put(str("awt_hide_reshare_button"),SettingsStatus.hideReshareButton);
+        FLAGS.put(str("awt_hide_save_buttons"), SettingsStatus.hideSaveButtons);
+        FLAGS.put(str("awt_hide_share_button"), SettingsStatus.hideShareButton);
+        FLAGS.put(str("awt_improve_image_viewing"),SettingsStatus.improveImageViewing);
+        FLAGS.put(str("awt_unlimited_replays"),SettingsStatus.unlimitedReplaysOnEphemeralMedia);
 
-        FLAGS.put(str("piko_customise_story_timestamp"),SettingsStatus.customiseStoryTimestamp);
-        FLAGS.put(str("piko_disable_story_flipping"),SettingsStatus.disableStoryFlipping);
-        FLAGS.put(str("piko_loop_story"),SettingsStatus.loopStory);
-        FLAGS.put(str("piko_view_story_mentions"),SettingsStatus.viewStoryMentions);
-        FLAGS.put(str("piko_follow_back_indicator"),SettingsStatus.followBackIndicator);
-        FLAGS.put(str("piko_follow_list_non_follower_badge"),SettingsStatus.followListNonFollowerBadge);
-        FLAGS.put(str("piko_disable_discover_people"),SettingsStatus.disableDiscoverPeople);
-        FLAGS.put(str("piko_disable_analytics"),SettingsStatus.disableAnalytics);
-        FLAGS.put(str("piko_customise_story_ring_size"),SettingsStatus.customiseStoryRingSize);
+        FLAGS.put(str("awt_customise_story_timestamp"),SettingsStatus.customiseStoryTimestamp);
+        FLAGS.put(str("awt_disable_story_flipping"),SettingsStatus.disableStoryFlipping);
+        FLAGS.put(str("awt_loop_story"),SettingsStatus.loopStory);
+        FLAGS.put(str("awt_view_story_mentions"),SettingsStatus.viewStoryMentions);
+        FLAGS.put(str("awt_follow_back_indicator"),SettingsStatus.followBackIndicator);
+        FLAGS.put(str("awt_follow_list_non_follower_badge"),SettingsStatus.followListNonFollowerBadge);
+        FLAGS.put(str("awt_disable_discover_people"),SettingsStatus.disableDiscoverPeople);
+        FLAGS.put(str("awt_disable_analytics"),SettingsStatus.disableAnalytics);
+        FLAGS.put(str("awt_customise_story_ring_size"),SettingsStatus.customiseStoryRingSize);
 
-        FLAGS.put(str("piko_change_like_animation"),SettingsStatus.changeLikeAnimation);
-        FLAGS.put(str("piko_unlock_plus_benefits"),SettingsStatus.unlockPlusBenefits);
-        FLAGS.put(str("piko_inbox_lock"),SettingsStatus.inboxLock);
+        FLAGS.put(str("awt_change_like_animation"),SettingsStatus.changeLikeAnimation);
+        FLAGS.put(str("awt_unlock_plus_benefits"),SettingsStatus.unlockPlusBenefits);
+        FLAGS.put(str("awt_inbox_lock"),SettingsStatus.inboxLock);
 
-        FLAGS.put(str("piko_disable_double_tap_to_like"),SettingsStatus.disableDoubleTapLike);
-        FLAGS.put(str("piko_hide_group_creation_button_on_sharesheet"),SettingsStatus.hideGroupCreationOnSharesheet);
-        FLAGS.put(str("piko_hide_reels_follow_button"),SettingsStatus.hideReelsFollowButton);
-        FLAGS.put(str("piko_limit_following_feed"),SettingsStatus.limitFollowingFeed);
-        FLAGS.put(str("piko_hide_notes_tray"),SettingsStatus.hideNotesTray);
-        FLAGS.put(str("piko_hide_stories_tray"),SettingsStatus.hideStoriesTray);
-        FLAGS.put(str("piko_disable_comments"),SettingsStatus.disableComments);
-        FLAGS.put(str("piko_disable_explore"),SettingsStatus.disableExplore);
-        FLAGS.put(str("piko_disable_highlights"),SettingsStatus.disableHighlights);
-        FLAGS.put(str("piko_disable_stories"),SettingsStatus.disableStories);
-        FLAGS.put(str("piko_disable_swipe_to_create"), SettingsStatus.disableSwipeToCreate);
-        FLAGS.put(str("piko_focus_lock"), SettingsStatus.focusLock);
+        FLAGS.put(str("awt_disable_double_tap_to_like"),SettingsStatus.disableDoubleTapLike);
+        FLAGS.put(str("awt_hide_group_creation_button_on_sharesheet"),SettingsStatus.hideGroupCreationOnSharesheet);
+        FLAGS.put(str("awt_hide_reels_follow_button"),SettingsStatus.hideReelsFollowButton);
+        FLAGS.put(str("awt_limit_following_feed"),SettingsStatus.limitFollowingFeed);
+        FLAGS.put(str("awt_hide_notes_tray"),SettingsStatus.hideNotesTray);
+        FLAGS.put(str("awt_hide_stories_tray"),SettingsStatus.hideStoriesTray);
+        FLAGS.put(str("awt_disable_comments"),SettingsStatus.disableComments);
+        FLAGS.put(str("awt_disable_explore"),SettingsStatus.disableExplore);
+        FLAGS.put(str("awt_disable_highlights"),SettingsStatus.disableHighlights);
+        FLAGS.put(str("awt_disable_stories"),SettingsStatus.disableStories);
+        FLAGS.put(str("awt_disable_swipe_to_create"), SettingsStatus.disableSwipeToCreate);
+        FLAGS.put(str("awt_focus_lock"), SettingsStatus.focusLock);
 
-        FLAGS.put(str("piko_view_dm_anonymously"),SettingsStatus.viewDmAnonymously);
-        FLAGS.put(str("piko_save_deleted_messages"),SettingsStatus.saveDeletedMessages);
-        FLAGS.put(str("piko_disable_screenshot_detection"),SettingsStatus.disableScreenshotDetection);
-        FLAGS.put(str("piko_disable_typing_status"),SettingsStatus.disableTypingStatus);
-        FLAGS.put(str("piko_view_live_anonymously"),SettingsStatus.viewLiveAnonymously);
-        FLAGS.put(str("piko_view_stories_anonymously"),SettingsStatus.viewStoriesAnonymously);
-        FLAGS.put(str("piko_instants_title"),SettingsStatus.instantsDownload);
+        FLAGS.put(str("awt_view_dm_anonymously"),SettingsStatus.viewDmAnonymously);
+        FLAGS.put(str("awt_save_deleted_messages"),SettingsStatus.saveDeletedMessages);
+        FLAGS.put(str("awt_disable_screenshot_detection"),SettingsStatus.disableScreenshotDetection);
+        FLAGS.put(str("awt_disable_typing_status"),SettingsStatus.disableTypingStatus);
+        FLAGS.put(str("awt_view_live_anonymously"),SettingsStatus.viewLiveAnonymously);
+        FLAGS.put(str("awt_view_stories_anonymously"),SettingsStatus.viewStoriesAnonymously);
+        FLAGS.put(str("awt_instants_title"),SettingsStatus.instantsDownload);
 
-        FLAGS.put(str("piko_sanitize_share_links"),SettingsStatus.sanitizeShareLinks);
-        FLAGS.put(str("piko_custom_sharing_domain"),SettingsStatus.customSharingDomain);
-        FLAGS.put(str("piko_open_links_externally"),SettingsStatus.openLinksExternally);
-        FLAGS.put(str("piko_enable_dev_options"),SettingsStatus.enableDeveloperOptions);
-        FLAGS.put(str("piko_enable_emp_options"),SettingsStatus.unlockEmployeeOptions);
-        FLAGS.put(str("piko_allow_user_network_certificate"),SettingsStatus.allowUserNetworkCertificate);
+        FLAGS.put(str("awt_sanitize_share_links"),SettingsStatus.sanitizeShareLinks);
+        FLAGS.put(str("awt_custom_sharing_domain"),SettingsStatus.customSharingDomain);
+        FLAGS.put(str("awt_open_links_externally"),SettingsStatus.openLinksExternally);
+        FLAGS.put(str("awt_enable_dev_options"),SettingsStatus.enableDeveloperOptions);
+        FLAGS.put(str("awt_enable_emp_options"),SettingsStatus.unlockEmployeeOptions);
+        FLAGS.put(str("awt_allow_user_network_certificate"),SettingsStatus.allowUserNetworkCertificate);
 
-        FLAGS.put(str("piko_enable_mark_chat_as_read"),SettingsStatus.markChatAsRead);
-        FLAGS.put(str("piko_category_filter_content"),SettingsStatus.storyFilters);
-        FLAGS.put(str("piko_category_rec_flags"),SettingsStatus.recommendedFlags);
-        FLAGS.put(str("piko_custom_font"),SettingsStatus.customFont);
+        FLAGS.put(str("awt_enable_mark_chat_as_read"),SettingsStatus.markChatAsRead);
+        FLAGS.put(str("awt_category_filter_content"),SettingsStatus.storyFilters);
+        FLAGS.put(str("awt_category_rec_flags"),SettingsStatus.recommendedFlags);
+        FLAGS.put(str("awt_custom_font"),SettingsStatus.customFont);
 
     }
 

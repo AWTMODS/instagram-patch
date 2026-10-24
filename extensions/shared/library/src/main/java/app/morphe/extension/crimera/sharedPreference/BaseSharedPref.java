@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -15,18 +15,18 @@ import org.json.JSONObject;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.crimera.settings.BooleanSetting;
 import app.morphe.extension.crimera.settings.StringSetting;
-import app.morphe.extension.shared.settings.preference.PikoSharedPrefCategory;
+import app.morphe.extension.shared.settings.preference.AwtSharedPrefCategory;
 import app.morphe.extension.crimera.constants.ExtensionStrings;
 
 public abstract class BaseSharedPref {
 
-    protected volatile PikoSharedPrefCategory sp;
+    protected volatile AwtSharedPrefCategory sp;
     private final String sharedPrefName;
 
     protected BaseSharedPref(Context context, String sharedPrefName) {
         this.sharedPrefName = sharedPrefName;
         this.sp = (context != null)
-                ? new PikoSharedPrefCategory(context, sharedPrefName)
+                ? new AwtSharedPrefCategory(context, sharedPrefName)
                 : null;
     }
 
@@ -34,8 +34,8 @@ public abstract class BaseSharedPref {
         this(null, sharedPrefName);
     }
 
-    private PikoSharedPrefCategory preferences() {
-        PikoSharedPrefCategory current = sp;
+    private AwtSharedPrefCategory preferences() {
+        AwtSharedPrefCategory current = sp;
         if (current != null) {
             return current;
         }
@@ -47,7 +47,7 @@ public abstract class BaseSharedPref {
 
         synchronized (this) {
             if (sp == null) {
-                sp = new PikoSharedPrefCategory(context, sharedPrefName);
+                sp = new AwtSharedPrefCategory(context, sharedPrefName);
             }
             return sp;
         }
@@ -55,7 +55,7 @@ public abstract class BaseSharedPref {
 
     public Boolean getBoolean(BooleanSetting setting) {
         Boolean defaultValue = setting.defaultValue;
-        PikoSharedPrefCategory preferences = preferences();
+        AwtSharedPrefCategory preferences = preferences();
         if (preferences != null) {
             return preferences.getBoolean(setting.key, defaultValue);
         }
@@ -64,7 +64,7 @@ public abstract class BaseSharedPref {
 
     public Boolean setBoolean(String key, Boolean val) {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 preferences.saveBoolean(key, val);
                 return true;
@@ -77,7 +77,7 @@ public abstract class BaseSharedPref {
 
     public Boolean setString(String key, String val) {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 preferences.saveString(key, val);
                 return true;
@@ -89,7 +89,7 @@ public abstract class BaseSharedPref {
     }
 
     public String getString(String key, String defaultValue) {
-        PikoSharedPrefCategory preferences = preferences();
+        AwtSharedPrefCategory preferences = preferences();
         if (preferences == null)
             return defaultValue;
 
@@ -105,7 +105,7 @@ public abstract class BaseSharedPref {
 
     public Set<String> getSet(StringSetting stringSetting) {
         Set<String> defVal = new HashSet();
-        PikoSharedPrefCategory preferences = preferences();
+        AwtSharedPrefCategory preferences = preferences();
         if (preferences != null) {
             return preferences.getSet(stringSetting.key, defVal);
         }
@@ -114,7 +114,7 @@ public abstract class BaseSharedPref {
 
     public Boolean setSet(String key, Set<String> value) {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 preferences.saveSet(key, value);
                 return true;
@@ -127,7 +127,7 @@ public abstract class BaseSharedPref {
 
     public boolean clear() {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 preferences.clearAll();
                 return true;
@@ -140,7 +140,7 @@ public abstract class BaseSharedPref {
 
     protected boolean flushPreferences() {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 return preferences.preferences.edit().commit();
             }
@@ -152,7 +152,7 @@ public abstract class BaseSharedPref {
 
     public JSONObject all() {
         try {
-            PikoSharedPrefCategory preferences = preferences();
+            AwtSharedPrefCategory preferences = preferences();
             if (preferences != null) {
                 return preferences.getAll();
             }

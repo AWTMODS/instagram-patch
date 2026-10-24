@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -35,7 +35,7 @@ import com.instagram.common.session.UserSession;
 /** Runtime hook for "Show non-followers in Following list". Field names resolved at patch time. */
 public class FollowListHook {
 
-    private static final String BADGE_TAG = "piko_follow_list_badge";
+    private static final String BADGE_TAG = "awt_follow_list_badge";
 
     // Parameter order matches bindView(int, View, Object, Object) exactly, since it's called with
     // all of bindView's own parameters passed straight through.
@@ -83,7 +83,7 @@ public class FollowListHook {
             badge.setColorFilter(new PorterDuffColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP));
             ((GradientDrawable) badge.getBackground()).setColor(
                     themedColor(context, "igds_color_primary_background"));
-            badge.setContentDescription(str("piko_fbi_doesnt_follows_you"));
+            badge.setContentDescription(str("awt_fbi_doesnt_follows_you"));
             FriendshipStatusIndicator.setStatusClickListener(badge, friendshipStatus);
             badge.setVisibility(View.VISIBLE);
         } catch (Exception e) {

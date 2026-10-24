@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -7,7 +7,7 @@
 
 package app.morphe.extension.instagram.entity;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class DeveloperOptionsItem {
 
@@ -55,7 +55,7 @@ public class DeveloperOptionsItem {
             int universalId = (int) new Entity().getMethod(universalIdHelperClass, "A00", new Class[]{long.class}, mobileConfigSpecifier);
             return String.valueOf(universalId);
         } catch (Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return "0";
     }
@@ -67,7 +67,7 @@ public class DeveloperOptionsItem {
             Object paramId = flag ? (shifted & 0xffff) : (shifted & 0xfff);
             return String.valueOf(paramId);
         } catch (Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return "0";
     }

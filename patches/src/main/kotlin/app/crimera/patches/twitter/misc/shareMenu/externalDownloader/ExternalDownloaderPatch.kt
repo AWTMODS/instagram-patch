@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -25,7 +25,7 @@ val externalDownloaderPatch =
         execute {
             val actionName = "ExternalDownload"
             val prefFunctionName = "enableExternalDownloader"
-            val stringId = "piko_pref_external_downloader_text"
+            val stringId = "awt_pref_external_downloader_text"
             val iconId = "ic_vector_incoming"
             val statusFunctionName = "externalDownloader"
             shareMenuButtonInjection(actionName, prefFunctionName, stringId, iconId, statusFunctionName)

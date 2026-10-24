@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -30,7 +30,7 @@ internal val settingsResourcePatch =
 
                 val prefMod = editor.createElement("Preference")
                 prefMod.setAttribute("android:icon", "@drawable/ic_vector_settings_stroke")
-                prefMod.setAttribute("android:title", "@string/piko_title_settings")
+                prefMod.setAttribute("android:title", "@string/awt_title_settings")
                 prefMod.setAttribute("android:key", "pref_mod")
                 prefMod.setAttribute("android:order", "110")
 
@@ -42,8 +42,8 @@ internal val settingsResourcePatch =
                 val parent = editor.getElementsByTagName("FrameLayout").item(1) as Element
 
                 val sideBtn =
-                    editor.createElement("app.morphe.extension.twitter.settings.widgets.PikoSettingsButton")
-                sideBtn.setAttribute("android:text", "Piko")
+                    editor.createElement("app.morphe.extension.twitter.settings.widgets.AwtSettingsButton")
+                sideBtn.setAttribute("android:text", "Awt")
                 sideBtn.setAttribute("android:textAllCaps", "false")
                 sideBtn.setAttribute("android:background", "?android:attr/selectableItemBackground")
                 sideBtn.setAttribute("android:drawableLeft", "@drawable/ic_vector_settings_stroke")
@@ -57,7 +57,7 @@ internal val settingsResourcePatch =
                 parent.appendChild(sideBtn)
             }
 
-            // Add piko settings to the launcher icon long-press shortcuts
+            // Add awt settings to the launcher icon long-press shortcuts
             document("res/xml/shortcuts.xml").use {
                 val extraElement =
                     it.createElement("extra").apply {
@@ -68,7 +68,7 @@ internal val settingsResourcePatch =
                     it.createElement("intent").apply {
                         setAttribute("android:targetPackage", "com.twitter.android")
                         setAttribute("android:action", "android.intent.action.VIEW")
-                        setAttribute("android:data", "https://x.com/i/piko/")
+                        setAttribute("android:data", "https://x.com/i/awt/")
                         setAttribute("android:targetClass", "com.twitter.deeplink.implementation.UrlInterpreterActivity")
                         appendChild(extraElement)
                     }
@@ -77,8 +77,8 @@ internal val settingsResourcePatch =
                         setAttribute("android:icon", "@drawable/ic_vector_settings_shortcut")
                         setAttribute("android:enabled", "true")
                         setAttribute("android:shortcutId", "settings")
-                        setAttribute("android:shortcutShortLabel", "@string/piko_title_settings")
-                        setAttribute("android:shortcutLongLabel", "@string/piko_title_settings")
+                        setAttribute("android:shortcutShortLabel", "@string/awt_title_settings")
+                        setAttribute("android:shortcutLongLabel", "@string/awt_title_settings")
                         appendChild(intentElement)
                     }
                 it.documentElement.insertBefore(shortcutElement, it.documentElement.firstChild)

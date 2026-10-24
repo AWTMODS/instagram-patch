@@ -32,8 +32,8 @@ body:
   - type: input
     id: patches-version
     attributes:
-      label: Piko patch version
-      description: Version of the Piko patch bundle.
+      label: Awt patch version
+      description: Version of the Awt patch bundle.
     validations:
       required: true
 

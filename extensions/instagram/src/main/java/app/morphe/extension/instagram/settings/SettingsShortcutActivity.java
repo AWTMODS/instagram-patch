@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,12 +12,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 public final class SettingsShortcutActivity extends Activity {
-    private static final String TAG = "PikoSettingsShortcut";
-    private static final String ACTION_OPEN_PIKO_SETTINGS =
-            "app.morphe.extension.instagram.action.OPEN_PIKO_SETTINGS";
+    private static final String TAG = "AwtSettingsShortcut";
+    private static final String ACTION_OPEN_AWT_SETTINGS =
+            "app.morphe.extension.instagram.action.OPEN_AWT_SETTINGS";
 
     private static boolean acceptsAction(String action) {
-        return ACTION_OPEN_PIKO_SETTINGS.equals(action);
+        return ACTION_OPEN_AWT_SETTINGS.equals(action);
     }
 
     @Override
@@ -31,7 +31,7 @@ public final class SettingsShortcutActivity extends Activity {
                 startActivity(target);
             }
         } catch (RuntimeException exception) {
-            Log.e(TAG, "Failed to open Piko settings from the launcher shortcut", exception);
+            Log.e(TAG, "Failed to open Awt settings from the launcher shortcut", exception);
         } finally {
             finish();
         }

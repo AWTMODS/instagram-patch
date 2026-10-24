@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -78,9 +78,9 @@ val disableScreenshotDetection =
                         index,
                         """
                         $PREF_CALL v$freeRegister
-                        if-nez v$freeRegister, :piko
+                        if-nez v$freeRegister, :awt
                         """.trimIndent(),
-                        ExternalLabel("piko", nextConstInstruction),
+                        ExternalLabel("awt", nextConstInstruction),
                     )
 
                     val secureWindowState = AddFlagsToWindowFingerprint.method
@@ -107,7 +107,7 @@ val disableScreenshotDetection =
                             0,
                             """
                             ${PREF_CALL} v0
-                            if-eqz v0, :piko
+                            if-eqz v0, :awt
                             move-object/from16 v0, p1
                             if-eqz v0, :return
                             const/16 v1, 0x2000
@@ -115,7 +115,7 @@ val disableScreenshotDetection =
                             :return
                             return-void
                             """.trimIndent(),
-                            ExternalLabel("piko", secureMethod.getInstruction(0)),
+                            ExternalLabel("awt", secureMethod.getInstruction(0)),
                         )
                     }
 
@@ -125,10 +125,10 @@ val disableScreenshotDetection =
                             0,
                             """
                             $PREF_CALL v0
-                            if-eqz v0, :piko
+                            if-eqz v0, :awt
                             return-void
                             """.trimIndent(),
-                            ExternalLabel("piko", getInstruction(0)),
+                            ExternalLabel("awt", getInstruction(0)),
                         )
                     }
 
@@ -144,9 +144,9 @@ val disableScreenshotDetection =
                             flagIntIndex,
                             """
                             $PREF_CALL v$freeRegister
-                            if-nez v$freeRegister, :piko
+                            if-nez v$freeRegister, :awt
                             """.trimIndent(),
-                            ExternalLabel("piko", getInstruction(firstIGetObjectAfterFlagIntIndex)),
+                            ExternalLabel("awt", getInstruction(firstIGetObjectAfterFlagIntIndex)),
                         )
                     }
 

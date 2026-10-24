@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -135,7 +135,7 @@ val disableAutoScrollPatch =
                 )
                 instructions.withIndex().filter { it.value.opcode == Opcode.RETURN_VOID }.map { it.index }
                     .reversed().forEach {
-                        replaceInstruction(it, "invoke-virtual/range {p0 .. p0}, $definingClass->pikoRetryTimelinePosition()V")
+                        replaceInstruction(it, "invoke-virtual/range {p0 .. p0}, $definingClass->awtRetryTimelinePosition()V")
                         addInstructions(it + 1, "return-void")
                     }
             }
@@ -186,7 +186,7 @@ internal fun preserveTimelineCache(forYouType: Int) {
         } != 1
     ) throw PatchException("Unexpected clear-cache instruction dispatch")
 
-    val fieldName = "pikoHomeFetchType"
+    val fieldName = "awtHomeFetchType"
     val field = "${response.classDef.type}->$fieldName:I"
     if (response.classDef.fields.any { it.name == fieldName }) {
         throw PatchException("Home request type field already exists")

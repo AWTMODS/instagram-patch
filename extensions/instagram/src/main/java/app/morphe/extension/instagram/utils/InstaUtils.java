@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -25,7 +25,7 @@ import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.entity.DeveloperOptions;
 import app.morphe.extension.instagram.patches.customise.font.FontStorage;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.patches.dm.InboxLock;
 import app.morphe.extension.instagram.patches.focusLock.FocusLock;
 
@@ -40,7 +40,7 @@ public class InstaUtils {
     public static boolean deleteRecursive(File file) {
         try {
             if (file == null || !file.exists()) {
-                PikoUtils.toast(str("piko_fail_no_file"));
+                AwtUtils.toast(str("awt_fail_no_file"));
                 return false;
             }
 
@@ -54,7 +54,7 @@ public class InstaUtils {
             }
             return file.delete();
         } catch (RuntimeException e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return false;
     }
@@ -75,14 +75,14 @@ public class InstaUtils {
             fileName += ".txt";
             data = developerOptions.toString();
         }
-        fileDone = PikoUtils.pikoWriteFile(fileName, Constants.DEFAULT_PIKO_FOLDER, data, false);
+        fileDone = AwtUtils.awtWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
         fileDoneTxt = fileDone ? " created" : fileDoneTxt;
-        PikoUtils.toast(fileName + fileDoneTxt);
+        AwtUtils.toast(fileName + fileDoneTxt);
     }
 
     public static void showResetSettingsDialog(Context context) {
         if (FocusLock.isActive()) {
-            PikoUtils.toast(str("piko_focus_lock_blocked_action"));
+            AwtUtils.toast(str("awt_focus_lock_blocked_action"));
             return;
         }
         // A reset would also turn Inbox lock off, so it has to be confirmed first while the lock is up.
@@ -91,10 +91,10 @@ public class InstaUtils {
             return;
         }
         new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(context))
-                .setTitle(str("piko_reset_pref_confirm"))
-                .setNegativeButton(str("piko_cancel"), null)
+                .setTitle(str("awt_reset_pref_confirm"))
+                .setNegativeButton(str("awt_cancel"), null)
                 .setPositiveButton(
-                        str("piko_ok"),
+                        str("awt_ok"),
                         (dialogInterface, which) -> deletePref()
                 )
                 .show();
@@ -104,10 +104,10 @@ public class InstaUtils {
         // The font file lives outside the preferences, so a reset removes it separately.
         FontStorage.delete();
         if(Pref.clearAllPreferences()){
-            PikoUtils.toast(str("piko_reset_pref_success"));
+            AwtUtils.toast(str("awt_reset_pref_success"));
             Utils.restartApp(Utils.getContext());
         }else{
-            PikoUtils.toast(str("piko_reset_pref_failed"));
+            AwtUtils.toast(str("awt_reset_pref_failed"));
         }
     }
 
@@ -115,7 +115,7 @@ public class InstaUtils {
         Context context = Utils.getContext();
 
         if (!Utils.isNetworkConnected()) {
-            PikoUtils.toast(str("piko_no_internet"));
+            AwtUtils.toast(str("awt_no_internet"));
             return;
         }
         Utils.runOnBackgroundThread(() -> {
@@ -124,14 +124,14 @@ public class InstaUtils {
                 HttpURLConnection connection = Requester.getConnectionFromRoute(host, route);
                 String response = Requester.parseString(connection);
 
-                boolean fileWritten = PikoUtils.writeFile(outputFile, response.getBytes(), false);
+                boolean fileWritten = AwtUtils.writeFile(outputFile, response.getBytes(), false);
 
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (!fileWritten) {
-                        PikoUtils.toast(str("piko_download_failed_media") + outputFile.getName());
+                        AwtUtils.toast(str("awt_download_failed_media") + outputFile.getName());
                         return;
                     }
-                    PikoUtils.toast(str("piko_downloaded_media") + outputFile.getName());
+                    AwtUtils.toast(str("awt_downloaded_media") + outputFile.getName());
 
                     if (onComplete != null) {
                         onComplete.run();
@@ -139,8 +139,8 @@ public class InstaUtils {
                 });
 
             } catch (Exception e) {
-                PikoUtils.logger(e);
-                PikoUtils.toast(str("piko_download_failed_media") + outputFile.getName());
+                AwtUtils.logger(e);
+                AwtUtils.toast(str("awt_download_failed_media") + outputFile.getName());
             }
         });
     }

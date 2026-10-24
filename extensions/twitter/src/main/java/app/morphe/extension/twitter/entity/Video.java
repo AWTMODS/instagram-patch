@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -7,7 +7,7 @@
 package app.morphe.extension.twitter.entity;
 
 import app.morphe.extension.twitter.entity.Debug;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +29,7 @@ public class Video extends Debug {
                 return matcher.group(1);
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
 
         return null;
@@ -80,7 +80,7 @@ public class Video extends Debug {
                     + ", getThumbnail()=" + this.getThumbnail() + ", getExtension()=" + this.getExtension() +", getResolution()=" +this.getResolution()+"]";
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return e.getMessage();
         }
 

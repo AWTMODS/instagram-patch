@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -104,12 +104,12 @@ val hookReelOverflowMenuButton =
                     move-object/from16 v$mediaRegister, v$mediaParameter
                     move-object/from16 v$indexRegister, v$stateParameter
                     iget-object v$indexRegister, v$indexRegister, $mediaExtraDataField
-                    if-eqz v$indexRegister, :piko_no_carousel_state
+                    if-eqz v$indexRegister, :awt_no_carousel_state
                     iget v$indexRegister, v$indexRegister, $CURRENT_MEDIA_FIELD
-                    goto :piko_carousel_index_ready
-                    :piko_no_carousel_state
+                    goto :awt_carousel_index_ready
+                    :awt_no_carousel_state
                     const/4 v$indexRegister, 0x0
-                    :piko_carousel_index_ready
+                    :awt_carousel_index_ready
                     invoke-static {v$contextRegister,v$builderRegister,v$mediaRegister,v$indexRegister},$ADD_REEL_BTN_OVERFLOW_MENU_BUTTON_CLASS->includeCustomReelOverflowButtons(Landroid/content/Context;Ljava/lang/Object;Ljava/lang/Object;I)V
                     """.trimIndent(),
                 )

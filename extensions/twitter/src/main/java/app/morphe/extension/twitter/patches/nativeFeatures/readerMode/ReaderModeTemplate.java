@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -20,12 +20,12 @@ import org.json.JSONArray;
 
 public class ReaderModeTemplate {
 
-  private static final String GROK_ANALYSE_THREAD = str("piko_native_reader_mode_grok_thread");
-  private static final String GROK_ANALYSE_AUTHOR = str("piko_native_reader_mode_grok_author");
-  private static final String TITLE_SOURCE = str("piko_native_reader_mode_source");
-  private static final String TITLE_PUBLISHED = str("piko_native_reader_mode_published");
-  private static final String TITLE_TOT_POSTS = str("piko_native_reader_mode_total_post");
-  private static final String SHARE_POST = str("piko_native_reader_mode_copy_post");
+  private static final String GROK_ANALYSE_THREAD = str("awt_native_reader_mode_grok_thread");
+  private static final String GROK_ANALYSE_AUTHOR = str("awt_native_reader_mode_grok_author");
+  private static final String TITLE_SOURCE = str("awt_native_reader_mode_source");
+  private static final String TITLE_PUBLISHED = str("awt_native_reader_mode_published");
+  private static final String TITLE_TOT_POSTS = str("awt_native_reader_mode_total_post");
+  private static final String SHARE_POST = str("awt_native_reader_mode_copy_post");
 
   private static String getGrokIcon(String slug, String text) {
     return "<a href=\"https://x.com/i/grok?text=" + slug

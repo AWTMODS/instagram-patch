@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -52,16 +52,16 @@ val customFontPatch =
             // resolvers of fonts the user picks inside the app (they take the repository as their
             // first parameter), the app's own text views, Paint.setTypeface calls, creations of
             // platform spans that set their font inside the framework, and the plain text widgets
-            // piko's own code creates.
+            // awt's own code creates.
             val contentFontResolvers = mutableListOf<Method>()
             val textViewClasses = mutableListOf<String>()
             val paintTypefaceCallers = mutableListOf<Method>()
             val platformSpanCreators = mutableListOf<Method>()
-            val pikoWidgetCreators = mutableListOf<Method>()
+            val awtWidgetCreators = mutableListOf<Method>()
             classDefForEach { classDef ->
                 // The font classes call CustomFont and extend the widgets, so must not be hooked.
                 if (classDef.type.startsWith(FONT_EXTENSION_PACKAGE)) return@classDefForEach
-                val isPikoClass = classDef.type.startsWith(EXTENSION_PACKAGE)
+                val isAwtClass = classDef.type.startsWith(EXTENSION_PACKAGE)
                 if (classDef.superclass in PLATFORM_TEXT_WIDGETS) {
                     textViewClasses += classDef.type
                 }
@@ -73,15 +73,15 @@ val customFontPatch =
                     }
                     var callsPaintTypeface = false
                     var createsPlatformSpan = false
-                    var createsPikoWidget = false
+                    var createsAwtWidget = false
                     method.implementation?.instructions?.forEach {
                         callsPaintTypeface = callsPaintTypeface || it.isPaintTypefaceCall()
                         createsPlatformSpan = createsPlatformSpan || it.createsOneOf(PLATFORM_TYPEFACE_SPANS)
-                        createsPikoWidget = createsPikoWidget || (isPikoClass && it.createsOneOf(PIKO_TEXT_WIDGETS))
+                        createsAwtWidget = createsAwtWidget || (isAwtClass && it.createsOneOf(AWT_TEXT_WIDGETS))
                     }
                     if (callsPaintTypeface) paintTypefaceCallers += method
                     if (createsPlatformSpan) platformSpanCreators += method
-                    if (createsPikoWidget) pikoWidgetCreators += method
+                    if (createsAwtWidget) awtWidgetCreators += method
                 }
             }
             contentFontResolvers.forEach { it.getMutableMethod().markAsContentFontResolver() }
@@ -104,7 +104,7 @@ val customFontPatch =
             platformSpanCreators
                 .filter { it.definingClass !in contentFontClasses }
                 .forEach { it.getMutableMethod().replaceCreations(PLATFORM_TYPEFACE_SPANS) }
-            pikoWidgetCreators.forEach { it.getMutableMethod().replaceCreations(PIKO_TEXT_WIDGETS) }
+            awtWidgetCreators.forEach { it.getMutableMethod().replaceCreations(AWT_TEXT_WIDGETS) }
 
             enableSettings("customFont")
         }

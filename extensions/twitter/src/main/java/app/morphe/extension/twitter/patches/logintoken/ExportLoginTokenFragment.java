@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -67,7 +67,7 @@ public class ExportLoginTokenFragment extends Fragment {
                 copySensitiveTextToClipboard(jsonString);
                 Utils.showToastShort(str("copied_to_clipboard"));
             } catch (Exception e) {
-                Utils.showToastLong(str("piko_pref_export_failed", str("accounts_title")));
+                Utils.showToastLong(str("awt_pref_export_failed", str("accounts_title")));
                 Logger.printInfo(() -> "Failed to export account to clipboard", e);
             }
         });
@@ -81,7 +81,7 @@ public class ExportLoginTokenFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("application/json");
-            intent.putExtra(Intent.EXTRA_TITLE, "piko_account_" + account.name);
+            intent.putExtra(Intent.EXTRA_TITLE, "awt_account_" + account.name);
             startActivityForResult(intent, CREATE_FILE_REQUEST_CODE);
         });
 
@@ -103,15 +103,15 @@ public class ExportLoginTokenFragment extends Fragment {
          */
         if (requestCode == CREATE_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data == null || data.getData() == null) {
-                Utils.showToastLong(str("piko_pref_export_no_uri"));
+                Utils.showToastLong(str("awt_pref_export_no_uri"));
                 return;
             }
             try (OutputStream outputStream = getContext().getContentResolver().openOutputStream(data.getData())) {
                 byte[] jsonStringByteArray = ImportExportLoginTokenPatch.createAccountJsonText(accountToSaveToFile).getBytes();
                 outputStream.write(jsonStringByteArray);
-                Utils.showToastShort(str("piko_pref_export_success"));
+                Utils.showToastShort(str("awt_pref_export_success"));
             } catch (Exception e) {
-                Utils.showToastLong(str("piko_pref_export_failed", str("accounts_title")));
+                Utils.showToastLong(str("awt_pref_export_failed", str("accounts_title")));
                 Logger.printInfo(() -> "Failed to export account to a file", e);
             }
         }
@@ -122,7 +122,7 @@ public class ExportLoginTokenFragment extends Fragment {
     private void copySensitiveTextToClipboard(String text) {
         ClipboardManager clipboard =
                 (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("piko_account_token", text);
+        ClipData clip = ClipData.newPlainText("awt_account_token", text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             PersistableBundle extras = new PersistableBundle();
             extras.putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true);

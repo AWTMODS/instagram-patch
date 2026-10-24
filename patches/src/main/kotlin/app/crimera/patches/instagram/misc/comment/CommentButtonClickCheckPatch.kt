@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -44,10 +44,10 @@ val commentButtonClickCheckPatch =
                     move-object/from16 v$freeRegister, p1
                     invoke-static {v$freeRegister, v$arrayListRegister},${HANDLE_COMMENT_BUTTON_EXTENSION_CLASS}->checkOnCommentButtonClick(Ljava/lang/Object;Ljava/util/List;)Z
                     move-result v$freeRegister
-                    if-eqz v$freeRegister, :piko
+                    if-eqz v$freeRegister, :awt
                     return-void
                     """.trimIndent(),
-                    ExternalLabel("piko", getInstruction(arrayListIndex + 1)),
+                    ExternalLabel("awt", getInstruction(arrayListIndex + 1)),
                 )
             }
         }

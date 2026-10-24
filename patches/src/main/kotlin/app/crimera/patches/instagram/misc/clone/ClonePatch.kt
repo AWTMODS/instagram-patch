@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -41,7 +41,7 @@ val clonePatch =
 
         val packageName by stringOption(
             key = "packageName",
-            default = "com.instagram.android.piko",
+            default = "com.instagram.android.awt",
             title = "Package name",
             description = "A new package name for the patched app.",
             required = true,
@@ -51,7 +51,7 @@ val clonePatch =
 
         val appName by stringOption(
             key = "appName",
-            default = "Piko Instagram",
+            default = "Awt Instagram",
             title = "App name",
             description = "A new app name (label). Entering \"Instagram\" will skip changing the app name.",
             required = true,

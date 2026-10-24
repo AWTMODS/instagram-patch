@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -66,37 +66,37 @@ public class ButtonPref extends Preference {
                         return true;
                     }
 
-                    if (key.equals("piko_export_dev_overrides") || key.equals("piko_import_dev_overrides") || key.equals("piko_import_id_mapping")
-                            || key.equals("piko_export_pref") || key.equals("piko_import_pref")
-                            || key.equals("piko_download_set_path") || key.equals("piko_pref_add_font")) {
+                    if (key.equals("awt_export_dev_overrides") || key.equals("awt_import_dev_overrides") || key.equals("awt_import_id_mapping")
+                            || key.equals("awt_export_pref") || key.equals("awt_import_pref")
+                            || key.equals("awt_download_set_path") || key.equals("awt_pref_add_font")) {
                         ActivityHook.launchFragment((Activity) context, key);
 
-                    } else if (key.equals("piko_reset_pref")) {
+                    } else if (key.equals("awt_reset_pref")) {
                         InstaUtils.showResetSettingsDialog(context);
 
-                    } else if (key.equals("piko_focus_lock_action")) {
+                    } else if (key.equals("awt_focus_lock_action")) {
                         FocusLockDialogs.onActionPressed(context, ButtonPref.this);
 
-                    } else if (key.equals("piko_delete_analytics_cache")) {
+                    } else if (key.equals("awt_delete_analytics_cache")) {
                         Block.deleteAnalyticsCacheFolder();
 
-                    } else if (key.equals("piko_pref_delete_font")) {
+                    } else if (key.equals("awt_pref_delete_font")) {
                         FontStorage.DeleteResult result = FontStorage.delete();
                         Utils.showToastShort(str(
-                                result == FontStorage.DeleteResult.DELETED ? "piko_pref_delete_font_success" :
-                                result == FontStorage.DeleteResult.NOT_FOUND ? "piko_pref_delete_font_warn" :
-                                        "piko_pref_delete_font_fail"));
+                                result == FontStorage.DeleteResult.DELETED ? "awt_pref_delete_font_success" :
+                                result == FontStorage.DeleteResult.NOT_FOUND ? "awt_pref_delete_font_warn" :
+                                        "awt_pref_delete_font_fail"));
 
-                    } else if (key.equals("piko_export_experiment_list")) {
+                    } else if (key.equals("awt_export_experiment_list")) {
                         InstaUtils.decompileExperiments(false);
 
-                    } else if (key.equals("piko_export_experiment_mappings")) {
+                    } else if (key.equals("awt_export_experiment_mappings")) {
                         InstaUtils.decompileExperiments(true);
 
-                    } else if (key.equals("piko_download_id_mapping")) {
+                    } else if (key.equals("awt_download_id_mapping")) {
                         DownloadMapping.downloadMapping();
 
-                    } else if (key.equals("piko_view_saved_instants")) {
+                    } else if (key.equals("awt_view_saved_instants")) {
                         ActivityHook.launchActivity(context,
                                 app.morphe.extension.instagram.patches.instants.InstantsVaultActivity.class);
 
@@ -106,7 +106,7 @@ public class ButtonPref extends Preference {
                     } else if (isFragmentNavigation(key)) {
                         FragmentHook.startFragment(key);
 
-                    } else if (key.equals("piko_rec_flags_refresh_file")) {
+                    } else if (key.equals("awt_rec_flags_refresh_file")) {
                         RecommendedFlags.downloadRecommendedFlagsFile(
                                 recreateActivityOnComplete(context)
                         );
@@ -151,35 +151,35 @@ public class ButtonPref extends Preference {
     }
 
     private static boolean isFragmentNavigation(String key) {
-        return key != null && key.startsWith("piko_frag_");
+        return key != null && key.startsWith("awt_frag_");
     }
 
     private static boolean hasVisibleTrail(String key) {
         return isFragmentNavigation(key)
                 || (key != null
-                && (key.equals("piko_export_dev_overrides")
-                || key.equals("piko_import_dev_overrides")
-                || key.equals("piko_import_id_mapping")
-                || key.equals("piko_export_pref")
-                || key.equals("piko_import_pref")
-                || key.equals("piko_reset_pref")
-                || key.equals("piko_focus_lock_action")
-                || key.equals("piko_download_set_path")
-                || key.equals("piko_delete_analytics_cache")
-                || key.equals("piko_export_experiment_list")
-                || key.equals("piko_export_experiment_mappings")
-                || key.equals("piko_download_id_mapping")
-                || key.equals("piko_rec_flags_refresh_file")
-                || key.equals("piko_view_saved_instants")
-                || key.equals("piko_pref_add_font")
-                || key.equals("piko_pref_delete_font")
+                && (key.equals("awt_export_dev_overrides")
+                || key.equals("awt_import_dev_overrides")
+                || key.equals("awt_import_id_mapping")
+                || key.equals("awt_export_pref")
+                || key.equals("awt_import_pref")
+                || key.equals("awt_reset_pref")
+                || key.equals("awt_focus_lock_action")
+                || key.equals("awt_download_set_path")
+                || key.equals("awt_delete_analytics_cache")
+                || key.equals("awt_export_experiment_list")
+                || key.equals("awt_export_experiment_mappings")
+                || key.equals("awt_download_id_mapping")
+                || key.equals("awt_rec_flags_refresh_file")
+                || key.equals("awt_view_saved_instants")
+                || key.equals("awt_pref_add_font")
+                || key.equals("awt_pref_delete_font")
                 || key.equals("view_deleted_messages")));
     }
 
     private static boolean hasPressedHighlight(String key) {
         return isFragmentNavigation(key)
-                && !Constants.PIKO_FRAGMENT_FOCUS_LOCK.equals(key)
-                && !Constants.PIKO_FRAGMENT_REC_FLAGS.equals(key);
+                && !Constants.AWT_FRAGMENT_FOCUS_LOCK.equals(key)
+                && !Constants.AWT_FRAGMENT_REC_FLAGS.equals(key);
     }
 
     public void setPressedHighlightEnabled(boolean enabled) {
@@ -193,46 +193,46 @@ public class ButtonPref extends Preference {
         if (key == null) {
             return null;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_ADS)) {
+        if (key.equals(Constants.AWT_FRAGMENT_ADS)) {
             return UI.DRAWABLE_ADS_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_GHOST)) {
+        if (key.equals(Constants.AWT_FRAGMENT_GHOST)) {
             return UI.DRAWABLE_GHOST_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_STORY)) {
+        if (key.equals(Constants.AWT_FRAGMENT_STORY)) {
             return UI.DRAWABLE_STORY_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_LINKS)) {
+        if (key.equals(Constants.AWT_FRAGMENT_LINKS)) {
             return UI.DRAWABLE_LINK_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_DISTRACTION_FREE)) {
+        if (key.equals(Constants.AWT_FRAGMENT_DISTRACTION_FREE)) {
             return UI.DRAWABLE_FRAME_CROSSED_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_MISC)) {
+        if (key.equals(Constants.AWT_FRAGMENT_MISC)) {
             return UI.DRAWABLE_SHAPES_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_DOWNLOAD_MEDIA)) {
+        if (key.equals(Constants.AWT_FRAGMENT_DOWNLOAD_MEDIA)) {
             return UI.DRAWABLE_DOWNLOAD_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_NAV_BTNS)) {
+        if (key.equals(Constants.AWT_FRAGMENT_NAV_BTNS)) {
             return UI.DRAWABLE_STACK_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_DEV_OPTIONS)) {
+        if (key.equals(Constants.AWT_FRAGMENT_DEV_OPTIONS)) {
             return UI.DRAWABLE_GEAR_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_ABOUT)) {
+        if (key.equals(Constants.AWT_FRAGMENT_ABOUT)) {
             return UI.DRAWABLE_DEBUG_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_ACTION_BAR)) {
+        if (key.equals(Constants.AWT_FRAGMENT_ACTION_BAR)) {
             return UI.DRAWABLE_COLLECTIONS_ICON;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_DM)) {
+        if (key.equals(Constants.AWT_FRAGMENT_DM)) {
             return UI.DRAWABLE_SHARE_TO_DIRECT;
         }
-        if (key.equals(Constants.PIKO_FRAGMENT_FILTER_CONTENT)) {
+        if (key.equals(Constants.AWT_FRAGMENT_FILTER_CONTENT)) {
             return UI.DRAWABLE_SHARE_TO_REEL;
         }
-        if(key.equals(Constants.PIKO_FRAGMENT_INSTANTS)){
+        if(key.equals(Constants.AWT_FRAGMENT_INSTANTS)){
             return UI.DRAWABLE_INSTANTS_ICON;
         }
         return null;

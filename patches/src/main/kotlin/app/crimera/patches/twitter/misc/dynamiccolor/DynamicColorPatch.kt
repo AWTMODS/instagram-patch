@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -134,7 +134,7 @@ val dynamicColorPatch =
             // Dim's translucent cell background is its cell background at 75% alpha (#bf15202b).
             // Resource references can't carry alpha, so wrap the dynamic color in a color state
             // list that applies the same alpha.
-            val translucentDimBackground = "piko_dynamic_dark_surface_container_translucent"
+            val translucentDimBackground = "awt_dynamic_dark_surface_container_translucent"
             val colorV31Directory = get("res/color-v31")
             if (!colorV31Directory.isDirectory) Files.createDirectories(colorV31Directory.toPath())
             FileWriter(colorV31Directory.resolve("$translucentDimBackground.xml")).use {

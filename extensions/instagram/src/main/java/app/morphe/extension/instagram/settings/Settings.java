@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -10,15 +10,15 @@ import app.morphe.extension.crimera.settings.StringSetting;
 import app.morphe.extension.instagram.patches.download.DownloadFileNameFormatter;
 
 public class Settings {
-    public static final BooleanSetting PIKO_DEBUG = new BooleanSetting("piko_debug", false);
+    public static final BooleanSetting AWT_DEBUG = new BooleanSetting("awt_debug", false);
     public static final BooleanSetting MATERIAL_YOU_THEME = new BooleanSetting("material_you_theme", false);
     public static final BooleanSetting AMOLED_THEME = new BooleanSetting("amoled_theme", false);
     public static final StringSetting INSTAGRAM_THEME_MODE =
             new StringSetting("instagram_theme_mode", "-1");
     public static final BooleanSetting INSTAGRAM_THEME_MODE_SYNCHRONIZED =
             new BooleanSetting("instagram_theme_mode_synchronized", false);
-    // It should be true always. It will be handled upon opening the piko settings for the first time.
-    public static final BooleanSetting FIRST_TIME_PIKO = new BooleanSetting("first_time_piko", true);
+    // It should be true always. It will be handled upon opening the awt settings for the first time.
+    public static final BooleanSetting FIRST_TIME_AWT = new BooleanSetting("first_time_awt", true);
 
     public static final BooleanSetting DISABLE_ADS = new BooleanSetting("disable_ads", true);
     public static final BooleanSetting OPEN_LINKS_EXTERNALLY = new BooleanSetting("open_links_externally", true);

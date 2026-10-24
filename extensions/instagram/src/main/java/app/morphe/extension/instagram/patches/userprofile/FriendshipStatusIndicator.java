@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -46,13 +46,13 @@ import com.instagram.common.session.UserSession;
 
 public class FriendshipStatusIndicator {
 
-    private static final String STATUS_TAG = "piko_friendship_status_textview";
+    private static final String STATUS_TAG = "awt_friendship_status_textview";
 
     private static void friendshipStatusDialogBox(Context context, UserFriendshipStatus userFriendshipStatus) {
         InstagramDialogBox dialog = new InstagramDialogBox(context);
 
-        dialog.setPositiveButton(str("piko_ok"), null);
-        dialog.setTitle(str("piko_friendship_status"));
+        dialog.setPositiveButton(str("awt_ok"), null);
+        dialog.setTitle(str("awt_friendship_status"));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
@@ -237,15 +237,15 @@ public class FriendshipStatusIndicator {
                 String indicatorColorHex;
                 boolean useStatusColor = Pref.followBackColorIndicator();
                 if (followed_by && following) {
-                    indicatorText = str("piko_fbi_following_each_other");
+                    indicatorText = str("awt_fbi_following_each_other");
                     indicatorIconDrawable = "fb_ic_friend_confirm_outline_20";
                     indicatorColorHex = useStatusColor ? "#3389DF" : null;
                 } else if (followed_by) {
-                    indicatorText = str("piko_fbi_follows_you");
+                    indicatorText = str("awt_fbi_follows_you");
                     indicatorIconDrawable = "fb_ic_friend_add_outline_20";
                     indicatorColorHex = useStatusColor ? "#3CC176" : null;
                 } else {
-                    indicatorText = str("piko_fbi_doesnt_follows_you");
+                    indicatorText = str("awt_fbi_doesnt_follows_you");
                     indicatorIconDrawable = "fb_ic_friend_remove_outline_20";
                     indicatorColorHex = useStatusColor ? "#EB4941" : null;
                 }

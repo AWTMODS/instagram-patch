@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -28,9 +28,9 @@ public class ImportLoginTokenDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String[] items = {
-                str("piko_login_token_import_from_text"),
-                str("piko_login_token_import_from_file"),
-                str("piko_login_token_import_about")
+                str("awt_login_token_import_from_text"),
+                str("awt_login_token_import_from_file"),
+                str("awt_login_token_import_about")
         };
 
         AlertDialog dialog = new AlertDialog.Builder(getContext())
@@ -68,7 +68,7 @@ public class ImportLoginTokenDialogFragment extends DialogFragment {
         // Import from file
         if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data == null || data.getData() == null) {
-                str("piko_pref_import_no_uri");
+                str("awt_pref_import_no_uri");
                 return;
             }
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(getContext().getContentResolver().openInputStream(data.getData())))) {

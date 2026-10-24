@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -60,7 +60,7 @@ public class FeatureFlagsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (!selecting) ActivityHook.toolbar.setTitle(ResourceUtils.getString("piko_pref_feature_flags"));
+        if (!selecting) ActivityHook.toolbar.setTitle(ResourceUtils.getString("awt_pref_feature_flags"));
         updateSelectionBack();
     }
 
@@ -113,19 +113,19 @@ public class FeatureFlagsFragment extends Fragment {
         input.setSingleLine(true);
         input.setInputType(android.text.InputType.TYPE_CLASS_TEXT
                 | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        input.setHint(ResourceUtils.getString("piko_pref_flag_name"));
+        input.setHint(ResourceUtils.getString("awt_pref_flag_name"));
         return input;
     }
 
     private boolean validateFlag(EditText input, int editingPosition) {
         String name = input.getText().toString().trim();
         if (!FeatureFlagCatalog.isValidName(name)) {
-            input.setError(ResourceUtils.getString("piko_pref_flag_invalid_name"));
+            input.setError(ResourceUtils.getString("awt_pref_flag_invalid_name"));
             return false;
         }
         for (int i = 0; i < flags.size(); i++) {
             if (i != editingPosition && flags.get(i).getName().trim().equals(name)) {
-                input.setError(ResourceUtils.getString("piko_pref_flag_already_added"));
+                input.setError(ResourceUtils.getString("awt_pref_flag_already_added"));
                 return false;
             }
         }
@@ -146,7 +146,7 @@ public class FeatureFlagsFragment extends Fragment {
             return;
         }
         new AlertDialog.Builder(getContext())
-                .setTitle(ResourceUtils.getString("piko_pref_flag_verify_name"))
+                .setTitle(ResourceUtils.getString("awt_pref_flag_verify_name"))
                 .setItems(suggestions.toArray(new String[0]), (dialog, which) -> {
                     input.setText(suggestions.get(which));
                     if (validateFlag(input, editingPosition)) save.run();
@@ -158,18 +158,18 @@ public class FeatureFlagsFragment extends Fragment {
         List<FeatureFlagAudit.Issue> issues = FeatureFlagAudit.inspect(flags,
                 new FeatureFlagCatalog(FeatureSwitchPatch.FLAGS_SEARCH, flags));
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle(ResourceUtils.getString("piko_pref_check_flags"))
+                .setTitle(ResourceUtils.getString("awt_pref_check_flags"))
                 .setNegativeButton(ResourceUtils.getString("cancel"), null);
         if (issues.isEmpty()) {
-            builder.setMessage(ResourceUtils.getString("piko_pref_flag_check_clear"));
+            builder.setMessage(ResourceUtils.getString("awt_pref_flag_check_clear"));
         } else {
             String[] labels = new String[issues.size()];
             for (int i = 0; i < issues.size(); i++) {
                 FeatureFlagAudit.Issue issue = issues.get(i);
                 String status = issue.copies > 1
-                        ? ResourceUtils.getString("piko_pref_flag_duplicates") + " (" + issue.copies + ")"
+                        ? ResourceUtils.getString("awt_pref_flag_duplicates") + " (" + issue.copies + ")"
                         : ResourceUtils.getString(issue.suggestions.isEmpty()
-                                ? "piko_pref_flag_unverified_short" : "piko_pref_flag_typo_short");
+                                ? "awt_pref_flag_unverified_short" : "awt_pref_flag_typo_short");
                 labels[i] = status + "\n" + flags.get(issue.position).getName();
             }
             builder.setItems(labels, (dialog, which) -> showFlagIssue(adapter, issues.get(which)));
@@ -180,30 +180,30 @@ public class FeatureFlagsFragment extends Fragment {
     private void showFlagIssue(FeatureFlagAdapter adapter, FeatureFlagAudit.Issue issue) {
         FeatureFlag flag = flags.get(issue.position);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle(ResourceUtils.getString("piko_pref_check_flags"))
+                .setTitle(ResourceUtils.getString("awt_pref_check_flags"))
                 .setNegativeButton(ResourceUtils.getString("cancel"), null);
         if (issue.copies > 1) {
-            String message = flag.getName() + "\n\n" + ResourceUtils.getString("piko_pref_flag_duplicates") + ": " + issue.copies + "\n\n"
-                    + ResourceUtils.getString(issue.conflicting ? "piko_pref_flag_merge_conflict" : "piko_pref_flag_merge_same");
+            String message = flag.getName() + "\n\n" + ResourceUtils.getString("awt_pref_flag_duplicates") + ": " + issue.copies + "\n\n"
+                    + ResourceUtils.getString(issue.conflicting ? "awt_pref_flag_merge_conflict" : "awt_pref_flag_merge_same");
             if (!issue.conflicting) message += "\n" + ResourceUtils.getString(flag.getEnabled()
-                    ? "piko_pref_flags_enable" : "piko_pref_flags_disable");
+                    ? "awt_pref_flags_enable" : "awt_pref_flags_disable");
             builder.setMessage(message);
             if (issue.conflicting) {
-                builder.setPositiveButton(ResourceUtils.getString("piko_pref_flag_keep_on"),
+                builder.setPositiveButton(ResourceUtils.getString("awt_pref_flag_keep_on"),
                         (dialog, which) -> mergeFlagDuplicates(adapter, flag.getName(), true));
-                builder.setNeutralButton(ResourceUtils.getString("piko_pref_flag_keep_off"),
+                builder.setNeutralButton(ResourceUtils.getString("awt_pref_flag_keep_off"),
                         (dialog, which) -> mergeFlagDuplicates(adapter, flag.getName(), false));
             } else {
-                builder.setPositiveButton(ResourceUtils.getString("piko_pref_flag_merge"),
+                builder.setPositiveButton(ResourceUtils.getString("awt_pref_flag_merge"),
                         (dialog, which) -> mergeFlagDuplicates(adapter, flag.getName(), flag.getEnabled()));
             }
         } else {
-            String message = flag.getName() + "\n\n" + ResourceUtils.getString("piko_pref_flag_unknown");
+            String message = flag.getName() + "\n\n" + ResourceUtils.getString("awt_pref_flag_unknown");
             if (!issue.suggestions.isEmpty()) message += "\n\n"
-                    + ResourceUtils.getString("piko_pref_flag_suggested_name") + "\n"
+                    + ResourceUtils.getString("awt_pref_flag_suggested_name") + "\n"
                     + String.join("\n", issue.suggestions);
             builder.setMessage(message)
-                    .setPositiveButton(ResourceUtils.getString("piko_pref_edit_flag_title"),
+                    .setPositiveButton(ResourceUtils.getString("awt_pref_edit_flag_title"),
                             (dialog, which) -> modifyFlag(adapter, issue.position));
         }
         builder.show();
@@ -220,7 +220,7 @@ public class FeatureFlagsFragment extends Fragment {
             FeatureFlag flag = flags.get(position);
 
             AlertDialog.Builder dia = new AlertDialog.Builder(getContext());
-            dia.setTitle(ResourceUtils.getString("piko_pref_edit_flag_title"));
+            dia.setTitle(ResourceUtils.getString("awt_pref_edit_flag_title"));
 
             LinearLayout ln = new LinearLayout(getContext());
             ln.setPadding(50, 50, 50, 50);
@@ -261,7 +261,7 @@ public class FeatureFlagsFragment extends Fragment {
 
     private void searchFlagsDialog(FeatureFlagAdapter parentAdapter) {
         AlertDialog.Builder dia = new AlertDialog.Builder(getContext());
-        dia.setTitle(ResourceUtils.getString("piko_pref_add_flag_title"));
+        dia.setTitle(ResourceUtils.getString("awt_pref_add_flag_title"));
 
         @SuppressLint({"NewApi", "LocalSuppress"}) View view = getLayoutInflater().inflate(
                 ResourceUtils.getIdentifier(ResourceType.LAYOUT, "search_dialog"), null);
@@ -293,7 +293,7 @@ public class FeatureFlagsFragment extends Fragment {
 
         dia.setView(view);
         dia.setNegativeButton(ResourceUtils.getString("cancel"), null);
-        dia.setPositiveButton(ResourceUtils.getString("piko_pref_add_selected_flags"), (dialogInterface, which) -> {
+        dia.setPositiveButton(ResourceUtils.getString("awt_pref_add_selected_flags"), (dialogInterface, which) -> {
             for (String name : catalog.selected()) {
                 if (FeatureFlagCatalog.indexOf(flags, name) < 0) flags.add(new FeatureFlag(name, true));
             }
@@ -307,7 +307,7 @@ public class FeatureFlagsFragment extends Fragment {
             adapter.notifyDataSetChanged();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!catalog.selected().isEmpty());
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(
-                    ResourceUtils.getString("piko_pref_add_selected_flags") + " (" + catalog.selected().size() + ")");
+                    ResourceUtils.getString("awt_pref_add_selected_flags") + " (" + catalog.selected().size() + ")");
         });
 
         dialog.show();
@@ -317,7 +317,7 @@ public class FeatureFlagsFragment extends Fragment {
     public void addFlag(FeatureFlagAdapter adapter, Bundle bundle) {
         boolean defaultFlagValue = true;
         AlertDialog.Builder dia = new AlertDialog.Builder(getContext());
-        dia.setTitle(ResourceUtils.getString("piko_pref_add_flag_title"));
+        dia.setTitle(ResourceUtils.getString("awt_pref_add_flag_title"));
 
         LinearLayout ln = new LinearLayout(getContext());
         ln.setPadding(50, 50, 50, 50);
@@ -333,7 +333,7 @@ public class FeatureFlagsFragment extends Fragment {
         final boolean flagValue = defaultFlagValue;
         dia.setPositiveButton(ResourceUtils.getString("save"), null);
 
-        dia.setNeutralButton(ResourceUtils.getString("piko_pref_search_flags"), ((dialogInterface, i) -> {
+        dia.setNeutralButton(ResourceUtils.getString("awt_pref_search_flags"), ((dialogInterface, i) -> {
             searchFlagsDialog(adapter);
         }));
 
@@ -406,8 +406,8 @@ public class FeatureFlagsFragment extends Fragment {
         addButton.setVisibility(selecting ? View.GONE : View.VISIBLE);
         flagToolbar.getMenu().removeGroup(FLAG_MENU_GROUP);
         flagToolbar.setTitle(selecting ? String.format(java.util.Locale.getDefault(),
-                ResourceUtils.getString("piko_pref_flags_selected"), selection.size())
-                : ResourceUtils.getString("piko_pref_feature_flags"));
+                ResourceUtils.getString("awt_pref_flags_selected"), selection.size())
+                : ResourceUtils.getString("awt_pref_feature_flags"));
         Runnable finish = () -> {
             selecting = false;
             selection.clear();
@@ -420,11 +420,11 @@ public class FeatureFlagsFragment extends Fragment {
             else getActivity().onBackPressed();
         });
         if (!selecting) {
-            toolbarItem("piko_pref_select_flags", false, true, () -> {
+            toolbarItem("awt_pref_select_flags", false, true, () -> {
                 selecting = true;
                 refreshToolbar(adapter, addButton);
             });
-            toolbarItem("piko_pref_check_flags", false, true, () -> checkFlags(adapter));
+            toolbarItem("awt_pref_check_flags", false, true, () -> checkFlags(adapter));
             android.graphics.drawable.Drawable overflow = flagToolbar.getContext().getDrawable(
                     ResourceUtils.getIdentifier(ResourceType.DRAWABLE, "ic_vector_overflow"));
             if (overflow != null) {
@@ -436,7 +436,7 @@ public class FeatureFlagsFragment extends Fragment {
         } else {
             toolbarItem("remove", true, selection.size() > 0, () ->
                     new AlertDialog.Builder(getContext())
-                            .setMessage(ResourceUtils.getString("piko_pref_flags_remove_selected") + " (" + selection.size() + ")")
+                            .setMessage(ResourceUtils.getString("awt_pref_flags_remove_selected") + " (" + selection.size() + ")")
                             .setNegativeButton(ResourceUtils.getString("cancel"), null)
                             .setPositiveButton(ResourceUtils.getString("remove"), (dialog, which) -> {
                                 selection.remove(flags);

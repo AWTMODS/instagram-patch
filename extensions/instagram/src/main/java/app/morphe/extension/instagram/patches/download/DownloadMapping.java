@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -18,7 +18,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 
 import app.morphe.extension.shared.Utils;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.entity.InstagramDialogBox;
 import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.instagram.constants.UI;
@@ -32,17 +32,17 @@ public class DownloadMapping {
     private static void getMappingsDialogBox(Context context) {
         InstagramDialogBox dialog = new InstagramDialogBox(context);
 
-        dialog.setNegativeButton(str("piko_cancel"),null);
+        dialog.setNegativeButton(str("awt_cancel"),null);
 
-        dialog.setPositiveButton(str("piko_download_id_mapping"), new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton(str("awt_download_id_mapping"), new DialogInterface.OnClickListener() {
             public final void onClick(DialogInterface dialogInterface, int i) {
                 DownloadMapping.downloadMapping();
             }
         });
 
 
-        dialog.setTitle(str("piko_missing_mapping_file"));
-        dialog.setMessage(str("piko_missing_mapping_file_desc"));
+        dialog.setTitle(str("awt_missing_mapping_file"));
+        dialog.setMessage(str("awt_missing_mapping_file_desc"));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
@@ -62,8 +62,8 @@ public class DownloadMapping {
                 return fileSizeInBytes > limitInBytes;
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
-            PikoUtils.toast(e.getMessage());
+            AwtUtils.logger(e);
+            AwtUtils.toast(e.getMessage());
         }
         return false;
 
@@ -76,12 +76,12 @@ public class DownloadMapping {
                 DownloadMapping.getMappingsDialogBox(context);
             }
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
     public static void downloadMapping() {
-        String host = Constants.PIKO_MAPPINGS_PATH;
+        String host = Constants.AWT_MAPPINGS_PATH;
         String appVersionName = Utils.getAppVersionName();
         String mappings_filename = appVersionName + ".json";
         File destinationFile = new File(DownloadMapping.mappingsPath);

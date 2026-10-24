@@ -32,7 +32,7 @@
  */
 
 /**
- * Piko changes:
+ * Awt changes:
  * - Changed locale languages
  */
 

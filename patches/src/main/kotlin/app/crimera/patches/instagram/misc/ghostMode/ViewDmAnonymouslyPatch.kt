@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -40,10 +40,10 @@ val viewDmAnonymouslyPatch =
                     """
                     invoke-static {}, $PREF_DESCRIPTOR->viewDmAnonymously()Z
                     move-result v$shouldDisableRegister
-                    if-eqz v$shouldDisableRegister, :piko_continue
+                    if-eqz v$shouldDisableRegister, :awt_continue
                     return-void
                     """.trimIndent(),
-                    ExternalLabel("piko_continue", getInstruction(1)),
+                    ExternalLabel("awt_continue", getInstruction(1)),
                 )
             }
             enableSettings("viewDmAnonymously")

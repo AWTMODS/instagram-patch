@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -15,14 +15,14 @@ import org.w3c.dom.Document
 import org.w3c.dom.Element
 
 private const val STOCK_PRISM_OVERFLOW_STAMP_BACKGROUND =
-    "piko_stock_prism_overflow_stamp_background"
+    "awt_stock_prism_overflow_stamp_background"
 private const val STOCK_LEGACY_OVERFLOW_STAMP_BACKGROUND =
-    "piko_stock_legacy_overflow_stamp_background"
+    "awt_stock_legacy_overflow_stamp_background"
 private const val CREATION_BUTTON_BACKGROUND =
-    "piko_creation_button_background"
+    "awt_creation_button_background"
 private const val STOCK_CREATION_BUTTON_BACKGROUND = "#ff191c1f"
 private const val STOCK_CLIPS_COMPOSER_BACKGROUND =
-    "piko_stock_clips_composer_background"
+    "awt_stock_clips_composer_background"
 private const val STOCK_CLIPS_COMPOSER_BACKGROUND_COLOR = "#ff25292e"
 // This GM3 elevation color and its consumers were removed in newer Instagram resources.
 private const val LEGACY_SURFACE_TINT = "baseline_neutral_10_with_surface_tint_dark_alpha_14"
@@ -277,9 +277,9 @@ internal fun ResourcePatchContext.writeMaterialYouOverlay(night: Boolean): File 
         outputFile =
             get(
                 if (night) {
-                    "assets/piko/material_you_dark.arsc"
+                    "assets/awt/material_you_dark.arsc"
                 } else {
-                    "assets/piko/material_you_light.arsc"
+                    "assets/awt/material_you_light.arsc"
                 },
                 copy = false,
             ),
@@ -293,7 +293,7 @@ internal fun ResourcePatchContext.writeAmoledOverlay(
         sourceManifest = get("AndroidManifest.xml"),
         sourcePublic = get("res/values/public.xml"),
         packageName = packageMetadata.packageName,
-        outputFile = get("assets/piko/amoled.arsc", copy = false),
+        outputFile = get("assets/awt/amoled.arsc", copy = false),
         values = supportedOverlayValues(amoledOverlayValues(snapshot)),
     )
 
@@ -337,7 +337,7 @@ internal fun ResourcePatchContext.writeAmoledMaterialYouOverlay(): File =
         sourceManifest = get("AndroidManifest.xml"),
         sourcePublic = get("res/values/public.xml"),
         packageName = packageMetadata.packageName,
-        outputFile = get("assets/piko/amoled_material_you.arsc", copy = false),
+        outputFile = get("assets/awt/amoled_material_you.arsc", copy = false),
         values = supportedOverlayValues(amoledMaterialYouOverlayValues()),
     )
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -25,7 +25,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 
-private const val RESULT_METHOD = "pikoStorySeenSucceeded"
+private const val RESULT_METHOD = "awtStorySeenSucceeded"
 
 internal fun addStorySeenResultHooks(
     requestBuilder: MutableMethod,
@@ -126,8 +126,8 @@ internal fun addStorySeenResultHooks(
         val failureMethod = stream.methods.single { it.matches(failureReference) }
         val cancelMethod = stream.methods.singleOrNull { it.name == "onCancel" && it.parameterTypes.isEmpty() }
             ?: throw PatchException("Could not identify streaming cancellation")
-        val succeeded = addResultField(stream, "pikoStorySeenResponseOk")
-        val failed = addResultField(stream, "pikoStorySeenResponseFailed")
+        val succeeded = addResultField(stream, "awtStorySeenResponseOk")
+        val failed = addResultField(stream, "awtStorySeenResponseFailed")
         // Streaming responses are processed on a different thread. Keep their outcome on the task,
         // then read it only after run() has finished waiting for the response.
         responseMethod.addInstruction(predicateIndex + 2, "iput-boolean v$resultRegister, v$receiver, $succeeded")
@@ -137,22 +137,22 @@ internal fun addStorySeenResultHooks(
         addResultMethod(streaming, """
             iget-object v0, p0, $streamField
             iget-boolean v1, v0, $failed
-            if-nez v1, :piko_story_request_failed
+            if-nez v1, :awt_story_request_failed
             iget-boolean v0, v0, $succeeded
             return v0
-            :piko_story_request_failed
+            :awt_story_request_failed
             const/4 v0, 0x0
             return v0
         """.trimIndent())
     }
     extensionMethod.addInstructions(0, """
         instance-of p1, p0, $requestType
-        if-eqz p1, :piko_story_result_unavailable
+        if-eqz p1, :awt_story_result_unavailable
         check-cast p0, $requestType
         invoke-virtual {p0}, $requestType->$RESULT_METHOD()Z
         move-result p1
         return p1
-        :piko_story_result_unavailable
+        :awt_story_result_unavailable
         const/4 p1, 0x0
         return p1
     """.trimIndent())

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -48,7 +48,7 @@ import app.morphe.extension.crimera.downloader.MediaDownloader;
 import app.morphe.extension.crimera.downloader.DownloadMetadata;
 import app.morphe.extension.crimera.downloader.DownloadRequest;
 import app.morphe.extension.crimera.downloader.MediaType;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 import com.instagram.common.session.UserSession;
 
@@ -70,10 +70,10 @@ public class DownloadUtils {
         List<MediaInterface> variantList;
         String title = "";
         if(mediaType.equals(MediaType.VIDEO)){
-            title = str("piko_video_variants");
+            title = str("awt_video_variants");
             variantList = currentMediaData.getVideoVariants();
         }else{
-            title = str("piko_image_variants");
+            title = str("awt_image_variants");
             variantList = currentMediaData.getImageVariants();
         }
 
@@ -102,7 +102,7 @@ public class DownloadUtils {
                     );
                     enqueueDownload(context, request);
                 } catch (Exception e) {
-                    PikoUtils.logger(e);
+                    AwtUtils.logger(e);
                     Logger.printException(() -> "Error at buildVariantDialogBox", e);
                     Utils.showToastShort(e.getMessage());
                 }
@@ -111,7 +111,7 @@ public class DownloadUtils {
         });
 
         dialog.setTitle(title);
-        dialog.setNegativeButton(str("piko_close"), (d, which) -> d.dismiss());
+        dialog.setNegativeButton(str("awt_close"), (d, which) -> d.dismiss());
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
 
@@ -130,19 +130,19 @@ public class DownloadUtils {
         InstagramDialogBox dialog = new InstagramDialogBox(context);
 
         ArrayList<String> options = new ArrayList<>();
-        options.add(str("piko_download_current_media"));
-        options.add(str("piko_download_as_image"));
-        if (currentMediaHasAudio) options.add(str("piko_download_audio"));
-        options.add(str("piko_copy_media_link"));
-        options.add(str("piko_image_variants"));
+        options.add(str("awt_download_current_media"));
+        options.add(str("awt_download_as_image"));
+        if (currentMediaHasAudio) options.add(str("awt_download_audio"));
+        options.add(str("awt_copy_media_link"));
+        options.add(str("awt_image_variants"));
         if (isCurrentMediaVideo) {
-            options.add(str("piko_video_variants"));
-            options.add(str("piko_open_video_externally"));
+            options.add(str("awt_video_variants"));
+            options.add(str("awt_open_video_externally"));
         } else {
-            options.add(str("piko_open_image_externally"));
+            options.add(str("awt_open_image_externally"));
         }
 
-        if (carouselSize > 1) options.add(str("piko_download_all"));
+        if (carouselSize > 1) options.add(str("awt_download_all"));
 
         CharSequence[] items = options.toArray(new CharSequence[0]);
 
@@ -153,34 +153,34 @@ public class DownloadUtils {
                     // Doing like this because options are dynamic.
                     String selectedOption = options.get(which);
 
-                    if (selectedOption.equals(str("piko_download_current_media"))) {
+                    if (selectedOption.equals(str("awt_download_current_media"))) {
                         downloadMedia(context, mediaInfo, position, MediaType.ANY);
 
-                    } else if (selectedOption.equals(str("piko_download_as_image"))) {
+                    } else if (selectedOption.equals(str("awt_download_as_image"))) {
                         downloadMedia(context, mediaInfo, position, MediaType.IMAGE);
 
-                    } else if (selectedOption.equals(str("piko_copy_media_link"))) {
+                    } else if (selectedOption.equals(str("awt_copy_media_link"))) {
                         Utils.setClipboard(currentMediaData.getMediaLink());
-                        Utils.showToastShort(str("piko_copied_media_link"));
+                        Utils.showToastShort(str("awt_copied_media_link"));
 
-                    } else if (selectedOption.equals(str("piko_open_video_externally")) || selectedOption.equals(str("piko_open_image_externally"))) {
+                    } else if (selectedOption.equals(str("awt_open_video_externally")) || selectedOption.equals(str("awt_open_image_externally"))) {
                         ActivityHook.handleUrlIntent(isCurrentMediaVideo, currentMediaData.getMediaLink());
 
-                    } else if (selectedOption.equals(str("piko_download_all"))) {
+                    } else if (selectedOption.equals(str("awt_download_all"))) {
                         downloadMedia(context, mediaInfo, -1, MediaType.ANY);
 
-                    } else if (selectedOption.equals(str("piko_download_audio"))) {
+                    } else if (selectedOption.equals(str("awt_download_audio"))) {
                         downloadMedia(context, mediaInfo, position, MediaType.AUDIO);
 
-                    } else if (selectedOption.equals(str("piko_video_variants"))) {
+                    } else if (selectedOption.equals(str("awt_video_variants"))) {
                         buildVariantDialogBox(context, mediaInfo, position, MediaType.VIDEO);
 
-                    } else if (selectedOption.equals(str("piko_image_variants"))) {
+                    } else if (selectedOption.equals(str("awt_image_variants"))) {
                         buildVariantDialogBox(context, mediaInfo, position, MediaType.IMAGE);
 
                     }
                 } catch (Exception e) {
-                    PikoUtils.logger(e);
+                    AwtUtils.logger(e);
                     Logger.printException(() -> "Error at downloadDialogBox", e);
                     Utils.showToastShort(e.getMessage());
                 }
@@ -188,8 +188,8 @@ public class DownloadUtils {
         });
 
 
-        dialog.setTitle(str("piko_download_options"));
-        dialog.setNegativeButton(str("piko_close"), (d, which) -> d.dismiss());
+        dialog.setTitle(str("awt_download_options"));
+        dialog.setNegativeButton(str("awt_close"), (d, which) -> d.dismiss());
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
 
@@ -210,7 +210,7 @@ public class DownloadUtils {
             }
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             Logger.printException(() -> "Error at downloadPost", e);
         }
     }
@@ -218,7 +218,7 @@ public class DownloadUtils {
     // Position is set to -1 if we want to download all medias from the media info object.
     public static void downloadMedia(Context context, MediaData mediaInfo, int position, MediaType mediaType) throws Exception {
         if(!Utils.isNetworkConnected()){
-            Utils.showToastShort(str("piko_no_internet"));
+            Utils.showToastShort(str("awt_no_internet"));
             return;
         }
         MediaDownloader downloader = new MediaDownloader(context);
@@ -316,7 +316,7 @@ public class DownloadUtils {
                     ZoneId.systemDefault()
             );
         } catch (Exception | LinkageError fileNameException) {
-            PikoUtils.logger(fileNameException);
+            AwtUtils.logger(fileNameException);
             Logger.printException(
                     () -> "Could not format download filename",
                     fileNameException
@@ -342,7 +342,7 @@ public class DownloadUtils {
             );
             return new DownloadRequest(mediaUrl, subFolder, fileName, metadata);
         } catch (Exception | LinkageError metadataException) {
-            PikoUtils.logger(metadataException);
+            AwtUtils.logger(metadataException);
             Logger.printException(
                     () -> "Could not collect download metadata",
                     metadataException
@@ -484,7 +484,7 @@ public class DownloadUtils {
 
     private static void enqueueDownload(Context context, DownloadRequest request) {
         if(!Utils.isNetworkConnected()){
-            Utils.showToastShort(str("piko_no_internet"));
+            Utils.showToastShort(str("awt_no_internet"));
             return;
         }
         MediaDownloader downloader = new MediaDownloader(context);
@@ -496,17 +496,17 @@ public class DownloadUtils {
             String packageName = Pref.externalDownloaderPackageName();
             packageName = packageName == null ? "" : packageName.trim();
             if(packageName.isEmpty()){
-                PikoUtils.toast(str("piko_external_downloader_package_name_not_set"));
+                AwtUtils.toast(str("awt_external_downloader_package_name_not_set"));
                 return;
             }
-            if(!PikoUtils.isAppInstalledAndEnabled(packageName)){
-                PikoUtils.toast(str("piko_external_downloader_package_name_not_found"));
+            if(!AwtUtils.isAppInstalledAndEnabled(packageName)){
+                AwtUtils.toast(str("awt_external_downloader_package_name_not_found"));
                 return;
             }
             String link = Links.generatePostLink(mediaObject, currentMediaIndex);
-            PikoUtils.shareTextToPackageName(link, packageName);
+            AwtUtils.shareTextToPackageName(link, packageName);
         } catch (Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             Logger.printException(() -> "Error at externalDownloader", e);
         }
     }

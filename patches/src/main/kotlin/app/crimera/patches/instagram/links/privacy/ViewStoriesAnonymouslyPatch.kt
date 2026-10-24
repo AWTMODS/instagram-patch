@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -292,17 +292,17 @@ val viewStoriesAnonymouslyPatch =
                 check-cast p1, $reelParentClass
                 invoke-virtual {p0}, $excludedItemPredicate
                 move-result p2
-                if-nez p2, :piko_unsupported_story
+                if-nez p2, :awt_unsupported_story
                 invoke-virtual {p0}, $regularStoryPredicate
                 move-result p2
-                if-eqz p2, :piko_unsupported_story
+                if-eqz p2, :awt_unsupported_story
                 iget-object p1, p1, $reelModelField
                 invoke-virtual {p1}, $excludedReelPredicate
                 move-result p2
-                if-nez p2, :piko_unsupported_story
+                if-nez p2, :awt_unsupported_story
                 const/4 p2, 0x1
                 return p2
-                :piko_unsupported_story
+                :awt_unsupported_story
                 const/4 p2, 0x0
                 return p2
                 """.trimIndent(),
@@ -344,29 +344,29 @@ val viewStoriesAnonymouslyPatch =
                 check-cast p2, $reelParentClass
                 invoke-virtual {p1}, $excludedItemPredicate
                 move-result p3
-                if-nez p3, :piko_request_unavailable
+                if-nez p3, :awt_request_unavailable
                 invoke-virtual {p1}, $regularStoryPredicate
                 move-result p3
-                if-eqz p3, :piko_request_unavailable
+                if-eqz p3, :awt_request_unavailable
                 iget-object p3, p1, $mediaField
-                if-eqz p3, :piko_request_unavailable
+                if-eqz p3, :awt_request_unavailable
                 iget-object p2, p2, $reelModelField
                 invoke-virtual {p2}, $excludedReelPredicate
                 move-result p1
-                if-nez p1, :piko_request_unavailable
+                if-nez p1, :awt_request_unavailable
                 iget-object p2, p2, $reelOwnerIdField
                 const-string p1, "itas-android"
                 const p4, -0x18b1a0fe
                 invoke-virtual {p3, p1, p4}, $mediaConversion
                 move-result-object p3
-                if-eqz p3, :piko_request_unavailable
+                if-eqz p3, :awt_request_unavailable
                 new-instance p1, $pendingSeenClass
                 invoke-direct {p1}, $pendingSeenClass-><init>()V
                 invoke-static {p3, p0, p1, p2}, $aggregateMethod
                 invoke-virtual {p1, p0}, $requestBuilder
                 move-result-object p3
                 return-object p3
-                :piko_request_unavailable
+                :awt_request_unavailable
                 const/4 p3, 0x0
                 return-object p3
                 """.trimIndent(),

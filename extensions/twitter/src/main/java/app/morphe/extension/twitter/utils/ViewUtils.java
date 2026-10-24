@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -14,7 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import java.io.OutputStream;
 
 public class ViewUtils {
@@ -50,12 +50,12 @@ public class ViewUtils {
             width = Math.round(width * scale);
             height = Math.round(height * scale);
             if (DEBUG) {
-                PikoUtils.logger("Scaling down bitmap to " + width + "x" + height + " (scale: " + scale + ")");
+                AwtUtils.logger("Scaling down bitmap to " + width + "x" + height + " (scale: " + scale + ")");
             }
         }
 
         if (DEBUG) {
-            PikoUtils.logger(String.format("Rendering bitmap: %dx%d%s",
+            AwtUtils.logger(String.format("Rendering bitmap: %dx%d%s",
                 width, height, clipRect != null ? " (clipping applied)" : ""));
         }
         
@@ -77,13 +77,13 @@ public class ViewUtils {
             
             view.draw(canvas);
         } catch (OutOfMemoryError e) {
-            PikoUtils.logger("OOM while creating bitmap: " + e.getMessage());
+            AwtUtils.logger("OOM while creating bitmap: " + e.getMessage());
             if (bitmap != null) {
                 bitmap.recycle();
                 bitmap = null;
             }
         } catch (Exception e) {
-            PikoUtils.logger("Error rendering bitmap: " + e.getMessage());
+            AwtUtils.logger("Error rendering bitmap: " + e.getMessage());
             if (bitmap != null) {
                 bitmap.recycle();
                 bitmap = null;

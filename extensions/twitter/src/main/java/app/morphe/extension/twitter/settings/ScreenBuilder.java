@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -28,7 +28,7 @@ import app.morphe.extension.twitter.Pref;
 public class ScreenBuilder {
     private static final SettingsSection[] SETTINGS_SECTIONS = new SettingsSection[]{
             new SettingsSection(
-                    "piko_title_premium",
+                    "awt_title_premium",
                     null,
                     Settings.PREMIUM_SECTION,
                     "ic_vector_twitter",
@@ -36,7 +36,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildPremiumSection
             ),
             new SettingsSection(
-                    "piko_title_download",
+                    "awt_title_download",
                     null,
                     Settings.DOWNLOAD_SECTION,
                     "ic_vector_incoming",
@@ -44,7 +44,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildDownloadSection
             ),
             new SettingsSection(
-                    "piko_title_feature_flags",
+                    "awt_title_feature_flags",
                     null,
                     Settings.FLAGS_SECTION,
                     "ic_vector_flag",
@@ -52,7 +52,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildFeatureFlagsSection
             ),
             new SettingsSection(
-                    "piko_title_ads",
+                    "awt_title_ads",
                     null,
                     Settings.ADS_SECTION,
                     "ic_vector_accessibility_alt",
@@ -60,7 +60,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildAdsSection
             ),
             new SettingsSection(
-                    "piko_title_native",
+                    "awt_title_native",
                     null,
                     Settings.NATIVE_SECTION,
                     "ic_vector_flask_stroke",
@@ -68,7 +68,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildNativeSection
             ),
             new SettingsSection(
-                    "piko_title_misc",
+                    "awt_title_misc",
                     null,
                     Settings.MISC_SECTION,
                     "ic_vector_heartline",
@@ -76,7 +76,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildMiscSection
             ),
             new SettingsSection(
-                    "piko_title_customisation",
+                    "awt_title_customisation",
                     null,
                     Settings.CUSTOMISE_SECTION,
                     "ic_vector_paintbrush_stroke",
@@ -84,7 +84,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildCustomiseSection
             ),
             new SettingsSection(
-                    "piko_title_font",
+                    "awt_title_font",
                     null,
                     Settings.FONT_SECTION,
                     "ic_vector_at",
@@ -92,7 +92,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildFontSection
             ),
             new SettingsSection(
-                    "piko_title_timeline",
+                    "awt_title_timeline",
                     null,
                     Settings.TIMELINE_SECTION,
                     "ic_vector_timeline_stroke",
@@ -100,7 +100,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildTimelineSection
             ),
             new SettingsSection(
-                    "piko_title_logging",
+                    "awt_title_logging",
                     null,
                     Settings.LOGGING_SECTION,
                     "ic_vector_bug_stroke",
@@ -108,7 +108,7 @@ public class ScreenBuilder {
                     ScreenBuilder::buildLoggingSection
             ),
             new SettingsSection(
-                    "piko_title_backup",
+                    "awt_title_backup",
                     null,
                     Settings.BACKUP_SECTION,
                     "ic_vector_layers_stroke",
@@ -116,12 +116,12 @@ public class ScreenBuilder {
                     ScreenBuilder::buildExportSection
             ),
             new SettingsSection(
-                    "piko_title_about",
-                    "piko_pref_patch_info",
+                    "awt_title_about",
+                    "awt_pref_patch_info",
                     Settings.PATCH_INFO,
                     "ic_vector_accessibility_circle",
                     () -> true,
-                    ScreenBuilder::buildPikoSection
+                    ScreenBuilder::buildAwtSection
             )
     };
     private final Context context;
@@ -149,20 +149,20 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_premium"));
+            category = preferenceCategory(str("awt_title_premium"));
 
         if (SettingsStatus.enableUndoPosts) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_undo_posts"),
-                            str("piko_pref_undo_posts_desc"),
+                            str("awt_pref_undo_posts"),
+                            str("awt_pref_undo_posts_desc"),
                             Settings.PREMIUM_UNDO_POSTS
                     )
             );
 
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_undo_posts_btn"),
+                            str("awt_pref_undo_posts_btn"),
                             "",
                             Settings.PREMIUM_UNDO_POSTS.key
                     )
@@ -172,8 +172,8 @@ public class ScreenBuilder {
         if (SettingsStatus.enableForcePip) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_enable_force_pip"),
-                            str("piko_pref_enable_force_pip_desc"),
+                            str("awt_pref_enable_force_pip"),
+                            str("awt_pref_enable_force_pip_desc"),
                             Settings.PREMIUM_ENABLE_FORCE_PIP
                     )
             );
@@ -196,23 +196,23 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_download"));
+            category = preferenceCategory(str("awt_title_download"));
         if (SettingsStatus.changeDownloadEnabled) {
             addPreference(category,helper.listPreference(
-                    str("piko_pref_download_path"),
-                    str("piko_pref_download_path_desc"),
+                    str("awt_pref_download_path"),
+                    str("awt_pref_download_path_desc"),
                     Settings.VID_PUBLIC_FOLDER
             ));
             addPreference(category,helper.editTextPreference(
-                    str("piko_pref_download_folder"),
-                    str("piko_pref_download_folder_desc"),
+                    str("awt_pref_download_folder"),
+                    str("awt_pref_download_folder_desc"),
                     Settings.VID_SUBFOLDER
             ));
         }
         if (SettingsStatus.mediaLinkHandle) {
             addPreference(category,
                     helper.listPreference(
-                            str("piko_pref_download_media_link_handle"),
+                            str("awt_pref_download_media_link_handle"),
                             "",
                             Settings.VID_MEDIA_HANDLE
                     )
@@ -221,14 +221,14 @@ public class ScreenBuilder {
         if (SettingsStatus.externalDownloader) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_external_downloader_toggle"),
+                            str("awt_pref_external_downloader_toggle"),
                             "",
                             Settings.EXTERNAL_DOWNLOADER
                     )
             );
 
             addPreference(category,helper.editTextPreference(
-                    str("piko_pref_external_downloader_package_name"),
+                    str("awt_pref_external_downloader_package_name"),
                     "",
                     Settings.EXTERNAL_DOWNLOADER_PACKAGE_NAME
             ));
@@ -240,11 +240,11 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_ads"));
+            category = preferenceCategory(str("awt_title_ads"));
         if (SettingsStatus.hideAds) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_promoted_posts"),
+                            str("awt_pref_hide_promoted_posts"),
                             "",
                             Settings.ADS_HIDE_PROMOTED_POSTS
                     )
@@ -254,7 +254,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideWTF) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_wtf_section"),
+                            str("awt_pref_wtf_section"),
                             "",
                             Settings.ADS_HIDE_WHO_TO_FOLLOW
                     )
@@ -263,7 +263,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideCTS) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_cts_section"),
+                            str("awt_pref_cts_section"),
                             "",
                             Settings.ADS_HIDE_CREATORS_TO_SUB
                     )
@@ -273,7 +273,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideCTJ) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_ctj_section"),
+                            str("awt_pref_ctj_section"),
                             "",
                             Settings.ADS_HIDE_COMM_TO_JOIN
                     )
@@ -283,7 +283,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideRBMK) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_ryb_section"),
+                            str("awt_pref_ryb_section"),
                             "",
                             Settings.ADS_HIDE_REVISIT_BMK
                     )
@@ -293,7 +293,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideRPinnedPosts) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_pinned_posts_section"),
+                            str("awt_pref_pinned_posts_section"),
                             "",
                             Settings.ADS_HIDE_REVISIT_PINNED_POSTS
                     )
@@ -303,7 +303,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideDetailedPosts) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_unrelated_replies"),
+                            str("awt_pref_hide_unrelated_replies"),
                             "",
                             Settings.ADS_HIDE_DETAILED_POSTS
                     )
@@ -313,7 +313,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hidePremiumPrompt) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_premium_prompt"),
+                            str("awt_pref_hide_premium_prompt"),
                             "",
                             Settings.ADS_HIDE_PREMIUM_PROMPT
                     )
@@ -323,8 +323,8 @@ public class ScreenBuilder {
         if (SettingsStatus.removePremiumUpsell) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_premium_upsell"),
-                            str("piko_pref_hide_premium_upsell_desc"),
+                            str("awt_pref_hide_premium_upsell"),
+                            str("awt_pref_hide_premium_upsell_desc"),
                             Settings.ADS_REMOVE_PREMIUM_UPSELL
                     )
             );
@@ -333,8 +333,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideTopPeopleSearch) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_top_people_search"),
-                            str("piko_pref_top_people_search_desc"),
+                            str("awt_pref_top_people_search"),
+                            str("awt_pref_top_people_search_desc"),
                             Settings.ADS_HIDE_TOP_PEOPLE_SEARCH
                     )
             );
@@ -342,7 +342,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideTodaysNews) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_todays_news"),
+                            str("awt_pref_hide_todays_news"),
                             "",
                             Settings.ADS_REMOVE_TODAYS_NEW
                     )
@@ -352,7 +352,7 @@ public class ScreenBuilder {
         if (SettingsStatus.deleteFromDb) {
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_del_from_db"),
+                            str("awt_pref_del_from_db"),
                             "",
                             Settings.ADS_DEL_FROM_DB.key,
                             null,
@@ -367,16 +367,16 @@ public class ScreenBuilder {
 
         if (!buildCategory) {
             Preference nativePageDescription = new Preference(context);
-            nativePageDescription.setSummary(str("piko_pref_native_page_desc"));
+            nativePageDescription.setSummary(str("awt_pref_native_page_desc"));
             addPreference(nativePageDescription);
         }
 
         LegacyTwitterPreferenceCategory category = null;
         if (SettingsStatus.nativeDownloader) {
-            category = preferenceCategory(str("piko_title_native_downloader"));
+            category = preferenceCategory(str("awt_title_native_downloader"));
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_title_native_downloader_toggle"),
+                            str("awt_title_native_downloader_toggle"),
                             "",
                             Settings.VID_NATIVE_DOWNLOADER
                     )
@@ -384,15 +384,15 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_native_downloader_autodownload_highest_video_res"),
-                            str("piko_pref_native_downloader_autodownload_highest_video_res_desc"),
+                            str("awt_pref_native_downloader_autodownload_highest_video_res"),
+                            str("awt_pref_native_downloader_autodownload_highest_video_res_desc"),
                             Settings.VID_NATIVE_DOWNLOADER_AUTODOWNLOAD_HIGHEST_VIDEO_RES
                     )
             );
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_native_downloader_show_download_icon"),
+                            str("awt_pref_native_downloader_show_download_icon"),
                             "",
                             Settings.VID_NATIVE_DOWNLOADER_SHOW_DOWNLOAD_ICON
                     )
@@ -400,7 +400,7 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_native_downloader_show_copy_icon"),
+                            str("awt_pref_native_downloader_show_copy_icon"),
                             "",
                             Settings.VID_NATIVE_DOWNLOADER_SHOW_COPY_ICON
                     )
@@ -408,7 +408,7 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_native_downloader_show_variants_icon"),
+                            str("awt_pref_native_downloader_show_variants_icon"),
                             "",
                             Settings.VID_NATIVE_DOWNLOADER_SHOW_VARIANTS_ICON
                     )
@@ -417,26 +417,26 @@ public class ScreenBuilder {
             if (SettingsStatus.inlineDownloadButton) {
                 addPreference(category,
                         helper.switchPreference(
-                                str("piko_pref_native_downloader_inline_button"),
-                                str("piko_pref_native_downloader_inline_button_desc"),
+                                str("awt_pref_native_downloader_inline_button"),
+                                str("awt_pref_native_downloader_inline_button_desc"),
                                 Settings.VID_INLINE_DOWNLOAD_BUTTON
                         )
                 );
             }
 
             addPreference(category,helper.listPreference(
-                    str("piko_pref_download_path"),
-                    str("piko_pref_download_path_desc"),
+                    str("awt_pref_download_path"),
+                    str("awt_pref_download_path_desc"),
                     Settings.VID_PUBLIC_FOLDER
             ));
             addPreference(category,helper.editTextPreference(
-                    str("piko_pref_download_folder"),
-                    str("piko_pref_download_folder_desc"),
+                    str("awt_pref_download_folder"),
+                    str("awt_pref_download_folder_desc"),
                     Settings.VID_SUBFOLDER
             ));
             addPreference(category,
                     helper.listPreference(
-                            str("piko_pref_native_downloader_filename_title"),
+                            str("awt_pref_native_downloader_filename_title"),
                             "",
                             Settings.VID_NATIVE_DOWNLOADER_FILENAME
                     )
@@ -444,26 +444,26 @@ public class ScreenBuilder {
         }
 
 
-        category = preferenceCategory(str("piko_title_native_translator"));
+        category = preferenceCategory(str("awt_title_native_translator"));
 
         if (SettingsStatus.nativeTranslator) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_native_translator_toggle"),
+                            str("awt_native_translator_toggle"),
                             "",
                             Settings.NATIVE_TRANSLATOR
                     )
             );
             addPreference(category,
                     helper.listPreference(
-                            str("piko_native_translator_provider"),
+                            str("awt_native_translator_provider"),
                             "",
                             Settings.NATIVE_TRANSLATOR_PROVIDERS
                     )
             );
             addPreference(category,
                     helper.listPreference(
-                            str("piko_native_translator_to_lang"),
+                            str("awt_native_translator_to_lang"),
                             Pref.translatorLanguage(),
                             Settings.NATIVE_TRANSLATOR_LANG
                     )
@@ -472,11 +472,11 @@ public class ScreenBuilder {
         }
 
         if (SettingsStatus.nativeReaderMode) {
-            category = preferenceCategory(str("piko_title_native_reader_mode"));
+            category = preferenceCategory(str("awt_title_native_reader_mode"));
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_native_reader_mode_toggle"),
+                            str("awt_native_reader_mode_toggle"),
                             "",
                             Settings.NATIVE_READER_MODE
                     )
@@ -484,21 +484,21 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_native_reader_mode_pref_text_only_mode"),
+                            str("awt_native_reader_mode_pref_text_only_mode"),
                             "",
                             Settings.NATIVE_READER_MODE_TEXT_ONLY_MODE
                     )
             );
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_native_reader_mode_pref_hide_quoted_posts"),
+                            str("awt_native_reader_mode_pref_hide_quoted_posts"),
                             "",
                             Settings.NATIVE_READER_MODE_HIDE_QUOTED_POST
                     )
             );
             addPreference(category,
                     helper.switchPreference (
-                            str("piko_native_reader_mode_pref_no_grok"),
+                            str("awt_native_reader_mode_pref_no_grok"),
                             "",
                             Settings.NATIVE_READER_MODE_NO_GROK
                     )
@@ -512,7 +512,7 @@ public class ScreenBuilder {
             );
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_native_reader_mode_cache_delete"),
+                            str("awt_native_reader_mode_cache_delete"),
                             "",
                             Settings.RESET_READER_MODE_CACHE
                     )
@@ -521,11 +521,11 @@ public class ScreenBuilder {
         }
 
         if (SettingsStatus.shareImage) {
-            category = preferenceCategory(str("piko_share_image_title"));
+            category = preferenceCategory(str("awt_share_image_title"));
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_share_image_toggle"),
+                            str("awt_share_image_toggle"),
                             "",
                             Settings.SHARE_IMAGE_ENABLED
                     )
@@ -533,19 +533,19 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_share_image_autocleanup"),
-                            str("piko_share_image_autocleanup_desc"),
+                            str("awt_share_image_autocleanup"),
+                            str("awt_share_image_autocleanup_desc"),
                             Settings.SHARE_IMAGE_AUTOCLEANUP
                     )
             );
         }
 
         if (SettingsStatus.nativeTranslator) {
-            category = preferenceCategory(str("piko_title_native_share_menu"));
+            category = preferenceCategory(str("awt_title_native_share_menu"));
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_native_share_menu_toggle"),
+                            str("awt_native_share_menu_toggle"),
                             "",
                             Settings.NATIVE_SHARE_MENU
                     )
@@ -553,7 +553,7 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_native_share_menu_items_to_hide"),
+                            str("awt_native_share_menu_items_to_hide"),
                             "",
                             Settings.NATIVE_SHARE_MENU_ITEMS_TO_HIDE
                     )
@@ -567,12 +567,12 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_misc"));
+            category = preferenceCategory(str("awt_title_misc"));
         if (SettingsStatus.blockUpdateScreen) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_block_update_screen"),
-                            str("piko_pref_block_update_screen_desc"),
+                            str("awt_pref_block_update_screen"),
+                            str("awt_pref_block_update_screen_desc"),
                             Settings.MISC_BLOCK_UPDATE_SCREEN
                     )
             );
@@ -580,7 +580,7 @@ public class ScreenBuilder {
         if (SettingsStatus.enableFontMod) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_chirp_font"),
+                            str("awt_pref_chirp_font"),
                             "",
                             Settings.MISC_FONT
                     )
@@ -589,7 +589,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideFAB) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_fab"),
+                            str("awt_pref_hide_fab"),
                             "",
                             Settings.MISC_HIDE_FAB
                     )
@@ -598,7 +598,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideFABBtns) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_fab_menu"),
+                            str("awt_pref_hide_fab_menu"),
                             "",
                             Settings.MISC_HIDE_FAB_BTN
                     )
@@ -608,7 +608,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideRecommendedUsers) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_rec_users"),
+                            str("awt_pref_rec_users"),
                             "",
                             Settings.MISC_HIDE_RECOMMENDED_USERS
                     )
@@ -618,7 +618,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideViewCount) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_view_count"),
+                            str("awt_pref_hide_view_count"),
                             "",
                             Settings.MISC_HIDE_VIEW_COUNT
                     )
@@ -628,8 +628,8 @@ public class ScreenBuilder {
         if (SettingsStatus.roundOffNumbers) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_round_off_numbers"),
-                            str("piko_pref_round_off_numbers_desc"),
+                            str("awt_pref_round_off_numbers"),
+                            str("awt_pref_round_off_numbers_desc"),
                             Settings.MISC_ROUND_OFF_NUMBERS
                     )
             );
@@ -638,7 +638,7 @@ public class ScreenBuilder {
         if (SettingsStatus.enableDebugMenu) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_debug_menu"),
+                            str("awt_pref_debug_menu"),
                             "",
                             Settings.MISC_DEBUG_MENU
                     )
@@ -648,8 +648,8 @@ public class ScreenBuilder {
         if (SettingsStatus.customSharingDomainEnabled) {
             addPreference(category,
                     helper.editTextPreference(
-                            str("piko_pref_custom_share_domain"),
-                            str("piko_pref_custom_share_domain_desc"),
+                            str("awt_pref_custom_share_domain"),
+                            str("awt_pref_custom_share_domain_desc"),
                             Settings.CUSTOM_SHARING_DOMAIN
                     )
             );
@@ -658,8 +658,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideSocialProof) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_social_proof"),
-                            str("piko_pref_hide_social_proof_desc"),
+                            str("awt_pref_hide_social_proof"),
+                            str("awt_pref_hide_social_proof_desc"),
                             Settings.MISC_HIDE_SOCIAL_PROOF
                     )
             );
@@ -668,8 +668,8 @@ public class ScreenBuilder {
         if (SettingsStatus.removeSearchSuggestions) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_search_suggestion"),
-                            str("piko_pref_search_suggestion_desc"),
+                            str("awt_pref_search_suggestion"),
+                            str("awt_pref_search_suggestion_desc"),
                             Settings.MISC_HIDE_SEARCH_SUGGESTIONS
                     )
             );
@@ -678,8 +678,8 @@ public class ScreenBuilder {
         if (SettingsStatus.pauseSearchSuggestions) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_pause_search_suggestion"),
-                            str("piko_pref_pause_search_suggestion_desc"),
+                            str("awt_pref_pause_search_suggestion"),
+                            str("awt_pref_pause_search_suggestion_desc"),
                             Settings.MISC_PAUSE_SEARCH_SUGGESTIONS
                     )
             );
@@ -692,11 +692,11 @@ public class ScreenBuilder {
 
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_feature_flags"));
+            category = preferenceCategory(str("awt_title_feature_flags"));
 
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_feature_flags"),
+                        str("awt_pref_feature_flags"),
                         "",
                         Settings.FEATURE_FLAGS,
                         "ic_vector_exiting",
@@ -707,8 +707,8 @@ public class ScreenBuilder {
 
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_import_flags"),
-                        str("piko_pref_app_restart_rec"),
+                        str("awt_pref_import_flags"),
+                        str("awt_pref_app_restart_rec"),
                         Settings.IMPORT_FLAGS,
                         "ic_vector_incoming",
                         null
@@ -717,7 +717,7 @@ public class ScreenBuilder {
 
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_export_flags"),
+                        str("awt_pref_export_flags"),
                         "",
                         Settings.EXPORT_FLAGS,
                         "ic_vector_outgoing",
@@ -727,7 +727,7 @@ public class ScreenBuilder {
 
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_reset_flags"),
+                        str("awt_pref_reset_flags"),
                         "",
                         Settings.RESET_FLAGS,
                         "ic_vector_trashcan_stroke",
@@ -744,12 +744,12 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_customisation"));
+            category = preferenceCategory(str("awt_title_customisation"));
         if (SettingsStatus.profileTabCustomisation) {
            addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_profiletabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_profiletabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_PROFILE_TABS
                     )
             );
@@ -757,8 +757,8 @@ public class ScreenBuilder {
         if (SettingsStatus.timelineTabCustomisation) {
            addPreference(category,
                     helper.listPreference(
-                            str("piko_pref_customisation_timelinetabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_timelinetabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_TIMELINE_TABS
                     )
             );
@@ -766,8 +766,8 @@ public class ScreenBuilder {
         if (SettingsStatus.exploreTabCustomisation) {
             addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_exploretabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_exploretabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_EXPLORE_TABS
                     )
             );
@@ -775,8 +775,8 @@ public class ScreenBuilder {
         if (SettingsStatus.sideBarCustomisation) {
            addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_sidebartabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_sidebartabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_SIDEBAR_TABS
                     )
             );
@@ -785,8 +785,8 @@ public class ScreenBuilder {
         if (SettingsStatus.navBarCustomisation) {
            addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_navbartabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_navbartabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_NAVBAR_TABS
                     )
             );
@@ -795,8 +795,8 @@ public class ScreenBuilder {
         if (SettingsStatus.inlineBarCustomisation) {
            addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_inlinetabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_inlinetabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_INLINE_TABS
                     )
             );
@@ -805,8 +805,8 @@ public class ScreenBuilder {
         if (SettingsStatus.searchTabCustomisation) {
             addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_searchtabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_searchtabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_SEARCH_TABS
                     )
             );
@@ -815,8 +815,8 @@ public class ScreenBuilder {
         if (SettingsStatus.notificationTabCustomisation) {
             addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_notificationtabs"),
-                            str("piko_pref_app_restart_rec"),
+                            str("awt_pref_customisation_notificationtabs"),
+                            str("awt_pref_app_restart_rec"),
                             Settings.CUSTOM_NOTIFICATION_TABS
                     )
             );
@@ -825,7 +825,7 @@ public class ScreenBuilder {
         if (SettingsStatus.defaultReplySortFilter) {
            addPreference(category,
                     helper.listPreference(
-                            str("piko_pref_customisation_reply_sorting"),
+                            str("awt_pref_customisation_reply_sorting"),
                             "",
                             Settings.CUSTOM_DEF_REPLY_SORTING
                     )
@@ -835,7 +835,7 @@ public class ScreenBuilder {
         if (SettingsStatus.typeaheadCustomisation) {
             addPreference(category,
                     helper.multiSelectListPref(
-                            str("piko_pref_customisation_search_type_ahead"),
+                            str("awt_pref_customisation_search_type_ahead"),
                             "",
                             Settings.CUSTOM_SEARCH_TYPE_AHEAD
                     )
@@ -845,7 +845,7 @@ public class ScreenBuilder {
         if(SettingsStatus.customPostFontSize) {
             addPreference(category,
                     helper.editTextNumPreference(
-                            str("piko_pref_customisation_post_font_size"),
+                            str("awt_pref_customisation_post_font_size"),
                             String.valueOf(Pref.setPostFontSize()),
                             Settings.CUSTOM_POST_FONT_SIZE
                     ));
@@ -854,7 +854,7 @@ public class ScreenBuilder {
         if (SettingsStatus.appIconCustomisation) {
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_customisation_change_app_icon"),
+                            str("awt_pref_customisation_change_app_icon"),
                             "",
                             Settings.CHANGE_APP_ICON
                     )
@@ -863,8 +863,8 @@ public class ScreenBuilder {
 
         addPreference(category,
                 helper.switchPreference(
-                        str("piko_pref_quick_settings"),
-                        str("piko_pref_quick_settings_summary"),
+                        str("awt_pref_quick_settings"),
+                        str("awt_pref_quick_settings_summary"),
                         Settings.MISC_QUICK_SETTINGS_BUTTON
                 )
         );
@@ -872,8 +872,8 @@ public class ScreenBuilder {
         if (SettingsStatus.moreInfoOnProfile) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_customisation_more_info_on_profile"),
-                            str("piko_pref_customisation_more_info_on_profile_desc"),
+                            str("awt_pref_customisation_more_info_on_profile"),
+                            str("awt_pref_customisation_more_info_on_profile_desc"),
                             Settings.MORE_INFO_ON_PROFILE
                     )
             );
@@ -886,13 +886,13 @@ public class ScreenBuilder {
 
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_font"));
+            category = preferenceCategory(str("awt_title_font"));
 
         if(SettingsStatus.customFont) {
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_add_font"),
-                            str("piko_pref_add_font_desc"),
+                            str("awt_pref_add_font"),
+                            str("awt_pref_add_font_desc"),
                             Settings.ADD_FONT,
                             "ic_vector_pencil_stroke",
                             null
@@ -902,7 +902,7 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_delete_font"),
+                            str("awt_pref_delete_font"),
                             "",
                             Settings.DELETE_FONT,
                             "ic_vector_trashcan_stroke",
@@ -913,8 +913,8 @@ public class ScreenBuilder {
         if(SettingsStatus.customEmojiFont) {
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_add_emoji_font"),
-                            str("piko_pref_add_font_desc"),
+                            str("awt_pref_add_emoji_font"),
+                            str("awt_pref_add_font_desc"),
                             Settings.ADD_EMOJI_FONT,
                             "ic_vector_live_heart_stroke",
                             null
@@ -924,7 +924,7 @@ public class ScreenBuilder {
 
             addPreference(category,
                     helper.buttonPreference(
-                            str("piko_pref_delete_emoji_font"),
+                            str("awt_pref_delete_emoji_font"),
                             "",
                             Settings.DELETE_EMOJI_FONT,
                             "ic_vector_trashcan_stroke",
@@ -943,11 +943,11 @@ public class ScreenBuilder {
             
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_timeline"));
+            category = preferenceCategory(str("awt_title_timeline"));
         if (SettingsStatus.disableAutoTimelineScroll) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_disable_auto_timeline_scroll"),
+                            str("awt_pref_disable_auto_timeline_scroll"),
                             "",
                             Settings.TIMELINE_DISABLE_AUTO_SCROLL
                     )
@@ -956,8 +956,8 @@ public class ScreenBuilder {
         if (SettingsStatus.showSourceLabel) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_show_post_source"),
-                            str("piko_pref_show_post_source_desc"),
+                            str("awt_pref_show_post_source"),
+                            str("awt_pref_show_post_source_desc"),
                             Settings.TIMELINE_SHOW_SOURCE_LABEL
                     )
             );
@@ -965,8 +965,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideLiveThreads) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_live_threads"),
-                            str("piko_pref_hide_live_threads_desc"),
+                            str("awt_pref_hide_live_threads"),
+                            str("awt_pref_hide_live_threads_desc"),
                             Settings.TIMELINE_HIDE_LIVETHREADS
                     )
             );
@@ -974,8 +974,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideBanner) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_banner"),
-                            str("piko_pref_hide_banner_desc"),
+                            str("awt_pref_hide_banner"),
+                            str("awt_pref_hide_banner_desc"),
                             Settings.TIMELINE_HIDE_BANNER
                     )
             );
@@ -983,7 +983,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideInlineBmk) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_bmk_timeline"),
+                            str("awt_pref_hide_bmk_timeline"),
                             "",
                             Settings.TIMELINE_HIDE_BMK_ICON
                     )
@@ -993,8 +993,8 @@ public class ScreenBuilder {
         if (SettingsStatus.showPollResultsEnabled) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_show_poll_result"),
-                            str("piko_pref_show_poll_result_desc"),
+                            str("awt_pref_show_poll_result"),
+                            str("awt_pref_show_poll_result_desc"),
                             Settings.TIMELINE_SHOW_POLL_RESULTS
                     )
             );
@@ -1003,8 +1003,8 @@ public class ScreenBuilder {
         if (SettingsStatus.unshortenlink) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_unshorten_link"),
-                            str("piko_pref_unshorten_link_desc"),
+                            str("awt_pref_unshorten_link"),
+                            str("awt_pref_unshorten_link_desc"),
                             Settings.TIMELINE_UNSHORT_URL
                     )
             );
@@ -1013,7 +1013,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideCommunityNote) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_community_notes"),
+                            str("awt_pref_hide_community_notes"),
                             "",
                             Settings.MISC_HIDE_COMM_NOTES
                     )
@@ -1023,8 +1023,8 @@ public class ScreenBuilder {
         if (SettingsStatus.forceTranslate) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_force_translate"),
-                            str("piko_pref_force_translate_desc"),
+                            str("awt_pref_force_translate"),
+                            str("awt_pref_force_translate_desc"),
                             Settings.TIMELINE_HIDE_FORCE_TRANSLATE
                     )
             );
@@ -1033,8 +1033,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hidePromoteButton) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_quick_promote"),
-                            str("piko_pref_hide_quick_promote_desc"),
+                            str("awt_pref_hide_quick_promote"),
+                            str("awt_pref_hide_quick_promote_desc"),
                             Settings.TIMELINE_HIDE_PROMOTE_BUTTON
                     )
             );
@@ -1043,8 +1043,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideImmersivePlayer) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_immersive_player"),
-                            str("piko_pref_hide_immersive_player_desc"),
+                            str("awt_pref_hide_immersive_player"),
+                            str("awt_pref_hide_immersive_player_desc"),
                             Settings.TIMELINE_HIDE_IMMERSIVE_PLAYER
                     )
             );
@@ -1052,8 +1052,8 @@ public class ScreenBuilder {
         if (SettingsStatus.enableVidAutoAdvance) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_enable_vid_auto_advance"),
-                            str("piko_pref_enable_vid_auto_advance_desc"),
+                            str("awt_pref_enable_vid_auto_advance"),
+                            str("awt_pref_enable_vid_auto_advance_desc"),
                             Settings.TIMELINE_ENABLE_VID_AUTO_ADVANCE
                     )
             );
@@ -1061,7 +1061,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideHiddenReplies) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_hidden_replies"),
+                            str("awt_pref_hide_hidden_replies"),
                             "",
                             Settings.TIMELINE_HIDE_HIDDEN_REPLIES
                     )
@@ -1070,8 +1070,8 @@ public class ScreenBuilder {
         if (SettingsStatus.enableForceHD) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_force_hd"),
-                            str("piko_pref_force_hd_desc"),
+                            str("awt_pref_force_hd"),
+                            str("awt_pref_force_hd_desc"),
                             Settings.TIMELINE_ENABLE_VID_FORCE_HD
                     )
             );
@@ -1079,8 +1079,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideNudgeButton) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_nudge_button"),
-                            str("piko_pref_hide_nudge_button_desc"),
+                            str("awt_pref_hide_nudge_button"),
+                            str("awt_pref_hide_nudge_button_desc"),
                             Settings.TIMELINE_HIDE_NUDGE_BUTTON
                     )
             );
@@ -1088,7 +1088,7 @@ public class ScreenBuilder {
         if (SettingsStatus.showSensitiveMedia) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_show_sensitive_media"),
+                            str("awt_pref_show_sensitive_media"),
                             "",
                             Settings.TIMELINE_SHOW_SENSITIVE_MEDIA
                     )
@@ -1097,7 +1097,7 @@ public class ScreenBuilder {
         if (SettingsStatus.hideCommBadge) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_community_badge"),
+                            str("awt_pref_hide_community_badge"),
                             "",
                             Settings.TIMELINE_HIDE_COMM_BADGE
                     )
@@ -1106,8 +1106,8 @@ public class ScreenBuilder {
         if (SettingsStatus.hideNavbarBadge) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_badge_nav_bar"),
-                            str("piko_pref_hide_badge_nav_bar_desc"),
+                            str("awt_pref_hide_badge_nav_bar"),
+                            str("awt_pref_hide_badge_nav_bar_desc"),
                             Settings.TIMELINE_HIDE_NAVBAR_BADGE
                     )
             );
@@ -1116,16 +1116,16 @@ public class ScreenBuilder {
         if (SettingsStatus.hidePostMetrics) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_post_inline_metrics"),
-                            str("piko_pref_hide_post_inline_metrics_desc"),
+                            str("awt_pref_hide_post_inline_metrics"),
+                            str("awt_pref_hide_post_inline_metrics_desc"),
                             Settings.TIMELINE_HIDE_POST_INLINE_METRICS
                     )
             );
 
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_hide_post_detailed_metrics"),
-                            str("piko_pref_hide_post_detailed_metrics_desc"),
+                            str("awt_pref_hide_post_detailed_metrics"),
+                            str("awt_pref_hide_post_detailed_metrics_desc"),
                             Settings.TIMELINE_HIDE_POST_DETAILED_METRICS
                     )
             );
@@ -1136,13 +1136,13 @@ public class ScreenBuilder {
     public void buildLoggingSection(boolean buildCategory) {
         LegacyTwitterPreferenceCategory category = null;
         if (buildCategory)
-            category = preferenceCategory(str("piko_title_logging"));
+            category = preferenceCategory(str("awt_title_logging"));
 
         if (SettingsStatus.serverResponseLogging) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_server_response_logging"),
-                            str("piko_pref_server_response_logging_desc"),
+                            str("awt_pref_server_response_logging"),
+                            str("awt_pref_server_response_logging_desc"),
                             Settings.LOG_RES
                     )
             );
@@ -1151,8 +1151,8 @@ public class ScreenBuilder {
         if (SettingsStatus.serverResponseLoggingOverwriteFile) {
             addPreference(category,
                     helper.switchPreference(
-                            str("piko_pref_server_response_logging_file_overwrite"),
-                            str("piko_pref_server_response_logging_file_overwrite_desc"),
+                            str("awt_pref_server_response_logging_file_overwrite"),
+                            str("awt_pref_server_response_logging_file_overwrite_desc"),
                             Settings.LOG_RES_OVRD
                     )
             );
@@ -1163,13 +1163,13 @@ public class ScreenBuilder {
     public void buildExportSection(boolean buildCategory){
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_backup"));
+            category = preferenceCategory(str("awt_title_backup"));
 
 
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_import_settings"),
-                        str("piko_pref_app_restart_rec"),
+                        str("awt_pref_import_settings"),
+                        str("awt_pref_app_restart_rec"),
                         Settings.IMPORT_PREF,
                         "ic_vector_incoming",
                         null
@@ -1178,7 +1178,7 @@ public class ScreenBuilder {
         );
        addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_export_settings"),
+                        str("awt_pref_export_settings"),
                         "",
                         Settings.EXPORT_PREF,
                         "ic_vector_outgoing",
@@ -1188,7 +1188,7 @@ public class ScreenBuilder {
 
        addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_reset_settings"),
+                        str("awt_pref_reset_settings"),
                         "",
                         Settings.RESET_PREF,
                         "ic_vector_trashcan_stroke",
@@ -1199,7 +1199,7 @@ public class ScreenBuilder {
        if (SettingsStatus.exportLoginToken) {
            addPreference(category,
                    helper.buttonPreference(
-                           str("piko_pref_import_login_token"),
+                           str("awt_pref_import_login_token"),
                            "",
                            Settings.IMPORT_LOGIN_TOKEN,
                            "ic_vector_passkey",
@@ -1208,7 +1208,7 @@ public class ScreenBuilder {
            );
            addPreference(category,
                    helper.buttonPreference(
-                           str("piko_pref_export_login_token"),
+                           str("awt_pref_export_login_token"),
                            "",
                            Settings.EXPORT_LOGIN_TOKEN,
                            "ic_vector_passkey",
@@ -1218,13 +1218,13 @@ public class ScreenBuilder {
        }
     }
 
-    public void buildPikoSection(boolean buildCategory){
+    public void buildAwtSection(boolean buildCategory){
         LegacyTwitterPreferenceCategory category = null;
         if(buildCategory)
-            category = preferenceCategory(str("piko_title_about"));
+            category = preferenceCategory(str("awt_title_about"));
         addPreference(category,
                 helper.buttonPreference(
-                        str("piko_pref_patch_info"),
+                        str("awt_pref_patch_info"),
                         "",
                         Settings.PATCH_INFO
                 )

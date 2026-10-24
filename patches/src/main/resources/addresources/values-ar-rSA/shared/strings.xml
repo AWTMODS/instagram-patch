@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="piko_title_settings">إعدادات Piko</string>
-    <string name="piko_title_piko_patches">تعديلات Piko</string>
+    <string name="awt_title_settings">إعدادات Awt</string>
+    <string name="awt_title_awt_patches">تعديلات Awt</string>
 </resources>

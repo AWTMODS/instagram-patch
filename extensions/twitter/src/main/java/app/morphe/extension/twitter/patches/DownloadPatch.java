@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.twitter.Pref;
 
@@ -42,7 +42,7 @@ public class DownloadPatch {
             }
 
         }catch (Exception e){
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
     }
 
@@ -54,7 +54,7 @@ public class DownloadPatch {
             downloadClass.invoke(obj1, para1);
         }
         catch (Exception e){
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
     }
 
@@ -67,7 +67,7 @@ public class DownloadPatch {
             return mediaLink;
         }
         catch (Exception e){
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
         return "";
     }
@@ -77,20 +77,20 @@ public class DownloadPatch {
 
             String mediaLink = getMediaLink(para1);
             app.morphe.extension.shared.Utils.setClipboard(mediaLink);
-            PikoUtils.toast(str("link_copied_to_clipboard"));
+            AwtUtils.toast(str("link_copied_to_clipboard"));
         }
         catch (Exception e){
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
     }
 
     private static void shareMediaLink(Object para1) {
         try{
             String mediaLink = getMediaLink(para1);
-            PikoUtils.shareText(mediaLink);
+            AwtUtils.shareText(mediaLink);
         }
         catch (Exception e) {
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
     }
 
@@ -103,9 +103,9 @@ public class DownloadPatch {
         LinearLayout ln = new LinearLayout(context);
         ln.setOrientation(LinearLayout.VERTICAL);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(str("piko_pref_download_media_link_handle"));
+        builder.setTitle(str("awt_pref_download_media_link_handle"));
 
-        String[] choices = {str("download_video_option"), str("piko_pref_download_media_link_handle_copy_media_link"),str("piko_pref_download_media_link_handle_share_media_link"), str("cancel")};
+        String[] choices = {str("download_video_option"), str("awt_pref_download_media_link_handle_copy_media_link"),str("awt_pref_download_media_link_handle_share_media_link"), str("cancel")};
         builder.setItems(choices, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {

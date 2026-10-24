@@ -1,32 +1,32 @@
-# Deep links for piko twitter
+# Deep links for awt twitter
 
-Piko Twitter provides custom deep links.
+Awt Twitter provides custom deep links.
 
-To use the deep links, set the Piko Twitter app to open x.com links. (App Info > Open by default)
+To use the deep links, set the Awt Twitter app to open x.com links. (App Info > Open by default)
 
 (Last updated: April 16, 2026)
 
 ## List of available deep links
 
-Open piko settings:
+Open awt settings:
 
-- https://x.com/i/piko/  
+- https://x.com/i/awt/  
 - https://x.com/i/pikosettings/
 
-Open each section of piko settings:
+Open each section of awt settings:
 
-- https://x.com/i/piko/premium
-- https://x.com/i/piko/download
-- https://x.com/i/piko/flags
+- https://x.com/i/awt/premium
+- https://x.com/i/awt/download
+- https://x.com/i/awt/flags
 - https://x.com/i/addflags
-- https://x.com/i/piko/ads
-- https://x.com/i/piko/native
-- https://x.com/i/piko/misc
-- https://x.com/i/piko/customise
-- https://x.com/i/piko/font
-- https://x.com/i/piko/timeline
-- https://x.com/i/piko/pref
-- https://x.com/i/piko/info
+- https://x.com/i/awt/ads
+- https://x.com/i/awt/native
+- https://x.com/i/awt/misc
+- https://x.com/i/awt/customise
+- https://x.com/i/awt/font
+- https://x.com/i/awt/timeline
+- https://x.com/i/awt/pref
+- https://x.com/i/awt/info
 
 Open X settings:
 

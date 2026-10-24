@@ -374,7 +374,7 @@
           "description": "A new package name for the patched app.",
           "required": true,
           "type": "kotlin.String",
-          "default": "com.instagram.android.piko",
+          "default": "com.instagram.android.awt",
           "values": null
         },
         {
@@ -383,7 +383,7 @@
           "description": "A new app name (label). Entering \"Instagram\" will skip changing the app name.",
           "required": true,
           "type": "kotlin.String",
-          "default": "Piko Instagram",
+          "default": "Awt Instagram",
           "values": null
         }
       ]
@@ -2782,7 +2782,7 @@
     },
     {
       "name": "Import/Export login token",
-      "description": "Adds an feature to export and import the token of accounts. This is useful when logging in on your second device or when re-installing piko.",
+      "description": "Adds an feature to export and import the token of accounts. This is useful when logging in on your second device or when re-installing awt.",
       "default": true,
       "dependencies": [
         "BytecodePatch",
@@ -3903,7 +3903,7 @@
     },
     {
       "name": "Theme",
-      "description": "Adds Material You and AMOLED controls to Piko settings on Android 12 and later. On Android 8–11, it applies a fixed Material You-style theme or an optional AMOLED theme.",
+      "description": "Adds Material You and AMOLED controls to Awt settings on Android 12 and later. On Android 8–11, it applies a fixed Material You-style theme or an optional AMOLED theme.",
       "default": true,
       "dependencies": [
         "BytecodePatch",
@@ -3935,7 +3935,7 @@
         {
           "key": "amoled",
           "title": "Pure-black AMOLED theme for Android 8–11",
-          "description": "Use a fixed pure-black AMOLED theme instead of the fixed Material You-style theme on Android 8–11. On Android 12 and later, use the AMOLED control in Piko settings.",
+          "description": "Use a fixed pure-black AMOLED theme instead of the fixed Material You-style theme on Android 8–11. On Android 12 and later, use the AMOLED control in Awt settings.",
           "required": false,
           "type": "kotlin.Boolean",
           "default": false,

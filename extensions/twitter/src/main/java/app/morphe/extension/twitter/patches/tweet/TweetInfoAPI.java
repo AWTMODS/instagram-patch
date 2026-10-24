@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -12,7 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 
 public class TweetInfoAPI {
     private static JSONObject responseObj = null;
@@ -41,7 +41,7 @@ public class TweetInfoAPI {
 
             int responseCode = connection.getResponseCode();
             if (responseCode != HttpURLConnection.HTTP_OK) {
-                PikoUtils.logger("HTTP error code when fetching tweet source: " + responseCode);
+                AwtUtils.logger("HTTP error code when fetching tweet source: " + responseCode);
                 return empty;
             }
 
@@ -55,7 +55,7 @@ public class TweetInfoAPI {
             return new JSONObject(responseBuilder.toString());
 
         } catch (Exception e) {
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
             return empty;
 
         } finally {
@@ -96,7 +96,7 @@ public class TweetInfoAPI {
                             lock.wait();
                         }catch (InterruptedException e){
                             Thread.currentThread().interrupt();
-                            PikoUtils.logger("Interrupted while waiting: " + e.getMessage());
+                            AwtUtils.logger("Interrupted while waiting: " + e.getMessage());
                         }
                     }
 
@@ -108,7 +108,7 @@ public class TweetInfoAPI {
             }
             }
         }catch(Exception e){
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
         return src;
     }

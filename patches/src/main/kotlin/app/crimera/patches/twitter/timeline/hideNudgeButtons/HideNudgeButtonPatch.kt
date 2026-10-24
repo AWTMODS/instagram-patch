@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -44,11 +44,11 @@ val hideNudgeButtonPatch =
                     """
                     invoke-static {}, $PREF_DESCRIPTOR;->hideNudgeButton()Z
                     move-result v$dummyReg
-                    if-eqz v$dummyReg, :piko
+                    if-eqz v$dummyReg, :awt
                     const/16 v$dummyReg, 0x8
                     invoke-virtual {p1, v$dummyReg}, Landroidx/appcompat/widget/AppCompatButton;->setVisibility(I)V
                     """.trimIndent(),
-                    ExternalLabel("piko", getInstruction(toggleButtonIndex + 1)),
+                    ExternalLabel("awt", getInstruction(toggleButtonIndex + 1)),
                 )
 
                 enableSettings("hideNudgeButton")

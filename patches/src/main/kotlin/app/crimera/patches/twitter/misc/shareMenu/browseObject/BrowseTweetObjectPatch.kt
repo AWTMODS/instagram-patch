@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -24,8 +24,8 @@ val browseObjectPatch =
 
         execute {
             val actionName = "BrowseObject"
-            val prefFunctionName = "pikoDebug"
-            val stringId = "piko_debug"
+            val prefFunctionName = "awtDebug"
+            val stringId = "awt_debug"
             val iconId = "ic_vector_flask_stroke"
             val statusFunctionName = "browseObject"
             shareMenuButtonInjection(actionName, prefFunctionName, stringId, iconId, statusFunctionName)

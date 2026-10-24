@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -82,7 +82,7 @@ public final class DownloadFileNameTemplatePref extends EditTextPref {
         container.addView(previewView, matchWidthWrapHeight());
 
         container.addView(
-                createSectionLabel(context, "piko_download_file_name_variables"),
+                createSectionLabel(context, "awt_download_file_name_variables"),
                 matchWidthWrapHeight()
         );
 
@@ -98,7 +98,7 @@ public final class DownloadFileNameTemplatePref extends EditTextPref {
         tokenRow.setPadding(0, 0, InstagramPreferenceStyle.dp(context, 12), 0);
         DownloadFileNameFormatter.Token[] tokens = DownloadFileNameFormatter.Token.values();
         for (DownloadFileNameFormatter.Token token : tokens) {
-            String label = str("piko_download_file_name_token_" + token.key());
+            String label = str("awt_download_file_name_token_" + token.key());
             TextView field = createInsertButton(context, label, token.placeholder());
             LinearLayout.LayoutParams fieldParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -155,7 +155,7 @@ public final class DownloadFileNameTemplatePref extends EditTextPref {
     @Override
     protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
         super.onPrepareDialogBuilder(builder);
-        builder.setNeutralButton(str("piko_reset"), null);
+        builder.setNeutralButton(str("awt_reset"), null);
     }
 
     @Override
@@ -226,7 +226,7 @@ public final class DownloadFileNameTemplatePref extends EditTextPref {
         button.setBackground(createButtonBackground(context));
         button.setClickable(true);
         button.setFocusable(true);
-        button.setContentDescription(str("piko_download_file_name_insert_token", label));
+        button.setContentDescription(str("awt_download_file_name_insert_token", label));
         button.setOnClickListener(view -> insertComponent(component));
         applyButtonAccessibility(button);
         return button;
@@ -348,7 +348,7 @@ public final class DownloadFileNameTemplatePref extends EditTextPref {
             return;
         }
         if (!valid) {
-            previewView.setText(str("piko_download_file_name_template_invalid"));
+            previewView.setText(str("awt_download_file_name_template_invalid"));
             previewView.setTextColor(errorTextColor(getContext()));
             return;
         }

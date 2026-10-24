@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -78,9 +78,9 @@ val disableCommentsPatch =
                 """
                 $HIDE_COMMENT_BUTTONS
                 move-result v$scratch
-                if-eqz v$scratch, :piko_comments_original
+                if-eqz v$scratch, :awt_comments_original
                 sget-object v$stateRegister, $hiddenField
-                :piko_comments_original
+                :awt_comments_original
                 nop
                 """.trimIndent(),
             )

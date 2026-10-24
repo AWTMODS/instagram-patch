@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -51,10 +51,10 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.constants.UI;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
-import app.morphe.extension.instagram.db.PikoInstantsDb;
+import app.morphe.extension.instagram.db.AwtInstantsDb;
 import app.morphe.extension.instagram.patches.download.DownloadUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -62,7 +62,7 @@ import app.morphe.extension.shared.Utils;
 /**
  * "Saved Instants" screen: shows every instant captured by {@link InstantsDownloadHook} as a grid of
  * thumbnails grouped by the sender (keyed on a stable user id, labelled by username). Tap a tile for
- * download / open / copy (reusing piko's download pipeline); long-press to remove it. Plain
+ * download / open / copy (reusing awt's download pipeline); long-press to remove it. Plain
  * programmatic UI so it has no layout-resource dependency, mirroring DeletedMessagesActivity.
  */
 public class InstantsVaultActivity extends Activity {
@@ -113,7 +113,7 @@ public class InstantsVaultActivity extends Activity {
         int gap = dp(2);
         tileSize = (screenW - gap * (COLUMNS + 1)) / COLUMNS;
 
-        PikoInstantsDb db = PikoInstantsDb.getInstance(this);
+        AwtInstantsDb db = AwtInstantsDb.getInstance(this);
         db.purgeExpired();
         items = db.getAll();
         pruneThumbCache();
@@ -152,7 +152,7 @@ public class InstantsVaultActivity extends Activity {
         EditText search = new EditText(this);
         search.setSingleLine(true);
         search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-        search.setHint(str("piko_search_username"));
+        search.setHint(str("awt_search_username"));
         search.setHintTextColor(themed("igds_color_secondary_text", 0xFFB0B0B0));
         search.setTextColor(themed("igds_color_primary_text", 0xFFFFFFFF));
         search.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
@@ -193,8 +193,8 @@ public class InstantsVaultActivity extends Activity {
         if (visible.isEmpty()) {
             scroll = null;
             content.addView(centeredMessage(items.isEmpty()
-                    ? str("piko_instants_vault_empty")
-                    : str("piko_instants_no_matches")));
+                    ? str("awt_instants_vault_empty")
+                    : str("awt_instants_no_matches")));
             return;
         }
         scroll = new ScrollView(this);
@@ -304,7 +304,7 @@ public class InstantsVaultActivity extends Activity {
     }
 
     private void drop(String mediaId) {
-        PikoInstantsDb.getInstance(this).delete(mediaId);
+        AwtInstantsDb.getInstance(this).delete(mediaId);
         File cached = cacheFile(mediaId);
         if (cached != null) cached.delete();
         for (int i = 0; i < items.size(); i++) {
@@ -347,7 +347,7 @@ public class InstantsVaultActivity extends Activity {
         for (Map.Entry<String, List<String[]>> e : groups.entrySet()) {
             List<String[]> rows = e.getValue();
             String username = rows.get(0)[1];
-            if (username == null || username.isEmpty()) username = str("piko_instants_unknown_user");
+            if (username == null || username.isEmpty()) username = str("awt_instants_unknown_user");
             container.addView(buildHeader(username));
 
             LinearLayout grid = new LinearLayout(this);
@@ -391,7 +391,7 @@ public class InstantsVaultActivity extends Activity {
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 
         TextView unavailable = new TextView(this);
-        unavailable.setText(str("piko_instants_unavailable"));
+        unavailable.setText(str("awt_instants_unavailable"));
         unavailable.setTextColor(themed("igds_color_secondary_text", 0xFFB0B0B0));
         unavailable.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         unavailable.setGravity(Gravity.CENTER);
@@ -420,7 +420,7 @@ public class InstantsVaultActivity extends Activity {
 
         tile.setOnClickListener(v -> showOptions(row));
         tile.setOnLongClickListener(v -> {
-            confirm(str("piko_instants_delete_confirm"), str("piko_delete"), () -> forget(row[0]));
+            confirm(str("awt_instants_delete_confirm"), str("awt_delete"), () -> forget(row[0]));
             return true;
         });
         return tile;
@@ -435,7 +435,7 @@ public class InstantsVaultActivity extends Activity {
         back.setOnClickListener(v -> finish());
 
         TextView title = new TextView(this);
-        title.setText(str("piko_view_saved_instants"));
+        title.setText(str("awt_view_saved_instants"));
         title.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         InstagramPreferenceStyle.applyToolbarLayout(this, bar, back, title, false);
         bar.addView(back);
@@ -443,12 +443,12 @@ public class InstantsVaultActivity extends Activity {
 
         if (!items.isEmpty()) {
             TextView clear = new TextView(this);
-            clear.setText(str("piko_instants_clear_all"));
+            clear.setText(str("awt_instants_clear_all"));
             clear.setTextColor(themed("igds_color_error_or_destructive", 0xFFFF5C5C));
             clear.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            clear.setOnClickListener(v -> confirm(str("piko_instants_clear_all_confirm"), str("piko_instants_clear_all"),
+            clear.setOnClickListener(v -> confirm(str("awt_instants_clear_all_confirm"), str("awt_instants_clear_all"),
                     () -> {
-                        PikoInstantsDb.getInstance(this).clearAll();
+                        AwtInstantsDb.getInstance(this).clearAll();
                         recreate();
                     }));
             bar.addView(clear);
@@ -461,7 +461,7 @@ public class InstantsVaultActivity extends Activity {
         try {
             long ts = Long.parseLong(row[5]);
             if (ts <= 0) return null;
-            return str("piko_saved_on") + " "
+            return str("awt_saved_on") + " "
                     + new SimpleDateFormat("d MMM yyyy, HH:mm", Locale.getDefault()).format(new Date(ts));
         } catch (Exception e) {
             return null;
@@ -479,38 +479,38 @@ public class InstantsVaultActivity extends Activity {
     private void showOptions(String[] row) {
         String url = urlOf(row);
         if (url == null || !url.startsWith("http")) {
-            Toast.makeText(this, str("piko_instants_link_unavailable"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, str("awt_instants_link_unavailable"), Toast.LENGTH_SHORT).show();
             return;
         }
         boolean isVideo = "1".equals(row[4]);
         CharSequence[] options = new CharSequence[] {
-                str("piko_download_current_media"),
-                isVideo ? str("piko_open_video_externally") : str("piko_open_image_externally"),
-                str("piko_copy_media_link"),
+                str("awt_download_current_media"),
+                isVideo ? str("awt_open_video_externally") : str("awt_open_image_externally"),
+                str("awt_copy_media_link"),
         };
         DialogInterface.OnClickListener onPick = (d, which) -> {
             try {
                 if (which == 0) {
-                    String fileName = "piko_instant_" + row[0] + (isVideo ? ".mp4" : ".jpg");
+                    String fileName = "awt_instant_" + row[0] + (isVideo ? ".mp4" : ".jpg");
                     DownloadUtils.downloadMediaUrl(this, url, SUBFOLDER, fileName);
                 } else if (which == 2) {
                     Utils.setClipboard(url);
-                    Utils.showToastShort(str("piko_copied_media_link"));
+                    Utils.showToastShort(str("awt_copied_media_link"));
                 } else {
                     startActivity(Intent.createChooser(
                             new Intent(Intent.ACTION_VIEW, Uri.parse(url)), null));
                 }
             } catch (Exception e) {
-                PikoUtils.logger(e);
+                AwtUtils.logger(e);
             }
         };
 
         // Plain AlertDialog: the IGDS native box needs an Instagram-themed context, which a
-        // standalone piko activity doesn't have (same as DeletedMessagesActivity).
+        // standalone awt activity doesn't have (same as DeletedMessagesActivity).
         // Title carries the date, not setMessage — a message would replace the option list entirely.
         CharSequence saved = savedOn(row);
         new android.app.AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(this))
-                .setTitle(saved == null ? str("piko_download_options") : saved)
+                .setTitle(saved == null ? str("awt_download_options") : saved)
                 .setItems(options, onPick)
                 .show();
     }
@@ -519,7 +519,7 @@ public class InstantsVaultActivity extends Activity {
         new android.app.AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(this))
                 .setMessage(message)
                 .setPositiveButton(positiveText, (d, w) -> onConfirm.run())
-                .setNegativeButton(str("piko_cancel"), null)
+                .setNegativeButton(str("awt_cancel"), null)
                 .show();
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -129,26 +129,26 @@ val disableSwipeToCreatePatch =
                     """
                     $PREF_CALL_DESCRIPTOR->disableSwipeToCreate()Z
                     move-result v1
-                    if-eqz v1, :piko_continue
+                    if-eqz v1, :awt_continue
                     iget-object v1, p1, $reasonField
                     const-string/jumbo v2, "swipe"
                     invoke-virtual {v2, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
                     move-result v1
-                    if-eqz v1, :piko_continue
+                    if-eqz v1, :awt_continue
                     const/4 v2, 0x0
                     cmpl-float v1, v$positionRegister, v2
-                    if-gez v1, :piko_continue
+                    if-gez v1, :awt_continue
                     invoke-direct {p0}, $SWIPE_NAVIGATION_CONTAINER_CLASS->getClampedPosition()F
                     move-result v1
                     cmpl-float v1, v2, v1
-                    if-gtz v1, :piko_continue
+                    if-gtz v1, :awt_continue
                     const/4 v$positionRegister, 0x0
                     invoke-direct {p0}, $getSpringMethod
                     move-result-object v1
                     const-wide/16 v2, 0x0
                     invoke-virtual {v1, v2, v3}, $setSpringVelocityMethod
                     """.trimIndent(),
-                    ExternalLabel("piko_continue", continueInstruction),
+                    ExternalLabel("awt_continue", continueInstruction),
                 )
             }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -37,10 +37,10 @@ public class MoreOptionsOnPostPatch {
 
             ArrayList<String> options = new ArrayList<>();
 
-            options.add(str("piko_copy_post_description"));
-            options.add(str("piko_copy_post_owner_username"));
-            options.add(str("piko_copy_post_owner_fullname"));
-            options.add(str("piko_download_options"));
+            options.add(str("awt_copy_post_description"));
+            options.add(str("awt_copy_post_owner_username"));
+            options.add(str("awt_copy_post_owner_fullname"));
+            options.add(str("awt_download_options"));
             CharSequence[] items = options.toArray(new CharSequence[0]);
 
             dialog.addDialogMenuItems(items, new DialogInterface.OnClickListener() {
@@ -51,24 +51,24 @@ public class MoreOptionsOnPostPatch {
                         String selectedOption = options.get(which);
                         String stringToCopy = null;
 
-                        if (selectedOption.equals(str("piko_copy_post_description"))) {
+                        if (selectedOption.equals(str("awt_copy_post_description"))) {
                             stringToCopy = mediaData.getDescriptionText();
 
-                        } else if (selectedOption.equals(str("piko_copy_post_owner_username"))) {
+                        } else if (selectedOption.equals(str("awt_copy_post_owner_username"))) {
                             UserData userData = mediaData.getUserData();
                             stringToCopy = userData.getUsername();
 
-                        } else if (selectedOption.equals(str("piko_copy_post_owner_fullname"))) {
+                        } else if (selectedOption.equals(str("awt_copy_post_owner_fullname"))) {
                             UserData userData = mediaData.getUserData();
                             stringToCopy = userData.getFullName();
 
-                        } else if (selectedOption.equals(str("piko_download_options"))) {
+                        } else if (selectedOption.equals(str("awt_download_options"))) {
                             DownloadUtils.downloadPost(context, userSession, mediaObject, currentMediaIndex);
 
                         }
                         if (stringToCopy != null && stringToCopy.length() > 0) {
                             Utils.setClipboard(stringToCopy);
-                            Utils.showToastShort(str("piko_copied"));
+                            Utils.showToastShort(str("awt_copied"));
                         }
                     } catch (Exception e) {
                         Logger.printException(() -> "Error at postMoreOptions addDialogMenuItems", e);
@@ -77,8 +77,8 @@ public class MoreOptionsOnPostPatch {
                 }
             });
 
-            dialog.setTitle(str("piko_post_options"));
-            dialog.setNegativeButton(str("piko_close"), (d, which) -> d.dismiss());
+            dialog.setTitle(str("awt_post_options"));
+            dialog.setNegativeButton(str("awt_close"), (d, which) -> d.dismiss());
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
 

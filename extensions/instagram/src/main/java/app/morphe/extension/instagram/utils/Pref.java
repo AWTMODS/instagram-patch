@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -36,15 +36,15 @@ public class Pref {
         return SharedPref.clearAll();
     }
     
-    public static boolean pikoDebug() {
-        return SharedPref.getBooleanPref(Settings.PIKO_DEBUG);
+    public static boolean awtDebug() {
+        return SharedPref.getBooleanPref(Settings.AWT_DEBUG);
     }
 
-    public static boolean firstTimePiko() {
-        return SharedPref.getBooleanPref(Settings.FIRST_TIME_PIKO);
+    public static boolean firstTimeAwt() {
+        return SharedPref.getBooleanPref(Settings.FIRST_TIME_AWT);
     }
-    public static boolean setFirstTimePiko(boolean bool) {
-        return SharedPref.setBooleanPref(Settings.FIRST_TIME_PIKO.key,bool);
+    public static boolean setFirstTimeAwt(boolean bool) {
+        return SharedPref.setBooleanPref(Settings.FIRST_TIME_AWT.key,bool);
     }
 
     public static boolean unlockPlusBenefits() {

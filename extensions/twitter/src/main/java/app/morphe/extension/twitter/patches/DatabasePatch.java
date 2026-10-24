@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -8,7 +8,7 @@ package app.morphe.extension.twitter.patches;
 
 import static app.morphe.extension.shared.StringRef.str;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.shared.ResourceUtils;
 import android.content.Context;
 import com.twitter.util.user.UserIdentifier;
@@ -21,10 +21,10 @@ import android.widget.LinearLayout;
 
 
 public class DatabasePatch {
-    private static final String[] listItems = ResourceUtils.getStringArray("piko_array_db_del_items");
+    private static final String[] listItems = ResourceUtils.getStringArray("awt_array_db_del_items");
 
     private static void logger(Object j){
-        Log.d("piko", j.toString());
+        Log.d("awt", j.toString());
     }
 
     private static String getDBPath(){
@@ -37,7 +37,7 @@ public class DatabasePatch {
         LinearLayout ln = new LinearLayout(context);
         ln.setOrientation(LinearLayout.VERTICAL);
 
-        builder.setTitle(str("piko_pref_db_del_items"));
+        builder.setTitle(str("awt_pref_db_del_items"));
         builder.setMessage(result);
         builder.setNegativeButton(str("ok"), null);
         builder.show();
@@ -52,7 +52,7 @@ public class DatabasePatch {
         LinearLayout ln = new LinearLayout(context);
         ln.setOrientation(LinearLayout.VERTICAL);
 
-        builder.setTitle(str("piko_pref_del_from_db"));
+        builder.setTitle(str("awt_pref_del_from_db"));
         builder.setMultiChoiceItems(listItems, checkedItems, (dialog, which, isChecked) -> {
             checkedItems[which] = isChecked;
             String currentItem = selectedItems.get(which);
@@ -73,7 +73,7 @@ public class DatabasePatch {
             String DATABASE_PATH = getDBPath();
             File f = new File(DATABASE_PATH);
             if (!f.exists() && f.isDirectory()) {
-                PikoUtils.toast(str("piko_pref_db_not_found"));
+                AwtUtils.toast(str("awt_pref_db_not_found"));
                 return result;
             }
             database = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
@@ -141,13 +141,13 @@ public class DatabasePatch {
                     }
                 }
             } else {
-                PikoUtils.toast(str("piko_pref_db_not_open"));
+                AwtUtils.toast(str("awt_pref_db_not_open"));
             }
 
         }
         catch (Exception e){
             logger(e.toString());
-            PikoUtils.toast(e.toString());
+            AwtUtils.toast(e.toString());
         }
         if (database != null && database.isOpen()) {
             database.close();

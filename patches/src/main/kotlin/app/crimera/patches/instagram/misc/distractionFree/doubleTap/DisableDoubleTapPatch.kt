@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -15,10 +15,10 @@ import app.morphe.patcher.patch.bytecodePatch
 internal const val DOUBLE_TAP_PREF_DESCRIPTOR = """
                         $PREF_CALL_DESCRIPTOR->%s()Z
                         move-result v0
-                        if-eqz v0, :piko
+                        if-eqz v0, :awt
                         const v0,0x1
                         return v0
-                        :piko
+                        :awt
                         nop"""
 
 @Suppress("unused")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -43,9 +43,9 @@ val checkMappingsPatch =
                     targetIndex,
                     """ 
                     invoke-static {v$fragmentRegister}, $DOWNLOAD_DESCRIPTOR/DownloadMapping;->checkMappings(Landroidx/fragment/app/Fragment;)V
-                    goto: piko
+                    goto: awt
                     """.trimIndent(),
-                    ExternalLabel("piko", firstGoto16),
+                    ExternalLabel("awt", firstGoto16),
                 )
             }
         }

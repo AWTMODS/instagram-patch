@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ * Copyright (C) 2026 awt <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -13,7 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.settings.preference.fragments.BackupPrefActivity;
 import app.morphe.extension.instagram.settings.preference.fragments.RestorePrefActivity;
 import app.morphe.extension.crimera.downloader.FolderPickerActivity;
@@ -34,26 +34,26 @@ public class ActivityHook {
             context.startActivity(intent);
         } catch (Exception e) {
             Logger.printException(() -> "launchActivity failure", e);
-            PikoUtils.logger(e);
+            AwtUtils.logger(e);
         }
     }
 
-    public static void startPikoActivity(String fragment_name,String title){
-        Context context = PikoUtils.getContext();
+    public static void startAwtActivity(String fragment_name,String title){
+        Context context = AwtUtils.getContext();
         Intent intent = new Intent(context, SettingsActivity.class);
-        intent.putExtra(Constants.PIKO_FRAGMENT_NAME, fragment_name);
-        intent.putExtra(Constants.PIKO_FRAGMENT_TITLE, title);
+        intent.putExtra(Constants.AWT_FRAGMENT_NAME, fragment_name);
+        intent.putExtra(Constants.AWT_FRAGMENT_TITLE, title);
         launchActivity(context,intent);
     }
 
     public static void launchFragment(Context ctx, String bundleKey){
         Intent intent = null;
-        if (bundleKey.equals("piko_export_dev_overrides") || bundleKey.equals("piko_export_pref")) {
+        if (bundleKey.equals("awt_export_dev_overrides") || bundleKey.equals("awt_export_pref")) {
             intent = new Intent(ctx,BackupPrefActivity.class);
-        } else if (bundleKey.equals("piko_import_dev_overrides") || bundleKey.equals("piko_import_id_mapping")  || bundleKey.equals("piko_import_pref")
-                || bundleKey.equals("piko_pref_add_font")) {
+        } else if (bundleKey.equals("awt_import_dev_overrides") || bundleKey.equals("awt_import_id_mapping")  || bundleKey.equals("awt_import_pref")
+                || bundleKey.equals("awt_pref_add_font")) {
             intent = new Intent(ctx,RestorePrefActivity.class);
-        } else if (bundleKey.equals("piko_download_set_path")) {
+        } else if (bundleKey.equals("awt_download_set_path")) {
             intent = new Intent(ctx,FolderPickerActivity.class);
         }
         if(intent!=null){
@@ -64,17 +64,17 @@ public class ActivityHook {
 
     public static void handleUrlIntent(Boolean isVideo,String mediaUrl) {
         String dataType = "image/*";
-        String exportHeaderString = str("piko_open_image_with");
+        String exportHeaderString = str("awt_open_image_with");
         if(isVideo){
             dataType = "video/*";
-            exportHeaderString = str("piko_open_video_with");
+            exportHeaderString = str("awt_open_video_with");
         }
 
         Uri uri = Uri.parse(mediaUrl);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, dataType);
         Intent chooserIntent = Intent.createChooser(intent, exportHeaderString);
-        PikoUtils.launchIntent(chooserIntent);
+        AwtUtils.launchIntent(chooserIntent);
     }
 
 }

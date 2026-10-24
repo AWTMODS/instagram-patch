@@ -971,76 +971,7 @@ public class ScreenBuilder {
     }
 
     public void aboutSection(TreeMap<String, Boolean> flags) {
-
-        String appVersionText = String.format(str("awt_app_version"), Utils.getAppVersionName());
-        String patchVersionText = String.format(str("awt_patch_version"), Utils.getPatchesReleaseVersion());
-
-        addPreference(
-                helper.buttonPreference(
-                        appVersionText,
-                        "",
-                        appVersionText
-                )
-        );
-
-        addPreference(
-                helper.buttonPreference(
-                        patchVersionText,
-                        "",
-                        patchVersionText
-                )
-        );
-
-        addPreference(
-                helper.buttonPreference(
-                        str("awt_export_pref"),
-                        "",
-                        "awt_export_pref"
-                )
-        );
-
-        addPreference(
-                helper.buttonPreference(
-                        str("awt_import_pref"),
-                        "",
-                        "awt_import_pref"
-                )
-        );
-
-        addPreference(
-                helper.buttonPreference(
-                        str("awt_reset_pref"),
-                        "",
-                        "awt_reset_pref"
-                )
-        );
-
-        addPreference(
-                helper.switchPreference(
-                        str("awt_debug"),
-                        str("awt_debug_desc"),
-                        Settings.AWT_DEBUG
-                )
-        );
-
-        PreferenceCategory category = addCategory(str("awt_patch_info_title"));
-        String enabledStr = str("awt_patch_enabled");
-        String disabledStr = str("awt_patch_disabled");
-
-        for (Map.Entry<String, Boolean> entry : flags.entrySet()) {
-            String resName = entry.getKey();
-            boolean sts = (boolean) entry.getValue();
-            String status = sts ? enabledStr : disabledStr;
-
-            addPreference(category,
-                    helper.buttonPreference(
-                            resName,
-                            status,
-                            resName
-                    )
-            );
-        }
-
+        addPreference(new AboutPreference(context));
     }
 
     public void storySection() {

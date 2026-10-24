@@ -344,33 +344,48 @@ public class SettingsActivity extends Activity {
             }
             if (listView != null) {
                 Context ctx = listView.getContext();
-                GradientDrawable cardBg = new GradientDrawable();
-                cardBg.setShape(GradientDrawable.RECTANGLE);
-                cardBg.setCornerRadius(InstagramPreferenceStyle.dp(ctx, 22));
-                cardBg.setColor(Color.parseColor("#101513"));
-                cardBg.setStroke(InstagramPreferenceStyle.dp(ctx, 1), Color.parseColor("#1B2620"));
+                String fragment_name = null;
+                if (getArguments() != null) {
+                    fragment_name = getArguments().getString(Constants.AWT_FRAGMENT_NAME);
+                }
+                boolean isAbout = Constants.AWT_FRAGMENT_ABOUT.equals(fragment_name);
 
-                listView.setBackground(cardBg);
-                listView.setClipToOutline(true);
-                listView.setOutlineProvider(new ViewOutlineProvider() {
-                    @Override
-                    public void getOutline(View view, Outline outline) {
-                        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), InstagramPreferenceStyle.dp(ctx, 22));
-                    }
-                });
+                if (isAbout) {
+                    listView.setBackground(null);
+                    listView.setDivider(null);
+                    listView.setDividerHeight(0);
+                    listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+                    listView.setCacheColorHint(Color.TRANSPARENT);
+                    listView.setPadding(0, 0, 0, 0);
+                } else {
+                    GradientDrawable cardBg = new GradientDrawable();
+                    cardBg.setShape(GradientDrawable.RECTANGLE);
+                    cardBg.setCornerRadius(InstagramPreferenceStyle.dp(ctx, 22));
+                    cardBg.setColor(Color.parseColor("#101513"));
+                    cardBg.setStroke(InstagramPreferenceStyle.dp(ctx, 1), Color.parseColor("#1B2620"));
 
-                ShapeDrawable divider = new ShapeDrawable();
-                divider.setIntrinsicHeight(InstagramPreferenceStyle.dp(ctx, 1));
-                divider.getPaint().setColor(Color.parseColor("#18221D"));
-                listView.setDivider(divider);
-                listView.setDividerHeight(InstagramPreferenceStyle.dp(ctx, 1));
-                listView.setFooterDividersEnabled(false);
-                listView.setHeaderDividersEnabled(false);
+                    listView.setBackground(cardBg);
+                    listView.setClipToOutline(true);
+                    listView.setOutlineProvider(new ViewOutlineProvider() {
+                        @Override
+                        public void getOutline(View view, Outline outline) {
+                            outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), InstagramPreferenceStyle.dp(ctx, 22));
+                        }
+                    });
 
-                listView.setPadding(0, InstagramPreferenceStyle.dp(ctx, 4), 0, InstagramPreferenceStyle.dp(ctx, 4));
-                listView.setClipToPadding(true);
-                listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-                listView.setCacheColorHint(Color.TRANSPARENT);
+                    ShapeDrawable divider = new ShapeDrawable();
+                    divider.setIntrinsicHeight(InstagramPreferenceStyle.dp(ctx, 1));
+                    divider.getPaint().setColor(Color.parseColor("#18221D"));
+                    listView.setDivider(divider);
+                    listView.setDividerHeight(InstagramPreferenceStyle.dp(ctx, 1));
+                    listView.setFooterDividersEnabled(false);
+                    listView.setHeaderDividersEnabled(false);
+
+                    listView.setPadding(0, InstagramPreferenceStyle.dp(ctx, 4), 0, InstagramPreferenceStyle.dp(ctx, 4));
+                    listView.setClipToPadding(true);
+                    listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+                    listView.setCacheColorHint(Color.TRANSPARENT);
+                }
             }
 
             if (rootView != null) {

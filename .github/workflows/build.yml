@@ -39,14 +39,21 @@ jobs:
           name: awt-patches-mpp
           path: patches/build/libs/*.mpp
 
+      - name: Extract Version
+        id: get_version
+        run: |
+          VERSION=$(grep '^version' gradle.properties | cut -d'=' -f2 | tr -d ' \r\n')
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v4.0.0
-          name: Awt Patches v4.0.0
-          body: "Awt Instagram Patches with modern AMOLED Aurora glow UI and fix for Instagram 447.0.0.55.81"
+          tag_name: v${{ steps.get_version.outputs.VERSION }}
+          name: Awt Patches v${{ steps.get_version.outputs.VERSION }}
+          body: "Awt Instagram Patches with modern AMOLED Aurora glow UI, full Awt rebranding, and fix for Instagram 447.0.0.55.81"
           files: patches/build/libs/*.mpp
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

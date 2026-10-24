@@ -90,9 +90,9 @@ public class AboutPreference extends Preference {
         subParams.bottomMargin = InstagramPreferenceStyle.dp(context, 10);
         root.addView(subtitleView, subParams);
 
-        // ---------- 4. Version Pill Badge: v4.0.1 ----------
+        // ---------- 4. Version Pill Badge: v4.0.2 ----------
         TextView versionPill = new TextView(context);
-        versionPill.setText("v4.0.1");
+        versionPill.setText("v4.0.2");
         versionPill.setTextColor(Color.parseColor("#4EE49B"));
         versionPill.setTextSize(12);
         versionPill.setTypeface(Typeface.DEFAULT_BOLD);
@@ -325,7 +325,7 @@ public class AboutPreference extends Preference {
         }
         new AlertDialog.Builder(context)
                 .setTitle("About AWT Mods")
-                .setMessage("Modded by: Aadith C V\n\nApp version: " + appVersion + "\nMod version: 4.0.1\n\nOfficial website: www.awtmods.in")
+                .setMessage("Modded by: Aadith C V\n\nApp version: " + appVersion + "\nMod version: 4.0.2\n\nOfficial website: www.awtmods.in")
                 .setPositiveButton("Visit Website", (dialog, which) -> openUrl("https://www.awtmods.in"))
                 .setNegativeButton("Close", null)
                 .show();

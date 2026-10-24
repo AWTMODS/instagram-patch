@@ -2,12 +2,12 @@ group = "crimera"
 
 patches {
     about {
-        name = "Piko"
-        description = "Morphe patches focused on Twitter/X"
-        source = "git@github.com:crimera/piko.git"
-        author = "crimera"
+        name = "Awt"
+        description = "Morphe patches for Instagram"
+        source = "git@github.com:AWTMODS/instagram-patch.git"
+        author = "Aadith C V"
         contact = "na"
-        website = "https://github.com/crimera/piko"
+        website = "https://github.com/AWTMODS/instagram-patch"
         license = "GNU General Public License v3.0"
     }
 }

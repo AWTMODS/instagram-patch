@@ -38,6 +38,7 @@ jobs:
         run: npm install
 
       - name: Import GPG key
+        if: ${{ secrets.GPG_PRIVATE_KEY != '' }}
         uses: crazy-max/ghaction-import-gpg@v7
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -52,6 +53,7 @@ jobs:
 
       - name: Attest
         if: steps.release.outputs.new_release_published == 'true'
+        continue-on-error: true
         uses: actions/attest-build-provenance@v3
         with:
           subject-name: 'Piko Patches ${{ steps.release.outputs.new_release_git_tag }}'

@@ -1,0 +1,41 @@
+name: Build Patches
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - dev
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Patches Bundle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: burrunan/gradle-cache-action@v3
+
+      - name: Build with Gradle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew clean buildAndroid
+
+      - name: Upload Patch Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: awt-patches-mpp
+          path: patches/build/libs/*.mpp

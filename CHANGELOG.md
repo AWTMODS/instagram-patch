@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/AWTMODS/instagram-patch/compare/v1.0.0...v1.0.1) (2026-10-24)
+
+### 🐛 Bug Fixes
+
+* **bundle:** remove signature url to fix Morphe Manager bundle 404 ([5f8294b](https://github.com/AWTMODS/instagram-patch/commit/5f8294bcef398378c737d1d28e7c92400a30a376))
+
 ## 1.0.0 (2026-10-24)
 
 ### ⚠ BREAKING CHANGES

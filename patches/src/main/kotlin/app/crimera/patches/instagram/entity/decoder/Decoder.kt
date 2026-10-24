@@ -7,6 +7,7 @@
 package app.crimera.patches.instagram.entity.decoder
 
 import app.crimera.patches.instagram.entity.mediadata.AslSessionRelatedFingerprint
+import app.crimera.patches.instagram.utils.Constants.EDIT_MEDIA_INFO_FRAGMENT_CLASS
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -37,12 +38,12 @@ val decoderEntity =
         execute {
             MEDIA_CLASS_NAME = AslSessionRelatedFingerprint.method.parameters[0].type
 
-            val currentMediaFields =
-                EditMediaInfoGetCurrentMediaIdFingerprint.classDef.methods.mapNotNull { it.currentMediaIndexFieldOrNull() }
-            if (currentMediaFields.size != 1) {
-                throw PatchException("Expected exactly one current media index getter, found ${currentMediaFields.size}")
-            }
-            CURRENT_MEDIA_FIELD = currentMediaFields.single()
+            val currentMediaField =
+                EditMediaInfoGetCurrentMediaIdFingerprint.method.currentMediaIndexFieldOrNull()
+                    ?: EditMediaInfoGetCurrentMediaIdFingerprint.classDef.methods.firstNotNullOfOrNull { it.currentMediaIndexFieldOrNull() }
+                    ?: throw PatchException("Could not find current media index field in $EDIT_MEDIA_INFO_FRAGMENT_CLASS")
+
+            CURRENT_MEDIA_FIELD = currentMediaField
             MEDIA_ADD_INFO_CLASS_NAME = CURRENT_MEDIA_FIELD.definingClass
 
             COMMENT_BUTTON_CLASS = CommentButtonOnClickFingerprint.method.parameters[0].type

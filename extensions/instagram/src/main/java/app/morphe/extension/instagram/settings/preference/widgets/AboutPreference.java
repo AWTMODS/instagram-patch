@@ -132,7 +132,7 @@ public class AboutPreference extends Preference {
                 "$",
                 "Donate",
                 "Support the developer.",
-                v -> showDonateDialog()
+                v -> openUrl("https://telegram.me/artwebtech")
         ));
 
         // Card 3: About mod
@@ -312,26 +312,21 @@ public class AboutPreference extends Preference {
     private void showThanksDialog() {
         new AlertDialog.Builder(context)
                 .setTitle("Special Thanks")
-                .setMessage("Special thanks to all contributors, developers, and testers of AWT Mods and Morphe!\n\nYour passion makes this mod possible.")
-                .setPositiveButton("GitHub", (dialog, which) -> openUrl("https://github.com/AWTMODS/instagram-patch"))
-                .setNegativeButton("Close", null)
-                .show();
-    }
-
-    private void showDonateDialog() {
-        new AlertDialog.Builder(context)
-                .setTitle("Donate & Support")
-                .setMessage("Thank you for supporting AWT Mods!\n\nYour support helps maintain features, compatibility updates, and future enhancements.")
-                .setPositiveButton("Support on GitHub", (dialog, which) -> openUrl("https://github.com/AWTMODS/instagram-patch"))
+                .setMessage("Modded by: Aadith C V\n\nSpecial thanks to: Piko, Morphe\n\nOfficial website: www.awtmods.in")
+                .setPositiveButton("Visit Website", (dialog, which) -> openUrl("https://www.awtmods.in"))
                 .setNegativeButton("Close", null)
                 .show();
     }
 
     private void showAboutModDialog() {
+        String appVersion = app.morphe.extension.shared.Utils.getAppVersionName();
+        if (appVersion == null || appVersion.isEmpty()) {
+            appVersion = "Unknown";
+        }
         new AlertDialog.Builder(context)
-                .setTitle("AWT Mods")
-                .setMessage("Version: 4.0.1\n\nFeatures:\n• Modern AMOLED Aurora Glow UI\n• Fix for Instagram v447.0.0.55.81\n• Privacy, Ghost Mode, and Media Downloader\n\nDeveloped with ♥ by AWTMODS")
-                .setPositiveButton("Visit Repository", (dialog, which) -> openUrl("https://github.com/AWTMODS/instagram-patch"))
+                .setTitle("About AWT Mods")
+                .setMessage("Modded by: Aadith C V\n\nApp version: " + appVersion + "\nMod version: 4.0.1\n\nOfficial website: www.awtmods.in")
+                .setPositiveButton("Visit Website", (dialog, which) -> openUrl("https://www.awtmods.in"))
                 .setNegativeButton("Close", null)
                 .show();
     }

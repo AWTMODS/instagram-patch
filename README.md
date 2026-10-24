@@ -22,7 +22,7 @@ Starting with patches v3.0.0, Awt patches use [Morphe](https://morphe.software).
 
 Tap the link to add Awt as a patch source in Morphe Manager:
 
-[**➕ Add Awt to Morphe**](https://morphe.software/add-source?github=crimera/awt)
+[**➕ Add Awt to Morphe**](https://morphe.software/add-source?github=AWTMODS/instagram-patch&name=Awt)
 
 Then patch Twitter/X or Instagram:
 1. Tap X or Instagram app icon in Morphe

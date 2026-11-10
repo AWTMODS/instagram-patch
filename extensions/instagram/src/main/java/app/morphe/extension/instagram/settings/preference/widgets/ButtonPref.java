@@ -20,7 +20,6 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.instagram.settings.ActivityHook;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.settings.preference.fragments.FragmentHook;
-import app.morphe.extension.instagram.patches.Block;
 import app.morphe.extension.instagram.patches.customise.font.FontStorage;
 import app.morphe.extension.instagram.patches.download.DownloadMapping;
 import app.morphe.extension.instagram.patches.devFlags.RecommendedFlags;
@@ -77,9 +76,6 @@ public class ButtonPref extends Preference {
                     } else if (key.equals("awt_focus_lock_action")) {
                         FocusLockDialogs.onActionPressed(context, ButtonPref.this);
 
-                    } else if (key.equals("awt_delete_analytics_cache")) {
-                        Block.deleteAnalyticsCacheFolder();
-
                     } else if (key.equals("awt_pref_delete_font")) {
                         FontStorage.DeleteResult result = FontStorage.delete();
                         Utils.showToastShort(str(
@@ -135,14 +131,14 @@ public class ButtonPref extends Preference {
 
     @Override
     protected View onCreateView(ViewGroup parent) {
-        return InstagramPreferenceStyle.createPreferenceView(context, InstagramPreferenceStyle.TRAILING_CHEVRON, getIconResourceName(getKey()));
+        return InstagramPreferenceStyle.createPreferenceView(context, InstagramPreferenceStyle.TRAILING_CHEVRON, iconResourceNameForKey(getKey()));
     }
 
     @Override
     protected void onBindView(View view) {
         String key = getKey();
         InstagramPreferenceStyle.bindText(this, view);
-        InstagramPreferenceStyle.bindIcon(view, getIconResourceName(key));
+        InstagramPreferenceStyle.bindIcon(view, iconResourceNameForKey(key));
         InstagramPreferenceStyle.setTrailingVisible(view, hasVisibleTrail(key));
         InstagramPreferenceStyle.setPressedHighlightEnabled(
                 view,
@@ -165,7 +161,6 @@ public class ButtonPref extends Preference {
                 || key.equals("awt_reset_pref")
                 || key.equals("awt_focus_lock_action")
                 || key.equals("awt_download_set_path")
-                || key.equals("awt_delete_analytics_cache")
                 || key.equals("awt_export_experiment_list")
                 || key.equals("awt_export_experiment_mappings")
                 || key.equals("awt_download_id_mapping")
@@ -189,7 +184,7 @@ public class ButtonPref extends Preference {
         }
     }
 
-    private String getIconResourceName(String key) {
+    public static String iconResourceNameForKey(String key) {
         if (key == null) {
             return null;
         }

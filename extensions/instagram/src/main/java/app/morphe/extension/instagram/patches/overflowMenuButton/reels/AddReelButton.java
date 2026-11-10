@@ -57,9 +57,6 @@ public class AddReelButton {
         String icon = UI.DRAWABLE_DOWNLOAD_ICON;
         ReelButton reelButton = new DownloadButton(context, mediaObject, currentMediaIndex);
         String DOWNLOAD_BUTTON_TEXT = str("awt_download_options");
-        if(Pref.enableDirectDownload()){
-            DOWNLOAD_BUTTON_TEXT = str("awt_category_download_media");
-        }
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon,reelButton,DOWNLOAD_BUTTON_TEXT);
 
@@ -98,7 +95,7 @@ public class AddReelButton {
 
     // Called from hook — passes the real current carousel index.
     public static void includeCustomReelOverflowButtons(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
-        if(Pref.awtDebug()){
+        if(Pref.pikoDebug()){
             AddReelButton.addDebugButton(context, helperObject, mediaObject, currentMediaIndex);
         }
         if(Pref.enableDownload()){

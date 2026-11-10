@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.ViewGroup;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,10 +36,10 @@ public class ProfileMoreOption {
     private static boolean DEBUG;
 
     static {
-        DEBUG = Pref.awtDebug();
+        DEBUG = Pref.pikoDebug();
     }
 
-    public static void moreOptionsDailogueBox(Context context, UserData userData) {
+    public static void moreOptionsDailogueBox(Context context, UserData userData, Callable<String> refreshUrl) {
         try {
             InstagramDialogBox dialog = new InstagramDialogBox(context);
 
@@ -90,7 +91,7 @@ public class ProfileMoreOption {
                             }
 
                         } else if (selectedOption.equals(str("awt_view_profile_picture"))) {
-                            ProfilePictureViewer.show(context, userData);
+                            ProfilePictureViewer.show(context, userData, refreshUrl);
 
                         } else if (selectedOption.equals(str("awt_debug"))) {
                             // Using userData as it will be easier to debug known functions.
@@ -152,7 +153,7 @@ public class ProfileMoreOption {
             button.setText(str("awt_more_profile_options"));
             button.setStyle(InstagramButtonStyleEnum.SECONDARY);
             button.setOnClickListener(() ->
-                    moreOptionsDailogueBox(context, userData)
+                    moreOptionsDailogueBox(context, userData, () -> userData.refreshProfilePictureUrl(profileInfo.getUserSession()))
             );
 
             int marginPx = Dim.dp12;

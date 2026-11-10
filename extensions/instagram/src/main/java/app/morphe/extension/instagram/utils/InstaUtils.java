@@ -37,28 +37,6 @@ import static app.morphe.extension.shared.requests.Route.Method.GET;
 
 public class InstaUtils {
 
-    public static boolean deleteRecursive(File file) {
-        try {
-            if (file == null || !file.exists()) {
-                AwtUtils.toast(str("awt_fail_no_file"));
-                return false;
-            }
-
-            if (file.isDirectory()) {
-                File[] children = file.listFiles();
-                if (children != null) {
-                    for (File child : children) {
-                        deleteRecursive(child);
-                    }
-                }
-            }
-            return file.delete();
-        } catch (RuntimeException e) {
-            AwtUtils.logger(e);
-        }
-        return false;
-    }
-
     public static void decompileExperiments(boolean asJson) {
         String appVersionName = Utils.getAppVersionName();
         DeveloperOptions developerOptions = new DeveloperOptions();
@@ -75,7 +53,7 @@ public class InstaUtils {
             fileName += ".txt";
             data = developerOptions.toString();
         }
-        fileDone = AwtUtils.awtWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
+        fileDone = AwtUtils.pikoWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
         fileDoneTxt = fileDone ? " created" : fileDoneTxt;
         AwtUtils.toast(fileName + fileDoneTxt);
     }

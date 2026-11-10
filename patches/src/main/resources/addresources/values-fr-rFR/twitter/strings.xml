@@ -181,7 +181,7 @@
     <string name="awt_pref_hide_live_threads">Masquer les threads en direct</string>
     <string name="awt_pref_hide_live_threads_desc">Masque la section en direct dans le fil d\'actualité</string>
     <string name="awt_pref_hide_banner">Masquer la bannière</string>
-    <string name="awt_pref_hide_banner_desc">Cache la pilule des nouveaux messages</string>
+    <string name="awt_pref_hide_banner_desc">Masque l\'indicateur des nouvelles publications</string>
     <string name="awt_pref_hide_bmk_timeline">Masquer l\'icône de signet dans la chronologie</string>
     <string name="awt_pref_force_translate">Forcer l\'activation de la traduction</string>
     <string name="awt_pref_force_translate_desc">Obtenir l\'option de traduction pour toutes les publications</string>
@@ -246,7 +246,7 @@
     <!-- Logging Settings -->
     <string name="awt_title_logging">Journalisation</string>
     <string name="awt_pref_server_response_logging">Journaliser les réponses du serveur</string>
-    <string name="awt_pref_server_response_logging_desc">Enregistre les réponses JSON du serveur dans \'Download/Awt\'</string>
+    <string name="awt_pref_server_response_logging_desc">Enregistre les réponses JSON du serveur dans \'Download/Piko\'</string>
     <string name="awt_pref_server_response_logging_file_overwrite">Écraser le fichier de journalisation</string>
     <string name="awt_pref_server_response_logging_file_overwrite_desc">Effacer les données de journalisation existantes au lancement</string>
     <!-- Backup and Restore -->
@@ -291,7 +291,7 @@
     <string name="awt_array_light_mode">Mode clair</string>
     <!-- App icon strings -->
     <string name="awt_app_icon_thanks">Merci à @NeoFreeBird pour les icônes d\'application provenant d\'iOS</string>
-    <string name="awt_app_icon_awt_exclusive">(Exclusif Awt)</string>
+    <string name="awt_app_icon_awt_exclusive">(Exclusif Piko)</string>
     <!-- Category -->
     <string name="awt_app_icon_category_legacy">Classique</string>
     <string name="awt_app_icon_category_seasonal_event">Événements saisonniers</string>
@@ -401,7 +401,7 @@ Ne les partagez jamais avec qui que ce soit !
 Si quelqu'un obtient ce jeton, il peut accéder librement à votre compte jusqu'à ce que vous vous déconnectiez de la session.
 
 Pour plus de détails, veuillez consulter cette page :
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 
 Il est recommandé de la lire avant d'utiliser cette fonctionnalité. Elle contient des informations importantes, notamment sur la manière d'importer des jetons."</string>
     <string name="awt_login_token_select_account">Sélectionnez un compte:</string>

@@ -10,9 +10,11 @@ import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
-import android.graphics.Canvas;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Outline;
 import android.graphics.Paint;
@@ -21,78 +23,54 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.view.ViewOutlineProvider;
+
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
+import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.view.WindowInsets;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.window.OnBackInvokedDispatcher;
 
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Proxy;
+import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
 import app.morphe.extension.crimera.downloader.StorageUtils;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.constants.UI;
+import app.morphe.extension.instagram.patches.devFlags.RecommendedFlags;
 import app.morphe.extension.instagram.settings.preference.Helper;
 import app.morphe.extension.instagram.settings.preference.ScreenBuilder;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
+import app.morphe.extension.instagram.settings.preference.widgets.InstagramSearchStyle;
+import app.morphe.extension.instagram.settings.preference.widgets.SearchResultPreference;
 import app.morphe.extension.instagram.settings.preference.widgets.SwitchPref;
-import app.morphe.extension.instagram.settings.SettingsStatus;
 import app.morphe.extension.instagram.theme.MaterialYouTheme;
+import app.morphe.extension.shared.Logger;
 
-public class SettingsActivity extends Activity {
-
-    private LinearLayout root;
-    private LinearLayout toolbar;
-    private LinearLayout content;
-    private LinearLayout customContainer;
-    private TextView titleTextView;
-
-    @SuppressLint("ResourceType")
-    @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-
-        String displayTitle = null;
-        String fragmentName = null;
-
-        // Extract both variables safely from the incoming intent bundle
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            displayTitle = str(getIntent().getStringExtra(Constants.AWT_FRAGMENT_TITLE));
-            fragmentName = getIntent().getStringExtra(Constants.AWT_FRAGMENT_NAME);
-        }
-
-        // Fallback to default localized string if no custom title was provided in the intent
-        if (displayTitle == null || displayTitle.isEmpty()) {
-            displayTitle = str("awt_title_settings");
-        }
-
-        boolean isRootSettings = fragmentName == null || Constants.AWT_FRAGMENT_SETTINGS.equals(fragmentName);
-        createLayout(displayTitle, isRootSettings);
-
-        if (bundle == null) {
-            SettingsFragment fragment = new SettingsFragment();
-            if (getIntent() != null && getIntent().getExtras() != null) {
-                fragment.setArguments(getIntent().getExtras());
-            }
-
-            getFragmentManager().beginTransaction().replace(1001, fragment).commit();
-        }
-    }
+public final class SettingsActivity {
 
     public static CharSequence formatStyledTitle(String text) {
         if (text == null) return "";
@@ -154,96 +132,625 @@ public class SettingsActivity extends Activity {
         };
     }
 
+
+    private SettingsActivity() {
+    }
+
+    private static final int FRAGMENT_CONTAINER_ID = 1001;
+    private static final String STATE_FRAGMENT_NAME = "awt_settings_fragment_name";
+    private static final String STATE_FRAGMENT_STATE = "awt_settings_fragment_state";
+    private static final String STATE_DISPLAY_TITLE = "awt_settings_display_title";
+    private static final String STATE_SEARCH_QUERY = "awt_settings_search_query";
+    private static final String STATE_SEARCH_MODE = "awt_settings_search_mode";
+    private static final String STATE_TARGET_PREFERENCE_KEY = "awt_settings_target_preference_key";
+
+    private static final Map<Activity, Controller> sControllers = new WeakHashMap<>();
+
+    static Controller getController(Activity activity) {
+        return activity == null ? null : sControllers.get(activity);
+    }
+
     @SuppressLint("ResourceType")
-    private void createLayout(String displayTitle, boolean isRootSettings) {
-        root = new LinearLayout(this);
-        root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackground(createAuroraBackground());
+    public static void setupOnActivity(Activity activity, Bundle savedInstanceState) {
+        Controller controller = new Controller(activity);
+        sControllers.put(activity, controller);
+        controller.setup(savedInstanceState);
 
-        InstagramPreferenceStyle.applySystemBarStyle(this);
+        if (activity != null && activity.getApplication() != null) {
+            activity.getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+                @Override public void onActivityCreated(Activity a, Bundle b) {}
+                @Override public void onActivityStarted(Activity a) {}
+                @Override
+                public void onActivityResumed(Activity a) {
+                    if (a == activity) {
+                        controller.onResume();
+                    }
+                }
+                @Override
+                public void onActivityPaused(Activity a) {
+                    if (a == activity) {
+                        controller.onPause();
+                    }
+                }
+                @Override public void onActivityStopped(Activity a) {}
+                @Override
+                public void onActivitySaveInstanceState(Activity a, Bundle b) {
+                    if (a == activity) {
+                        controller.onSaveInstanceState(b);
+                    }
+                }
+                @Override
+                public void onActivityDestroyed(Activity a) {
+                    if (a == activity) {
+                        a.getApplication().unregisterActivityLifecycleCallbacks(this);
+                        sControllers.remove(activity);
+                        controller.onDestroy();
+                    }
+                }
+            });
+        }
+    }
 
-        // ---------- Toolbar ----------
-        toolbar = new LinearLayout(this);
-        toolbar.setBackgroundColor(Color.TRANSPARENT);
+    public static boolean handleBackPressed(Activity activity) {
+        Controller controller = getController(activity);
+        if (controller != null && controller.exitSearchIfActive()) {
+            return true;
+        }
+        if (controller != null && controller.rootSettings && SettingsRestart.promptRestartIfPending(activity)) {
+            return true;
+        }
+        return false;
+    }
 
-        ImageView back = new ImageView(this);
-        UI.setThemedIcon(back, UI.DRAWABLE_ARROW_BACK);
-        back.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    public static class Controller {
+        private final Activity activity;
+        private FrameLayout root;
+        private FrameLayout chromeOverlay;
+        private LinearLayout toolbar;
+        private FrameLayout contentFrame;
+        private LinearLayout customContainer;
+        private TextView titleTextView;
+        private ImageView backButton;
+        private View noResultsOverlay;
+        private SettingsFragment rootFragment;
+        private SettingsSearchController searchController;
+        private boolean refreshSearchIndexOnResume;
+        private final Runnable recommendedFlagsChanged = this::refreshSearchIndex;
+        private String fragmentName;
+        private String displayTitle;
+        private String targetPreferenceKey;
+        private String restoredSearchQuery = "";
+        private boolean restoredSearchMode;
+        private boolean rootSettings;
+        private Object searchBackDispatcher;
+        private Object searchBackCallback;
+        private boolean searchBackCallbackRegistered;
 
-        titleTextView = new TextView(this);
-        titleTextView.setText(formatStyledTitle(displayTitle));
-        InstagramPreferenceStyle.applyToolbarLayout(
-                this, toolbar, back, titleTextView, isRootSettings);
-        if (!(titleTextView.getText() instanceof Spanned)) {
-            titleTextView.setTextColor(Color.WHITE);
+        public Controller(Activity activity) {
+            this.activity = activity;
         }
 
-        toolbar.addView(back);
-        toolbar.addView(titleTextView);
+        @SuppressLint("ResourceType")
+        public void setup(Bundle savedInstanceState) {
+            Bundle intentExtras = activity.getIntent() == null ? null : activity.getIntent().getExtras();
+            String requestedFragmentName = intentExtras == null
+                    ? null
+                    : intentExtras.getString(Constants.AWT_FRAGMENT_NAME);
+            String requestedTitle = intentExtras == null
+                    ? null
+                    : intentExtras.getString(Constants.AWT_FRAGMENT_TITLE);
+            targetPreferenceKey = intentExtras == null
+                    ? null
+                    : intentExtras.getString(Constants.AWT_SEARCH_TARGET_PREFERENCE_KEY);
 
-        // ---------- Custom Container ----------
-        customContainer = new LinearLayout(this);
-        customContainer.setOrientation(LinearLayout.VERTICAL);
-        customContainer.setBackgroundColor(Color.TRANSPARENT);
+            if (savedInstanceState != null) {
+                requestedFragmentName = savedInstanceState.getString(STATE_FRAGMENT_NAME, requestedFragmentName);
+                displayTitle = savedInstanceState.getString(STATE_DISPLAY_TITLE);
+                restoredSearchQuery = savedInstanceState.getString(STATE_SEARCH_QUERY, "");
+                restoredSearchMode = savedInstanceState.getBoolean(STATE_SEARCH_MODE, false);
+                targetPreferenceKey = savedInstanceState.getString(
+                        STATE_TARGET_PREFERENCE_KEY,
+                        targetPreferenceKey
+                );
+            }
 
-        root.addView(toolbar);
-        root.addView(customContainer, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            if (displayTitle == null || displayTitle.isEmpty()) {
+                displayTitle = str(requestedTitle);
+            }
+            if (displayTitle == null || displayTitle.isEmpty()) {
+                displayTitle = str("awt_title_settings");
+            }
 
-        // ---------- Content ----------
-        content = new LinearLayout(this);
-        content.setId(1001);
-        content.setOrientation(LinearLayout.VERTICAL);
-        content.setBackgroundColor(Color.TRANSPARENT);
+            rootSettings = requestedFragmentName == null
+                    || Constants.AWT_FRAGMENT_SETTINGS.equals(requestedFragmentName);
+            fragmentName = requestedFragmentName == null
+                    ? Constants.AWT_FRAGMENT_SETTINGS
+                    : requestedFragmentName;
+            createLayout(displayTitle, rootSettings);
 
-        LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                1
-        );
-        contentParams.setMargins(
-                InstagramPreferenceStyle.dp(this, 16),
-                InstagramPreferenceStyle.dp(this, 6),
-                InstagramPreferenceStyle.dp(this, 16),
-                InstagramPreferenceStyle.dp(this, 16)
-        );
-        root.addView(content, contentParams);
+            if (activity instanceof androidx.activity.ComponentActivity) {
+                try {
+                    ((androidx.activity.ComponentActivity) activity).getOnBackPressedDispatcher().addCallback(
+                            (androidx.lifecycle.LifecycleOwner) activity,
+                            new androidx.activity.OnBackPressedCallback(true) {
+                                @Override
+                                public void handleOnBackPressed() {
+                                    if (exitSearchIfActive()) {
+                                        return;
+                                    }
+                                    if (rootSettings && SettingsRestart.promptRestartIfPending(activity)) {
+                                        return;
+                                    }
+                                    remove();
+                                    activity.finish();
+                                }
+                            }
+                    );
+                } catch (Throwable ignored) {
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                Api33BackHelper.register(activity, () -> {
+                    if (exitSearchIfActive()) {
+                        return;
+                    }
+                    if (rootSettings && SettingsRestart.promptRestartIfPending(activity)) {
+                        return;
+                    }
+                    activity.finish();
+                });
+            }
 
-        root.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-            @Override
-            public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+            SettingsFragment fragment = null;
+            if (savedInstanceState != null) {
+                android.app.Fragment restoredFragment = activity.getFragmentManager()
+                        .findFragmentById(FRAGMENT_CONTAINER_ID);
+                if (restoredFragment instanceof SettingsFragment) {
+                    fragment = (SettingsFragment) restoredFragment;
+                    fragment.updateNavigationArguments(fragmentName, targetPreferenceKey);
+                }
+            }
+
+            if (fragment == null && activity.getFragmentManager().findFragmentById(FRAGMENT_CONTAINER_ID) == null) {
+                fragment = new SettingsFragment();
+                fragment.setArguments(createFragmentArguments());
+                if (savedInstanceState != null) {
+                    fragment.setInitialSavedState(savedInstanceState.getParcelable(STATE_FRAGMENT_STATE));
+                }
+                activity.getFragmentManager().beginTransaction()
+                        .replace(FRAGMENT_CONTAINER_ID, fragment)
+                        .commit();
+            }
+        }
+
+        private Bundle createFragmentArguments() {
+            Bundle arguments = new Bundle();
+            arguments.putString(Constants.AWT_FRAGMENT_NAME, fragmentName);
+            arguments.putString(Constants.AWT_FRAGMENT_TITLE, displayTitle);
+            if (targetPreferenceKey != null && !targetPreferenceKey.isEmpty()) {
+                arguments.putString(
+                        Constants.AWT_SEARCH_TARGET_PREFERENCE_KEY,
+                        targetPreferenceKey
+                );
+            }
+            return arguments;
+        }
+
+        @SuppressLint("ResourceType")
+        private void createLayout(String displayTitle, boolean isRootSettings) {
+            root = new FrameLayout(activity);
+            root.setBackground(createAuroraBackground());
+
+            LinearLayout page = new LinearLayout(activity);
+            page.setOrientation(LinearLayout.VERTICAL);
+            page.setBackgroundColor(Color.TRANSPARENT);
+            root.addView(page, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+            ));
+
+            InstagramPreferenceStyle.applySystemBarStyle(activity);
+
+            // ---------- Toolbar ----------
+            toolbar = new LinearLayout(activity);
+            toolbar.setOrientation(LinearLayout.HORIZONTAL);
+            toolbar.setGravity(android.view.Gravity.CENTER_VERTICAL);
+            toolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LOCALE);
+            toolbar.setBackgroundColor(Color.TRANSPARENT);
+
+            int toolbarPadding = InstagramPreferenceStyle.dp(activity, 15);
+            toolbar.setPadding(toolbarPadding, InstagramPreferenceStyle.dp(activity, 10), toolbarPadding, InstagramPreferenceStyle.dp(activity, 8));
+
+            int iconSize = InstagramPreferenceStyle.dp(activity, 44);
+
+            View backSpacer = new View(activity);
+            LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(iconSize, iconSize);
+            backParams.gravity = android.view.Gravity.CENTER_VERTICAL;
+            backSpacer.setLayoutParams(backParams);
+
+            titleTextView = new TextView(activity);
+            titleTextView.setText(formatStyledTitle(displayTitle));
+            int titleTextSize = isRootSettings ? 25 : 20;
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, titleTextSize);
+            titleTextView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+            titleTextView.setIncludeFontPadding(false);
+            titleTextView.setMaxLines(1);
+            titleTextView.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+            titleTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+            if (!isRootSettings) {
+                titleTextView.setAutoSizeTextTypeUniformWithConfiguration(
+                        18,
+                        20,
+                        1,
+                        TypedValue.COMPLEX_UNIT_SP
+                );
+            }
+            LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1.0f
+            );
+            titleParams.gravity = android.view.Gravity.CENTER_VERTICAL;
+            titleParams.setMarginStart(InstagramPreferenceStyle.dp(activity, 7));
+            titleTextView.setLayoutParams(titleParams);
+            titleTextView.setTextColor(Color.WHITE);
+
+            toolbar.addView(backSpacer);
+            toolbar.addView(titleTextView);
+
+            customContainer = new LinearLayout(activity);
+            customContainer.setOrientation(LinearLayout.VERTICAL);
+            customContainer.setBackgroundColor(Color.TRANSPARENT);
+
+            page.addView(toolbar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, InstagramPreferenceStyle.dp(activity, 70)));
+            page.addView(customContainer, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            // ---------- Content ----------
+            contentFrame = new FrameLayout(activity);
+            contentFrame.setBackgroundColor(Color.TRANSPARENT);
+
+            FrameLayout fragmentContainer = new FrameLayout(activity);
+            fragmentContainer.setId(FRAGMENT_CONTAINER_ID);
+            fragmentContainer.setBackgroundColor(Color.TRANSPARENT);
+            contentFrame.addView(fragmentContainer, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+            ));
+
+            noResultsOverlay = InstagramSearchStyle.createNoResultsView(activity);
+            noResultsOverlay.setVisibility(View.GONE);
+            contentFrame.addView(noResultsOverlay, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+            ));
+
+            page.addView(contentFrame, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    0,
+                    1f
+            ));
+
+            chromeOverlay = new FrameLayout(activity);
+            root.addView(chromeOverlay, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+            ));
+
+            backButton = new ImageView(activity);
+            UI.setThemedIcon(backButton, UI.DRAWABLE_ARROW_BACK);
+            backButton.setColorFilter(new PorterDuffColorFilter(Color.parseColor("#4EE49B"), PorterDuff.Mode.SRC_IN));
+            backButton.setScaleType(ImageView.ScaleType.CENTER);
+            backButton.setPaddingRelative(
+                    0,
+                    0,
+                    InstagramPreferenceStyle.dp(activity, 16),
+                    0
+            );
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (exitSearchIfActive()) {
+                        return;
+                    }
+                    if (isRootSettings && SettingsRestart.promptRestartIfPending(activity)) {
+                        return;
+                    }
+                    activity.finish();
+                }
+            });
+            FrameLayout.LayoutParams overlayBackParams = new FrameLayout.LayoutParams(
+                    iconSize,
+                    iconSize
+            );
+            overlayBackParams.gravity = android.view.Gravity.START | android.view.Gravity.TOP;
+            overlayBackParams.setMarginStart(InstagramPreferenceStyle.dp(activity, 15));
+            overlayBackParams.topMargin = InstagramPreferenceStyle.dp(activity, 13);
+            chromeOverlay.addView(backButton, overlayBackParams);
+
+            root.setOnApplyWindowInsetsListener((v, insets) -> {
                 int topInset = insets.getSystemWindowInsetTop();
                 int bottomInset = insets.getSystemWindowInsetBottom();
 
                 v.setPadding(0, topInset, 0, 0);
 
-                content.setPadding(
-                        content.getPaddingLeft(),
-                        content.getPaddingTop(),
-                        content.getPaddingRight(),
+                contentFrame.setPadding(
+                        contentFrame.getPaddingLeft(),
+                        contentFrame.getPaddingTop(),
+                        contentFrame.getPaddingRight(),
                         bottomInset
                 );
 
                 return insets;
+            });
+
+            activity.setContentView(root);
+        }
+
+        void onRootFragmentReady(
+                SettingsFragment fragment,
+                PreferenceScreen rootScreen
+        ) {
+            if (!rootSettings || searchController != null) {
+                return;
             }
-        });
 
-        setContentView(root);
+            rootFragment = fragment;
+            searchController = new SettingsSearchController(
+                    activity,
+                    createSearchIndex(fragment, rootScreen),
+                    new SettingsSearchController.Listener() {
+                        @Override
+                        public void onSearchStateChanged(SettingsSearchController.State state) {
+                            if (rootFragment != null) {
+                                rootFragment.renderSearchState(state);
+                            }
+                            noResultsOverlay.setVisibility(
+                                    state.noResults ? View.VISIBLE : View.GONE
+                            );
+                        }
+
+                        @Override
+                        public void onSearchChromeChanged(boolean inToolbar) {
+                            applySearchChromeState(inToolbar);
+                        }
+                    }
+            );
+            searchController.attach(chromeOverlay);
+            fragment.searchEntryView = searchController.createSearchEntryView();
+            chromeOverlay.bringChildToFront(backButton);
+            searchController.restore(restoredSearchQuery, restoredSearchMode);
+        }
+
+        private SettingsSearchIndex createSearchIndex(
+                SettingsFragment fragment,
+                PreferenceScreen rootScreen
+        ) {
+            final PreferenceManager preferenceManager = fragment.getPreferenceManager();
+            final Context context = fragment.getActivity();
+            return SettingsSearchIndex.create(
+                    rootScreen,
+                    new SettingsSearchIndex.ScreenFactory() {
+                        @Override
+                        public PreferenceScreen build(String fragmentName) {
+                            String previousSharedPreferencesName =
+                                    preferenceManager.getSharedPreferencesName();
+                            preferenceManager.setSharedPreferencesName(
+                                    Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)
+                                            ? Constants.REC_FLAGS
+                                            : Constants.SHARED_PREF_NAME
+                            );
+                            try {
+                                PreferenceScreen screen =
+                                        preferenceManager.createPreferenceScreen(context);
+                                new ScreenBuilder(context, screen, new Helper(context))
+                                        .buildFragmentForSearch(fragmentName);
+                                return screen;
+                            } finally {
+                                preferenceManager.setSharedPreferencesName(
+                                        previousSharedPreferencesName
+                                );
+                            }
+                        }
+                    }
+            );
+        }
+
+        public void onPause() {
+            RecommendedFlags.removeChangeListener(recommendedFlagsChanged);
+            refreshSearchIndexOnResume = searchController != null;
+        }
+
+        public void onResume() {
+            if (rootSettings) {
+                RecommendedFlags.addChangeListener(recommendedFlagsChanged);
+            }
+            if (refreshSearchIndexOnResume) {
+                refreshSearchIndexOnResume = false;
+                refreshSearchIndex();
+            }
+        }
+
+        private void refreshSearchIndex() {
+            if (rootFragment != null && searchController != null) {
+                searchController.replaceIndex(createSearchIndex(
+                        rootFragment,
+                        rootFragment.buildScreen(Constants.AWT_FRAGMENT_SETTINGS)
+                ));
+            }
+        }
+
+        private void applySearchChromeState(boolean inToolbar) {
+            if (inToolbar) {
+                registerSearchBackCallback();
+            } else {
+                unregisterSearchBackCallback();
+            }
+            titleTextView.setVisibility(inToolbar ? View.GONE : View.VISIBLE);
+            if (chromeOverlay != null && backButton != null) {
+                chromeOverlay.bringChildToFront(backButton);
+            }
+        }
+
+        public void onSaveInstanceState(Bundle outState) {
+            SettingsSearchController.State searchState = searchController == null
+                    ? null
+                    : searchController.state();
+            outState.putString(STATE_FRAGMENT_NAME, fragmentName);
+            outState.putString(STATE_DISPLAY_TITLE, displayTitle);
+            outState.putString(
+                    STATE_SEARCH_QUERY,
+                    searchState == null ? restoredSearchQuery : searchState.query
+            );
+            outState.putBoolean(
+                    STATE_SEARCH_MODE,
+                    searchState == null ? restoredSearchMode : searchState.searchMode
+            );
+            outState.putString(STATE_TARGET_PREFERENCE_KEY, targetPreferenceKey);
+
+            // Instagram removes android:fragments during host creation, so keep our state under a Piko key.
+            android.app.Fragment fragment = activity.getFragmentManager()
+                    .findFragmentById(FRAGMENT_CONTAINER_ID);
+            if (fragment instanceof SettingsFragment) {
+                outState.putParcelable(
+                        STATE_FRAGMENT_STATE,
+                        activity.getFragmentManager().saveFragmentInstanceState(fragment)
+                );
+            }
+        }
+
+        public boolean exitSearchIfActive() {
+            if (searchController == null
+                    || searchController.state() == null
+                    || !searchController.state().searchMode) {
+                return false;
+            }
+            searchController.exitSearchMode();
+            return true;
+        }
+
+        private void registerSearchBackCallback() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+                    || searchBackCallbackRegistered) {
+                return;
+            }
+
+            try {
+                Class<?> callbackClass = Class.forName("android.window.OnBackInvokedCallback");
+                Class<?> dispatcherClass = Class.forName("android.window.OnBackInvokedDispatcher");
+                Object dispatcher = Activity.class
+                        .getMethod("getOnBackInvokedDispatcher")
+                        .invoke(activity);
+                Object callback = Proxy.newProxyInstance(
+                        SettingsActivity.class.getClassLoader(),
+                        new Class<?>[]{callbackClass},
+                        (proxy, method, args) -> {
+                            String methodName = method.getName();
+                            int parameterCount = method.getParameterTypes().length;
+                            if ("hashCode".equals(methodName) && parameterCount == 0) {
+                                return System.identityHashCode(proxy);
+                            }
+                            if ("equals".equals(methodName) && parameterCount == 1) {
+                                return proxy == (args == null ? null : args[0]);
+                            }
+                            if ("toString".equals(methodName) && parameterCount == 0) {
+                                return "AwtInstagramSettingsSearchBackCallback";
+                            }
+                            if ("onBackInvoked".equals(methodName)) {
+                                exitSearchIfActive();
+                            }
+                            return null;
+                        }
+                );
+                int priorityDefault = dispatcherClass
+                        .getField("PRIORITY_DEFAULT")
+                        .getInt(null);
+                dispatcher.getClass()
+                        .getMethod("registerOnBackInvokedCallback", int.class, callbackClass)
+                        .invoke(dispatcher, priorityDefault, callback);
+                searchBackDispatcher = dispatcher;
+                searchBackCallback = callback;
+                searchBackCallbackRegistered = true;
+            } catch (Throwable throwable) {
+                Logger.printException(
+                        () -> "Instagram settings search back callback registration failed",
+                        throwable
+                );
+                searchBackDispatcher = null;
+                searchBackCallback = null;
+                searchBackCallbackRegistered = false;
+            }
+        }
+
+        private void unregisterSearchBackCallback() {
+            if (!searchBackCallbackRegistered || searchBackCallback == null) {
+                return;
+            }
+
+            try {
+                Class<?> callbackClass = Class.forName("android.window.OnBackInvokedCallback");
+                Object dispatcher = searchBackDispatcher;
+                if (dispatcher == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    dispatcher = Activity.class
+                            .getMethod("getOnBackInvokedDispatcher")
+                            .invoke(activity);
+                }
+                if (dispatcher != null) {
+                    dispatcher.getClass()
+                            .getMethod("unregisterOnBackInvokedCallback", callbackClass)
+                            .invoke(dispatcher, searchBackCallback);
+                }
+            } catch (Throwable throwable) {
+                Logger.printException(
+                        () -> "Instagram settings search back callback unregistration failed",
+                        throwable
+                );
+            }
+            searchBackDispatcher = null;
+            searchBackCallback = null;
+            searchBackCallbackRegistered = false;
+        }
+
+        public void onDestroy() {
+            RecommendedFlags.removeChangeListener(recommendedFlagsChanged);
+            unregisterSearchBackCallback();
+        }
+
+        public LinearLayout getCustomContainer() {
+            return customContainer;
+        }
     }
 
-    public LinearLayout getCustomContainer() {
-        return customContainer;
-    }
-
-    // (Keep the nested static SettingsFragment class unchanged)
     public static class SettingsFragment extends PreferenceFragment {
 
         Context context;
+        private PreferenceManager preferenceManager;
+        private Helper helper;
+        private String fragmentName = Constants.AWT_FRAGMENT_SETTINGS;
+        private String targetPreferenceKey;
+        private ListView listView;
+        private View searchEntryView;
+        private boolean searchEntryAdded;
+        private final SharedPreferences.OnSharedPreferenceChangeListener dependencyListener =
+                (preferences, key) -> helper.updateDependencies(getPreferenceScreen());
+
+        void updateNavigationArguments(String fragmentName, String targetPreferenceKey) {
+            this.fragmentName = fragmentName == null
+                    ? Constants.AWT_FRAGMENT_SETTINGS
+                    : fragmentName;
+            this.targetPreferenceKey = targetPreferenceKey;
+
+            Bundle arguments = getArguments();
+            if (arguments != null) {
+                arguments.putString(Constants.AWT_FRAGMENT_NAME, this.fragmentName);
+                if (targetPreferenceKey == null || targetPreferenceKey.isEmpty()) {
+                    arguments.remove(Constants.AWT_SEARCH_TARGET_PREFERENCE_KEY);
+                } else {
+                    arguments.putString(
+                            Constants.AWT_SEARCH_TARGET_PREFERENCE_KEY,
+                            targetPreferenceKey
+                    );
+                }
+            }
+        }
 
         private void refreshPreferenceSummary(
                 String key,
@@ -258,6 +765,9 @@ public class SettingsActivity extends Activity {
         @Override
         public void onResume() {
             super.onResume();
+            preferenceManager.getSharedPreferences()
+                    .registerOnSharedPreferenceChangeListener(dependencyListener);
+            helper.updateDependencies(getPreferenceScreen());
             refreshPreferenceSummary(
                     "awt_download_set_path",
                     StorageUtils::getCustomPathForDisplay
@@ -266,10 +776,22 @@ public class SettingsActivity extends Activity {
             if (preference instanceof SwitchPref) {
                 SwitchPref amoledPreference = (SwitchPref) preference;
                 amoledPreference.setChecked(MaterialYouTheme.isAmoledEnabled());
-                amoledPreference.setSwitchInteractionEnabled(
-                        MaterialYouTheme.canEnableAmoled(getActivity())
-                );
             }
+        }
+
+        @Override
+        public void onPause() {
+            preferenceManager.getSharedPreferences()
+                    .unregisterOnSharedPreferenceChangeListener(dependencyListener);
+            super.onPause();
+        }
+
+        @Override
+        public void onDestroyView() {
+            listView = null;
+            searchEntryView = null;
+            searchEntryAdded = false;
+            super.onDestroyView();
         }
 
         @Override
@@ -277,65 +799,32 @@ public class SettingsActivity extends Activity {
             super.onCreate(savedInstanceState);
 
             context = getActivity();
-            PreferenceManager preferenceManager = getPreferenceManager();
-            PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
+            preferenceManager = getPreferenceManager();
             preferenceManager.setSharedPreferencesName(Constants.SHARED_PREF_NAME);
 
-            Helper helper = new Helper(context);
-            ScreenBuilder screenBuilder = new ScreenBuilder(context, screen, helper);
-
-            String fragment_name = Constants.AWT_FRAGMENT_SETTINGS;
             if (getArguments() != null) {
-                fragment_name = getArguments().getString(Constants.AWT_FRAGMENT_NAME, Constants.AWT_FRAGMENT_SETTINGS);
-            }
-            if(fragment_name.equals(Constants.AWT_FRAGMENT_SETTINGS)) {
-                screenBuilder.buildSettingsPage();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_ADS)) {
-                screenBuilder.buildAdsSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_GHOST)) {
-                screenBuilder.ghostSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_STORY)) {
-                screenBuilder.storySection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_LINKS)) {
-                screenBuilder.linksSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DISTRACTION_FREE)) {
-                screenBuilder.distractionFreeSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_FOCUS_LOCK)) {
-                screenBuilder.buildFocusLockSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_MISC)) {
-                screenBuilder.buildMiscSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DOWNLOAD_MEDIA)) {
-                screenBuilder.buildDownloadSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_NAV_BTNS)) {
-                screenBuilder.buildNavigationSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_DEV_OPTIONS)) {
-                screenBuilder.buildDeveloperSection();
-            } else if(fragment_name.equals(Constants.AWT_FRAGMENT_ABOUT)) {
-                screenBuilder.aboutSection(SettingsStatus.FLAGS);
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_ACTION_BAR)) {
-                screenBuilder.buildActionBarSection();
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_DM)) {
-                screenBuilder.dmSection();
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_FILTER_CONTENT)) {
-                screenBuilder.filterContentSection();
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_REC_FLAGS)) {
-                preferenceManager.setSharedPreferencesName(Constants.REC_FLAGS);
-                screenBuilder.buildRecommendedFlagsSection();
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_INSTANTS)) {
-                screenBuilder.buildInstantsSection();
-            } else if (fragment_name.equals(Constants.AWT_FRAGMENT_FONT)) {
-                screenBuilder.buildFontSection();
+                fragmentName = getArguments().getString(
+                        Constants.AWT_FRAGMENT_NAME,
+                        Constants.AWT_FRAGMENT_SETTINGS
+                );
+                targetPreferenceKey = getArguments().getString(
+                        Constants.AWT_SEARCH_TARGET_PREFERENCE_KEY
+                );
             }
 
-            setPreferenceScreen(screen);
+            preferenceManager.setSharedPreferencesName(
+                    Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)
+                            ? Constants.REC_FLAGS
+                            : Constants.SHARED_PREF_NAME
+            );
+
+            setPreferenceScreen(buildScreen(fragmentName));
         }
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-
             View rootView = getView();
-            ListView listView = null;
+            listView = null;
             if (rootView != null) {
                 View list = rootView.findViewById(android.R.id.list);
                 if (list instanceof ListView) {
@@ -343,53 +832,150 @@ public class SettingsActivity extends Activity {
                 }
             }
             if (listView != null) {
-                Context ctx = listView.getContext();
-                String fragment_name = null;
-                if (getArguments() != null) {
-                    fragment_name = getArguments().getString(Constants.AWT_FRAGMENT_NAME);
-                }
-                boolean isAbout = Constants.AWT_FRAGMENT_ABOUT.equals(fragment_name);
-
-                if (isAbout) {
-                    listView.setBackground(null);
-                    listView.setDivider(null);
-                    listView.setDividerHeight(0);
-                    listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-                    listView.setCacheColorHint(Color.TRANSPARENT);
-                    listView.setPadding(0, 0, 0, 0);
-                } else {
-                    GradientDrawable cardBg = new GradientDrawable();
-                    cardBg.setShape(GradientDrawable.RECTANGLE);
-                    cardBg.setCornerRadius(InstagramPreferenceStyle.dp(ctx, 22));
-                    cardBg.setColor(Color.parseColor("#101513"));
-                    cardBg.setStroke(InstagramPreferenceStyle.dp(ctx, 1), Color.parseColor("#1B2620"));
-
-                    listView.setBackground(cardBg);
-                    listView.setClipToOutline(true);
-                    listView.setOutlineProvider(new ViewOutlineProvider() {
-                        @Override
-                        public void getOutline(View view, Outline outline) {
-                            outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), InstagramPreferenceStyle.dp(ctx, 22));
-                        }
-                    });
-
-                    ShapeDrawable divider = new ShapeDrawable();
-                    divider.setIntrinsicHeight(InstagramPreferenceStyle.dp(ctx, 1));
-                    divider.getPaint().setColor(Color.parseColor("#18221D"));
-                    listView.setDivider(divider);
-                    listView.setDividerHeight(InstagramPreferenceStyle.dp(ctx, 1));
-                    listView.setFooterDividersEnabled(false);
-                    listView.setHeaderDividersEnabled(false);
-
-                    listView.setPadding(0, InstagramPreferenceStyle.dp(ctx, 4), 0, InstagramPreferenceStyle.dp(ctx, 4));
-                    listView.setClipToPadding(true);
-                    listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-                    listView.setCacheColorHint(Color.TRANSPARENT);
-                }
+                listView.setPadding(0, InstagramPreferenceStyle.dp(context, 10), 0, InstagramPreferenceStyle.dp(context, 10));
+                listView.setClipToPadding(false);
+                listView.setDivider(null);
+                listView.setDividerHeight(0);
+                listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+                listView.setCacheColorHint(Color.TRANSPARENT);
+                listView.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
             }
 
             if (rootView != null) {
-                rootView.setBackgroundColor(Color.TRANSPARENT);
+                rootView.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
+            }
+
+            Activity activity = getActivity();
+            Controller controller = getController(activity);
+            if (isRootFragment() && controller != null) {
+                controller.onRootFragmentReady(
+                        this,
+                        getPreferenceScreen()
+                );
+            } else if (listView != null
+                    && targetPreferenceKey != null
+                    && !targetPreferenceKey.isEmpty()) {
+                scrollToPreference(listView, targetPreferenceKey);
+            }
+
+            // Build the search screen before binding so a queued rebind cannot reset restored scroll state.
+            super.onActivityCreated(savedInstanceState);
+        }
+
+        private PreferenceScreen buildScreen(String fragmentName) {
+            PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
+            helper = new Helper(context);
+            new ScreenBuilder(context, screen, helper).buildFragment(fragmentName);
+            helper.updateDependencies(screen);
+            return screen;
+        }
+
+        private boolean isRootFragment() {
+            return fragmentName == null
+                    || Constants.AWT_FRAGMENT_SETTINGS.equals(fragmentName);
+        }
+
+        private void renderSearchState(SettingsSearchController.State state) {
+            if (!isRootFragment() || state == null) {
+                return;
+            }
+
+            PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
+            if (!state.searchMode) {
+                new ScreenBuilder(context, screen, new Helper(context))
+                        .buildFragment(Constants.AWT_FRAGMENT_SETTINGS);
+            } else {
+                for (SettingsSearchIndex.Result result : state.results) {
+                    screen.addPreference(new SearchResultPreference(
+                            context,
+                            result
+                    ));
+                }
+            }
+            setPreferenceScreen(screen);
+            if (listView != null) {
+                if (searchEntryView != null) {
+                    if (state.searchMode && searchEntryAdded) {
+                        listView.removeHeaderView(searchEntryView);
+                        searchEntryAdded = false;
+                    } else if (!state.searchMode && !searchEntryAdded) {
+                        listView.addHeaderView(searchEntryView, null, false);
+                        searchEntryAdded = true;
+                    }
+                    listView.setPadding(0,
+                            InstagramPreferenceStyle.dp(context, state.searchMode ? 10 : 0),
+                            0, InstagramPreferenceStyle.dp(context, 10));
+                }
+                screen.bind(listView);
+            }
+        }
+
+        private void scrollToPreference(
+                final ListView listView,
+                final String preferenceKey
+        ) {
+            if (findPreference(preferenceKey) == null) {
+                return;
+            }
+
+            listView.post(new Runnable() {
+                @Override
+                public void run() {
+                    ListAdapter adapter = listView.getAdapter();
+                    int position = findPreferencePosition(adapter, preferenceKey);
+                    if (position < 0) {
+                        return;
+                    }
+
+                    listView.setSelectionFromTop(
+                            position,
+                            InstagramPreferenceStyle.dp(context, 16)
+                    );
+                }
+            });
+        }
+
+        private static int findPreferencePosition(
+                ListAdapter adapter,
+                String preferenceKey
+        ) {
+            if (adapter == null) {
+                return -1;
+            }
+            for (int position = 0; position < adapter.getCount(); position++) {
+                if (isTargetPreference(adapter, position, preferenceKey)) {
+                    return position;
+                }
+            }
+            return -1;
+        }
+
+        private static boolean isTargetPreference(
+                ListAdapter adapter,
+                int position,
+                String preferenceKey
+        ) {
+            if (adapter == null || position < 0 || position >= adapter.getCount()) {
+                return false;
+            }
+            Object item = adapter.getItem(position);
+            if (!(item instanceof Preference)) {
+                return false;
+            }
+            String itemKey = ((Preference) item).getKey();
+            return preferenceKey.equals(itemKey);
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private static class Api33BackHelper {
+        static void register(Activity activity, Runnable onBack) {
+            try {
+                activity.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                        OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                        onBack::run
+                );
+            } catch (Throwable ignored) {
             }
         }
     }

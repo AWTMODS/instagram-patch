@@ -11,6 +11,7 @@ import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import java.util.ArrayList;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.instagram.settings.SettingsStatus;
@@ -26,14 +27,12 @@ import com.instagram.common.session.UserSession;
 public class StoryButton {
     private static boolean VIEW_STORY_MENTIONS;
     private static boolean ENABLE_DOWNLOAD;
-    private static boolean ENABLE_DIRECT_DOWNLOAD;
     private static boolean DEBUG;
 
     static{
         VIEW_STORY_MENTIONS = Pref.viewStoryMentions() && SettingsStatus.viewStoryMentions;
         ENABLE_DOWNLOAD = Pref.enableDownload() && SettingsStatus.downloadMedia;
-        ENABLE_DIRECT_DOWNLOAD = Pref.enableDirectDownload() && SettingsStatus.downloadMedia;
-        DEBUG = Pref.awtDebug();
+        DEBUG = Pref.pikoDebug();
     }
 
     public static ArrayList addButtons(ArrayList buttonList){
@@ -44,11 +43,7 @@ public class StoryButton {
             buttonList.add(str("awt_view_story_mentions"));
         }
         if(ENABLE_DOWNLOAD){
-            if(ENABLE_DIRECT_DOWNLOAD){
-                buttonList.add(str("awt_category_download_media"));
-            }else{
-                buttonList.add(str("awt_download_options"));
-            }
+            buttonList.add(str("awt_download_options"));
         }
         if(Pref.downloadWithExternalDownloader()){
             buttonList.add(str("awt_download_with_external_downloader"));
@@ -57,15 +52,22 @@ public class StoryButton {
         return buttonList;
     }
 
+    public static boolean storyDialogAction(CharSequence buttonText, Context ctx, UserSession session,
+                                           Object mediaObject, Object reel,
+                                           DialogInterface.OnDismissListener onDismiss) {
+        if (buttonText.equals(str("awt_view_story_mentions"))) {
+            ViewStoryMentionsPatch.viewMentions(ctx, mediaObject, onDismiss);
+            return true;
+        } else if (buttonText.equals(str("awt_download_options")) || buttonText.equals(str("awt_category_download_media"))) {
+            DownloadUtils.showStoryDownloadOptions(ctx, session, mediaObject, reel, onDismiss);
+            return true;
+        }
+        return false;
+    }
+
     public static boolean storyButtonAction(CharSequence buttonText, Context ctx, Object mediaObject){
         try {
-            if (buttonText.equals(str("awt_view_story_mentions"))) {
-                ViewStoryMentionsPatch.viewMentions(ctx, mediaObject);
-                return true;
-            } else if (buttonText.equals(str("awt_download_options")) || buttonText.equals(str("awt_category_download_media"))) {
-                DownloadUtils.downloadPost(ctx,null,mediaObject,0);
-                return true;
-            } else if (buttonText.equals(str("awt_debug"))) {
+            if (buttonText.equals(str("awt_debug"))) {
                 ObjectBrowser.browseObject(ctx, new MediaData(mediaObject));
                 return true;
             } else if (buttonText.equals(str("awt_download_with_external_downloader"))) {

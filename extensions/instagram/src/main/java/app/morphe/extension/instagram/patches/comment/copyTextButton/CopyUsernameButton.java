@@ -18,13 +18,13 @@ public final class CopyUsernameButton {
     public static final CopyUsernameButton A00 = new CopyUsernameButton();
 
     public static int getLabelResourceId() {
-        return ResourceUtils.getIdentifier(ResourceType.STRING, "piko_copy_username");
+        return ResourceUtils.getIdentifier(ResourceType.STRING, "awt_copy_username");
     }
 
     public static String getLabel(Context context, int resourceId) {
         // Instagram's downloaded translations can reuse IDs assigned to added Piko strings.
         if (resourceId == getLabelResourceId()) {
-            return str("piko_copy_username");
+            return str("awt_copy_username");
         }
         return context.getString(resourceId);
     }

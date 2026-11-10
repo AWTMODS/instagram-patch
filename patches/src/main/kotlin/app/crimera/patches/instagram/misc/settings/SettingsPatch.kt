@@ -177,9 +177,9 @@ val settingsPatch =
                     """
                         invoke-static/range { v$thisRegister .. v$thisRegister }, $ACTIVITY_SETTINGS_CLASS/ActivityHook;->isPiko(Landroid/app/Activity;)Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :not_piko_post_create
+                        if-eqz v$freeRegister, :not_awt_post_create
                         return-void
-                        :not_piko_post_create
+                        :not_awt_post_create
                         nop
                     """,
                 )
@@ -194,9 +194,9 @@ val settingsPatch =
                     """
                         invoke-static/range { v$thisRegister .. v$thisRegister }, $ACTIVITY_SETTINGS_CLASS/ActivityHook;->isPiko(Landroid/app/Activity;)Z
                         move-result v$freeRegister
-                        if-eqz v$freeRegister, :not_piko_init
+                        if-eqz v$freeRegister, :not_awt_init
                         return-void
-                        :not_piko_init
+                        :not_awt_init
                         nop
                     """,
                 )

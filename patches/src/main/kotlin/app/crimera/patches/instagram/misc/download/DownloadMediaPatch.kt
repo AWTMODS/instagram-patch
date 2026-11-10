@@ -61,7 +61,7 @@ val downloadMediaPatch =
 
         execute {
 
-            addOverflowMenuButtonAttributes("PIKO_DOWNLOAD", "downloadOverflowButton")
+            addOverflowMenuButtonAttributes("AWT_DOWNLOAD", "downloadOverflowButton")
 
             // DM media downloader.
             val appActivityField =

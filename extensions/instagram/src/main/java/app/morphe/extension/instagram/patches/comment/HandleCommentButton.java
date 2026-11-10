@@ -84,9 +84,9 @@ public class HandleCommentButton {
                 String username = userData != null ? userData.getUsername() : null;
                 if (username != null && !username.isEmpty()) {
                     Utils.setClipboard(username);
-                    PikoUtils.toast(str("piko_copied"));
+                    AwtUtils.toast(str("awt_copied"));
                 } else {
-                    PikoUtils.toast(str("piko_comment_copied_failed"));
+                    AwtUtils.toast(str("awt_comment_copied_failed"));
                 }
                 return true;
 

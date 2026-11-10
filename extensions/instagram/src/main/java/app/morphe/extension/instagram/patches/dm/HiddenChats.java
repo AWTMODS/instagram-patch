@@ -39,7 +39,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import app.morphe.extension.crimera.PikoUtils;
+import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceType;
@@ -68,7 +68,7 @@ public final class HiddenChats {
     private static final String[] HIDE_BUTTONS = {"HIDE_FROM_PRIMARY", "HIDE_FROM_MESSAGES"};
     private static final String[] UNHIDE_BUTTONS = {"SHOW_IN_PRIMARY", "SHOW_IN_MESSAGES"};
     // The incognito icon next to the account name tells that the hidden chats are open.
-    private static final String ICON_TAG = "piko_hidden_chats_icon";
+    private static final String ICON_TAG = "awt_hidden_chats_icon";
     private static final String TITLE_BOX_ID = "action_bar_title_notifications_container";
     private static final String TITLE_ID = "igds_action_bar_title";
     private static final Map<View, Boolean> watchedWindows = new WeakHashMap<>();
@@ -245,7 +245,7 @@ public final class HiddenChats {
     private static void toggleHiddenMode(Activity activity) {
         if (hiddenMode) {
             hiddenMode = false;
-            PikoUtils.toast(str("piko_hidden_chats_closed"));
+            AwtUtils.toast(str("awt_hidden_chats_closed"));
             refresh(modeUser);
             return;
         }
@@ -253,7 +253,7 @@ public final class HiddenChats {
             if (lastUser == null) return;
             modeUser = lastUser;
             hiddenMode = true;
-            PikoUtils.toast(str("piko_hidden_chats_opened"));
+            AwtUtils.toast(str("awt_hidden_chats_opened"));
             refresh(modeUser);
         };
         // The hidden chats are as private as the inbox, so they ask for the same lock.
@@ -366,7 +366,7 @@ public final class HiddenChats {
             String userId = ((UserSession) session).getUserId();
             if (menuButtonHides) HiddenChatsPref.add(userId, String.valueOf(threadKey));
             else HiddenChatsPref.remove(userId, String.valueOf(threadKey));
-            PikoUtils.toast(str(menuButtonHides ? "piko_hidden_chats_hidden" : "piko_hidden_chats_unhidden"));
+            AwtUtils.toast(str(menuButtonHides ? "awt_hidden_chats_hidden" : "awt_hidden_chats_unhidden"));
             refresh(userId);
             return true;
         } catch (Throwable t) {

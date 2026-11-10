@@ -103,7 +103,7 @@ public class FeedButton {
     }
 
     public static MediaOption$Option downloadOverflowButton(){
-        return FeedButton.initOverflowButton("PIKO_DOWNLOAD", 500, UI.DRAWABLE_DOWNLOAD_ICON);
+        return FeedButton.initOverflowButton("AWT_DOWNLOAD", 500, UI.DRAWABLE_DOWNLOAD_ICON);
     }
 
     public static MediaOption$Option morePostOptionOverflowButton(){

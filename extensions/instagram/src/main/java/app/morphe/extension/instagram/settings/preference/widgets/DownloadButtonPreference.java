@@ -29,22 +29,22 @@ public class DownloadButtonPreference extends MultiSelectListPref {
         super(context);
         // Keep the existing boolean keys for runtime hooks and settings imports/exports.
         setPersistent(false);
-        setKey("piko_download_buttons");
-        setTitle(str("piko_download_buttons"));
+        setKey("awt_download_buttons");
+        setTitle(str("awt_download_buttons"));
         setDialogTitle(getTitle());
 
         List<String> entries = new ArrayList<>();
         if (SettingsStatus.feedDownloadButton) {
             settings.add(Settings.FEED_DOWNLOAD_BUTTON);
-            entries.add(str("piko_download_buttons_feed"));
+            entries.add(str("awt_download_buttons_feed"));
         }
         if (SettingsStatus.reelDownloadButton) {
             settings.add(Settings.REEL_DOWNLOAD_BUTTON);
-            entries.add(str("piko_navigation_tab_reels"));
+            entries.add(str("awt_navigation_tab_reels"));
         }
         if (SettingsStatus.storyDownloadButton) {
             settings.add(Settings.STORY_DOWNLOAD_BUTTON);
-            entries.add(str("piko_download_buttons_stories"));
+            entries.add(str("awt_download_buttons_stories"));
         }
         setEntries(entries.toArray(new CharSequence[0]));
         CharSequence[] values = new CharSequence[settings.size()];

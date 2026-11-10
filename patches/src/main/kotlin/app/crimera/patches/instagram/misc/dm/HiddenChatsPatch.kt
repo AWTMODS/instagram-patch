@@ -222,10 +222,10 @@ val hiddenChatsPatch =
                         move-object/from16 v3, p$key
                         invoke-static {v1, v2, v3}, $EXTENSION_CLASS->onMenuButton(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z
                         move-result v0
-                        if-eqz v0, :piko_menu
+                        if-eqz v0, :awt_menu
                         return-void
                         """.trimIndent(),
-                        ExternalLabel("piko_menu", getInstruction(0)),
+                        ExternalLabel("awt_menu", getInstruction(0)),
                     )
                 }
             }
@@ -236,10 +236,10 @@ val hiddenChatsPatch =
                     """
                     invoke-static/range {p1 .. p3}, $EXTENSION_CLASS->shouldMuteNotification(Ljava/lang/Object;Ljava/lang/Runnable;Ljava/lang/String;)Z
                     move-result v0
-                    if-eqz v0, :piko_continue
+                    if-eqz v0, :awt_continue
                     return-void
                     """.trimIndent(),
-                    ExternalLabel("piko_continue", instructions.first()),
+                    ExternalLabel("awt_continue", instructions.first()),
                 )
             }
 
@@ -252,10 +252,10 @@ val hiddenChatsPatch =
                     """
                     invoke-static {p0, p1}, $EXTENSION_CLASS->onBadge(Ljava/lang/Object;Ljava/lang/Object;)Z
                     move-result v0
-                    if-eqz v0, :piko_badge
+                    if-eqz v0, :awt_badge
                     return-void
                     """.trimIndent(),
-                    ExternalLabel("piko_badge", first),
+                    ExternalLabel("awt_badge", first),
                 )
             }
 

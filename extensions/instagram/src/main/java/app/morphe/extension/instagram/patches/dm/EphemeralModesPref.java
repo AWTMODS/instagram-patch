@@ -24,7 +24,7 @@ public class EphemeralModesPref extends BaseSharedPref {
     private static JSONObject modes;
 
     private EphemeralModesPref() {
-        super("piko_ephemeral_modes");
+        super("awt_ephemeral_modes");
     }
 
     public static synchronized String get(long expireAt) {

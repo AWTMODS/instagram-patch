@@ -24,7 +24,7 @@ public class HiddenChatsPref extends BaseSharedPref {
     private static final HiddenChatsPref INSTANCE = new HiddenChatsPref();
 
     private HiddenChatsPref() {
-        super("piko_hidden_chats");
+        super("awt_hidden_chats");
     }
 
     private static final String KEY_PREFIX = "chats_";

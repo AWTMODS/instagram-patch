@@ -33,7 +33,7 @@ public final class JumpToOldestMessage {
         try {
             if (running) {
                 stop();
-                Utils.showToastShort(str("piko_jump_oldest_cancelled"));
+                Utils.showToastShort(str("awt_jump_oldest_cancelled"));
                 return;
             }
             View list = anchor.getRootView().findViewById(ResourceUtils.getIdentifier(ResourceType.ID, "message_list"));
@@ -41,7 +41,7 @@ public final class JumpToOldestMessage {
                 return;
             }
             running = true;
-            Utils.showToastShort(str("piko_jump_oldest_started"));
+            Utils.showToastShort(str("awt_jump_oldest_started"));
             step(list, 0);
         } catch (Throwable t) {
             stop();
@@ -67,7 +67,7 @@ public final class JumpToOldestMessage {
             } else if (idleMs >= TOP_IDLE_LIMIT_MS) {
                 // A quiet list cannot distinguish the oldest message from a stalled page load.
                 stop();
-                Utils.showToastShort(str("piko_jump_oldest_stopped"));
+                Utils.showToastShort(str("awt_jump_oldest_stopped"));
             } else {
                 HANDLER.postDelayed(() -> step(list, idleMs + TOP_POLL_MS), TOP_POLL_MS);
             }

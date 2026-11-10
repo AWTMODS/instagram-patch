@@ -76,7 +76,7 @@ val customFontPatch =
                 it.method.replaceCreations(PLATFORM_TYPEFACE_SPANS)
             }
             PikoWidgetCreatorFingerprint.matchAllOrNull()?.forEach {
-                it.method.replaceCreations(PIKO_TEXT_WIDGETS)
+                it.method.replaceCreations(AWT_TEXT_WIDGETS)
             }
 
             enableSettings("customFont")

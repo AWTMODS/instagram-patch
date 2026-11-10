@@ -73,7 +73,7 @@ public final class InstagramSearchStyle {
         ));
 
         TextView title = new TextView(context);
-        title.setText(str("piko_settings_search_no_results"));
+        title.setText(str("awt_settings_search_no_results"));
         title.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         title.setTypeface(Typeface.DEFAULT, Typeface.BOLD);

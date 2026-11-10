@@ -86,7 +86,7 @@ val markAsReadAfterReplyPatch = patch(
                     """
                     move-object/from16 v$threadsRegister, p2
                     instance-of v$sessionRegister, v$threadsRegister, ${sendClass.type}
-                    if-eqz v$sessionRegister, :piko_continue
+                    if-eqz v$sessionRegister, :awt_continue
                     check-cast v$threadsRegister, ${sendClass.type}
                     invoke-virtual {v$threadsRegister}, $threadsGetter
                     move-result-object v$threadsRegister
@@ -94,7 +94,7 @@ val markAsReadAfterReplyPatch = patch(
                     iget-object v$sessionRegister, v$sessionRegister, $sessionField
                     invoke-static {v$sessionRegister, v$threadsRegister}, $REPLY_READ_EXTENSION->onReplySent(${USER_SESSION_CLASS}Ljava/util/List;)V
                     """.trimIndent(),
-                    ExternalLabel("piko_continue", getInstruction(0)),
+                    ExternalLabel("awt_continue", getInstruction(0)),
                 )
             }
         }

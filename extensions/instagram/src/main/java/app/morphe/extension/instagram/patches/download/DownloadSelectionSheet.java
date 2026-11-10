@@ -110,9 +110,9 @@ final class DownloadSelectionSheet {
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
         header.setPadding(dp(20), dp(12), dp(8), 0);
-        TextView title = text(str("piko_select_media_download"), 22, true);
+        TextView title = text(str("awt_select_media_download"), 22, true);
         header.addView(title, new LinearLayout.LayoutParams(0, -2, 1));
-        ImageButton close = iconButton(UI.DRAWABLE_CLEAR, str("piko_close"));
+        ImageButton close = iconButton(UI.DRAWABLE_CLEAR, str("awt_close"));
         close.setOnClickListener(v -> dialog.cancel());
         header.addView(close, new LinearLayout.LayoutParams(dp(48), dp(48)));
         panel.addView(header);
@@ -174,7 +174,7 @@ final class DownloadSelectionSheet {
                 dialog.dismiss();
             } catch (Exception e) {
                 Logger.printException(() -> "Could not download selected media", e);
-                Utils.showToastShort(str("piko_download_failed_media"));
+                Utils.showToastShort(str("awt_download_failed_media"));
             }
         });
         LinearLayout.LayoutParams downloadParams = new LinearLayout.LayoutParams(-1, -2);
@@ -187,7 +187,7 @@ final class DownloadSelectionSheet {
 
     private View createRow(MediaData item, int index) throws Exception {
         boolean video = item.isVideo();
-        String label = str(video ? "piko_download_video_number" : "piko_download_photo_number", index + 1);
+        String label = str(video ? "awt_download_video_number" : "awt_download_photo_number", index + 1);
         LinearLayout row = new LinearLayout(context);
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setMinimumHeight(dp(80));
@@ -234,16 +234,16 @@ final class DownloadSelectionSheet {
         name.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         name.setPadding(dp(12), 0, dp(4), 0);
         row.addView(name, new LinearLayout.LayoutParams(0, -2, 1));
-        ImageButton copy = iconButton("instagram_link_outline_24", str("piko_download_copy_link_for", label));
+        ImageButton copy = iconButton("instagram_link_outline_24", str("awt_download_copy_link_for", label));
         copy.setOnClickListener(v -> {
             try {
                 String url = item.getMediaLink();
                 if (url == null || url.isEmpty()) throw new IllegalStateException("Missing media link");
                 Utils.setClipboard(MediaUrls.forViewing(url));
-                Utils.showToastShort(str("piko_copied_media_link"));
+                Utils.showToastShort(str("awt_copied_media_link"));
             } catch (Exception e) {
                 Logger.printException(() -> "Could not copy selected media link", e);
-                Utils.showToastShort(str("piko_media_link_unavailable"));
+                Utils.showToastShort(str("awt_media_link_unavailable"));
             }
         });
         row.addView(copy, new LinearLayout.LayoutParams(dp(48), dp(48)));
@@ -265,8 +265,8 @@ final class DownloadSelectionSheet {
 
     private void refreshSelection() {
         int count = selectedIndexes().size();
-        selectAll.setText(str(count == checks.size() ? "piko_download_deselect_all" : "piko_download_select_all"));
-        download.setText(str("piko_download_selected_count", count));
+        selectAll.setText(str(count == checks.size() ? "awt_download_deselect_all" : "awt_download_select_all"));
+        download.setText(str("awt_download_selected_count", count));
         download.setEnabled(count > 0);
         download.setAlpha(count > 0 ? 1f : 0.45f);
     }

@@ -128,7 +128,7 @@ public final class ReelDownload {
     }
 
     public static CharSequence description(CharSequence original) {
-        return CURRENT.get() == null ? original : str("piko_download_current_media");
+        return CURRENT.get() == null ? original : str("awt_download_current_media");
     }
 
     /** Keeps the save button's id unique, so lookups by that id still reach the real button. */

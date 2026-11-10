@@ -39,7 +39,7 @@ public final class EphemeralMediaCaption {
     private static final String BUBBLE_ID = "message_content_visual_thumbnail_bubble_container";
     private static final String PLACEHOLDER_ID = "message_placeholder_container";
     private static final String IMAGE_URL_CLASS = "com.instagram.model.mediasize.ExtendedImageUrl";
-    private static final String CAPTION_TAG = "piko_ephemeral_caption";
+    private static final String CAPTION_TAG = "awt_ephemeral_caption";
     private static final String MODE_PERMANENT = "permanent";
     private static final String MODE_KEEP_IN_CHAT = "keep_in_chat";
     private static final Set<Object> SERVER_PARSERS =
@@ -102,19 +102,19 @@ public final class EphemeralMediaCaption {
     private static String textFor(long expireAt, View bubble) {
         String how;
         switch (EphemeralModesPref.get(expireAt)) {
-            case "once": how = str("piko_ephemeral_received_once"); break;
-            case "replayable": how = str("piko_ephemeral_received_twice"); break;
-            case MODE_KEEP_IN_CHAT: how = str("piko_ephemeral_received_chat"); break;
+            case "once": how = str("awt_ephemeral_received_once"); break;
+            case "replayable": how = str("awt_ephemeral_received_twice"); break;
+            case MODE_KEEP_IN_CHAT: how = str("awt_ephemeral_received_chat"); break;
             // Permanent can also be a previously converted message with no original-mode record.
-            case MODE_PERMANENT: how = str("piko_ephemeral_received_unknown"); break;
+            case MODE_PERMANENT: how = str("awt_ephemeral_received_unknown"); break;
             default: return null;
         }
 
         long expireMillis = expireAt * 1000;
-        if (expireMillis < System.currentTimeMillis()) return how + " · " + str("piko_ephemeral_expired");
+        if (expireMillis < System.currentTimeMillis()) return how + " · " + str("awt_ephemeral_expired");
         String until = DateUtils.formatDateTime(bubble.getContext(), expireMillis,
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_MONTH);
-        return how + " · " + String.format(str("piko_ephemeral_available_until"), until);
+        return how + " · " + String.format(str("awt_ephemeral_available_until"), until);
     }
 
     private static View bubbleOf(Object holder) throws Exception {

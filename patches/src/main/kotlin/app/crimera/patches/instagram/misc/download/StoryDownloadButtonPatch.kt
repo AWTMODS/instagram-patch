@@ -129,9 +129,9 @@ private fun hookStoryToolbarBinder() {
         ${moveObject(container, binder.parameterRegister(holder.originalClassDef.type))}
         iget-object v$container, v$container, $containerField
         ${moveObject(media, binder.parameterRegister(REEL_ITEM_DESCRIPTOR))}
-        if-eqz v$media, :piko_story_media
+        if-eqz v$media, :awt_story_media
         iget-object v$media, v$media, $mediaField
-        :piko_story_media
+        :awt_story_media
         ${moveObject(session, binder.parameterRegister(USER_SESSION_DESCRIPTOR))}
         ${moveObject(reel, binder.parameterRegister(reelType))}
         invoke-static {v$container, v$media, v$session, v$reel}, $DOWNLOAD_UTILS_DESCRIPTOR->addStoryDownloadButton($VIEW_DESCRIPTOR$OBJECT_DESCRIPTOR$USER_SESSION_DESCRIPTOR$OBJECT_DESCRIPTOR)V

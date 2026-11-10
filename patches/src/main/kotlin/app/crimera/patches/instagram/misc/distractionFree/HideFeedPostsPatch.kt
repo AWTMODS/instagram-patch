@@ -86,10 +86,10 @@ private fun MutableMethod.stopHiddenFeedLoading() {
         """
         $PREF_CALL_DESCRIPTOR->hideFeedPosts()Z
         move-result v$scratch
-        if-eqz v$scratch, :piko_loading_original
+        if-eqz v$scratch, :awt_loading_original
         return-void
         """.trimIndent(),
-        ExternalLabel("piko_loading_original", first),
+        ExternalLabel("awt_loading_original", first),
     )
 }
 
@@ -123,10 +123,10 @@ val hideFeedPostsPatch = patch(
             """
             $PREF_CALL_DESCRIPTOR->hideFeedPosts()Z
             move-result v$scratchRegister
-            if-eqz v$scratchRegister, :piko_original
+            if-eqz v$scratchRegister, :awt_original
             const/16 v$countRegister, 0x0
             """.trimIndent(),
-            ExternalLabel("piko_original", match.method.getInstruction(insertIndex)),
+            ExternalLabel("awt_original", match.method.getInstruction(insertIndex)),
         )
 
         val footer = mainFeedFooterFingerprint(match.method.definingClass)
@@ -145,9 +145,9 @@ val hideFeedPostsPatch = patch(
             """
             $PREF_CALL_DESCRIPTOR->hideFeedPosts()Z
             move-result v${footerScratch.single()}
-            if-nez v${footerScratch.single()}, :piko_feed_complete
+            if-nez v${footerScratch.single()}, :awt_feed_complete
             """.trimIndent(),
-            ExternalLabel("piko_feed_complete", footer.method.getInstruction(footer.instructionMatches[7].index)),
+            ExternalLabel("awt_feed_complete", footer.method.getInstruction(footer.instructionMatches[7].index)),
         )
 
         MainFeedLoadMoreFingerprint.method.stopHiddenFeedLoading()

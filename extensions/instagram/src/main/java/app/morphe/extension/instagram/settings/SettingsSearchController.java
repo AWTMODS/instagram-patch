@@ -84,7 +84,7 @@ public final class SettingsSearchController {
         searchInput.setBackgroundColor(Color.TRANSPARENT);
         searchInput.setTextColor(InstagramPreferenceStyle.primaryTextColor());
         searchInput.setHintTextColor(InstagramPreferenceStyle.secondaryTextColor());
-        searchInput.setHint(str("piko_settings_search_hint"));
+        searchInput.setHint(str("awt_settings_search_hint"));
         searchInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         searchInput.setPaddingRelative(0, 0, 0, 0);
         searchInput.setTextDirection(View.TEXT_DIRECTION_LOCALE);
@@ -106,7 +106,7 @@ public final class SettingsSearchController {
                 clearHorizontalPadding, clearVerticalPadding);
         UI.setThemedIcon(clearIcon, UI.DRAWABLE_CLEAR, "igds_color_secondary_text");
         clearButton = clearIcon;
-        clearButton.setContentDescription(str("piko_settings_search_clear"));
+        clearButton.setContentDescription(str("awt_settings_search_clear"));
         clearButton.setClickable(true);
         clearButton.setFocusable(true);
         clearButton.setVisibility(View.GONE);
@@ -189,7 +189,7 @@ public final class SettingsSearchController {
                 InstagramPreferenceStyle.dp(context, 16),
                 InstagramPreferenceStyle.dp(context, 10)
         );
-        entry.setContentDescription(str("piko_settings_search_hint"));
+        entry.setContentDescription(str("awt_settings_search_hint"));
         entry.setFocusable(true);
         entry.setOnClickListener(view -> enterSearchMode());
 
@@ -197,7 +197,7 @@ public final class SettingsSearchController {
         LinearLayout bar = createSearchBar();
         bar.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         TextView hint = new TextView(context);
-        hint.setText(str("piko_settings_search_hint"));
+        hint.setText(str("awt_settings_search_hint"));
         hint.setTextColor(InstagramPreferenceStyle.secondaryTextColor());
         hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         hint.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);

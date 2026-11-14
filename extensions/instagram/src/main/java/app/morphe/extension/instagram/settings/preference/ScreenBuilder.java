@@ -927,6 +927,14 @@ public class ScreenBuilder {
         );
 
         addPreference(
+                helper.listPreference(
+                        str("awt_download_conflict_policy"),
+                        str("awt_download_conflict_policy_desc"),
+                        Settings.DOWNLOAD_CONFLICT_POLICY
+                )
+        );
+
+        addPreference(
                 helper.downloadFileNameTemplatePreference(
                         str("awt_download_file_name_template"),
                         Pref.downloadFileNameTemplate(),

@@ -26,6 +26,7 @@ import java.util.Set;
 import app.morphe.extension.crimera.sharedPreference.SharedPref;
 import app.morphe.extension.instagram.patches.devFlags.FlagsSharedPref;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
+import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 
@@ -129,7 +130,7 @@ public final class SettingsRestart {
                     .setTitle(str("awt_restart_app"))
                     .setPositiveButton(str("awt_ok"), (dialog, which) -> {
                         clearPendingRestart();
-                        Utils.restartApp(activity);
+                        InstaUtils.restartApp(activity);
                     })
                     .setNegativeButton(str("awt_cancel"), (dialog, which) -> {
                         activity.finish();

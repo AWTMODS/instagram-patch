@@ -14,6 +14,7 @@ import android.preference.Preference;
 
 import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
+import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.shared.Utils;
 
 /** Confirmation flows behind the Focus Lock button. */
@@ -55,7 +56,7 @@ public class FocusLockDialogs {
                     if (FocusLock.lock()) {
                         AwtUtils.toast(str("awt_focus_lock_locked_toast"));
                         // Some hooks read preferences once at class-load time, so restart.
-                        Utils.restartApp(Utils.getContext());
+                        InstaUtils.restartApp(Utils.getContext());
                     }
                 })
                 .show();
@@ -84,7 +85,7 @@ public class FocusLockDialogs {
                 .setNegativeButton(str("awt_cancel"), null)
                 .setPositiveButton(str("awt_ok"), (d, w) -> {
                     if (FocusLock.unlock()) {
-                        Utils.restartApp(Utils.getContext());
+                        InstaUtils.restartApp(Utils.getContext());
                     }
                 })
                 .show();

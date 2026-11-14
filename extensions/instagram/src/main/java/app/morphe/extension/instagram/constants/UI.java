@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import app.morphe.extension.crimera.AwtUtils;
+import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.instagram.entity.InstagramDialogBox;
 import app.morphe.extension.instagram.settings.preference.fragments.FragmentHook;
@@ -217,7 +218,7 @@ public class UI {
                     String selectedOption = options.get(which);
 
                     if (selectedOption.equals(str("awt_ok"))) {
-                        Utils.restartApp(context);
+                        InstaUtils.restartApp(context);
 
                     }
                 } catch (Exception e) {

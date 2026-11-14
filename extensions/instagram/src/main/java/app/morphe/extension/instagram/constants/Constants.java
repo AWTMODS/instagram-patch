@@ -96,6 +96,8 @@ public class Constants {
         ExtensionStrings.setDefaultAwtFolder(Constants.DEFAULT_AWT_FOLDER);
         ExtensionStrings.setDownloadOngoing(str("awt_downloading_media"));
         ExtensionStrings.setDownloadCompleted(str("awt_downloaded_media"));
+        ExtensionStrings.DOWNLOAD_MEDIA_EXISTS = str("awt_download_media_exists");
+        ExtensionStrings.DOWNLOAD_MEDIA_IN_PROGRESS = str("awt_download_media_in_progress");
         ExtensionStrings.setDownloadError(str("awt_download_failed_media"));
         ExtensionStrings.setDownloadSetPathFailed(str("awt_download_set_path_failed"));
         ExtensionStrings.setDownloadSetPathSuccess(str("awt_download_set_path_success"));

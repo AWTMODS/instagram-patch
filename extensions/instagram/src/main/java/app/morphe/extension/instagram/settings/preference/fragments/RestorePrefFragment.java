@@ -38,6 +38,7 @@ import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.patches.customise.font.FontStorage;
 import app.morphe.extension.instagram.patches.dm.InboxLock;
 import app.morphe.extension.instagram.patches.focusLock.FocusLock;
+import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 
@@ -176,7 +177,7 @@ public class RestorePrefFragment extends Fragment {
             }
 
             toast(str("awt_import_success"));
-            Utils.restartApp(ctx);
+            InstaUtils.restartApp(ctx);
 
         } catch (Exception e) {
             tempFile.delete();

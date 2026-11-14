@@ -48,13 +48,13 @@ public class FeedButton {
         List<MediaOption$Option> additionalButtonsList = new ArrayList<>();
 
         if(SettingsStatus.downloadMedia){
-            additionalButtonsList.add(MediaOption$Option.PIKO_DOWNLOAD);
+            additionalButtonsList.add(MediaOption$Option.AWT_DOWNLOAD);
         }
         if(SettingsStatus.moreOptionsOnPost){
-            additionalButtonsList.add(MediaOption$Option.PIKO_MORE_POST_OPTION);
+            additionalButtonsList.add(MediaOption$Option.AWT_MORE_POST_OPTION);
         }
         if(SettingsStatus.downloadWithExternalDownloader){
-            additionalButtonsList.add(MediaOption$Option.PIKO_EXTERNAL_DOWNLOADER);
+            additionalButtonsList.add(MediaOption$Option.AWT_EXTERNAL_DOWNLOADER);
         }
 
         int additionalButtonListSize = additionalButtonsList.size();
@@ -121,22 +121,22 @@ public class FeedButton {
 
     private static void addDownloadButton(Object buttonAdderObject, ArrayList buttonlist) throws Exception {
         String DOWNLOAD_BUTTON_TEXT = str("awt_download_options");
-        addButton(MediaOption$Option.PIKO_DOWNLOAD, DOWNLOAD_BUTTON_TEXT, buttonAdderObject, buttonlist);
+        addButton(MediaOption$Option.AWT_DOWNLOAD, DOWNLOAD_BUTTON_TEXT, buttonAdderObject, buttonlist);
     }
 
     public static void addFeedOverflowButton(Object buttonAdderObject, ArrayList buttonlist){
         try {
             if(Pref.pikoDebug()){
-                addButton(MediaOption$Option.PIKO_DEBUG, str("awt_debug"), buttonAdderObject, buttonlist);
+                addButton(MediaOption$Option.AWT_DEBUG, str("awt_debug"), buttonAdderObject, buttonlist);
             }
             if(Pref.enableDownload()) {
                 addDownloadButton(buttonAdderObject, buttonlist);
             }
             if(Pref.downloadWithExternalDownloader()) {
-                addButton(MediaOption$Option.PIKO_EXTERNAL_DOWNLOADER, str("awt_download_with_external_downloader"), buttonAdderObject, buttonlist);
+                addButton(MediaOption$Option.AWT_EXTERNAL_DOWNLOADER, str("awt_download_with_external_downloader"), buttonAdderObject, buttonlist);
             }
             if(Pref.moreOptionsOnPost()) {
-                addButton(MediaOption$Option.PIKO_MORE_POST_OPTION, str("awt_more_options"), buttonAdderObject, buttonlist);
+                addButton(MediaOption$Option.AWT_MORE_POST_OPTION, str("awt_more_options"), buttonAdderObject, buttonlist);
             }
         } catch (Exception e) {
             Logger.printException(() -> "Error at addReelButton",e);
@@ -145,25 +145,25 @@ public class FeedButton {
 
     public static boolean isCustomButtonPressed(MediaOption$Option pressedButton){
         return (
-                pressedButton.equals(MediaOption$Option.PIKO_DEBUG) ||
-                (SettingsStatus.downloadMedia && pressedButton.equals(MediaOption$Option.PIKO_DOWNLOAD)) ||
-                (SettingsStatus.moreOptionsOnPost && pressedButton.equals(MediaOption$Option.PIKO_MORE_POST_OPTION)) ||
-                (SettingsStatus.downloadWithExternalDownloader && pressedButton.equals(MediaOption$Option.PIKO_EXTERNAL_DOWNLOADER))
+                pressedButton.equals(MediaOption$Option.AWT_DEBUG) ||
+                (SettingsStatus.downloadMedia && pressedButton.equals(MediaOption$Option.AWT_DOWNLOAD)) ||
+                (SettingsStatus.moreOptionsOnPost && pressedButton.equals(MediaOption$Option.AWT_MORE_POST_OPTION)) ||
+                (SettingsStatus.downloadWithExternalDownloader && pressedButton.equals(MediaOption$Option.AWT_EXTERNAL_DOWNLOADER))
         );
     }
 
     public static void customButtonOnClick(MediaOption$Option pressedButton, UserSession userSession, Context context, Object mediaObject, int currentMediaIndex){
         try{
-            if(pressedButton.equals(MediaOption$Option.PIKO_DEBUG)) {
+            if(pressedButton.equals(MediaOption$Option.AWT_DEBUG)) {
                 ObjectBrowser.browseObject(context, new MediaData(mediaObject, userSession));
 
-            } else if (SettingsStatus.downloadMedia && pressedButton.equals(MediaOption$Option.PIKO_DOWNLOAD)) {
+            } else if (SettingsStatus.downloadMedia && pressedButton.equals(MediaOption$Option.AWT_DOWNLOAD)) {
                 DownloadUtils.showDownloadOptions(context, userSession, mediaObject, currentMediaIndex);
 
-            } else if (SettingsStatus.moreOptionsOnPost && pressedButton.equals(MediaOption$Option.PIKO_MORE_POST_OPTION)) {
+            } else if (SettingsStatus.moreOptionsOnPost && pressedButton.equals(MediaOption$Option.AWT_MORE_POST_OPTION)) {
                 MoreOptionsOnPostPatch.postMoreOptions(context, userSession, mediaObject, currentMediaIndex);
 
-            } else if (SettingsStatus.downloadWithExternalDownloader && pressedButton.equals(MediaOption$Option.PIKO_EXTERNAL_DOWNLOADER)) {
+            } else if (SettingsStatus.downloadWithExternalDownloader && pressedButton.equals(MediaOption$Option.AWT_EXTERNAL_DOWNLOADER)) {
                 DownloadUtils.externalDownloader(mediaObject,currentMediaIndex);
 
             }

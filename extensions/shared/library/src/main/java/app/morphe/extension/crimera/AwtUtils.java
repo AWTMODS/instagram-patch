@@ -101,6 +101,10 @@ public class AwtUtils {
         return writeFile(outputFile,data.getBytes(),append);
     }
 
+    public static boolean pikoWriteFile(String fileName, String subFolder, String data, boolean append) {
+        return awtWriteFile(fileName, subFolder, data, append);
+    }
+
     public static boolean writeFile(File fileName, byte[] data, boolean append) {
         try {
             FileOutputStream outputStream = new FileOutputStream(fileName, append);

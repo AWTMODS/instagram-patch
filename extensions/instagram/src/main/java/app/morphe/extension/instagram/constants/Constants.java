@@ -21,6 +21,7 @@ public class Constants {
     public static final String DEFAULT_DM_FOLDER = "DM";
     public static final String DEFAULT_GIF_FOLDER = "Gif";
 
+    public static final String INSTAGRAM_SHARE_LINK = "https://www.instagram.com/%s/%s/";
     // https://www.instagram.com/p/<short code>/
     // https://www.instagram.com/reel/<short code>/
     // https://www.instagram.com/stories/<user name>/<post id>

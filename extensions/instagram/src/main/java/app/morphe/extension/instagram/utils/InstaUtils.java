@@ -56,7 +56,7 @@ public class InstaUtils {
             fileName += ".txt";
             data = developerOptions.toString();
         }
-        fileDone = AwtUtils.pikoWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
+        fileDone = AwtUtils.awtWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
         fileDoneTxt = fileDone ? " created" : fileDoneTxt;
         AwtUtils.toast(fileName + fileDoneTxt);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -17,7 +17,7 @@ import java.lang.reflect.Modifier;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import app.morphe.extension.crimera.AwtUtils;
-import app.morphe.extension.instagram.db.AwtMessageDb;
+import app.morphe.extension.instagram.db.PikoMessageDb;
 import app.morphe.extension.instagram.entity.DirectItem;
 import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.settings.ActivityHook;
@@ -34,8 +34,8 @@ public class SavedMessagesHook {
     private static android.os.HandlerThread sWorkerThread;
     private static android.os.Handler sWorker;
 
-    private static void awt(String message) {
-        android.util.Log.e("awt", message);
+    private static void piko(String message) {
+        android.util.Log.e("piko", message);
     }
 
     public static void openDeletedMessages(Context context) {
@@ -44,32 +44,20 @@ public class SavedMessagesHook {
             if (context == null) return;
             ActivityHook.startDeletedMessagesActivity(context);
         } catch (Exception e) {
-            awt("SavedMessagesHook.openDeletedMessages: " + e);
+            piko("SavedMessagesHook.openDeletedMessages: " + e);
         }
     }
 
-    /** Harvest participant id-to-username mappings from the thread user list. */
-    public static void noteThreadUsers(final java.util.List<?> users) {
-        if (users == null || users.isEmpty() || !Pref.saveDeletedMessages()) return;
-        final java.util.ArrayList<Object> copy;
-        try {
-            copy = new java.util.ArrayList<Object>(users);
-        } catch (Throwable ignored) {
-            return;
-        }
+    public static void noteThreadUser(Object user) {
+        if (user == null || !Pref.saveDeletedMessages()) return;
         getWorker().post(() -> {
             try {
-                AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
-                for (Object user : copy) {
-                    if (user == null) continue;
-                    try {
-                        UserData data = new UserData(user);
-                        String id = data.getUserId();
-                        if (id == null || !id.matches("\\d{6,14}")) continue;
-                        String name = data.getUsername();
-                        if (name != null && !name.isEmpty()) db.putUsername(id, name);
-                    } catch (Throwable ignored) {
-                    }
+                UserData data = new UserData(user);
+                String id = data.getUserId();
+                if (id == null || !id.matches("\\d{6,14}")) return;
+                String name = data.getUsername();
+                if (name != null && !name.isEmpty()) {
+                    PikoMessageDb.getInstance(AwtUtils.getContext()).putUsername(id, name);
                 }
             } catch (Throwable ignored) {
             }
@@ -179,7 +167,7 @@ public class SavedMessagesHook {
         return null;
     }
 
-    private static String resolveSenderUsername(AwtMessageDb db, String senderId,
+    private static String resolveSenderUsername(PikoMessageDb db, String senderId,
                                                 String threadId, UserSession session,
                                                 String viewerId) {
         String username = db.getUsername(senderId);
@@ -218,7 +206,7 @@ public class SavedMessagesHook {
             if (isBlank(threadId) && !isBlank(threadIdHint)) threadId = threadIdHint;
             if (threadId == null) threadId = "";
 
-            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
+            PikoMessageDb db = PikoMessageDb.getInstance(AwtUtils.getContext());
             String senderUsername = resolveSenderUsername(
                     db, senderId, threadId, session, sessionViewerId);
             String content = directItem.getText();
@@ -254,7 +242,7 @@ public class SavedMessagesHook {
             db.upsertMessage(serverId, clientContext, threadId, senderId,
                     senderUsername, content, type, timestamp);
         } catch (Exception e) {
-            awt("SavedMessagesHook.processReceivedItem: " + e);
+            piko("SavedMessagesHook.processReceivedItem: " + e);
         }
     }
 
@@ -263,7 +251,7 @@ public class SavedMessagesHook {
         if (!isBlank(restoredContent)) directItem.setText(restoredContent);
     }
 
-    private static void markDeletedAndNotify(AwtMessageDb db, String messageId) {
+    private static void markDeletedAndNotify(PikoMessageDb db, String messageId) {
         if (!db.markDeleted(messageId)) return;
         // The notice shows who wrote what, so a hidden chat gets none.
         if (HiddenChats.shouldMuteDeletion(db.getThreadId(messageId))) return;
@@ -324,7 +312,7 @@ public class SavedMessagesHook {
             manager.notify((int) (System.currentTimeMillis() & Integer.MAX_VALUE),
                     InboxLock.hideNotification(notification));
         } catch (Exception e) {
-            awt("SavedMessagesHook.notifyDeletion: " + e);
+            piko("SavedMessagesHook.notifyDeletion: " + e);
         }
     }
 
@@ -363,13 +351,13 @@ public class SavedMessagesHook {
     private static void processMessageHiddenFromDb(String serverId, String clientContext) {
         try {
             if (!Pref.saveDeletedMessages()) return;
-            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
+            PikoMessageDb db = PikoMessageDb.getInstance(AwtUtils.getContext());
             String messageId = db.resolveAndMergeMessageId(serverId, clientContext);
             if (messageId == null) return;
             if (!shouldCaptureStored(db.getSenderId(messageId), myUserId())) return;
             markDeletedAndNotify(db, messageId);
         } catch (Exception e) {
-            awt("SavedMessagesHook.processMessageHiddenFromDb: " + e);
+            piko("SavedMessagesHook.processMessageHiddenFromDb: " + e);
         }
     }
 }

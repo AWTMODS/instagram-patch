@@ -400,7 +400,7 @@
 
 자세한 내용은 아래 문서를 참고하세요
 
-https://github.com/crimera/awt/blob/dev/docs /about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs /about_login_token_patch.md
 
 이 기능을 사용하기 전에 반드시 읽어보는 것을 추천합니다. 토큰을 가져오는 방법 등 중요한 정보가 포함되어 있습니다"</string>
     <string name="awt_login_token_select_account">계정 선택:</string>

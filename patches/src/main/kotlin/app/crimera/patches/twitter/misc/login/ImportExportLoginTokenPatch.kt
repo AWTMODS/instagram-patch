@@ -75,6 +75,7 @@ val importExportLoginTokenPatch =
                 "This is useful when logging in on your second device or when re-installing awt.",
     ) {
         compatibleWith(COMPATIBILITY_X)
+        category("Old patches")
 
         dependsOn(
             settingsPatch,

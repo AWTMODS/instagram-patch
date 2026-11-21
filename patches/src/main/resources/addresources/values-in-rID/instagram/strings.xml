@@ -159,13 +159,13 @@
     <string name="awt_navigation_tab_notifications">Pemberitahuan</string>
     <string name="awt_navigation_tab_create">Buat</string>
     <string name="awt_navigation_settings_lockout_title">Tidak ada tombol pengaturan Awt</string>
-    <string name="awt_navigation_settings_lockout_message">Pengaturan ini akan menghapus semua entri pengaturan Awt dari tab yang terlihat. Anda masih bisa membuka pengaturan Awt dengan menekan lama ikon aplikasi dan memilih pengaturan Piko.</string>
+    <string name="awt_navigation_settings_lockout_message">Pengaturan ini akan menghapus semua entri pengaturan Awt dari tab yang terlihat. Anda masih bisa membuka pengaturan Awt dengan menekan lama ikon aplikasi dan memilih pengaturan Awt.</string>
     <!-- Information Section -->
     <string name="awt_category_about">Tentang</string>
     <string name="awt_export_pref">Ekspor pengaturan Awt</string>
     <string name="awt_import_pref">Impor pengaturan Awt</string>
     <string name="awt_reset_pref">Atur ulang pengaturan Awt</string>
-    <string name="awt_reset_pref_confirm">Atur ulang pengaturan Piko?</string>
+    <string name="awt_reset_pref_confirm">Atur ulang pengaturan Awt?</string>
     <string name="awt_reset_pref_success">Pengaturan Awt diatur ulang</string>
     <string name="awt_reset_pref_failed">Gagal mengatur ulang pengaturan Awt</string>
     <string name="awt_app_version">Versi aplikasi: %s</string>
@@ -205,7 +205,7 @@
     <string name="awt_array_recmd_flag_state_disable">Nonaktifkan</string>
     <!-- Welcome Message -->
     <string name="awt_welcome_title">Selamat datang di Awt</string>
-    <string name="awt_welcome_message">Untuk meningkatkan pengalaman Anda menggunakan Piko, silakan buka pengaturan Awt dan sesuaikan preferensi Anda</string>
+    <string name="awt_welcome_message">Untuk meningkatkan pengalaman Anda menggunakan Awt, silakan buka pengaturan Awt dan sesuaikan preferensi Anda</string>
     <string name="awt_goto_awt_settings">Ke pengaturan Awt</string>
     <string name="awt_no_internet">Silakan sambungkan ke internet</string>
     <string name="awt_tap_here">Ketuk di sini !!</string>
@@ -323,4 +323,5 @@
     <string name="awt_media_like">suka</string>
     <string name="awt_media_link">tautan</string>
     <string name="awt_media_activity">aktivitas</string>
+    <!-- Recommended flags -->
 </resources>

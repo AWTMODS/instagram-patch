@@ -121,6 +121,8 @@
     <string name="awt_friendship_status">Statut d\'amitié</string>
     <string name="awt_follow_list_non_follower_badge">Afficher les comptes qui ne vous suivent pas dans la liste \'Suivi(e)s\'</string>
     <string name="awt_follow_list_non_follower_badge_desc">Ajoute un badge aux comptes de votre liste de \'Suivi(e)s\' qui ne vous suivent pas en retour</string>
+    <string name="awt_resume_reels_after_scrolling">Reprendre les Reels après avoir fait défiler</string>
+    <string name="awt_resume_reels_after_scrolling_desc">Reprendre un Reel là où vous vous étiez arrêté lorsque vous faites défiler vers lui</string>
     <string name="awt_improve_image_viewing">Améliorer la visualisation des images</string>
     <string name="awt_improve_image_viewing_desc">Récupère les images en résolution maximale depuis le serveur. Peut réduire les performances, augmenter la taille des données de l\'application ou faire basculer l\'application vers une ancienne disposition</string>
     <string name="awt_copy_comment">Copier le commentaire</string>
@@ -217,6 +219,13 @@
     <string name="awt_dash_audio_aac_lc_desc">Réencode le son xHE-AAC des téléchargements DASH au format AAC-LC à 192 kbit/s, ce qui permet à n\'importe quel lecteur de le lire</string>
     <string name="awt_embed_download_metadata">Intégrer les métadonnées de la vidéo</string>
     <string name="awt_embed_download_metadata_desc">Ajoute les sous-titres, le lien du post, le créateur et la date de mise en ligne aux fichiers MP4 téléchargés</string>
+    <string name="awt_download_conflict_policy">Lorsque le média existe déjà</string>
+    <string name="awt_download_conflict_policy_desc">S\'applique aux fichiers portant le même nom dans le dossier de téléchargement sélectionné</string>
+    <string name="awt_download_conflict_rename">Enregistrer sous un nouveau nom</string>
+    <string name="awt_download_conflict_skip">Ignorer les médias déjà téléchargés</string>
+    <string name="awt_download_conflict_overwrite">Écraser le fichier existant</string>
+    <string name="awt_download_media_exists">Le média existe déjà</string>
+    <string name="awt_download_media_in_progress">Le média est déjà en cours de téléchargement</string>
     <string name="awt_download_file_name_template">Format du nom du fichier</string>
     <string name="awt_download_file_name_template_invalid">Nom de fichier invalide</string>
     <string name="awt_download_file_name_insert_token">Insérer %1$s</string>
@@ -226,6 +235,7 @@
     <string name="awt_download_file_name_token_shortcode">Code de remplacement</string>
     <string name="awt_download_file_name_token_upload_date">Date</string>
     <string name="awt_download_file_name_token_upload_time">Temps</string>
+    <string name="awt_download_file_name_token_upload_timestamp">Horodatage</string>
     <string name="awt_download_file_name_token_type">Type</string>
     <string name="awt_download_file_name_token_carousel_index">Carrousel</string>
     <string name="awt_download_file_name_token_variant_suffix">Variante</string>
@@ -274,7 +284,7 @@
     <string name="awt_navigation_tab_notifications">Notifications</string>
     <string name="awt_navigation_tab_create">Créer</string>
     <string name="awt_navigation_settings_lockout_title">Aucun bouton paramètres de Awt</string>
-    <string name="awt_navigation_settings_lockout_message">Cette configuration supprime toutes les entrées des paramètres de Awt des onglets visibles. Vous pouvez toujours ouvrir les paramètres de Awt en appuyant longuement sur l\'icône de l\'application, puis en sélectionnant \'Paramètres de Piko\'.</string>
+    <string name="awt_navigation_settings_lockout_message">Cette configuration supprime toutes les entrées des paramètres de Awt des onglets visibles. Vous pouvez toujours ouvrir les paramètres de Awt en appuyant longuement sur l\'icône de l\'application, puis en sélectionnant \'Paramètres de Awt\'.</string>
     <!-- Information Section -->
     <string name="awt_category_about">À propos</string>
     <string name="awt_export_pref">Exporter les paramètres Awt</string>
@@ -325,7 +335,7 @@
     <string name="awt_array_recmd_flag_state_disable">Désactiver</string>
     <!-- Welcome Message -->
     <string name="awt_welcome_title">Bienvenue sur Awt</string>
-    <string name="awt_welcome_message">Pour améliorer votre expérience avec Piko, veuillez visiter les paramètres de Awt et ajuster vos préférences</string>
+    <string name="awt_welcome_message">Pour améliorer votre expérience avec Awt, veuillez visiter les paramètres de Awt et ajuster vos préférences</string>
     <string name="awt_goto_awt_settings">Accéder aux paramètres de Awt</string>
     <string name="awt_no_internet">Veuillez vous connecter à Internet</string>
     <string name="awt_tap_here">Appuyez ici !!</string>
@@ -477,4 +487,5 @@
     <string name="awt_media_activity">activité</string>
     <string name="awt_patch_theme">Thème</string>
     <string name="awt_patch_settings">Ajouter des paramètres</string>
+    <!-- Recommended flags -->
 </resources>

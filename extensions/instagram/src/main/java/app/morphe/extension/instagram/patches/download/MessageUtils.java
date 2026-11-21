@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -7,6 +7,8 @@
 
 package app.morphe.extension.instagram.patches.download;
 
+
+import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import android.content.Context;
 
@@ -18,12 +20,12 @@ import app.morphe.extension.instagram.settings.SettingsStatus;
 import app.morphe.extension.instagram.constants.Constants;
 
 import app.morphe.extension.crimera.ObjectBrowser;
-import app.morphe.extension.crimera.downloader.MediaType;
+import app.morphe.extension.crimera.legacydownloader.MediaType;
 
 public class MessageUtils {
     private static boolean DEBUG;
     static {
-        DEBUG = Pref.awtDebug();
+        DEBUG = Pref.pikoDebug();
     }
 
     public static boolean messageDownloadCheck(Context context, Object messageInfoObject){
@@ -36,10 +38,10 @@ public class MessageUtils {
                 return false;
             }
 
-            if(messageType == "media" || messageType == "raven_media"){
+            if ("media".equals(messageType) || "raven_media".equals(messageType) || "xma_collage".equals(messageType)) {
                 return true;
 
-            } else if (messageType == "voice_media" && SettingsStatus.downloadVoiceMessage) {
+            } else if ("voice_media".equals(messageType) && SettingsStatus.downloadVoiceMessage) {
                 MediaData audioData = messageInfo.getAudioMedia();
                 String audioUrl = audioData.getMessageAudioUrl();
                 String fileName = audioData.getDownloadFilename(MediaType.AUDIO);
@@ -54,6 +56,7 @@ public class MessageUtils {
 
         } catch (Exception e) {
             app.morphe.extension.crimera.AwtUtils.logger(e);
+            Utils.showToastShort(str("awt_download_failed_media"));
         }
         return false;
     }

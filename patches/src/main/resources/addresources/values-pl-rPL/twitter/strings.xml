@@ -401,7 +401,7 @@ Nigdy się nimi z nikim nie dziel!
 Jeśli ktoś zdobędzie ten token, uzyska pełny dostęp do Twojego konta, dopóki nie wylogujesz się z tej sesji.
 
 Szczegóły znajdziesz na tej stronie:
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Zalecamy zapoznanie się z tym dokumentem przed użyciem funkcji. Zawiera on ważne informacje, między innymi o tym, jak importować tokeny."</string>
     <string name="awt_login_token_select_account">Wybierz konto:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Kopiuj do schowka</string>

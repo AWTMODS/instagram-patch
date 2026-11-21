@@ -401,7 +401,7 @@
 Отримавши цей токен, будь-хто зможе вільно користуватися вашим обліковим записом, доки ви не вийдете із сесії.
 
 Детальніше читайте на цій сторінці:
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Рекомендуємо ознайомитися перед використанням. Там є важливі інструкції, зокрема щодо імпорту токенів."</string>
     <string name="awt_login_token_select_account">Виберіть обліковий запис:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Копіювати в буфер обміну</string>

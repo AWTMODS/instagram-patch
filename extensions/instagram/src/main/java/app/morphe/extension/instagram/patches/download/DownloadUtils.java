@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -64,11 +64,11 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.instagram.settings.ActivityHook;
 import app.morphe.extension.instagram.patches.Links;
 import app.morphe.extension.crimera.ObjectBrowser;
-import app.morphe.extension.crimera.downloader.MediaDownloader;
-import app.morphe.extension.crimera.downloader.DownloadMetadata;
-import app.morphe.extension.crimera.downloader.DownloadRequest;
-import app.morphe.extension.crimera.downloader.MediaType;
-import app.morphe.extension.crimera.downloader.StorageUtils;
+import app.morphe.extension.crimera.legacydownloader.MediaDownloader;
+import app.morphe.extension.crimera.legacydownloader.DownloadMetadata;
+import app.morphe.extension.crimera.legacydownloader.DownloadRequest;
+import app.morphe.extension.crimera.legacydownloader.MediaType;
+import app.morphe.extension.crimera.legacydownloader.StorageUtils;
 import app.morphe.extension.crimera.AwtUtils;
 
 import com.instagram.common.session.UserSession;
@@ -269,6 +269,7 @@ public class DownloadUtils {
         } catch (Exception e) {
             AwtUtils.logger(e);
             Logger.printException(() -> "Error at downloadPost", e);
+            Utils.showToastShort(str("awt_download_failed_media"));
         }
     }
 
@@ -370,7 +371,7 @@ public class DownloadUtils {
         if (mediaType.equals(MediaType.AUDIO)) {
             AudioMediaInterface audioMedia = mediaInfo.getMediaAt(position).getAudioMedia();
             String audioUrl = audioMedia.getAudioUrl();
-            String fileName = audioMedia.getDownloadName() + ".mp3";
+            String fileName = DownloadFileNameFormatter.safeFilename(audioMedia.getDownloadName(), ".m4a");
             downloader.enqueue(createDownloadRequest(audioUrl, Constants.DEFAULT_AUDIO_FOLDER, fileName));
 
         } else if (position != -1) {

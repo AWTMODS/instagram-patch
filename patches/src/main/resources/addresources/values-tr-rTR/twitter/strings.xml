@@ -33,7 +33,7 @@
     <string name="awt_pref_external_downloader_package_not_found">Harici indirici paketi bulunamadı</string>
     <!-- Native -->
     <string name="awt_title_native">Yerel özellikler</string>
-    <string name="awt_pref_native_page_desc">Bu yerleşik awt özellikleri gönderi menüsünde mevcut.</string>
+    <string name="awt_pref_native_page_desc">Bu yerleşik piko özellikleri gönderi menüsünde mevcut.</string>
     <string name="awt_title_native_downloader">Yerel indirici</string>
     <string name="awt_title_native_downloader_toggle">Yerel indirmeyi etkinleştir</string>
     <string name="awt_pref_native_downloader_autodownload_highest_video_res">En yüksek video çözünürlüğünü otomatik indir</string>
@@ -401,7 +401,7 @@ Bunları asla kimseyle paylaşmayın!
 Eğer birisi bu belirtece sahip olursa, siz oturumu kapatana kadar hesabınıza serbestçe erişebilir.
 
 Ayrıntılar için lütfen bu sayfaya başvurun:
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Bu özelliği kullanmadan önce bu sayfayı okumanız tavsiye edilir. Belirteçlerin nasıl içe aktarılacağı gibi bazı önemli bilgileri içerir."</string>
     <string name="awt_login_token_select_account">Bir hesap seçin:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Panoya kopyala</string>

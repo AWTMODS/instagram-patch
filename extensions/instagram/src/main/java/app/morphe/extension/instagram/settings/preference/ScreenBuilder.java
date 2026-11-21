@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -13,18 +13,14 @@ import android.content.Context;
 import android.preference.PreferenceScreen;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.text.format.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TreeMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Locale;
-
-import app.morphe.extension.instagram.patches.devFlags.RecommendedFlags;
 import app.morphe.extension.instagram.patches.devFlags.Flag;
+import app.morphe.extension.instagram.patches.devFlags.RecommendedFlags;
 
-import app.morphe.extension.crimera.downloader.StorageUtils;
+
+import app.morphe.extension.crimera.legacydownloader.StorageUtils;
 import app.morphe.extension.crimera.sharedPreference.SharedPref;
 import app.morphe.extension.instagram.patches.Links;
 import app.morphe.extension.instagram.patches.customise.font.FontStorage;
@@ -79,8 +75,8 @@ public class ScreenBuilder {
             dmSection();
         } else if (Constants.AWT_FRAGMENT_FILTER_CONTENT.equals(fragmentName)) {
             filterContentSection();
-        } else if (Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)) {
-            buildRecommendedFlagsSection();
+        } else if (RecommendedFlagsScreen.isFlagsScreen(fragmentName)) {
+            RecommendedFlagsScreen.build(context, screen, fragmentName, false, RecommendedFlags.getFlags(false));
         } else if (Constants.AWT_FRAGMENT_FOCUS_LOCK.equals(fragmentName)) {
             buildFocusLockSection();
         } else if (Constants.AWT_FRAGMENT_INSTANTS.equals(fragmentName)) {
@@ -90,9 +86,9 @@ public class ScreenBuilder {
         }
     }
 
-    public void buildFragmentForSearch(String fragmentName) {
-        if (Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)) {
-            buildRecommendedFlagsSection(false);
+    public void buildFragmentForSearch(String fragmentName, List<Flag> flags) {
+        if (RecommendedFlagsScreen.isFlagsScreen(fragmentName)) {
+            RecommendedFlagsScreen.build(context, screen, fragmentName, true, flags);
         } else {
             buildFragment(fragmentName);
         }
@@ -144,34 +140,46 @@ public class ScreenBuilder {
     }
 
     public void buildFontSection() {
-        if (!(SettingsStatus.fontSection())) return;
+        if (SettingsStatus.customFont) {
+            // Written here rather than left to the preference framework, which persists only after
+            // this listener has run - FontStorage.useSystemFont() has to read the new value straight
+            // away, from load() on the next start up.
+            SwitchPref useSystemFont = new SwitchPref(context);
+            useSystemFont.setTitle(str("awt_use_system_font"));
+            useSystemFont.setSummary(str("awt_use_system_font_desc"));
+            useSystemFont.setKey(Settings.USE_SYSTEM_FONT.key);
+            useSystemFont.setPersistent(false);
+            useSystemFont.setChecked(FontStorage.useSystemFont());
+            useSystemFont.setOnPreferenceChangeListener((preference, newValue) -> {
+                FontStorage.setUseSystemFont(Boolean.TRUE.equals(newValue));
+                return true;
+            });
+            addPreference(useSystemFont);
 
-        // Written here rather than left to the preference framework, which persists only after
-        // this listener has run - FontStorage.useSystemFont() has to read the new value straight
-        // away, from load() on the next start up.
-        SwitchPref useSystemFont = new SwitchPref(context);
-        useSystemFont.setTitle(str("awt_use_system_font"));
-        useSystemFont.setSummary(str("awt_use_system_font_desc"));
-        useSystemFont.setKey(Settings.USE_SYSTEM_FONT.key);
-        useSystemFont.setPersistent(false);
-        useSystemFont.setChecked(FontStorage.useSystemFont());
-        useSystemFont.setOnPreferenceChangeListener((preference, newValue) -> {
-            FontStorage.setUseSystemFont(Boolean.TRUE.equals(newValue));
-            return true;
-        });
-        addPreference(useSystemFont);
+            addPreference(helper.buttonPreference(
+                    str("awt_pref_add_font"),
+                    str("awt_pref_add_font_desc"),
+                    "awt_pref_add_font"
+            ));
 
-        addPreference(helper.buttonPreference(
-                str("awt_pref_add_font"),
-                str("awt_pref_add_font_desc"),
-                "awt_pref_add_font"
-        ));
-
-        addPreference(helper.buttonPreference(
-                str("awt_pref_delete_font"),
-                "",
-                "awt_pref_delete_font"
-        ));
+            addPreference(helper.buttonPreference(
+                    str("awt_pref_delete_font"),
+                    "",
+                    "awt_pref_delete_font"
+            ));
+        }
+        if (SettingsStatus.customEmojiFont) {
+            addPreference(helper.buttonPreference(
+                    str("awt_pref_add_emoji"),
+                    str("awt_pref_add_font_desc"),
+                    "awt_pref_add_emoji"
+            ));
+            addPreference(helper.buttonPreference(
+                    str("awt_pref_delete_emoji"),
+                    "",
+                    "awt_pref_delete_emoji"
+            ));
+        }
     }
 
     public void buildDeveloperSection() {
@@ -235,7 +243,7 @@ public class ScreenBuilder {
                     )
             );
 
-            if(Pref.awtDebug()) {
+            if(Pref.pikoDebug()) {
                 addPreference(
                         helper.buttonPreference(
                                 str("awt_export_experiment_list"),
@@ -264,6 +272,16 @@ public class ScreenBuilder {
                             str("awt_disable_disappearing_messages_gesture"),
                             str("awt_disable_disappearing_messages_gesture_desc"),
                             Settings.DISABLE_DISAPPEARING_MESSAGES_GESTURE
+                    )
+            );
+        }
+
+        if (SettingsStatus.sendKeyboardGifs) {
+            addPreference(
+                    helper.switchPreference(
+                            str("awt_send_keyboard_gifs"),
+                            str("awt_send_keyboard_gifs_desc"),
+                            Settings.SEND_KEYBOARD_GIFS
                     )
             );
         }
@@ -852,10 +870,31 @@ public class ScreenBuilder {
     }
 
     public void buildDownloadSection() {
-        if (!SettingsStatus.downloadSection()) return;
+        if (SettingsStatus.downloadMedia || SettingsStatus.saveMediaCommentButton) {
+            addInternalDownloadPreferences();
+        }
+        if (!SettingsStatus.downloadWithExternalDownloader) return;
 
-        // PreferenceCategory category= addCategory(str("awt_category_download_media"));
+        addPreference(
+                helper.switchPreference(
+                        str("awt_download_with_external_downloader"),
+                        "",
+                        Settings.DOWNLOAD_WITH_EXTERNAL_DOWNLOADER
+                )
+        );
+        addPreference(
+                helper.availableWhen(
+                        helper.editTextPreference(
+                                str("awt_external_downloader_package_name"),
+                                Pref.externalDownloaderPackageName(),
+                                Settings.EXTERNAL_DOWNLOADER_PACKAGE_NAME
+                        ),
+                        () -> SharedPref.getBooleanPref(Settings.DOWNLOAD_WITH_EXTERNAL_DOWNLOADER)
+                )
+        );
+    }
 
+    private void addInternalDownloadPreferences() {
         addPreference(
                 helper.switchPreference(
                         str("awt_enable_download"),
@@ -883,13 +922,15 @@ public class ScreenBuilder {
             );
         }
 
-        addPreference(
-                helper.switchPreference(
-                        str("awt_enable_direct_download"),
-                        str("awt_enable_direct_download_desc"),
-                        Settings.ENABLE_DIRECT_DOWNLOAD
-                )
-        );
+        if (SettingsStatus.downloadMedia) {
+            addPreference(
+                    helper.switchPreference(
+                            str("awt_enable_direct_download"),
+                            str("awt_enable_direct_download_desc"),
+                            Settings.ENABLE_DIRECT_DOWNLOAD
+                    )
+            );
+        }
 
         addPreference(
                 helper.switchPreference(
@@ -950,26 +991,6 @@ public class ScreenBuilder {
                 )
         );
 
-        if(SettingsStatus.downloadWithExternalDownloader) {
-            addPreference(
-                    helper.switchPreference(
-                            str("awt_download_with_external_downloader"),
-                            "",
-                            Settings.DOWNLOAD_WITH_EXTERNAL_DOWNLOADER
-                    )
-            );
-
-            addPreference(
-                    helper.availableWhen(
-                            helper.editTextPreference(
-                                    str("awt_external_downloader_package_name"),
-                                    Pref.externalDownloaderPackageName(),
-                                    Settings.EXTERNAL_DOWNLOADER_PACKAGE_NAME
-                            ),
-                            () -> SharedPref.getBooleanPref(Settings.DOWNLOAD_WITH_EXTERNAL_DOWNLOADER)
-                    )
-            );
-        }
     }
 
     public void buildActionBarSection() {
@@ -1031,23 +1052,10 @@ public class ScreenBuilder {
                     )
             );
 
-            addPreference(
-                    category,
-                    helper.editTextNumPreference(
-                            str("awt_filter_story_minimum_item_count"),
-                            str("awt_filter_story_minimum_item_count_desc"),
-                            Settings.FILTER_STORY_MIN_STORY_ITEMS
-                    )
-            );
-
-            addPreference(
-                    category,
-                    helper.editTextNumPreference(
-                            str("awt_filter_story_maximum_item_count"),
-                            str("awt_filter_story_maximum_item_count_desc"),
-                            Settings.FILTER_STORY_MAX_STORY_ITEMS
-                    )
-            );
+            addPreference(category, new StoryItemCountPreference(context, Settings.FILTER_STORY_MIN_STORY_ITEMS,
+                    str("awt_filter_story_minimum_item_count"), str("awt_filter_story_minimum_item_count_desc")));
+            addPreference(category, new StoryItemCountPreference(context, Settings.FILTER_STORY_MAX_STORY_ITEMS,
+                    str("awt_filter_story_maximum_item_count"), str("awt_filter_story_maximum_item_count_desc")));
         }
     }
 
@@ -1069,55 +1077,78 @@ public class ScreenBuilder {
         );
     }
 
-    public void buildRecommendedFlagsSection() {
-        buildRecommendedFlagsSection(true);
-    }
-
-    private void buildRecommendedFlagsSection(boolean notifyErrors) {
-        long lastModified = RecommendedFlags.getLastModified();
-        String lastModifiedAtString = "";
-        if (lastModified > 0L) {
-            Locale locale = context.getResources().getConfiguration().getLocales().get(0);
-            String skeleton = DateFormat.is24HourFormat(context) ? "yMMMEdHm" : "yMMMEdhm";
-            String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
-            String formattedDate = new SimpleDateFormat(pattern, locale).format(new Date(lastModified));
-            lastModifiedAtString = String.format(str("awt_rec_flags_last_modified_at"), formattedDate);
-        }
-        addPreference(
-            helper.buttonPreference(
-                    str("awt_rec_flags_refresh_file"),
-                    lastModifiedAtString,
-                    "awt_rec_flags_refresh_file"
-            )
-        );
-        List<Flag> recFlags = RecommendedFlags.getFlags(notifyErrors);
-        // The flag names will be English only,
-        // as I want to keep it as a live service
-        // rather than triggering new build
-        // for every a new flag.
-        for(Flag flag : recFlags) {
-            if (flag.isLongType()) {
-                addPreference(
-                        helper.editTextNumPreference(
-                                flag.getName(),
-                                flag.getDesc(),
-                                flag.getCode()
-                        )
-                );
-            } else {
-                addPreference(
-                        helper.listPreference(
-                                flag.getName(),
-                                flag.getDesc(),
-                                flag.getCode()
-                        )
-                );
-            }
-        }
-    }
-
     public void aboutSection(TreeMap<String, Boolean> flags) {
-        addPreference(new AboutPreference(context));
+
+        String appVersionText = String.format(str("awt_app_version"), Utils.getAppVersionName());
+        String patchVersionText = String.format(str("awt_patch_version"), Utils.getPatchesReleaseVersion());
+
+        addPreference(
+                helper.buttonPreference(
+                        appVersionText,
+                        "",
+                        Constants.AWT_APP_VERSION_PREFERENCE
+                )
+        );
+
+        addPreference(
+                helper.buttonPreference(
+                        patchVersionText,
+                        "",
+                        Constants.AWT_PATCH_VERSION_PREFERENCE
+                )
+        );
+
+        addPreference(
+                helper.buttonPreference(
+                        str("awt_export_pref"),
+                        "",
+                        "awt_export_pref"
+                )
+        );
+
+        addPreference(
+                helper.buttonPreference(
+                        str("awt_import_pref"),
+                        "",
+                        "awt_import_pref"
+                )
+        );
+
+        addPreference(
+                helper.buttonPreference(
+                        str("awt_reset_pref"),
+                        "",
+                        "awt_reset_pref"
+                )
+        );
+
+        addPreference(
+                helper.switchPreference(
+                        str("awt_debug"),
+                        str("awt_debug_desc"),
+                        Settings.AWT_DEBUG
+                )
+        );
+
+        PreferenceCategory category = addCategory(str("awt_patch_info_title"));
+        category.setKey(Constants.AWT_PATCH_INFO_PREFERENCE_CATEGORY);
+        String enabledStr = str("awt_patch_enabled");
+        String disabledStr = str("awt_patch_disabled");
+
+        for (Map.Entry<String, Boolean> entry : flags.entrySet()) {
+            String resName = entry.getKey();
+            boolean sts = (boolean) entry.getValue();
+            String status = sts ? enabledStr : disabledStr;
+
+            addPreference(category,
+                    helper.buttonPreference(
+                            resName,
+                            status,
+                            resName
+                    )
+            );
+        }
+
     }
 
     public void storySection() {

@@ -401,7 +401,7 @@
 このトークンを他人に知られると、そのセッションからログアウトするまで、あなたのアカウントに自由にアクセスできてしまいます。
 
 詳細については、こちらのページを参照してください。
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 この機能を使用する前に読むことをおすすめします。トークンのインポート方法など、重要な情報が含まれています。"</string>
     <string name="awt_login_token_select_account">アカウントを選択:</string>
     <string name="awt_login_token_export_copy_to_clipboard">クリップボードにコピー</string>

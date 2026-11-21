@@ -1,11 +1,12 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
 
 package app.morphe.extension.instagram.settings;
 
+import app.morphe.extension.instagram.theme.MaterialYouTheme;
 import java.util.TreeMap;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
@@ -35,7 +36,7 @@ public class SettingsStatus {
     public static boolean storyFilters = false;
     public static void storyFilters(){storyFilters = true;}
     public static boolean filterContentSection(){return storyFilters; }
-    
+
     //Ghost section.
     public static boolean viewStoriesAnonymously = false;
     public static void viewStoriesAnonymously() {
@@ -80,7 +81,9 @@ public class SettingsStatus {
     public static void inboxLock() { inboxLock = true; }
     public static boolean hiddenChats = false;
     public static void hiddenChats() { hiddenChats = true; }
-    public static boolean dmSection(){ return markChatAsRead || unlimitedReplaysOnEphemeralMedia || saveDeletedMessages || inboxLock || hiddenChats || disableDisappearingMessagesGesture ;}
+    public static boolean sendKeyboardGifs = false;
+    public static void sendKeyboardGifs() { sendKeyboardGifs = true; }
+    public static boolean dmSection(){ return markChatAsRead || unlimitedReplaysOnEphemeralMedia || saveDeletedMessages || inboxLock || hiddenChats || disableDisappearingMessagesGesture || sendKeyboardGifs ;}
 
     //Story section
     public static boolean customiseStoryTimestamp = false;
@@ -176,7 +179,7 @@ public class SettingsStatus {
         focusLock = true;
     }
     public static boolean disableVideoAutoplay = false;
-    public static void disableVideoAutoplay() { disableVideoAutoplay = true;    
+    public static void disableVideoAutoplay() { disableVideoAutoplay = true;
     }
     public static boolean disableDoubleTapLike = false;
     public static void disableDoubleTapLike() {
@@ -235,13 +238,19 @@ public class SettingsStatus {
     public static void moreOptionsOnPost() { moreOptionsOnPost = true; }
     public static boolean moreOptionsOnProfile = false;
     public static void moreOptionsOnProfile() { moreOptionsOnProfile = true; }
-    public static boolean miscSection() {return ( moreOptionsOnProfile || moreOptionsOnPost || changeLikeAnimation || removeEmptyBottomSpace || copyCommentButton || improveImageViewing || resumeReelsAfterScrolling || followBackIndicator || followListNonFollowerBadge || customFont);}
+    public static boolean miscSection() {
+        return moreOptionsOnPost || changeLikeAnimation || removeEmptyBottomSpace || copyCommentButton
+                || improveImageViewing || resumeReelsAfterScrolling || followBackIndicator || followListNonFollowerBadge
+                || fontSection() || MaterialYouTheme.isAmoledAvailable() || MaterialYouTheme.isMaterialYouAvailable();
+    }
 
     //Font section.
     public static boolean customFont = false;
     public static void customFont() { customFont = true; }
-    public static boolean fontSection(){ return customFont; }
-    
+    public static boolean customEmojiFont = false;
+    public static void customEmojiFont() { customEmojiFont = true; }
+    public static boolean fontSection(){ return customFont || customEmojiFont; }
+
     //Download section.
     public static boolean downloadMedia = false;
     public static void downloadMedia() {downloadMedia = true;}
@@ -266,7 +275,7 @@ public class SettingsStatus {
     public static void instantsDownload() {
         instantsDownload = true;
     }
-    
+
     //Navigation Section
     public static boolean hideNavigationButtons = false;
     public static void hideNavigationButtons() { hideNavigationButtons = true; }
@@ -310,6 +319,7 @@ public class SettingsStatus {
         FLAGS.put(str("awt_resume_reels_after_scrolling"), SettingsStatus.resumeReelsAfterScrolling);
         FLAGS.put(str("awt_unlimited_replays"),SettingsStatus.unlimitedReplaysOnEphemeralMedia);
         FLAGS.put(str("awt_disable_disappearing_messages_gesture"), SettingsStatus.disableDisappearingMessagesGesture);
+        FLAGS.put(str("awt_send_keyboard_gifs"), SettingsStatus.sendKeyboardGifs);
 
         FLAGS.put(str("awt_customise_story_timestamp"),SettingsStatus.customiseStoryTimestamp);
         FLAGS.put(str("awt_disable_story_flipping"),SettingsStatus.disableStoryFlipping);
@@ -357,6 +367,7 @@ public class SettingsStatus {
         FLAGS.put(str("awt_category_filter_content"),SettingsStatus.storyFilters);
         FLAGS.put(str("awt_category_rec_flags"),SettingsStatus.recommendedFlags);
         FLAGS.put(str("awt_custom_font"),SettingsStatus.customFont);
+        FLAGS.put(str("awt_emoji_font"),SettingsStatus.customEmojiFont);
 
     }
 

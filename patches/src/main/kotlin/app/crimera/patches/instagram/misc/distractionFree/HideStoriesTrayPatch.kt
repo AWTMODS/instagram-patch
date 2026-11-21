@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -11,26 +11,23 @@ import app.crimera.patches.instagram.utils.Constants.COMPATIBILITY_INSTAGRAM
 import app.crimera.patches.instagram.utils.Constants.PREF_CALL_DESCRIPTOR
 import app.crimera.patches.instagram.utils.enableSettings
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
-import app.morphe.patcher.fieldAccess
-import app.morphe.patcher.opcode
 import app.morphe.patcher.patch.patch
 import app.morphe.patcher.string
+import app.morphe.patcher.util.findFreeRegister
 import app.morphe.patcher.util.smali.ExternalLabel
-import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-object MainFeedStoryTrayBinderGroupViewBinderFingerprint : Fingerprint(
-    strings = listOf("MainFeedStoryTrayBinderGroup", "litho_main_feed_stories_tray"),
-    filters = listOf(
-        // Stories tray view group.
-        fieldAccess(type = "Landroid/view/ViewGroup;", opcode = Opcode.IGET_OBJECT),
-        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
-        string("floating_tray_spacer", location = MatchAfterImmediately()),
-    ),
+private object StoryTrayRowsFingerprint : Fingerprint(
+    name = "buildRowViewTypes",
+    returnType = "V",
+    filters = listOf(string("MainFeedStoryTrayBinderGroup.buildRowViewTypes")),
+)
+
+private object FloatingStoryTrayFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("Landroid/view/View;", "Landroid/view/View;", "Ljava/lang/String;", "I"),
+    filters = listOf(string("floating_tray_overlay_container")),
 )
 
 @Suppress("unused")
@@ -43,28 +40,19 @@ val hideStoriesTrayPatch =
         compatibleWith(COMPATIBILITY_INSTAGRAM)
 
         execute {
-
-            MainFeedStoryTrayBinderGroupViewBinderFingerprint.apply {
-                method.apply {
-                    val iGetObjectIndex = instructionMatches.first().index
-                    val targetIndex = iGetObjectIndex + 1
-
-                    val storiesTrayViewGroupRegistry = instructionMatches.first().getInstruction<TwoRegisterInstruction>().registerA
-                    val freeRegister = instructionMatches.last().getInstruction<OneRegisterInstruction>().registerA
-
-                    addInstructionsWithLabels(
-                        targetIndex,
-                        """
-                        $PREF_CALL_DESCRIPTOR->hideStoriesTray()Z
-                        move-result v$freeRegister
-                        if-eqz v$freeRegister, :awt
-                        const v$storiesTrayViewGroupRegistry, 0x0
-                        """.trimIndent(),
-                        ExternalLabel("awt", getInstruction(targetIndex)),
-                    )
-
-                    enableSettings("hideStoriesTray")
-                }
+            listOf(StoryTrayRowsFingerprint.method, FloatingStoryTrayFingerprint.method).forEach { method ->
+                val scratch = method.findFreeRegister(0)
+                method.addInstructionsWithLabels(
+                    0,
+                    """
+                    $PREF_CALL_DESCRIPTOR->hideStoriesTray()Z
+                    move-result v$scratch
+                    if-eqz v$scratch, :show_tray
+                    return-void
+                    """.trimIndent(),
+                    ExternalLabel("show_tray", method.getInstruction(0)),
+                )
             }
+            enableSettings("hideStoriesTray")
         }
     }

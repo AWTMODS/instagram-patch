@@ -246,7 +246,7 @@
     <!-- Logging Settings -->
     <string name="awt_title_logging">Journalisation</string>
     <string name="awt_pref_server_response_logging">Journaliser les réponses du serveur</string>
-    <string name="awt_pref_server_response_logging_desc">Enregistre les réponses JSON du serveur dans \'Download/Piko\'</string>
+    <string name="awt_pref_server_response_logging_desc">Enregistre les réponses JSON du serveur dans \'Download/Awt\'</string>
     <string name="awt_pref_server_response_logging_file_overwrite">Écraser le fichier de journalisation</string>
     <string name="awt_pref_server_response_logging_file_overwrite_desc">Effacer les données de journalisation existantes au lancement</string>
     <!-- Backup and Restore -->
@@ -291,7 +291,7 @@
     <string name="awt_array_light_mode">Mode clair</string>
     <!-- App icon strings -->
     <string name="awt_app_icon_thanks">Merci à @NeoFreeBird pour les icônes d\'application provenant d\'iOS</string>
-    <string name="awt_app_icon_awt_exclusive">(Exclusif Piko)</string>
+    <string name="awt_app_icon_awt_exclusive">(Exclusif Awt)</string>
     <!-- Category -->
     <string name="awt_app_icon_category_legacy">Classique</string>
     <string name="awt_app_icon_category_seasonal_event">Événements saisonniers</string>

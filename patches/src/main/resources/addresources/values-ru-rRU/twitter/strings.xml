@@ -401,7 +401,7 @@
 Если кто-то получит этот токен, он сможет свободно получить доступ к вашему аккаунту, пока вы не выйдете из сессии.
 
 Для получения подробных сведений, пожалуйста, ознакомьтесь с этой страницей:
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Рекомендуется прочитать ее перед использованием этой функции. Она содержит важную информацию, например, о том, как импортировать токены."</string>
     <string name="awt_login_token_select_account">Выберите аккаунт:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Копировать в буфер обмена</string>

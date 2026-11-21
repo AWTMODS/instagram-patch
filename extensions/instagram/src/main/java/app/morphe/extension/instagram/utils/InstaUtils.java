@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -30,7 +30,6 @@ import app.morphe.extension.instagram.settings.preference.widgets.InstagramPrefe
 import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.patches.dm.InboxLock;
 import app.morphe.extension.instagram.patches.focusLock.FocusLock;
-import app.morphe.extension.shared.Logger;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.requests.Requester;
@@ -56,7 +55,7 @@ public class InstaUtils {
             fileName += ".txt";
             data = developerOptions.toString();
         }
-        fileDone = AwtUtils.awtWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
+        fileDone = AwtUtils.pikoWriteFile(fileName, Constants.DEFAULT_AWT_FOLDER, data, false);
         fileDoneTxt = fileDone ? " created" : fileDoneTxt;
         AwtUtils.toast(fileName + fileDoneTxt);
     }

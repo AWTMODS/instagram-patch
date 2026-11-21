@@ -401,7 +401,7 @@
 إذا حصل شخص ما على هذا الرمز، فسيتمكن من الوصول إلى حسابك بحرية كاملة حتى تقوم بتسجيل الخروج من الجلسة.
 
 لمزيد من التفاصيل، يُرجى الرجوع إلى هذه الصفحة:
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 يُنصَح بقراءة هذه الصفحة قبل استخدام هذه الميزة، لأنها تتضمن على بعض المعلومات المهمة، مثل كيفية استيراد الرموز."</string>
     <string name="awt_login_token_select_account">اختر حسابًا:</string>
     <string name="awt_login_token_export_copy_to_clipboard">نسخ إلى الحافظة</string>

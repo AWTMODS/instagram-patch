@@ -177,13 +177,13 @@
     <string name="awt_navigation_tab_notifications">Уведомления</string>
     <string name="awt_navigation_tab_create">Создать</string>
     <string name="awt_navigation_settings_lockout_title">Без кнопки настроек Awt</string>
-    <string name="awt_navigation_settings_lockout_message">Эта конфигурация удаляет все пункты настроек Awt с видимых вкладок. Вы всё равно сможете открыть настройки Piko, зажав иконку приложения и выбрав «Настройки Piko».</string>
+    <string name="awt_navigation_settings_lockout_message">Эта конфигурация удаляет все пункты настроек Awt с видимых вкладок. Вы всё равно сможете открыть настройки Awt, зажав иконку приложения и выбрав «Настройки Awt».</string>
     <!-- Information Section -->
     <string name="awt_category_about">Информация</string>
     <string name="awt_export_pref">Экспортировать настройки Awt</string>
     <string name="awt_import_pref">Импортировать настройки Awt</string>
     <string name="awt_reset_pref">Сбросить настройки Awt</string>
-    <string name="awt_reset_pref_confirm">Сбросить настройки Piko?</string>
+    <string name="awt_reset_pref_confirm">Сбросить настройки Awt?</string>
     <string name="awt_reset_pref_success">Настройки Awt сброшены</string>
     <string name="awt_reset_pref_failed">Не удалось сбросить настройки Awt</string>
     <string name="awt_app_version">Версия приложения: %s</string>
@@ -341,4 +341,5 @@
     <string name="awt_media_like">лайк</string>
     <string name="awt_media_link">ссылка</string>
     <string name="awt_media_activity">активность</string>
+    <!-- Recommended flags -->
 </resources>

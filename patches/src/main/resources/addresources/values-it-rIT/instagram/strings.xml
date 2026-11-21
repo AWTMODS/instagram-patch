@@ -107,6 +107,7 @@
     <string name="awt_inbox_lock_unlock">Sblocca</string>
     <string name="awt_inbox_lock_prompt">Sblocca i tuoi messaggi</string>
     <string name="awt_inbox_lock_no_lock">Imposta un blocco schermo sul tuo dispositivo per usare il blocco Posta in arrivo</string>
+    <string name="awt_hidden_chats_taps">Clicca per aprire le chat nascoste</string>
     <!-- DM Section -->
     <string name="awt_category_dm">DM</string>
     <string name="awt_unlimited_replays">Rendi permanenti i contenuti temporanei</string>
@@ -197,13 +198,13 @@
     <string name="awt_navigation_tab_notifications">Notifiche</string>
     <string name="awt_navigation_tab_create">Crea</string>
     <string name="awt_navigation_settings_lockout_title">Nessun pulsante impostazioni Awt</string>
-    <string name="awt_navigation_settings_lockout_message">Questa configurazione rimuove ogni voce di impostazioni Awt dalle schede visibili. Puoi ancora aprire le impostazioni Awt premendo a lungo l\'icona dell\'app e selezionando le impostazioni Piko.</string>
+    <string name="awt_navigation_settings_lockout_message">Questa configurazione rimuove ogni voce di impostazioni Awt dalle schede visibili. Puoi ancora aprire le impostazioni Awt premendo a lungo l\'icona dell\'app e selezionando le impostazioni Awt.</string>
     <!-- Information Section -->
     <string name="awt_category_about">Informazioni</string>
     <string name="awt_export_pref">Esporta impostazioni Awt</string>
     <string name="awt_import_pref">Importa impostazioni Awt</string>
     <string name="awt_reset_pref">Ripristina impostazioni Awt</string>
-    <string name="awt_reset_pref_confirm">Ripristinare impostazioni Piko?</string>
+    <string name="awt_reset_pref_confirm">Ripristinare impostazioni Awt?</string>
     <string name="awt_reset_pref_success">Ripristino impostazioni Awt</string>
     <string name="awt_reset_pref_failed">Impossibile ripristinare le impostazioni Awt</string>
     <string name="awt_app_version">Versione dell\'app: %s</string>
@@ -243,7 +244,7 @@
     <string name="awt_array_recmd_flag_state_disable">Disabilita</string>
     <!-- Welcome Message -->
     <string name="awt_welcome_title">Benvenuto su Awt</string>
-    <string name="awt_welcome_message">Per migliorare la tua esperienza con Piko, consulta le impostazioni Awt e modifica le tue preferenze</string>
+    <string name="awt_welcome_message">Per migliorare la tua esperienza con Awt, consulta le impostazioni Awt e modifica le tue preferenze</string>
     <string name="awt_goto_awt_settings">Vai alle impostazioni Awt</string>
     <string name="awt_no_internet">Connettiti a internet</string>
     <string name="awt_tap_here">Clicca qui!!</string>
@@ -342,4 +343,5 @@
     <string name="awt_media_like">like</string>
     <string name="awt_media_link">link</string>
     <string name="awt_media_activity">attività</string>
+    <!-- Recommended flags -->
 </resources>

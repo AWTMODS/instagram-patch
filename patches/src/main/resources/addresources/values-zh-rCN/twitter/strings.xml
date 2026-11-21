@@ -401,7 +401,7 @@
 如果有人拥有此令牌，他们可以自由访问您的帐户，直到您退出会话。
 
 详情请参阅此页面。
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 建议在使用此功能之前阅读本文。它包含一些重要信息，例如如何导入令牌。"</string>
     <string name="awt_login_token_select_account">选择账号：</string>
     <string name="awt_login_token_export_copy_to_clipboard">复制到剪贴板</string>

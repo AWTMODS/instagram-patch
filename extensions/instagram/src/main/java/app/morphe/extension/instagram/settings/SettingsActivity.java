@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -14,23 +14,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Outline;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.view.ViewOutlineProvider;
-
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -40,7 +23,9 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -54,13 +39,18 @@ import androidx.annotation.RequiresApi;
 
 import java.lang.reflect.Proxy;
 import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
-import app.morphe.extension.crimera.downloader.StorageUtils;
+import app.morphe.extension.crimera.legacydownloader.StorageUtils;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.constants.UI;
 import app.morphe.extension.instagram.patches.devFlags.RecommendedFlags;
+import app.morphe.extension.instagram.patches.devFlags.Flag;
+import app.morphe.extension.instagram.settings.preference.RecommendedFlagsScreen;
+import app.morphe.extension.instagram.settings.preference.widgets.RecommendedFlagPreference;
 import app.morphe.extension.instagram.settings.preference.Helper;
 import app.morphe.extension.instagram.settings.preference.ScreenBuilder;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
@@ -71,67 +61,6 @@ import app.morphe.extension.instagram.theme.MaterialYouTheme;
 import app.morphe.extension.shared.Logger;
 
 public final class SettingsActivity {
-
-    public static CharSequence formatStyledTitle(String text) {
-        if (text == null) return "";
-        int lastSpace = text.lastIndexOf(' ');
-        if (lastSpace > 0) {
-            SpannableStringBuilder span = new SpannableStringBuilder(text);
-            span.setSpan(new ForegroundColorSpan(Color.WHITE), 0, lastSpace, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            span.setSpan(new ForegroundColorSpan(Color.parseColor("#4EE49B")), lastSpace + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return span;
-        }
-        return text;
-    }
-
-    private static Drawable createAuroraBackground() {
-        return new Drawable() {
-            private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-            @Override
-            public void draw(Canvas canvas) {
-                int width = canvas.getWidth();
-                int height = canvas.getHeight();
-
-                canvas.drawColor(Color.parseColor("#080B09"));
-
-                float centerX = width * 0.95f;
-                float centerY = height * 0.05f;
-                float radius = Math.max(width, height) * 0.55f;
-
-                int[] colors = new int[]{
-                        Color.parseColor("#384EE49B"),
-                        Color.parseColor("#1834D399"),
-                        Color.parseColor("#08154D32"),
-                        Color.TRANSPARENT
-                };
-                float[] stops = new float[]{0f, 0.35f, 0.65f, 1f};
-
-                paint.setShader(new RadialGradient(
-                        centerX, centerY, radius,
-                        colors, stops,
-                        Shader.TileMode.CLAMP
-                ));
-                canvas.drawRect(0, 0, width, height, paint);
-            }
-
-            @Override
-            public void setAlpha(int alpha) {
-                paint.setAlpha(alpha);
-            }
-
-            @Override
-            public void setColorFilter(ColorFilter colorFilter) {
-                paint.setColorFilter(colorFilter);
-            }
-
-            @Override
-            public int getOpacity() {
-                return PixelFormat.TRANSLUCENT;
-            }
-        };
-    }
-
 
     private SettingsActivity() {
     }
@@ -338,11 +267,11 @@ public final class SettingsActivity {
         @SuppressLint("ResourceType")
         private void createLayout(String displayTitle, boolean isRootSettings) {
             root = new FrameLayout(activity);
-            root.setBackground(createAuroraBackground());
+            root.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
 
             LinearLayout page = new LinearLayout(activity);
             page.setOrientation(LinearLayout.VERTICAL);
-            page.setBackgroundColor(Color.TRANSPARENT);
+            page.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
             root.addView(page, new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -355,7 +284,7 @@ public final class SettingsActivity {
             toolbar.setOrientation(LinearLayout.HORIZONTAL);
             toolbar.setGravity(android.view.Gravity.CENTER_VERTICAL);
             toolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LOCALE);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
+            toolbar.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
 
             int toolbarPadding = InstagramPreferenceStyle.dp(activity, 15);
             toolbar.setPadding(toolbarPadding, InstagramPreferenceStyle.dp(activity, 10), toolbarPadding, InstagramPreferenceStyle.dp(activity, 8));
@@ -368,7 +297,7 @@ public final class SettingsActivity {
             backSpacer.setLayoutParams(backParams);
 
             titleTextView = new TextView(activity);
-            titleTextView.setText(formatStyledTitle(displayTitle));
+            titleTextView.setText(displayTitle); // Dynamically bound from intent data
             int titleTextSize = isRootSettings ? 25 : 20;
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, titleTextSize);
             titleTextView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
@@ -392,7 +321,7 @@ public final class SettingsActivity {
             titleParams.gravity = android.view.Gravity.CENTER_VERTICAL;
             titleParams.setMarginStart(InstagramPreferenceStyle.dp(activity, 7));
             titleTextView.setLayoutParams(titleParams);
-            titleTextView.setTextColor(Color.WHITE);
+            titleTextView.setTextColor(InstagramPreferenceStyle.primaryTextColor());
 
             toolbar.addView(backSpacer);
             toolbar.addView(titleTextView);
@@ -406,11 +335,11 @@ public final class SettingsActivity {
 
             // ---------- Content ----------
             contentFrame = new FrameLayout(activity);
-            contentFrame.setBackgroundColor(Color.TRANSPARENT);
+            contentFrame.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
 
-            FrameLayout fragmentContainer = new FrameLayout(activity);
+            FrameLayout fragmentContainer = new PreferenceListContainer(activity);
             fragmentContainer.setId(FRAGMENT_CONTAINER_ID);
-            fragmentContainer.setBackgroundColor(Color.TRANSPARENT);
+            fragmentContainer.setBackgroundColor(InstagramPreferenceStyle.backgroundColor());
             contentFrame.addView(fragmentContainer, new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -437,7 +366,6 @@ public final class SettingsActivity {
 
             backButton = new ImageView(activity);
             UI.setThemedIcon(backButton, UI.DRAWABLE_ARROW_BACK);
-            backButton.setColorFilter(new PorterDuffColorFilter(Color.parseColor("#4EE49B"), PorterDuff.Mode.SRC_IN));
             backButton.setScaleType(ImageView.ScaleType.CENTER);
             backButton.setPaddingRelative(
                     0,
@@ -489,7 +417,7 @@ public final class SettingsActivity {
                 SettingsFragment fragment,
                 PreferenceScreen rootScreen
         ) {
-            if (!rootSettings || searchController != null) {
+            if ((!rootSettings && !RecommendedFlagsScreen.isFlagsScreen(fragmentName)) || searchController != null) {
                 return;
             }
 
@@ -524,6 +452,14 @@ public final class SettingsActivity {
                 SettingsFragment fragment,
                 PreferenceScreen rootScreen
         ) {
+            List<Flag> flags = RecommendedFlags.getFlags(false);
+            if (RecommendedFlagsScreen.isFlagsScreen(fragmentName)) {
+                fragment.searchableFlags.clear();
+                for (Flag flag : flags) {
+                    fragment.searchableFlags.put(flag.getCode().key, flag);
+                }
+                return SettingsSearchIndex.forRecommendedFlags(flags);
+            }
             final PreferenceManager preferenceManager = fragment.getPreferenceManager();
             final Context context = fragment.getActivity();
             return SettingsSearchIndex.create(
@@ -534,7 +470,7 @@ public final class SettingsActivity {
                             String previousSharedPreferencesName =
                                     preferenceManager.getSharedPreferencesName();
                             preferenceManager.setSharedPreferencesName(
-                                    Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)
+                                    RecommendedFlagsScreen.isFlagsScreen(fragmentName)
                                             ? Constants.REC_FLAGS
                                             : Constants.SHARED_PREF_NAME
                             );
@@ -542,7 +478,7 @@ public final class SettingsActivity {
                                 PreferenceScreen screen =
                                         preferenceManager.createPreferenceScreen(context);
                                 new ScreenBuilder(context, screen, new Helper(context))
-                                        .buildFragmentForSearch(fragmentName);
+                                        .buildFragmentForSearch(fragmentName, flags);
                                 return screen;
                             } finally {
                                 preferenceManager.setSharedPreferencesName(
@@ -560,7 +496,7 @@ public final class SettingsActivity {
         }
 
         public void onResume() {
-            if (rootSettings) {
+            if (rootSettings || RecommendedFlagsScreen.isFlagsScreen(fragmentName)) {
                 RecommendedFlags.addChangeListener(recommendedFlagsChanged);
             }
             if (refreshSearchIndexOnResume) {
@@ -571,10 +507,15 @@ public final class SettingsActivity {
 
         private void refreshSearchIndex() {
             if (rootFragment != null && searchController != null) {
-                searchController.replaceIndex(createSearchIndex(
-                        rootFragment,
-                        rootFragment.buildScreen(Constants.AWT_FRAGMENT_SETTINGS)
-                ));
+                rootFragment.runPreservingScrollPosition(() -> {
+                    searchController.replaceIndex(createSearchIndex(
+                            rootFragment,
+                            rootFragment.buildScreen(fragmentName)
+                    ));
+                    if (RecommendedFlagsScreen.isFlagsScreen(fragmentName) && !searchController.state().searchMode) {
+                        rootFragment.renderSearchState(searchController.state());
+                    }
+                });
             }
         }
 
@@ -652,7 +593,7 @@ public final class SettingsActivity {
                                 return proxy == (args == null ? null : args[0]);
                             }
                             if ("toString".equals(methodName) && parameterCount == 0) {
-                                return "AwtInstagramSettingsSearchBackCallback";
+                                return "PikoInstagramSettingsSearchBackCallback";
                             }
                             if ("onBackInvoked".equals(methodName)) {
                                 exitSearchIfActive();
@@ -719,6 +660,43 @@ public final class SettingsActivity {
         }
     }
 
+    private static final class PreferenceListContainer extends FrameLayout {
+        private final int touchSlop;
+        private boolean fromBackEdge;
+        private float downX;
+        private float downY;
+
+        PreferenceListContainer(Context context) {
+            super(context);
+            touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent event) {
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    downX = event.getX();
+                    downY = event.getY();
+                    WindowInsets insets = getRootWindowInsets();
+                    fromBackEdge = false;
+                    if (Build.VERSION.SDK_INT >= 29 && insets != null) {
+                        android.graphics.Insets edges = insets.getSystemGestureInsets();
+                        fromBackEdge = downX < edges.left || getWidth() - downX < edges.right;
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                case MotionEvent.ACTION_UP:
+                    // ListView checks vertical movement only and can click a row after a back swipe.
+                    float distanceX = Math.abs(event.getX() - downX);
+                    if (fromBackEdge && distanceX > touchSlop && distanceX > Math.abs(event.getY() - downY)) {
+                        return true;
+                    }
+                    break;
+            }
+            return super.onInterceptTouchEvent(event);
+        }
+    }
+
     public static class SettingsFragment extends PreferenceFragment {
 
         Context context;
@@ -729,8 +707,40 @@ public final class SettingsActivity {
         private ListView listView;
         private View searchEntryView;
         private boolean searchEntryAdded;
+        private final Map<String, Flag> searchableFlags = new HashMap<>();
         private final SharedPreferences.OnSharedPreferenceChangeListener dependencyListener =
-                (preferences, key) -> helper.updateDependencies(getPreferenceScreen());
+                (preferences, key) -> {
+                    helper.updateDependencies(getPreferenceScreen());
+                    if (RecommendedFlagsScreen.isFlagsScreen(fragmentName) && listView != null) {
+                        // Rebuild after the dialog has finished saving its preference value.
+                        listView.removeCallbacks(this.refreshFlags);
+                        listView.post(this.refreshFlags);
+                    }
+                };
+        private final Runnable refreshFlags = () -> {
+            Controller controller = getController(getActivity());
+            if (controller != null && controller.searchController != null && listView != null
+                    && !controller.searchController.state().searchMode
+                    && (Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)
+                    || RecommendedFlagsScreen.MODIFIED.equals(fragmentName))) {
+                runPreservingScrollPosition(() -> renderSearchState(controller.searchController.state()));
+            }
+        };
+
+        private void runPreservingScrollPosition(Runnable update) {
+            ListView currentList = listView;
+            android.os.Parcelable scrollState = currentList == null
+                    ? null : currentList.onSaveInstanceState();
+            update.run();
+            if (scrollState != null) {
+                // PreferenceFragment queues another bind when its screen changes.
+                currentList.post(() -> {
+                    if (listView == currentList) {
+                        currentList.onRestoreInstanceState(scrollState);
+                    }
+                });
+            }
+        }
 
         void updateNavigationArguments(String fragmentName, String targetPreferenceKey) {
             this.fragmentName = fragmentName == null
@@ -781,6 +791,10 @@ public final class SettingsActivity {
 
         @Override
         public void onPause() {
+            if (listView != null && getActivity().isFinishing()) {
+                // A row click can already be queued when the closing animation starts.
+                listView.setOnItemClickListener(null);
+            }
             preferenceManager.getSharedPreferences()
                     .unregisterOnSharedPreferenceChangeListener(dependencyListener);
             super.onPause();
@@ -788,6 +802,7 @@ public final class SettingsActivity {
 
         @Override
         public void onDestroyView() {
+            if (listView != null) listView.removeCallbacks(this.refreshFlags);
             listView = null;
             searchEntryView = null;
             searchEntryAdded = false;
@@ -797,6 +812,10 @@ public final class SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+        // AMOLED Aurora Glow UI styling
+        if (getWindow() != null) {
+            getWindow().getDecorView().setBackgroundColor(0xFF080B09);
+        }
 
             context = getActivity();
             preferenceManager = getPreferenceManager();
@@ -813,7 +832,7 @@ public final class SettingsActivity {
             }
 
             preferenceManager.setSharedPreferencesName(
-                    Constants.AWT_FRAGMENT_REC_FLAGS.equals(fragmentName)
+                    RecommendedFlagsScreen.isFlagsScreen(fragmentName)
                             ? Constants.REC_FLAGS
                             : Constants.SHARED_PREF_NAME
             );
@@ -847,12 +866,13 @@ public final class SettingsActivity {
 
             Activity activity = getActivity();
             Controller controller = getController(activity);
-            if (isRootFragment() && controller != null) {
+            if ((isRootFragment() || RecommendedFlagsScreen.isFlagsScreen(fragmentName)) && controller != null) {
                 controller.onRootFragmentReady(
                         this,
                         getPreferenceScreen()
                 );
-            } else if (listView != null
+            }
+            if (listView != null
                     && targetPreferenceKey != null
                     && !targetPreferenceKey.isEmpty()) {
                 scrollToPreference(listView, targetPreferenceKey);
@@ -876,14 +896,21 @@ public final class SettingsActivity {
         }
 
         private void renderSearchState(SettingsSearchController.State state) {
-            if (!isRootFragment() || state == null) {
+            if ((!isRootFragment() && !RecommendedFlagsScreen.isFlagsScreen(fragmentName)) || state == null) {
                 return;
             }
 
             PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
             if (!state.searchMode) {
                 new ScreenBuilder(context, screen, new Helper(context))
-                        .buildFragment(Constants.AWT_FRAGMENT_SETTINGS);
+                        .buildFragment(fragmentName);
+            } else if (RecommendedFlagsScreen.isFlagsScreen(fragmentName)) {
+                for (SettingsSearchIndex.Result result : state.results) {
+                    Flag flag = searchableFlags.get(result.preferenceKey);
+                    if (flag != null) {
+                        screen.addPreference(RecommendedFlagPreference.create(context, flag, true));
+                    }
+                }
             } else {
                 for (SettingsSearchIndex.Result result : state.results) {
                     screen.addPreference(new SearchResultPreference(

@@ -401,7 +401,7 @@ Jangan pernah membagikannya kepada siapa pun!
 Jika seseorang memiliki token ini, mereka dapat mengakses akun Anda sesuka hati hingga Anda keluar dari sesi tersebut.
 
 Untuk detail selengkapnya, silakan lihat halaman ini.
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Disarankan untuk membaca halaman ini sebelum menggunakan fitur ini. Halaman tersebut berisi beberapa informasi penting, seperti cara mengimpor token."</string>
     <string name="awt_login_token_select_account">Pilih akun:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Salin ke papan klip</string>

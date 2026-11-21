@@ -401,7 +401,7 @@ Non condividerli mai con nessuno!
 Se qualcuno ha questo token, può accedere liberamente al tuo account fino a quando non ti disconnetterai dalla sessione.
 
 Per ulteriori dettagli, puoi consultare questa pagina.
-https://github.com/crimera/awt/blob/dev/docs/about_login_token_patch.md
+https://github.com/crimera/piko/blob/dev/docs/about_login_token_patch.md
 Si consiglia di leggerlo prima di usare questa funzione. Include alcune note importanti, come importare i token."</string>
     <string name="awt_login_token_select_account">Seleziona un account:</string>
     <string name="awt_login_token_export_copy_to_clipboard">Copia negli appunti</string>

@@ -6,6 +6,7 @@
 
 package app.morphe.extension.instagram.settings;
 
+import app.morphe.extension.instagram.utils.InstaUtils;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import android.app.Activity;

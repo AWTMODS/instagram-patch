@@ -1,11 +1,12 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
 
 package app.morphe.extension.instagram.constants;
 
+import app.morphe.extension.instagram.utils.InstaUtils;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import android.app.Dialog;
@@ -23,7 +24,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import app.morphe.extension.crimera.AwtUtils;
-import app.morphe.extension.instagram.utils.InstaUtils;
 import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.instagram.entity.InstagramDialogBox;
 import app.morphe.extension.instagram.settings.preference.fragments.FragmentHook;
@@ -181,7 +181,7 @@ public class UI {
         return null;
     }
 
-    public static void awtSettingsGear(ViewGroup viewGroup) {
+    public static void pikoSettingsGear(ViewGroup viewGroup) {
         try {
             if (viewGroup == null) {
                 return;
@@ -193,13 +193,13 @@ public class UI {
             }
 
             Context context = viewGroup.getContext();
-            boolean isFirstTime = Pref.firstTimeAwt();
+            boolean isFirstTime = Pref.firstTimePiko();
             if(isFirstTime) {
                 TooltipHelper.showPersistentTooltip(context, imageView, str("awt_tap_here"));
-                Pref.setFirstTimeAwt(false);
+                Pref.setFirstTimePiko(false);
             }
         } catch (Exception e) {
-            Logger.printException(() -> "Failed awtSettingsGear: ", e);
+            Logger.printException(() -> "Failed pikoSettingsGear: ", e);
         }
     }
 
@@ -271,8 +271,8 @@ public class UI {
         dlg.show();
     }
 
-    public static void awtSettingsButton(ViewGroup viewGroup, int bottomMargin) throws Exception {
-        boolean isFirstTime = Pref.firstTimeAwt();
+    public static void pikoSettingsButton(ViewGroup viewGroup, int bottomMargin) throws Exception {
+        boolean isFirstTime = Pref.firstTimePiko();
 
         Context context = viewGroup.getContext();
         InstagramButton button = new InstagramButton(context);
@@ -286,7 +286,7 @@ public class UI {
         viewGroup.addView(button.getIgdsButton());
         if(isFirstTime){
             button.startPulseAnimation();
-            Pref.setFirstTimeAwt(false);
+            Pref.setFirstTimePiko(false);
         }
     }
 }

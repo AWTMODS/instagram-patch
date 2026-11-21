@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
 */
@@ -12,6 +12,7 @@ import android.content.Context;
 import app.morphe.extension.crimera.AwtUtils;
 import app.morphe.extension.instagram.settings.ActivityHook;
 import app.morphe.extension.instagram.constants.Constants;
+import app.morphe.extension.instagram.settings.preference.RecommendedFlagsScreen;
 
 @SuppressWarnings("deprecation")
 public class FragmentHook {
@@ -47,8 +48,8 @@ public class FragmentHook {
             actionBarTitleKey = "awt_category_dm";
         }else if(key.equals(Constants.AWT_FRAGMENT_FILTER_CONTENT)){
             actionBarTitleKey = "awt_category_filter_content";
-        }else if(key.equals(Constants.AWT_FRAGMENT_REC_FLAGS)){
-            actionBarTitleKey = "awt_category_rec_flags";
+        }else if(RecommendedFlagsScreen.isFlagsScreen(key)){
+            actionBarTitleKey = RecommendedFlagsScreen.titleKey(key);
         }else if(key.equals(Constants.AWT_FRAGMENT_INSTANTS)){
             actionBarTitleKey = "awt_instants_title";
         }else if(key.equals(Constants.AWT_FRAGMENT_FONT)){
@@ -56,12 +57,12 @@ public class FragmentHook {
         }
 
         if(actionBarTitleKey!=null){
-            ActivityHook.startAwtActivity(key,actionBarTitleKey);
+            ActivityHook.startPikoActivity(key,actionBarTitleKey);
         }
     }
 
     public static void startSettings(){
-        ActivityHook.startAwtActivity(Constants.AWT_FRAGMENT_SETTINGS,"awt_title_settings");
+        ActivityHook.startPikoActivity(Constants.AWT_FRAGMENT_SETTINGS,"awt_title_settings");
     }
 
 }

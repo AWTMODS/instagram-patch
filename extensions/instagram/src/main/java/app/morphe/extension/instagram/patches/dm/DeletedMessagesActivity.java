@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -54,7 +54,7 @@ import java.util.regex.Pattern;
 
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.constants.UI;
-import app.morphe.extension.instagram.db.AwtMessageDb;
+import app.morphe.extension.instagram.db.PikoMessageDb;
 import app.morphe.extension.instagram.patches.download.DownloadUtils;
 import app.morphe.extension.instagram.settings.ActivityHook;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
@@ -154,13 +154,16 @@ public final class DeletedMessagesActivity {
         synchronized (sControllers) {
             sControllers.put(activity, controller);
         }
-        controller.setup();
         if (activity.getApplication() != null) {
             activity.getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
                 @Override public void onActivityCreated(Activity a, Bundle b) {}
                 @Override public void onActivityStarted(Activity a) {}
-                @Override public void onActivityResumed(Activity a) {}
-                @Override public void onActivityPaused(Activity a) {}
+                @Override public void onActivityResumed(Activity a) {
+                    if (a == activity) controller.resume();
+                }
+                @Override public void onActivityPaused(Activity a) {
+                    if (a == activity) controller.hide();
+                }
                 @Override public void onActivityStopped(Activity a) {}
                 @Override public void onActivitySaveInstanceState(Activity a, Bundle b) {}
                 @Override
@@ -173,6 +176,12 @@ public final class DeletedMessagesActivity {
                     }
                 }
             });
+        }
+    }
+
+    static boolean isShowingOn(Activity activity) {
+        synchronized (sControllers) {
+            return sControllers.containsKey(activity);
         }
     }
 
@@ -190,6 +199,8 @@ public final class DeletedMessagesActivity {
 
     private static class Controller {
         private final Activity activity;
+        private boolean resumed;
+        private boolean confirming;
         private List<String[]> messages;
         private ListView messageList;
         private MessageAdapter adapter;
@@ -208,9 +219,35 @@ public final class DeletedMessagesActivity {
             this.activity = activity;
         }
 
+        void hide() {
+            resumed = false;
+            activity.findViewById(android.R.id.content).setVisibility(View.INVISIBLE);
+        }
+
+        void close() {
+            hide();
+            activity.finish();
+        }
+
+        private boolean canAct() {
+            return resumed && !InboxLock.mustConfirmToDisable();
+        }
+
+        void resume() {
+            resumed = true;
+            if (activity.isFinishing() || activity.isDestroyed() || confirming) return;
+            confirming = true;
+            InboxLock.confirmIfLocked(activity, () -> {
+                confirming = false;
+                if (!resumed || activity.isFinishing() || activity.isDestroyed()) return;
+                if (adapter == null) setup();
+                activity.findViewById(android.R.id.content).setVisibility(View.VISIBLE);
+            }, this::close);
+        }
+
         void setup() {
             activity.setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER);
-            messages = AwtMessageDb.getInstance(activity).getDeletedMessages();
+            messages = PikoMessageDb.getInstance(activity).getDeletedMessages();
             Locale locale = activity.getResources().getConfiguration().getLocales().get(0);
             String skeleton = DateFormat.is24HourFormat(activity) ? "yMMMdHm" : "yMMMdhm";
             timestampFormatter = new SimpleDateFormat(
@@ -296,6 +333,7 @@ public final class DeletedMessagesActivity {
             messageList.setDividerHeight(1);
             messageList.setChoiceMode(ListView.CHOICE_MODE_NONE);
             messageList.setOnItemClickListener((parent, view, position, id) -> {
+                if (!canAct()) return;
                 if (selectionMode) {
                     updateSelectionUi();
                     return;
@@ -312,6 +350,7 @@ public final class DeletedMessagesActivity {
                 }
             });
             messageList.setOnItemLongClickListener((parent, view, position, id) -> {
+                if (!canAct()) return true;
                 if (!selectionMode) {
                     selectionMode = true;
                     messageList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -480,7 +519,8 @@ public final class DeletedMessagesActivity {
             new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(activity))
                     .setMessage(prompt)
                     .setPositiveButton(str("awt_delete"), (dialog, which) -> {
-                        AwtMessageDb db = AwtMessageDb.getInstance(activity);
+                        if (!canAct()) return;
+                        PikoMessageDb db = PikoMessageDb.getInstance(activity);
                         db.deleteSaved(selectedIds);
                         selectionMode = false;
                         messageList.clearChoices();
@@ -513,6 +553,7 @@ public final class DeletedMessagesActivity {
                 new AlertDialog.Builder(InstagramPreferenceStyle.dialogContext(activity))
                     .setTitle(str("awt_download_options"))
                     .setItems(options, (d, which) -> {
+                        if (!canAct()) return;
                         try {
                             if (which == 0) {
                                 String fileName = "awt_" + messageId + guessExtension(url, type);

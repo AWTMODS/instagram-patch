@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 awt <https://github.com/crimera/piko>
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
  *
  * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
  */
@@ -19,8 +19,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import app.morphe.extension.crimera.AwtUtils;
-import app.morphe.extension.crimera.downloader.FolderPickerFragment;
-import app.morphe.extension.crimera.downloader.StorageUtils;
+import app.morphe.extension.crimera.legacydownloader.FolderPickerFragment;
+import app.morphe.extension.crimera.legacydownloader.StorageUtils;
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.patches.dm.DeletedMessagesActivity;
 import app.morphe.extension.instagram.patches.instants.InstantsVaultActivity;
@@ -32,8 +32,8 @@ public class ActivityHook {
 
     private static final String PROXY_ACTIVITY_CLASS = "com.instagram.modal.ModalActivity";
     private static final String PROXY_TRANSPARENT_ACTIVITY_CLASS = "com.instagram.modal.TransparentModalActivity";
-    private static final String EXTRA_PIKO = "awt";
-    private static final String EXTRA_PIKO_LAUNCH_TYPE = "awt_launch_type";
+    private static final String EXTRA_PIKO = "piko";
+    private static final String EXTRA_AWT_LAUNCH_TYPE = "awt_launch_type";
     private static final String EXTRA_SHORTCUT = "shortcut";
 
     static final String LAUNCH_TYPE_SETTINGS = "settings";
@@ -128,7 +128,7 @@ public class ActivityHook {
     public static boolean onBackPressed(Activity activity) {
         if (!isPiko(activity)) return false;
         Intent intent = activity.getIntent();
-        String launchType = intent != null ? intent.getStringExtra(EXTRA_PIKO_LAUNCH_TYPE) : null;
+        String launchType = intent != null ? intent.getStringExtra(EXTRA_AWT_LAUNCH_TYPE) : null;
         if (launchType == null && intent != null && LAUNCH_TYPE_SETTINGS.equals(intent.getStringExtra(EXTRA_SHORTCUT))) {
             launchType = LAUNCH_TYPE_SETTINGS;
         }
@@ -149,7 +149,7 @@ public class ActivityHook {
     }
 
     private static boolean dispatchLaunch(Activity activity, Intent intent, Bundle savedInstanceState) {
-        String launchType = intent.getStringExtra(EXTRA_PIKO_LAUNCH_TYPE);
+        String launchType = intent.getStringExtra(EXTRA_AWT_LAUNCH_TYPE);
         if (launchType == null && LAUNCH_TYPE_SETTINGS.equals(intent.getStringExtra(EXTRA_SHORTCUT))) {
             launchType = LAUNCH_TYPE_SETTINGS;
         }
@@ -208,14 +208,6 @@ public class ActivityHook {
                 .commitAllowingStateLoss();
     }
 
-    public static void startAwtActivity(String fragment_name, String title) {
-        startPikoActivity(fragment_name, title, null);
-    }
-
-    public static void startAwtActivity(String fragment_name, String title, String targetPreferenceKey) {
-        startPikoActivity(fragment_name, title, targetPreferenceKey);
-    }
-
     public static void startPikoActivity(String fragment_name, String title) {
         startPikoActivity(fragment_name, title, null);
     }
@@ -223,7 +215,7 @@ public class ActivityHook {
     public static void startPikoActivity(String fragment_name, String title, String targetPreferenceKey) {
         Context context = AwtUtils.getContext();
         Intent intent = createProxyIntent(context);
-        intent.putExtra(EXTRA_PIKO_LAUNCH_TYPE, LAUNCH_TYPE_SETTINGS);
+        intent.putExtra(EXTRA_AWT_LAUNCH_TYPE, LAUNCH_TYPE_SETTINGS);
         intent.putExtra(Constants.AWT_FRAGMENT_NAME, fragment_name);
         intent.putExtra(Constants.AWT_FRAGMENT_TITLE, title);
         if (targetPreferenceKey != null && !targetPreferenceKey.isEmpty()) {
@@ -234,7 +226,7 @@ public class ActivityHook {
 
     public static Intent createDeletedMessagesIntent(Context context) {
         Intent intent = createProxyIntent(context);
-        intent.putExtra(EXTRA_PIKO_LAUNCH_TYPE, LAUNCH_TYPE_DELETED_MESSAGES);
+        intent.putExtra(EXTRA_AWT_LAUNCH_TYPE, LAUNCH_TYPE_DELETED_MESSAGES);
         return intent;
     }
 
@@ -244,7 +236,7 @@ public class ActivityHook {
 
     public static void startInstantsVaultActivity(Context context) {
         Intent intent = createProxyIntent(context);
-        intent.putExtra(EXTRA_PIKO_LAUNCH_TYPE, LAUNCH_TYPE_INSTANTS_VAULT);
+        intent.putExtra(EXTRA_AWT_LAUNCH_TYPE, LAUNCH_TYPE_INSTANTS_VAULT);
         launchActivity(context, intent);
     }
 
@@ -253,7 +245,8 @@ public class ActivityHook {
         if (bundleKey.equals("awt_export_dev_overrides") || bundleKey.equals("awt_export_pref")) {
             launchType = LAUNCH_TYPE_BACKUP;
         } else if (bundleKey.equals("awt_import_dev_overrides") || bundleKey.equals("awt_import_id_mapping")
-                || bundleKey.equals("awt_import_pref") || bundleKey.equals("awt_pref_add_font")) {
+                || bundleKey.equals("awt_import_pref") || bundleKey.equals("awt_pref_add_font")
+                || bundleKey.equals("awt_pref_add_emoji")) {
             launchType = LAUNCH_TYPE_RESTORE;
         } else if (bundleKey.equals("awt_download_set_path")) {
             launchType = LAUNCH_TYPE_FOLDER_PICKER;
@@ -262,7 +255,7 @@ public class ActivityHook {
         }
 
         Intent intent = createProxyIntent(ctx, PROXY_TRANSPARENT_ACTIVITY_CLASS);
-        intent.putExtra(EXTRA_PIKO_LAUNCH_TYPE, launchType);
+        intent.putExtra(EXTRA_AWT_LAUNCH_TYPE, launchType);
         intent.putExtra(bundleKey, true);
         launchActivity(ctx, intent);
     }

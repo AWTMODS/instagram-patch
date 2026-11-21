@@ -6,6 +6,7 @@
 
 package app.morphe.extension.instagram.patches.focusLock;
 
+import app.morphe.extension.instagram.utils.InstaUtils;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import android.app.AlertDialog;

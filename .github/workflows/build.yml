@@ -29,10 +29,15 @@ jobs:
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
 
+      - name: Checkout bytecode and library
+        run: |
+          git clone --depth 1 https://github.com/crimera/morphe-bytecode.git morphe-bytecode-lib
+          git clone --depth 1 https://github.com/crimera/piko-patches-library.git piko-patches-library-lib
+
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew clean buildAndroid
+        run: ./gradlew clean buildAndroid --stacktrace
 
       - name: Upload Patch Artifact
         uses: actions/upload-artifact@v4

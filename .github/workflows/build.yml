@@ -37,7 +37,15 @@ jobs:
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew clean buildAndroid --stacktrace
+        run: |
+          ./gradlew clean buildAndroid --stacktrace > build.log 2>&1 || (cat build.log | tail -n 150 && exit 1)
+
+      - name: Upload Build Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-build-log
+          path: build.log
 
       - name: Upload Patch Artifact
         uses: actions/upload-artifact@v4

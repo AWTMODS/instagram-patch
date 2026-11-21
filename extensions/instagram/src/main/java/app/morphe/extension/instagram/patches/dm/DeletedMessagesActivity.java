@@ -54,7 +54,7 @@ import java.util.regex.Pattern;
 
 import app.morphe.extension.instagram.constants.Constants;
 import app.morphe.extension.instagram.constants.UI;
-import app.morphe.extension.instagram.db.PikoMessageDb;
+import app.morphe.extension.instagram.db.AwtMessageDb;
 import app.morphe.extension.instagram.patches.download.DownloadUtils;
 import app.morphe.extension.instagram.settings.ActivityHook;
 import app.morphe.extension.instagram.settings.preference.widgets.InstagramPreferenceStyle;
@@ -247,7 +247,7 @@ public final class DeletedMessagesActivity {
 
         void setup() {
             activity.setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER);
-            messages = PikoMessageDb.getInstance(activity).getDeletedMessages();
+            messages = AwtMessageDb.getInstance(activity).getDeletedMessages();
             Locale locale = activity.getResources().getConfiguration().getLocales().get(0);
             String skeleton = DateFormat.is24HourFormat(activity) ? "yMMMdHm" : "yMMMdhm";
             timestampFormatter = new SimpleDateFormat(
@@ -520,7 +520,7 @@ public final class DeletedMessagesActivity {
                     .setMessage(prompt)
                     .setPositiveButton(str("awt_delete"), (dialog, which) -> {
                         if (!canAct()) return;
-                        PikoMessageDb db = PikoMessageDb.getInstance(activity);
+                        AwtMessageDb db = AwtMessageDb.getInstance(activity);
                         db.deleteSaved(selectedIds);
                         selectionMode = false;
                         messageList.clearChoices();

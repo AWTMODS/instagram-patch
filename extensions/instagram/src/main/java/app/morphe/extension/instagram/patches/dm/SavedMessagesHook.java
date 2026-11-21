@@ -17,7 +17,7 @@ import java.lang.reflect.Modifier;
 import static app.morphe.extension.instagram.utils.IgStr.str;
 
 import app.morphe.extension.crimera.AwtUtils;
-import app.morphe.extension.instagram.db.PikoMessageDb;
+import app.morphe.extension.instagram.db.AwtMessageDb;
 import app.morphe.extension.instagram.entity.DirectItem;
 import app.morphe.extension.instagram.entity.UserData;
 import app.morphe.extension.instagram.settings.ActivityHook;
@@ -57,7 +57,7 @@ public class SavedMessagesHook {
                 if (id == null || !id.matches("\\d{6,14}")) return;
                 String name = data.getUsername();
                 if (name != null && !name.isEmpty()) {
-                    PikoMessageDb.getInstance(AwtUtils.getContext()).putUsername(id, name);
+                    AwtMessageDb.getInstance(AwtUtils.getContext()).putUsername(id, name);
                 }
             } catch (Throwable ignored) {
             }
@@ -167,7 +167,7 @@ public class SavedMessagesHook {
         return null;
     }
 
-    private static String resolveSenderUsername(PikoMessageDb db, String senderId,
+    private static String resolveSenderUsername(AwtMessageDb db, String senderId,
                                                 String threadId, UserSession session,
                                                 String viewerId) {
         String username = db.getUsername(senderId);
@@ -206,7 +206,7 @@ public class SavedMessagesHook {
             if (isBlank(threadId) && !isBlank(threadIdHint)) threadId = threadIdHint;
             if (threadId == null) threadId = "";
 
-            PikoMessageDb db = PikoMessageDb.getInstance(AwtUtils.getContext());
+            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
             String senderUsername = resolveSenderUsername(
                     db, senderId, threadId, session, sessionViewerId);
             String content = directItem.getText();
@@ -251,7 +251,7 @@ public class SavedMessagesHook {
         if (!isBlank(restoredContent)) directItem.setText(restoredContent);
     }
 
-    private static void markDeletedAndNotify(PikoMessageDb db, String messageId) {
+    private static void markDeletedAndNotify(AwtMessageDb db, String messageId) {
         if (!db.markDeleted(messageId)) return;
         // The notice shows who wrote what, so a hidden chat gets none.
         if (HiddenChats.shouldMuteDeletion(db.getThreadId(messageId))) return;
@@ -351,7 +351,7 @@ public class SavedMessagesHook {
     private static void processMessageHiddenFromDb(String serverId, String clientContext) {
         try {
             if (!Pref.saveDeletedMessages()) return;
-            PikoMessageDb db = PikoMessageDb.getInstance(AwtUtils.getContext());
+            AwtMessageDb db = AwtMessageDb.getInstance(AwtUtils.getContext());
             String messageId = db.resolveAndMergeMessageId(serverId, clientContext);
             if (messageId == null) return;
             if (!shouldCaptureStored(db.getSenderId(messageId), myUserId())) return;
